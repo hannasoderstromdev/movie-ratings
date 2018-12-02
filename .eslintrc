@@ -1,0 +1,32 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "plugins": ["react"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "globals": {
+    "it": true,
+    "expect": true,
+    "describe": true,
+    "beforeEach": true,
+    "shallow": true,
+    "sinon": true,
+    "afterEach": true,
+    "xit": true,
+    "xdescribe": true
+  },
+  "rules": {},
+  "settings": {
+    "react": {
+      "version": "16.8"
+    },
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "src/", "styleguide/"]
+      }
+    }
+  }
+}
