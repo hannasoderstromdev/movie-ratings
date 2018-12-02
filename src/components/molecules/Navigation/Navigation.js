@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from '@reach/router'
 
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.colors.black};
@@ -41,12 +42,12 @@ const Navigation = () => (
   <Nav>
     <ul>
       <li>
-        <a href="/" className="active">
+        <Link to="/" className="active">
           Home
-        </a>
+        </Link>
       </li>
       <li>
-        <a href="/new">New</a>
+        <Link to="/new">New</Link>
       </li>
     </ul>
   </Nav>
