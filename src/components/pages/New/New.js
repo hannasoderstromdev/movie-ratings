@@ -1,5 +1,7 @@
 import React from 'react'
 
-const New = () => <div>New</div>
+import Page from 'components/templates/Page'
+
+const New = () => <Page>New</Page>
 
 export default New
