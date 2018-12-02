@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
   width: 100%;
   height: 4.5rem;
   display: flex;
@@ -25,17 +25,27 @@ const SearchField = styled.input`
 `
 const SearchButton = styled.button`
   flex: 0.1;
+  background-color: ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+  font-size: 1.8rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  outline: none;
+  cursor: pointer;
+
+  &:focus {
+    border: 1px solid ${({ theme }) => theme.colors.textPrimary};
+  }
 `
 
-const SearchLibrary = ({ name, onChange, placeholder }) => (
-  <Wrapper>
+const SearchLibrary = ({ name, onChange, onSubmit, placeholder }) => (
+  <Wrapper onSubmit={onSubmit}>
     <SearchField
       type="search"
       name={name}
       onChange={onChange}
       placeholder={placeholder}
     />
-    <SearchButton>Search</SearchButton>
+    <SearchButton type="submit">Search</SearchButton>
   </Wrapper>
 )
 
@@ -46,6 +56,7 @@ SearchLibrary.defaultProps = {
 SearchLibrary.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
 }
 
