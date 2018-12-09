@@ -43,7 +43,6 @@ const Movie = ({ Title, Year, Runtime, Director, Actors, Poster, rating }) => (
 Movie.propTypes = {
   Title: PropTypes.string.isRequired,
   Year: PropTypes.string.isRequired,
-  Released: PropTypes.string.isRequired,
   Runtime: PropTypes.string.isRequired,
   Director: PropTypes.string.isRequired,
   Actors: PropTypes.string.isRequired,
