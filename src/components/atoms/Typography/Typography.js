@@ -5,6 +5,7 @@ export const H1 = styled.h1`
   font-size: 1.6rem;
   font-weight: 500;
   color: ${({ theme }) => theme.colors.textPrimary};
+  margin: 1rem 0 2rem;
 `
 
 export const H2 = styled.h2`
@@ -12,6 +13,7 @@ export const H2 = styled.h2`
   font-size: 1.4rem;
   font-weight: 500;
   color: ${({ theme }) => theme.colors.textPrimary};
+  margin: 0 0 1rem;
 `
 
 export const Text = styled.span`
