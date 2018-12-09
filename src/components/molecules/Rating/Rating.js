@@ -8,16 +8,54 @@ const RatingStyle = styled.div`
   display: flex;
 `
 
-const Rating = ({ rating, increase, decrease }) => {
-  const stars = []
-  for (let i = 0; i < rating; i++) {
-    stars.push(<Star key={i} isSelected onClick={decrease} />)
+class Rating extends React.Component {
+  state = {
+    rating: 0,
+    stars: 0,
   }
 
-  for (let i = 0; i < 5 - rating; i++) {
-    stars.push(<Star key={stars.length + i} onClick={increase} />)
+  componentDidMount() {
+    this.setState({ rating: this.props.rating, stars: this.props.rating })
   }
-  return <RatingStyle>{stars}</RatingStyle>
+
+  onMouseOver = newRating => {
+    this.setState({ stars: newRating })
+  }
+
+  onMouseOut = () => {
+    this.setState(prevState => ({ stars: prevState.rating }))
+  }
+
+  render() {
+    const { increase, decrease } = this.props
+    const { stars } = this.state
+
+    const starsToRender = []
+    for (let i = 0; i < stars; i++) {
+      starsToRender.push(
+        <Star
+          key={i + 1}
+          isSelected
+          onClick={decrease}
+          onMouseOver={() => this.onMouseOver(i + 1)}
+          onMouseOut={this.onMouseOut}
+        />,
+      )
+    }
+
+    for (let i = 0; i < 5 - stars; i++) {
+      starsToRender.push(
+        <Star
+          key={stars + 1 + i}
+          onClick={increase}
+          onMouseOver={() => this.onMouseOver(stars + 1 + i)}
+          onMouseOut={this.onMouseOut}
+        />,
+      )
+    }
+
+    return <RatingStyle>{starsToRender}</RatingStyle>
+  }
 }
 
 Rating.propTypes = {
