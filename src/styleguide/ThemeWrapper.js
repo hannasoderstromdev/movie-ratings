@@ -4,10 +4,10 @@ import theme from '../components/themes/default'
 import Normalize from '../components/Normalize'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 // Add all icons used here
-library.add(faTimes)
+library.add(faStar, faTimes)
 
 export default class ThemeWrapper extends Component {
   render() {
