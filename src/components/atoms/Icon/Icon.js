@@ -8,14 +8,22 @@ const IconStyle = styled(FontAwesomeIcon)`
   font-size: ${({ iconSize }) => (iconSize ? iconSize : '1rem')};
 `
 
-const Icon = ({ color, icon, iconSize }) => (
-  <IconStyle color={color} icon={icon} iconSize={iconSize} />
+const Icon = ({ color, icon, iconSize, onMouseOver, onMouseOut }) => (
+  <IconStyle
+    color={color}
+    icon={icon}
+    iconSize={iconSize}
+    onMouseOver={onMouseOver}
+    onMouseOut={onMouseOut}
+  />
 )
 
 Icon.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   iconSize: PropTypes.string,
+  onMouseOver: PropTypes.func,
+  onMouseOut: PropTypes.func,
 }
 
 export default Icon
