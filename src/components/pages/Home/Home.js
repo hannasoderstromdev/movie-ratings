@@ -32,6 +32,7 @@ class Home extends React.Component {
         Actors: 'Chris Pratt, Zoe Saldana, Dave Bautista, Vin Diesel',
         Poster:
           'https://m.media-amazon.com/images/M/MV5BMTg2MzI1MTg3OF5BMl5BanBnXkFtZTgwNTU3NDA2MTI@._V1_SX300.jpg',
+        imdbID: 'tt3896198',
       },
     ],
   }
@@ -58,10 +59,11 @@ class Home extends React.Component {
         <Main>
           <H1>Recent</H1>
           {recent.length ? (
-            <MoviesList movies={recent} />
+            <MoviesList key={1} movies={recent} />
           ) : (
             <NoRatingsYet>No ratings added yet</NoRatingsYet>
           )}
+          {!!results.length && <MoviesList movies={results} />}
         </Main>
       </Page>
     )
