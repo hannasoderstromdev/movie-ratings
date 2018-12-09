@@ -1,9 +1,16 @@
 #
 
 ```js
-  <Star />
+  <Star
+    onMouseOver={() => console.log('onMouseOver')}
+    onMouseOut={() => console.log('onMouseOut')}
+  />
 ```
 
 ```js
-  <Star isSelected />
+  <Star
+    onMouseOver={() => console.log('onMouseOver')}
+    onMouseOut={() => console.log('onMouseOut')}
+    isSelected
+  />
 ```
