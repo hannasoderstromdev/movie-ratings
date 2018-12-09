@@ -5,17 +5,17 @@ import PropTypes from 'prop-types'
 
 const IconStyle = styled(FontAwesomeIcon)`
   color: ${({ color, theme }) => (color ? color : theme.lightGray)};
-  font-size: ${({ size }) => (size ? size : '1rem')};
+  font-size: ${({ iconSize }) => (iconSize ? iconSize : '1rem')};
 `
 
-const Icon = ({ color, icon, size }) => (
-  <IconStyle color={color} icon={icon} size={size} />
+const Icon = ({ color, icon, iconSize }) => (
+  <IconStyle color={color} icon={icon} iconSize={iconSize} />
 )
 
 Icon.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  size: PropTypes.string,
+  iconSize: PropTypes.string,
 }
 
 export default Icon
