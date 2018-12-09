@@ -32,7 +32,7 @@ const Movie = ({ Title, Year, Runtime, Director, Actors, Poster, rating }) => (
           <Text>{Year}</Text> <Text>{Runtime}</Text>
         </div>
       </div>
-      {rating ? <Rating rating={rating} /> : <div>Rate</div>}
+      {rating ? <Rating rating={rating} /> : <div>No rating</div>}
 
       <Text>Director: {Director}</Text>
       <Text>Actors: {Actors}</Text>
