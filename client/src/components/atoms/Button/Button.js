@@ -22,7 +22,7 @@ const Primary = styled.button`
 `
 
 const Button = ({ children, onClick, disabled }) => (
-  <Primary onClick={onClick} disabled={disabled}>
+  <Primary data-testid="primary-button" onClick={onClick} disabled={disabled}>
     {children}
   </Primary>
 )

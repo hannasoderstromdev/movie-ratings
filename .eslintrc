@@ -13,7 +13,6 @@
     "describe": true,
     "beforeEach": true,
     "shallow": true,
-    "sinon": true,
     "afterEach": true,
     "xit": true,
     "xdescribe": true
