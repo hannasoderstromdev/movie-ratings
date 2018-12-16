@@ -6,13 +6,12 @@ module.exports = {
    */
 
   getById: function(req, res, next) {
-    console.log(req.body)
     movieModel.findById(req.params.movieId, function(err, movieInfo) {
       if (err) {
         next(err)
       } else {
         res.json({
-          status: 'Success',
+          status: 'success',
           message: 'Movie found',
           data: { movies: movieInfo },
         })
