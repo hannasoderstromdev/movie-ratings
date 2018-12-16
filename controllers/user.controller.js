@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const jwt = require('jwt')
+const jwt = require('jsonwebtoken')
 
 const keys = require('../config/keys')
 const userModel = require('../models/User')
@@ -34,23 +34,40 @@ module.exports = {
    * Authenticate User
    */
   authenticate: function(req, res, next) {
-    userModel.findOne({ email: req.body.email }, function(err, userInfo) {
-      if (err) {
-        next(err)
-      } else {
-        if (bcrypt.compareSync(req.body.password, userInfo.password)) {
-          const token = jwt.sign(
-            { id: userInfo._id },
-            req.app.get(keys.JWTSecret, { expiresIn: '1h' }),
-          )
+    userModel.findOne(
+      {
+        email: req.body.email,
+      },
+      function(err, userInfo) {
+        if (err) {
+          next(err)
+        } else {
+          try {
+            if (bcrypt.compareSync(req.body.password, userInfo.password)) {
+              const token = jwt.sign({ id: userInfo._id }, keys.JWTSecret, {
+                expiresIn: '1h',
+              })
 
-          res.json({
-            status: 'Success',
-            message: 'User found',
-            data: { user: userInfo, token },
-          })
+              res.json({
+                status: 'success',
+                message: 'User found',
+                data: {
+                  user: {
+                    role: userInfo.role,
+                    id: userInfo._id,
+                    firstName: userInfo.firstName,
+                    lastName: userInfo.lastName,
+                    email: userInfo.email,
+                  },
+                  token,
+                },
+              })
+            }
+          } catch (error) {
+            next(error)
+          }
         }
-      }
-    })
+      },
+    )
   },
 }
