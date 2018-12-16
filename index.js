@@ -1,6 +1,8 @@
 const express = require('express')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
+const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose')
 
 const movie = require('./routes/movie.route')
 const user = require('./routes/user.route')
@@ -9,12 +11,14 @@ const keys = require('./config/keys')
 
 const app = express()
 
-
 /**
  * Utilities
  */
 function validateUser(req, res, next) {
-  jwt.verify(req.headers['x-access-token', keys.JWTSecret, function(err, decoded) {
+  jwt.verify(req.headers['x-access-token'], keys.JWTSecret, function(
+    err,
+    decoded,
+  ) {
     if (err) {
       res.json({ status: 'error', message: err.message, data: null })
     } else {
@@ -60,10 +64,11 @@ app.use(function(req, res, next) {
  * Error Handler
  */
 app.use(function(err, req, res, next) {
+  console.error(err)
   if (err.status === 404) {
-    res.status(404).json({ message: 'Not found' })
+    res.status(404).json({ message: 'Not found' })
   } else {
-    res.status(500).json({ message: 'Server error' })
+    res.status(500).json({ message: 'Server error: ' + err.message })
   }
 })
 
