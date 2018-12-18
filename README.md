@@ -12,3 +12,6 @@ Encryption: bcrypt
 ## Client
 
 Single-page Application built with React.
+
+The UI is designed for mobile, future versions will handle desktop as well.
+
