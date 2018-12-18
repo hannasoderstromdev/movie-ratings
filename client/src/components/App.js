@@ -2,6 +2,9 @@ import React from 'react'
 import { Router } from '@reach/router'
 import styled from 'styled-components'
 
+import { store } from 'helpers/store'
+
+import Root from './Root'
 import Theme from './Theme'
 import Normalize from './Normalize'
 
@@ -10,6 +13,7 @@ import Navigation from 'components/molecules/Navigation'
 
 import Home from './pages/Home'
 import New from './pages/New'
+import Login from './pages/Login'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -20,7 +24,7 @@ const Wrapper = styled.div`
 `
 
 const App = () => (
-  <div>
+  <Root store={store}>
     <Theme>
       <Wrapper>
         <Normalize />
@@ -29,12 +33,13 @@ const App = () => (
         <Router>
           <Home path="/" />
           <New path="/new" />
+          <Login path="/login" />
         </Router>
 
         <Navigation />
       </Wrapper>
     </Theme>
-  </div>
+  </Root>
 )
 
 export default App
