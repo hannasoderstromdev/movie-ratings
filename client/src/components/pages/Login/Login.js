@@ -8,10 +8,17 @@ import Main from 'components/templates/Main'
 import Button from 'components/atoms/Button'
 import LabeledInputField from 'components/molecules/LabeledInputField'
 
+// import Spinner from 'components/atoms/Spinner'
+
 const FormField = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
+`
+
+const RightAlign = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `
 
 class Login extends React.Component {
@@ -60,7 +67,9 @@ class Login extends React.Component {
               />
             </FormField>
 
-            <Button type="submit">Login</Button>
+            <RightAlign>
+              <Button type="submit">Login</Button>
+            </RightAlign>
           </form>
         </Main>
       </Page>
