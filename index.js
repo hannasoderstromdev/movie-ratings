@@ -48,8 +48,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 /**
  * Routes
  */
-app.use('/user', user)
-app.use('/movie', validateUser, movie)
+app.get('/', function(req, res) {
+  res.json({ message: 'Welcome to Movie Ratings API' })
+})
+app.use('/users', user)
+app.use('/movies', validateUser, movie)
 
 /**
  * 404 Handler
@@ -64,11 +67,22 @@ app.use(function(req, res, next) {
  * Error Handler
  */
 app.use(function(err, req, res, next) {
-  console.error(err)
-  if (err.status === 404) {
-    res.status(404).json({ message: 'Not found' })
-  } else {
-    res.status(500).json({ message: 'Server error: ' + err.message })
+  switch (err.status) {
+    case 400:
+      res.status(400).json({ message: 'Bad Request' })
+      break
+
+    case 403:
+      res.status(403).json({ message: 'Unauthorized' })
+      break
+
+    case 404:
+      res.status(404).json({ message: 'Not Found' })
+      break
+
+    default:
+      res.status(500).json({ message: 'Server error: ' + err.message })
+      break
   }
 })
 
@@ -77,3 +91,6 @@ app.use(function(err, req, res, next) {
  */
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+
+// Export app for integration tests
+module.exports = app
