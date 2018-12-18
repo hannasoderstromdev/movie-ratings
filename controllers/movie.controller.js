@@ -52,6 +52,19 @@ module.exports = {
             rating,
           })
         }
+        if (moviesList.length === 0) {
+          res.status(204).json({
+            status: 'success',
+            message: 'No movies available',
+            data: null,
+          })
+        } else {
+          res.status(200).json({
+            status: 'success',
+            message: 'All movies',
+            data: moviesList,
+          })
+        }
       }
     })
   },
@@ -60,9 +73,20 @@ module.exports = {
    * Update Movie
    */
   updateById: function(req, res, next) {
+    const newValues = {}
+    if (req.body.title) newValues.title = req.body.title
+    if (req.body.year) newValues.year = req.body.year
+    if (req.body.runtime) newValues.runtime = req.body.runtime
+    if (req.body.director) newValues.director = req.body.director
+    if (req.body.actors) newValues.actors = req.body.actors
+    if (req.body.poster) newValues.poster = req.body.poster
+    if (req.body.imdbID) newValues.imdbID = req.body.imdbID
+    if (req.body.rating) newValues.rating = req.body.rating
+
     movieModel.findByIdAndUpdate(
       req.params.movieId,
-      { title: req.body.title },
+      { ...newValues },
+      { new: true, runValidators: true },
       function(err, movieInfo) {
         if (err) {
           next(err)

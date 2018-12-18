@@ -20,7 +20,7 @@ module.exports = {
         if (err) {
           next(err)
         } else {
-          res.json({
+          res.status(201).json({
             status: 'success',
             message: 'User created successfully!',
             data: null,
