@@ -21,21 +21,28 @@ const Primary = styled.button`
   }
 `
 
-const Button = ({ children, onClick, disabled }) => (
-  <Primary data-testid="primary-button" onClick={onClick} disabled={disabled}>
+const Button = ({ children, onClick, disabled, type }) => (
+  <Primary
+    data-testid="primary-button"
+    onClick={onClick}
+    disabled={disabled}
+    type={type}
+  >
     {children}
   </Primary>
 )
 
 Button.defaultProps = {
+  type: null,
   disabled: false,
-  onClick: () => console.log('clicked'),
+  onClick: null,
 }
 
 Button.propTypes = {
   children: PropTypes.node,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  type: PropTypes.string,
 }
 
 export default Button
