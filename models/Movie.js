@@ -32,7 +32,6 @@ const MovieSchema = new Schema({
   imdbID: {
     type: String,
     trim: true,
-    required: true,
   },
   rating: {
     type: Number,
