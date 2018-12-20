@@ -8,6 +8,8 @@ import Root from './Root'
 import Theme from './Theme'
 import Normalize from './Normalize'
 
+import Alert from 'components/molecules/Alert'
+
 import Header from 'components/molecules/Header'
 import Navigation from 'components/molecules/Navigation'
 
@@ -36,6 +38,7 @@ const App = () => (
           <Login path="/login" />
         </Router>
 
+        <Alert />
         <Navigation />
       </Wrapper>
     </Theme>
