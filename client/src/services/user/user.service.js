@@ -1,4 +1,3 @@
-// import { authHeader } from '../../helpers/auth-header'
 import handleResponse from '../handle-response'
 
 const login = async (username, password) => {
@@ -15,8 +14,6 @@ const login = async (username, password) => {
     const response = await fetch(`/users/authenticate`, requestOptions)
 
     const { data } = await handleResponse(response)
-
-    console.log('data', data)
 
     if (data) {
       localStorage.setItem('user', JSON.stringify(data))
