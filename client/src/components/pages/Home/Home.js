@@ -23,18 +23,7 @@ class Home extends React.Component {
   state = {
     search: '',
     results: [],
-    recent: [
-      {
-        Title: 'Guardians of the Galaxy Vol. 2',
-        Year: '2017',
-        Runtime: '136 min',
-        Director: 'James Gunn',
-        Actors: 'Chris Pratt, Zoe Saldana, Dave Bautista, Vin Diesel',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BMTg2MzI1MTg3OF5BMl5BanBnXkFtZTgwNTU3NDA2MTI@._V1_SX300.jpg',
-        imdbID: 'tt3896198',
-      },
-    ],
+    recent: [],
   }
 
   doOnSearch = e => {
