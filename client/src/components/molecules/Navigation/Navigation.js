@@ -5,7 +5,7 @@ import { Link } from '@reach/router'
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.colors.black};
   color: ${({ theme }) => theme.colors.textPrimary};
-  height: 5rem;
+  height: 10vh;
   padding: 1rem;
   display: flex;
   justify-content: center;
