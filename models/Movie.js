@@ -12,7 +12,15 @@ const MovieSchema = new Schema({
     trim: true,
     required: true,
   },
+  released: {
+    type: String,
+    required: true,
+  },
   runtime: {
+    type: String,
+    required: true,
+  },
+  genre: {
     type: String,
     required: true,
   },
@@ -20,16 +28,51 @@ const MovieSchema = new Schema({
     type: String,
     required: true,
   },
+  writer: {
+    type: String,
+    required: true,
+  },
   actors: {
     type: String,
     required: true,
+  },
+  plot: {
+    type: String,
+    required: true,
+  },
+  language: {
+    type: String,
+    required: true,
+  },
+  country: {
+    type: String,
+    required: true,
+  },
+  awards: {
+    type: String,
   },
   poster: {
     type: String,
     trim: true,
     required: true,
   },
+  ratings: {
+    type: Schema.Types.Mixed,
+  },
+  metascore: {
+    type: String,
+  },
+  imdbRating: {
+    type: String,
+  },
   imdbID: {
+    type: String,
+    trim: true,
+  },
+  production: {
+    type: String,
+  },
+  website: {
     type: String,
     trim: true,
   },
