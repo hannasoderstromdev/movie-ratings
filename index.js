@@ -4,29 +4,16 @@ const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 
-const movie = require('./routes/movie.route')
-const user = require('./routes/user.route')
-
 const keys = require('./config/keys')
 
 const app = express()
 
 /**
- * Utilities
+ * Middleware
  */
-function validateUser(req, res, next) {
-  jwt.verify(req.headers['x-access-token'], keys.JWTSecret, function(
-    err,
-    decoded,
-  ) {
-    if (err) {
-      res.json({ status: 'error', message: err.message, data: null })
-    } else {
-      req.body.userId = decoded.id
-      next()
-    }
-  })
-}
+app.use(logger('dev'))
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json({ type: 'application/json' }))
 
 /**
  * Connect to MongoDB
@@ -40,14 +27,12 @@ mongoose
   .catch(err => console.error(err))
 
 /**
- * Middleware
- */
-app.use(logger('dev'))
-app.use(bodyParser.urlencoded({ extended: false }))
-
-/**
  * Routes
  */
+
+const movie = require('./routes/movie.route')
+const user = require('./routes/user.route')
+
 app.get('/', function(req, res) {
   res.json({ message: 'Welcome to Movie Ratings API' })
 })
@@ -85,6 +70,23 @@ app.use(function(err, req, res, next) {
       break
   }
 })
+
+/**
+ * Utilities
+ */
+function validateUser(req, res, next) {
+  jwt.verify(req.headers['x-access-token'], keys.JWTSecret, function(
+    err,
+    decoded,
+  ) {
+    if (err) {
+      res.json({ status: 'error', message: err.message, data: null })
+    } else {
+      req.body.userId = decoded.id
+      next()
+    }
+  })
+}
 
 /**
  * Run Server
