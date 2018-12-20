@@ -4,7 +4,11 @@ import PropTypes from 'prop-types'
 
 const Primary = styled.button`
   background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme, disabled }) =>
+    disabled && theme.colors.lightGray};
   border: 1px solid ${({ theme }) => theme.colors.primary};
+  border: 1px solid
+    ${({ theme, disabled }) => disabled && theme.colors.darkGray};
   height: 30px;
   min-width: 30px;
   outline: none;
@@ -15,6 +19,7 @@ const Primary = styled.button`
   display: flex;
   align-items: center;
   cursor: pointer;
+  cursor: ${({ disabled }) => disabled && 'not-allowed'};
 
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.textPrimary};
