@@ -12,11 +12,11 @@ const AlertWrapper = styled.div`
   height: 5rem;
   width: 100%;
   position: fixed;
-  bottom: 10vh;
+  bottom: 9vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 2rem;
+  padding: 0 2rem;
   font-size: 1.6rem;
   color: ${({ theme }) => theme.colors.textPrimary};
   background-color: ${({ type, theme }) =>
@@ -39,7 +39,12 @@ const Alert = ({ alerts: { display, type, message }, alertClearAction }) => {
     <AlertWrapper type={type}>
       {message}
       <Button secondary onClick={alertClearAction}>
-        <AlertIcon icon={['fas', 'times']} type={type} />
+        <AlertIcon
+          icon={['fas', 'times']}
+          type={type}
+          iconSize="16px"
+          color="#fff"
+        />
       </Button>
     </AlertWrapper>
   ) : null
