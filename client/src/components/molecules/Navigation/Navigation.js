@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from '@reach/router'
+import { Link } from 'react-router-dom'
 
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.colors.black};
