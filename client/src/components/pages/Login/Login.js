@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { Redirect, withRouter } from 'react-router-dom'
 
 import { login } from 'actions/user/user.actions'
 
@@ -12,6 +13,7 @@ import Button from 'components/atoms/Button'
 // import Spinner from 'components/atoms/Spinner'
 
 import LabeledInputField from 'components/molecules/LabeledInputField'
+import FullscreenSpinner from 'components/molecules/FullscreenSpinner/FullscreenSpinner'
 
 // import Spinner from 'components/atoms/Spinner'
 
@@ -40,15 +42,22 @@ class Login extends React.Component {
 
   doOnSubmit = e => {
     e.preventDefault()
-    console.log('submit')
     // attempt login
-    this.props.login(this.state.username, this.state.password)
+    const { username, password } = this.state
+
+    this.props.login(username, password)
+    // redirect to home
   }
 
   render() {
     const { username, password } = this.state
-    return (
+    const { user, location } = this.props
+
+    return user.loggedIn ? (
+      <Redirect to={{ pathname: '/', state: { from: location } }} />
+    ) : (
       <Page>
+        {user && user.loggingIn && <FullscreenSpinner />}
         <Main>
           <H1>Login</H1>
 
@@ -74,7 +83,9 @@ class Login extends React.Component {
             </FormField>
 
             <RightAlign>
-              <Button type="submit">Login</Button>
+              <Button disabled={!username || !password} type="submit">
+                Login
+              </Button>
             </RightAlign>
           </form>
         </Main>
@@ -94,4 +105,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Login)
+)(withRouter(Login))
