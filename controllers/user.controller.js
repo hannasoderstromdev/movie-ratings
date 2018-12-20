@@ -38,13 +38,13 @@ module.exports = {
       {
         email: req.body.email,
       },
-      function(err, userInfo) {
+      function(err, result) {
         if (err) {
           next(err)
         } else {
           try {
-            if (bcrypt.compareSync(req.body.password, userInfo.password)) {
-              const token = jwt.sign({ id: userInfo._id }, keys.JWTSecret, {
+            if (bcrypt.compareSync(req.body.password, result.password)) {
+              const token = jwt.sign({ id: result._id }, keys.JWTSecret, {
                 expiresIn: '1h',
               })
 
@@ -53,11 +53,11 @@ module.exports = {
                 message: 'User found',
                 data: {
                   user: {
-                    role: userInfo.role,
-                    id: userInfo._id,
-                    firstName: userInfo.firstName,
-                    lastName: userInfo.lastName,
-                    email: userInfo.email,
+                    role: result.role,
+                    id: result._id,
+                    firstName: result.firstName,
+                    lastName: result.lastName,
+                    email: result.email,
                   },
                   token,
                 },
