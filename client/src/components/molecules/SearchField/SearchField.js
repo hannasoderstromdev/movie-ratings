@@ -57,7 +57,7 @@ const SearchField = ({ name, onChange, placeholder }) => (
       placeholder={placeholder}
       type="search"
     />
-    <SearchButton>Search</SearchButton>
+    <SearchButton type="submit">Search</SearchButton>
   </Wrapper>
 )
 
