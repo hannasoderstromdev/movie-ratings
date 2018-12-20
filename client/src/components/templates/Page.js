@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Page = styled.div`
-  height: 85vh;
+  height: 84vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
