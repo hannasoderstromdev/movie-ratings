@@ -1,42 +1,37 @@
-import config from 'config'
-import { authHeader } from '../../helpers/auth-header'
+// import { authHeader } from '../../helpers/auth-header'
+import handleResponse from '../handle-response'
 
 const login = async (username, password) => {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email: username, password }),
   }
 
-  const response = await fetch(`${process.env.API_URL}/users/authenticate`, requestOptions)
+  try {
+    const response = await fetch(`/users/authenticate`, requestOptions)
 
-  await handleResponse(response)
-  
-  const data = await response.json()
+    const { data } = await handleResponse(response)
 
-  if (data.user.token) {
-    localStorage.setItem('user', JSON.stringify(data.user))
+    console.log('data', data)
+
+    if (data) {
+      localStorage.setItem('user', JSON.stringify(data))
+    }
+
+    return data.user
+  } catch (error) {
+    throw new Error(error)
   }
-
-  return data.user
 }
 
 const logout = () => {
   localStorage.removeItem('user')
 }
 
-const handleResponse = async response => {
-  const text = await response.text()
-  const data = await JSON.parse(text)
-  if (!response.ok) {
-    if (response.status === 401) {
-      logout()
-    }
+const userService = { login, logout }
 
-    const error = await data.message || await response.statusText
-    return Promise.reject(error)
-  }
-  return data
-}
-
-export { login, logout }
+export default userService
