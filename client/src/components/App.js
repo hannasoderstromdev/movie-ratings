@@ -32,21 +32,21 @@ const App = () => (
   <ErrorBoundary>
     <Root store={store}>
       <Theme>
-        <Wrapper>
-          <Normalize />
-          <Header />
+        <Router>
+          <Wrapper>
+            <Normalize />
+            <Header />
 
-          <Router>
             <div>
               <PrivateRoute path="/new" exact component={New} />
               <Route path="/login" exact component={Login} />
               <PrivateRoute path="/" exact component={Home} />
             </div>
-          </Router>
 
-          <Alert />
-          <Navigation />
-        </Wrapper>
+            <Alert />
+            <Navigation />
+          </Wrapper>
+        </Router>
       </Theme>
     </Root>
   </ErrorBoundary>
