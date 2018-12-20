@@ -15,7 +15,8 @@
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.3.16",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.8"
+    "nodemon": "^1.18.8",
+    "request": "^2.88.0"
   },
   "scripts": {
     "start": "node index.js",
