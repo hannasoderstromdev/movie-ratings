@@ -1,11 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
-import { H1 } from 'components/atoms/Typography'
+import { login } from 'actions/user/user.actions'
 
 import Page from 'components/templates/Page'
 import Main from 'components/templates/Main'
+
+import { H1 } from 'components/atoms/Typography'
 import Button from 'components/atoms/Button'
+// import Spinner from 'components/atoms/Spinner'
+
 import LabeledInputField from 'components/molecules/LabeledInputField'
 
 // import Spinner from 'components/atoms/Spinner'
@@ -33,10 +38,11 @@ class Login extends React.Component {
 
   doOnChange = e => this.setState({ [e.target.name]: e.target.value })
 
-  doOnSubmit(e) {
+  doOnSubmit = e => {
     e.preventDefault()
     console.log('submit')
     // attempt login
+    this.props.login(this.state.username, this.state.password)
   }
 
   render() {
@@ -77,4 +83,15 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+const mapStateToProps = ({ user }) => ({
+  user,
+})
+
+const mapDispatchToProps = {
+  login,
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Login)
