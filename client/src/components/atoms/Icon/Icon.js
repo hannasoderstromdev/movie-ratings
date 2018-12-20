@@ -18,6 +18,13 @@ const Icon = ({ color, icon, iconSize, onMouseOver, onMouseOut }) => (
   />
 )
 
+Icon.defaultProps = {
+  iconSize: '1rem',
+  color: '#000',
+  onMouseOver: null,
+  onMouseOut: null,
+}
+
 Icon.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
