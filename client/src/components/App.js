@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router } from '@reach/router'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { store } from 'helpers/store'
@@ -7,6 +7,9 @@ import { store } from 'helpers/store'
 import Root from './Root'
 import Theme from './Theme'
 import Normalize from './Normalize'
+
+import ErrorBoundary from 'components/hoc/ErrorBoundary'
+import PrivateRoute from 'components/hoc/PrivateRoute'
 
 import Alert from 'components/molecules/Alert'
 
@@ -26,23 +29,27 @@ const Wrapper = styled.div`
 `
 
 const App = () => (
-  <Root store={store}>
-    <Theme>
-      <Wrapper>
-        <Normalize />
-        <Header />
+  <ErrorBoundary>
+    <Root store={store}>
+      <Theme>
+        <Wrapper>
+          <Normalize />
+          <Header />
 
-        <Router>
-          <Home path="/" />
-          <New path="/new" />
-          <Login path="/login" />
-        </Router>
+          <Router>
+            <div>
+              <PrivateRoute path="/new" exact component={New} />
+              <Route path="/login" exact component={Login} />
+              <PrivateRoute path="/" exact component={Home} />
+            </div>
+          </Router>
 
-        <Alert />
-        <Navigation />
-      </Wrapper>
-    </Theme>
-  </Root>
+          <Alert />
+          <Navigation />
+        </Wrapper>
+      </Theme>
+    </Root>
+  </ErrorBoundary>
 )
 
 export default App
