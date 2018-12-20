@@ -32,21 +32,14 @@ mongoose
 
 const movie = require('./routes/movie.route')
 const user = require('./routes/user.route')
+const search = require('./routes/search.route')
 
 app.get('/', function(req, res) {
   res.json({ message: 'Welcome to Movie Ratings API' })
 })
 app.use('/users', user)
 app.use('/movies', validateUser, movie)
-
-/**
- * 404 Handler
- */
-app.use(function(req, res, next) {
-  const err = new Error('Not Found')
-  err.status = 404
-  next(err)
-})
+app.use('/search', validateUser, search)
 
 /**
  * Error Handler
