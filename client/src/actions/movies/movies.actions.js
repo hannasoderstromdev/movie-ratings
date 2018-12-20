@@ -14,8 +14,9 @@ const getAllMoviesSuccessAction = movies => ({
   payload: { movies },
 })
 
-const getAllMoviesFailureAction = () => ({
+const getAllMoviesFailureAction = error => ({
   type: GET_ALL_MOVIES_FAILURE,
+  payload: { error },
 })
 
 export const getAllMovies = () => async dispatch => {
@@ -25,7 +26,7 @@ export const getAllMovies = () => async dispatch => {
     const movies = await moviesService.getAll()
     dispatch(getAllMoviesSuccessAction(movies))
   } catch (error) {
-    dispatch(getAllMoviesFailureAction())
+    dispatch(getAllMoviesFailureAction(error))
     dispatch(alertErrorAction(error))
   }
 }
