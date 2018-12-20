@@ -21,16 +21,40 @@ const Primary = styled.button`
   }
 `
 
-const Button = ({ children, onClick, disabled, type }) => (
-  <Primary
-    data-testid="primary-button"
-    onClick={onClick}
-    disabled={disabled}
-    type={type}
-  >
-    {children}
-  </Primary>
-)
+const Secondary = styled.button`
+  background-color: transparent;
+  border: 1px solid transparent;
+  height: 30px;
+  min-width: 30px;
+  outline: none;
+  color: ${({ theme }) => theme.colors.black};
+  font-size: 1.6rem;
+  margin: 0;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:focus {
+    border: 1px solid ${({ theme }) => theme.colors.textPrimary};
+  }
+`
+
+const Button = ({ secondary, children, onClick, disabled, type }) => {
+  if (secondary) {
+    return (
+      <Secondary onClick={onClick} disabled={disabled} type={type}>
+        {children}
+      </Secondary>
+    )
+  }
+
+  return (
+    <Primary onClick={onClick} disabled={disabled} type={type}>
+      {children}
+    </Primary>
+  )
+}
 
 Button.defaultProps = {
   type: null,
