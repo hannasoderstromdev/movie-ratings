@@ -8,7 +8,9 @@ const LabelStyle = styled.label`
 `
 
 const Label = ({ children, htmlFor }) => (
-  <LabelStyle htmlFor={htmlFor}>{children}</LabelStyle>
+  <LabelStyle data-testid="label" htmlFor={htmlFor}>
+    {children}
+  </LabelStyle>
 )
 
 Label.defaultProps = {
