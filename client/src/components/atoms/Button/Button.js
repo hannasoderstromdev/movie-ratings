@@ -48,14 +48,24 @@ const Secondary = styled.button`
 const Button = ({ secondary, children, onClick, disabled, type }) => {
   if (secondary) {
     return (
-      <Secondary onClick={onClick} disabled={disabled} type={type}>
+      <Secondary
+        data-testid="secondary-button"
+        onClick={onClick}
+        disabled={disabled}
+        type={type}
+      >
         {children}
       </Secondary>
     )
   }
 
   return (
-    <Primary onClick={onClick} disabled={disabled} type={type}>
+    <Primary
+      data-testid="primary-button"
+      onClick={onClick}
+      disabled={disabled}
+      type={type}
+    >
       {children}
     </Primary>
   )
