@@ -58,9 +58,14 @@ class Rating extends React.Component {
   }
 }
 
+Rating.defaultProps = {
+  decrease: null,
+  increase: null,
+}
+
 Rating.propTypes = {
-  decrease: PropTypes.func.isRequired,
-  increase: PropTypes.func.isRequired,
+  decrease: PropTypes.func,
+  increase: PropTypes.func,
   rating: PropTypes.number.isRequired,
 }
 
