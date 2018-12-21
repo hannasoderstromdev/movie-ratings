@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   loading: false,
-  movie: {},
+  movie: null,
   error: null,
 }
 
