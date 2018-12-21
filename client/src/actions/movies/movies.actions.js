@@ -3,7 +3,7 @@ import { alertErrorAction } from '../alerts/alerts.actions'
 
 export const GET_ALL_MOVIES = 'GET_ALL_MOVIES'
 export const GET_ALL_MOVIES_SUCCESS = 'GET_ALL_MOVIES_SUCCESS'
-export const GET_ALL_MOVIES_FAILURE = 'GET_ALL_MOVIES_SUCCESS'
+export const GET_ALL_MOVIES_FAILURE = 'GET_ALL_MOVIES_FAILURE'
 
 export const CREATE_MOVIE = 'CREATE_MOVIE'
 export const CREATE_MOVIE_SUCCESS = 'CREATE_MOVIE_SUCCESS'
