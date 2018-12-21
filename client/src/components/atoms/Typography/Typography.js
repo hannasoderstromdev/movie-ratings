@@ -12,7 +12,7 @@ export const H2 = styled.h2`
   font-family: 'Open Sans', sans-serif;
   font-size: 1.4rem;
   font-weight: 500;
-  color: ${({ theme }) => theme.colors.textPrimary};
+  color: ${({ theme }) => theme.colors.primary};
   margin: 0 0 1rem;
 `
 
