@@ -61,7 +61,7 @@ const Navigation = () => (
       </li>
       <li>
         <Link to="/settings">
-          <Icon icon={['fas', 'ellipsis-v']} iconSize="18px" />
+          <Icon icon={['fas', 'ellipsis-v']} iconsize="18px" />
         </Link>
       </li>
     </ul>
