@@ -14,6 +14,7 @@ const LabeledInputField = ({
   <Label htmlFor={name}>
     {label}
     <InputField
+      data-testid="input"
       name={name}
       type={type}
       onChange={onChange}
