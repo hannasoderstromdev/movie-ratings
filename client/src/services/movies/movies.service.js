@@ -8,7 +8,7 @@ const getAll = async () => {
     headers: authHeader(),
   }
 
-  const response = await fetch(`${process.env.API_URL}/movies`, requestOptions)
+  const response = await fetch('/movies', requestOptions)
   const data = await handleResponse(response)
 
   console.log('getAll', data)
@@ -16,6 +16,24 @@ const getAll = async () => {
   return data
 }
 
-const moviesService = { getAll }
+const create = async movie => {
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...authHeader(),
+    },
+    body: JSON.stringify({ ...movie }),
+  }
+
+  const response = await fetch('/movies', requestOptions)
+  const data = await handleResponse(response)
+
+  console.log('create', data)
+
+  return data
+}
+
+const moviesService = { getAll, create }
 
 export default moviesService
