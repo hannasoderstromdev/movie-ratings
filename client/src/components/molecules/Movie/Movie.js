@@ -22,20 +22,20 @@ const PosterImg = styled.img`
   height: auto;
 `
 
-const Movie = ({ Title, Year, Runtime, Director, Actors, Poster, rating }) => (
+const Movie = ({ title, year, runtime, director, actors, poster, rating }) => (
   <MovieStyle>
-    <PosterImg src={Poster} alt={Title} />
+    <PosterImg src={poster} alt={title} />
     <Details>
       <div>
-        <H2>{Title}</H2>
+        <H2>{title}</H2>
         <div>
-          <Text>{Year}</Text> <Text>{Runtime}</Text>
+          <Text>{year}</Text> <Text>{runtime}</Text>
         </div>
       </div>
       {rating ? <Rating rating={rating} /> : <div>No rating</div>}
 
-      <Text>Director: {Director}</Text>
-      <Text>Actors: {Actors}</Text>
+      <Text>Director: {director}</Text>
+      <Text>Actors: {actors}</Text>
     </Details>
   </MovieStyle>
 )
