@@ -68,7 +68,8 @@ describe('Actions/User', () => {
       store = mockStore(initialState)
     })
 
-    describe('login', () => {
+    xdescribe('login', () => {
+      // TODO: mock fetch-request
       it('dispatches the correct actions failed network request', async () => {
         await store.dispatch(login('email@test.com', 'password123'))
         const actions = store.getActions()
