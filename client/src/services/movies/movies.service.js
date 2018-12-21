@@ -9,9 +9,11 @@ const getAll = async () => {
   }
 
   const response = await fetch(`${process.env.API_URL}/movies`, requestOptions)
-  handleResponse(response)
+  const data = await handleResponse(response)
 
-  return response
+  console.log('getAll', data)
+
+  return data
 }
 
 const moviesService = { getAll }
