@@ -10,6 +10,7 @@ const IconStyle = styled(FontAwesomeIcon)`
 
 const Icon = ({ color, icon, iconsize, onMouseOver, onMouseOut }) => (
   <IconStyle
+    data-testid="icon"
     color={color}
     icon={icon}
     iconsize={iconsize}
