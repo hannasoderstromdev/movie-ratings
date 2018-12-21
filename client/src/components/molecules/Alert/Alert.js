@@ -34,7 +34,7 @@ const AlertIcon = styled(Icon)`
   color: ${({ type, theme }) => type === 'alert' && theme.colors.alertLight};
 `
 
-const Alert = ({ alerts: { display, type, message }, alertClearAction }) => {
+const Alert = ({ display, type, message, alertClearAction }) => {
   return display ? (
     <AlertWrapper type={type}>
       {message}
@@ -65,7 +65,7 @@ Alert.propTypes = {
 }
 
 const mapStateToProps = ({ alerts }) => ({
-  alerts,
+  ...alerts,
 })
 
 const mapDispatchToProps = {
