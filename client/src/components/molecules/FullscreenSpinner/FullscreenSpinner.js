@@ -16,7 +16,7 @@ const Backdrop = styled.div`
 `
 
 const FullscreenSpinner = () => (
-  <Backdrop>
+  <Backdrop data-testid="backdrop">
     <Spinner />
   </Backdrop>
 )
