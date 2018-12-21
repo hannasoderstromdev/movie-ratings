@@ -1,9 +1,3 @@
-# Movie Rating
+# Movie Rating - Client
 
-## Client
-
-Running React
-
-## Server
-
-Running MongoDB on Express.
+Built with `create-react-app`.
