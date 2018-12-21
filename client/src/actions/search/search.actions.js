@@ -25,11 +25,7 @@ export const searchOMDB = movieTitle => async dispatch => {
   try {
     const result = await searchService.search(movieTitle)
 
-    if (result.status === 'error') {
-      throw Error(result.message)
-    }
-
-    dispatch(searchForMovieTitleSuccessAction(result))
+    dispatch(searchForMovieTitleSuccessAction(result.data))
   } catch (error) {
     console.log('error', error.message)
     dispatch(searchForMovieTitleFailureAction(error))
