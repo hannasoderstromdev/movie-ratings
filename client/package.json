@@ -43,6 +43,7 @@
   ],
   "devDependencies": {
     "react-styleguidist": "^8.0.6",
-    "redux-devtools-extension": "^2.13.7"
+    "redux-devtools-extension": "^2.13.7",
+    "redux-mock-store": "^1.5.3"
   }
 }
