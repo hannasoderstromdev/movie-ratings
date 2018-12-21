@@ -20,7 +20,7 @@ import FullscreenSpinner from 'components/molecules/FullscreenSpinner/Fullscreen
 const FormField = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
+  margin: 4rem 0;
 `
 
 const RightAlign = styled.div`
