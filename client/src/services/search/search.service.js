@@ -1,5 +1,3 @@
-import authHeader from '../auth-header'
-
 import handleResponse from '../handle-response'
 
 const search = async movieTitle => {
@@ -19,7 +17,6 @@ const search = async movieTitle => {
   )
 
   const data = await handleResponse(response)
-  console.log('search', data)
 
   return data
 }
