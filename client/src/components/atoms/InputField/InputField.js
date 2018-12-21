@@ -28,6 +28,7 @@ const InputStyle = styled.input`
 
 const InputField = ({ name, type, placeholder, value, onChange }) => (
   <InputStyle
+    data-testid="input"
     name={name}
     type={type}
     placeholder={placeholder}
