@@ -15,22 +15,21 @@ export const LOGOUT = 'LOGOUT'
  * Action Creators
  */
 
-const loginRequestAction = user => ({
+export const loginRequestAction = () => ({
   type: LOGIN_REQUEST,
-  payload: { user },
 })
 
-const loginSuccessAction = user => ({
+export const loginSuccessAction = user => ({
   type: LOGIN_SUCCESS,
   payload: { user },
 })
 
-const loginFailureAction = error => ({
+export const loginFailureAction = error => ({
   type: LOGIN_FAILURE,
   payload: { error },
 })
 
-const logoutUserAction = () => ({
+export const logoutUserAction = () => ({
   type: LOGOUT,
 })
 
@@ -46,8 +45,7 @@ export const login = (username, password) => async dispatch => {
     dispatch(loginSuccessAction(user))
     dispatch(alertSuccessAction('Logged in!'))
   } catch (error) {
-    console.log('error', error.message)
-    dispatch(loginFailureAction(error))
+    dispatch(loginFailureAction(error.message))
     dispatch(alertErrorAction(error.message))
   }
 }
