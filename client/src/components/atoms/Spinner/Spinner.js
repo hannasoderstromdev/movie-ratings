@@ -30,7 +30,7 @@ const SpinnerBall = styled.div`
 `
 
 const Spinner = () => (
-  <SpinnerWrapper>
+  <SpinnerWrapper data-testid="spinner">
     <SpinnerBall />
   </SpinnerWrapper>
 )
