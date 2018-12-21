@@ -5,21 +5,21 @@ import PropTypes from 'prop-types'
 
 const IconStyle = styled(FontAwesomeIcon)`
   color: ${({ color, theme }) => (color ? color : theme.lightGray)};
-  font-size: ${({ iconSize }) => (iconSize ? iconSize : '1rem')};
+  font-size: ${({ iconsize }) => (iconsize ? iconsize : '1rem')};
 `
 
-const Icon = ({ color, icon, iconSize, onMouseOver, onMouseOut }) => (
+const Icon = ({ color, icon, iconsize, onMouseOver, onMouseOut }) => (
   <IconStyle
     color={color}
     icon={icon}
-    iconSize={iconSize}
+    iconsize={iconsize}
     onMouseOver={onMouseOver}
     onMouseOut={onMouseOut}
   />
 )
 
 Icon.defaultProps = {
-  iconSize: '1rem',
+  iconsize: '1rem',
   color: '#000',
   onMouseOver: null,
   onMouseOut: null,
@@ -28,7 +28,7 @@ Icon.defaultProps = {
 Icon.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  iconSize: PropTypes.string,
+  iconsize: PropTypes.string,
   onMouseOver: PropTypes.func,
   onMouseOut: PropTypes.func,
 }
