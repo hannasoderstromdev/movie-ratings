@@ -24,9 +24,14 @@ const Star = ({ onClick, isSelected, onMouseOver, onMouseOut }) => (
   </StarButton>
 )
 
+Star.defaultProps = {
+  isSelected: false,
+  onClick: null,
+}
+
 Star.propTypes = {
-  isSelected: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool,
+  onClick: PropTypes.func,
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
 }
