@@ -9,30 +9,30 @@ export const CREATE_MOVIE = 'CREATE_MOVIE'
 export const CREATE_MOVIE_SUCCESS = 'CREATE_MOVIE_SUCCESS'
 export const CREATE_MOVIE_FAILURE = 'CREATE_MOVIE_FAILURE'
 
-const getAllMoviesAction = () => ({
+export const getAllMoviesAction = () => ({
   type: GET_ALL_MOVIES,
 })
 
-const getAllMoviesSuccessAction = movies => ({
+export const getAllMoviesSuccessAction = movies => ({
   type: GET_ALL_MOVIES_SUCCESS,
   payload: { movies },
 })
 
-const getAllMoviesFailureAction = error => ({
+export const getAllMoviesFailureAction = error => ({
   type: GET_ALL_MOVIES_FAILURE,
   payload: { error },
 })
 
-const createMovieAction = () => ({
+export const createMovieAction = () => ({
   type: CREATE_MOVIE,
 })
 
-const createMovieSuccessAction = movie => ({
+export const createMovieSuccessAction = movie => ({
   type: CREATE_MOVIE_SUCCESS,
   payload: { movie },
 })
 
-const createMovieFailureAction = error => ({
+export const createMovieFailureAction = error => ({
   type: CREATE_MOVIE_FAILURE,
   payload: { error },
 })
@@ -44,8 +44,8 @@ export const getAllMovies = () => async dispatch => {
     const movies = await moviesService.getAll()
     dispatch(getAllMoviesSuccessAction(movies))
   } catch (error) {
-    dispatch(getAllMoviesFailureAction(error))
-    dispatch(alertErrorAction(error))
+    dispatch(getAllMoviesFailureAction(error.message))
+    dispatch(alertErrorAction(error.message))
   }
 }
 
@@ -56,7 +56,7 @@ export const createMovie = movie => async dispatch => {
     const createdMovie = await moviesService.create(movie)
     dispatch(createMovieSuccessAction(createdMovie))
   } catch (error) {
-    dispatch(createMovieFailureAction(error))
-    dispatch(alertErrorAction(error))
+    dispatch(createMovieFailureAction(error.message))
+    dispatch(alertErrorAction(error.message))
   }
 }
