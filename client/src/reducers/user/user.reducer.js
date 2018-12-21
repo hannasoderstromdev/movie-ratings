@@ -7,27 +7,44 @@ import {
 
 const user = JSON.parse(localStorage.getItem('user'))
 
-const initialState = user ? { loggedIn: true, profile: user } : {}
+const initialState = user
+  ? {
+      loggingIn: false,
+      loggedIn: true,
+      profile: user,
+      error: null,
+    }
+  : {
+      loggingIn: false,
+      loggedIn: false,
+      profile: null,
+      error: null,
+    }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
+        ...initialState,
         loggingIn: true,
-        profile: action.payload.user,
       }
 
     case LOGIN_SUCCESS:
       return {
+        ...initialState,
+        loggingIn: false,
         loggedIn: true,
         profile: action.payload.user,
       }
 
     case LOGIN_FAILURE:
-      return {}
+      return {
+        ...initialState,
+        error: action.payload.error,
+      }
 
     case LOGOUT:
-      return {}
+      return initialState
 
     default:
       return state
