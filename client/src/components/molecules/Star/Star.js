@@ -13,7 +13,7 @@ const StarButton = styled.button`
 `
 
 const Star = ({ onClick, isSelected, onMouseOver, onMouseOut }) => (
-  <StarButton onClick={onClick}>
+  <StarButton onClick={onClick} data-testid="star">
     <Icon
       icon={['fas', 'star']}
       iconSize="2.5rem"
