@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, fireEvent } from 'react-testing-library'
 
-import SearchLibrary from '../SearchLibrary'
+import SearchLibrary from '..'
 import Theme from '../../../Theme'
 
 describe('Components/Molecules/SearchLibrary', () => {
