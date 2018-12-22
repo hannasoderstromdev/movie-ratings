@@ -40,6 +40,7 @@ const SearchButton = styled.button`
 const SearchLibrary = ({ name, onChange, onSubmit, placeholder }) => (
   <Wrapper onSubmit={onSubmit}>
     <SearchField
+      data-testid="searchfield"
       type="search"
       name={name}
       onChange={onChange}
