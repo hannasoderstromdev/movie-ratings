@@ -5,8 +5,8 @@ import { H1 } from 'components/atoms/Typography'
 import Page from 'components/templates/Page'
 import Main from 'components/templates/Main'
 
-import SearchForMovie from './SearchForMovie'
-import RateNewMovie from './RateNewMovie'
+import SearchForMovie from 'components/organisms/SearchForMovie'
+import RateNewMovie from 'components/organisms/RateNewMovie'
 
 const New = () => (
   <Page>
