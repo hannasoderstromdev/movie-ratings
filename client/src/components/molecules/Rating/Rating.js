@@ -54,7 +54,7 @@ class Rating extends React.Component {
       )
     }
 
-    return <RatingStyle>{starsToRender}</RatingStyle>
+    return <RatingStyle data-testid="rating">{starsToRender}</RatingStyle>
   }
 }
 
