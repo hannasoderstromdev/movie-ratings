@@ -31,7 +31,7 @@ In order to build components separately from the application, I've used Stylegui
 
 ### Atomic Design
 
-For the UI-components I've implemented the Atomic Design-structure. This means you start with the basic building blocks as *atoms* (labels, inputfields, buttons) and then combine them to more complex *molecules* (menus, formfields) and then *organisms* for even more complex patterns of components.
+For the UI-components I've implemented the Atomic Design-structure. This means you start with the basic building blocks as *atoms* (labels, inputfields, buttons) and then combine them to more complex *molecules* (menus, formfields) and then *organisms* for even more complex sections of components.
 
 These then combines into Pages which are the routes for the application.
 
