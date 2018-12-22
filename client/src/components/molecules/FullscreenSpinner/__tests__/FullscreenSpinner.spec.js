@@ -4,7 +4,7 @@ import { render } from 'react-testing-library'
 import FullscreenSpinner from '..'
 import Theme from '../../../Theme'
 
-describe('<FullscreenSpinner />', () => {
+describe('Components/Molecules/FullscreenSpinner', () => {
   it('renders', () => {
     const { getByTestId } = render(
       <Theme>

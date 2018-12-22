@@ -4,7 +4,7 @@ import { render } from 'react-testing-library'
 import LabeledInputField from '..'
 import Theme from '../../../Theme'
 
-describe('<LabeledInputField />', () => {
+describe('Components/Molecules/LabeledInputField', () => {
   it('renders', () => {
     const props = {
       label: 'Label',

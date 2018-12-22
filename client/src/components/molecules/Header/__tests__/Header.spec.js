@@ -4,7 +4,7 @@ import { render } from 'react-testing-library'
 import Header from '..'
 import Theme from '../../../Theme'
 
-describe('<Header />', () => {
+describe('Components/Molecules/Header', () => {
   it('renders', () => {
     const { getByText } = render(
       <Theme>

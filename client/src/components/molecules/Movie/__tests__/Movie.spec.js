@@ -4,7 +4,7 @@ import { render } from 'react-testing-library'
 import Movie from '../index'
 import Theme from '../../../Theme'
 
-describe('<Movie />', () => {
+describe('Components/Molecules/Movie', () => {
   it('renders', () => {
     const props = {
       title: 'Movie Title',

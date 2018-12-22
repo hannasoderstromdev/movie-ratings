@@ -8,7 +8,7 @@ import Theme from '../../../Theme'
 
 import reducer from 'reducers/alerts/alerts.reducer'
 
-describe('<Alert />', () => {
+describe('Components/Molecules/Alert', () => {
   let initialState
   let store
 

@@ -4,7 +4,7 @@ import { render } from 'react-testing-library'
 import MoviesList from '..'
 import Theme from '../../../Theme'
 
-describe('<MoviesList />', () => {
+describe('Components/Molecules/MoviesList', () => {
   it('renders', () => {
     const props = {
       movies: [
