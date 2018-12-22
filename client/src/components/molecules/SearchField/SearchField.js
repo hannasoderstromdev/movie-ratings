@@ -52,6 +52,7 @@ const SearchButton = styled.button`
 const SearchField = ({ name, onChange, placeholder }) => (
   <Wrapper>
     <SearchStyle
+      data-testid="searchfield"
       name={name}
       onChange={onChange}
       placeholder={placeholder}
