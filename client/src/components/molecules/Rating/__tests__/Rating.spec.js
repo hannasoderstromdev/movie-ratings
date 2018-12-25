@@ -5,11 +5,9 @@ import Rating from '..'
 import Theme from '../../../Theme'
 
 describe('Components/Molecules/Rating', () => {
-  const increase = jest.fn()
-  const decrease = jest.fn()
+  const setRating = jest.fn()
   const props = {
-    increase,
-    decrease,
+    setRating,
     rating: 1,
   }
   const { getByTestId } = render(
@@ -21,13 +19,9 @@ describe('Components/Molecules/Rating', () => {
     expect(getByTestId('rating').children.length).toBe(5)
   })
 
-  it('handles decrease', () => {
-    fireEvent.click(getByTestId('rating').children[0])
-    expect(decrease).toHaveBeenCalledTimes(1)
-  })
-
-  it('handles increase', () => {
+  it('handles setRating', () => {
     fireEvent.click(getByTestId('rating').children[1])
-    expect(increase).toHaveBeenCalledTimes(1)
+    expect(setRating).toHaveBeenCalledTimes(1)
+    expect(setRating).toHaveBeenCalledWith(2)
   })
 })
