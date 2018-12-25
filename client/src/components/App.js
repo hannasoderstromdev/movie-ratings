@@ -16,9 +16,10 @@ import Alert from 'components/molecules/Alert'
 import Header from 'components/molecules/Header'
 import Navigation from 'components/molecules/Navigation'
 
-import Home from './pages/Home'
+import Library from './pages/Library'
 import New from './pages/New'
 import Login from './pages/Login'
+import Account from './pages/Account'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -28,7 +29,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `
 
-const App = () => (
+const App = ({ loggedIn }) => (
   <ErrorBoundary>
     <Root store={store}>
       <Theme>
@@ -40,11 +41,12 @@ const App = () => (
             <div>
               <PrivateRoute path="/new" exact component={New} />
               <Route path="/login" exact component={Login} />
-              <PrivateRoute path="/" exact component={Home} />
+              <PrivateRoute path="/account" exact component={Account} />
+              <PrivateRoute path="/" exact component={Library} />
             </div>
 
             <Alert />
-            <Navigation />
+            <Navigation loggedIn={loggedIn} />
           </Wrapper>
         </Router>
       </Theme>
