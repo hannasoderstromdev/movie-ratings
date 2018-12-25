@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
+import { createMovie } from 'actions/movies/movies.actions'
+
 import Button from 'components/atoms/Button'
 
 import MoviesList from 'components/molecules/MoviesList'
@@ -46,7 +48,14 @@ class RateNewMovie extends Component {
       rating: prevState.rating--,
     }))
 
-  saveNewRating = () => {}
+  saveNewRating = () => {
+    const { createMovie, movie } = this.props
+    const newMovie = {
+      ...movie,
+      rating: this.state.rating,
+    }
+    createMovie(newMovie)
+  }
 
   render() {
     const { movie } = this.props
@@ -80,4 +89,11 @@ const mapStateToProps = ({ search }) => ({
   ...search,
 })
 
-export default connect(mapStateToProps)(RateNewMovie)
+const mapDispatchToProps = {
+  createMovie,
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(RateNewMovie)
