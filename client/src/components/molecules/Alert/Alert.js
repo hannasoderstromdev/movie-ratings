@@ -42,7 +42,7 @@ const Alert = ({ display, type, message, alertClearAction }) => {
         <AlertIcon
           icon={['fas', 'times']}
           type={type}
-          iconSize="16px"
+          iconsize="16px"
           color="#fff"
         />
       </Button>
