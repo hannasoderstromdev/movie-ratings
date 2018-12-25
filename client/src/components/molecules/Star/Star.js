@@ -16,7 +16,7 @@ const Star = ({ onClick, isSelected, onMouseOver, onMouseOut }) => (
   <StarButton onClick={onClick} data-testid="star">
     <Icon
       icon={['fas', 'star']}
-      iconSize="2.5rem"
+      iconsize="2.5rem"
       color={isSelected ? '#FEDC9B' : '#666'}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
