@@ -21,7 +21,7 @@ app.use(bodyParser.json({ type: 'application/json' }))
 
 mongoose
   .connect(
-    keys.mongoURI,
+    keys.MONGO_URI,
     { useNewUrlParser: true },
   )
   .catch(err => console.error(err))
@@ -68,7 +68,7 @@ app.use(function(err, req, res, next) {
  * Utilities
  */
 function validateUser(req, res, next) {
-  jwt.verify(req.headers['x-access-token'], keys.JWTSecret, function(
+  jwt.verify(req.headers['x-access-token'], keys.JWT_SECRET, function(
     err,
     decoded,
   ) {
@@ -86,8 +86,7 @@ function validateUser(req, res, next) {
 /**
  * Run Server
  */
-const PORT = process.env.PORT || 5000
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+app.listen(keys.PORT, () => console.log(`Server running on port ${keys.PORT}`))
 
 // Export app for integration tests
 module.exports = app
