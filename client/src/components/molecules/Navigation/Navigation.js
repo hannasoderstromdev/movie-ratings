@@ -1,6 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import Icon from 'components/atoms/Icon'
 
@@ -47,17 +49,21 @@ const Nav = styled.nav`
   }
 `
 
-const Navigation = () => (
+const Navigation = ({ loggedIn }) => (
   <Nav>
     <ul>
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/">Library</Link>
       </li>
       <li>
         <Link to="/new">New</Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        {loggedIn ? (
+          <Link to="/account">Account</Link>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </li>
       <li>
         <Link to="/settings">
@@ -68,4 +74,12 @@ const Navigation = () => (
   </Nav>
 )
 
-export default Navigation
+Navigation.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+}
+
+const mapStateToProps = ({ user }) => ({
+  loggedIn: user.loggedIn,
+})
+
+export default connect(mapStateToProps)(Navigation)
