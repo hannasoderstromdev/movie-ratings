@@ -27,7 +27,7 @@ class Rating extends React.Component {
   }
 
   render() {
-    const { increase, decrease } = this.props
+    const { setRating } = this.props
     const { stars } = this.state
 
     const starsToRender = []
@@ -36,7 +36,7 @@ class Rating extends React.Component {
         <Star
           key={i + 1}
           isSelected
-          onClick={decrease}
+          onClick={() => setRating(i + 1)}
           onMouseOver={() => this.onMouseOver(i + 1)}
           onMouseOut={this.onMouseOut}
         />,
@@ -47,7 +47,7 @@ class Rating extends React.Component {
       starsToRender.push(
         <Star
           key={stars + 1 + i}
-          onClick={increase}
+          onClick={() => setRating(stars + i + 1)}
           onMouseOver={() => this.onMouseOver(stars + 1 + i)}
           onMouseOut={this.onMouseOut}
         />,
@@ -59,13 +59,11 @@ class Rating extends React.Component {
 }
 
 Rating.defaultProps = {
-  decrease: null,
-  increase: null,
+  setRating: null,
 }
 
 Rating.propTypes = {
-  decrease: PropTypes.func,
-  increase: PropTypes.func,
+  setRating: PropTypes.func,
   rating: PropTypes.number.isRequired,
 }
 
