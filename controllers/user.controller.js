@@ -44,7 +44,7 @@ module.exports = {
         } else {
           try {
             if (bcrypt.compareSync(req.body.password, result.password)) {
-              const token = jwt.sign({ id: result._id }, keys.JWTSecret, {
+              const token = jwt.sign({ id: result._id }, keys.JWT_SECRET, {
                 expiresIn: '1h',
               })
 
