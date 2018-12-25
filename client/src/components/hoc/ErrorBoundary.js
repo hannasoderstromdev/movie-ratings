@@ -1,5 +1,4 @@
 import React from 'react'
-import { isRedirect } from '@reach/router'
 
 class ErrorBoundary extends React.Component {
   state = {
@@ -9,11 +8,7 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, info) {
-    if (isRedirect(error)) {
-      throw error
-    } else {
-      this.setState({ hasError: true, error, info })
-    }
+    this.setState({ hasError: true, error, info })
   }
 
   render() {
