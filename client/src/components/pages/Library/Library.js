@@ -1,5 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+
+import { getAllMovies } from 'actions/movies/movies.actions'
 
 import SearchLibrary from 'components/molecules/SearchLibrary'
 
@@ -19,11 +22,14 @@ const NoRatingsYet = styled.div`
   font-style: italic;
 `
 
-class Home extends React.Component {
+class Library extends React.Component {
   state = {
     search: '',
     results: [],
-    recent: [],
+  }
+
+  async componentDidMount() {
+    await this.props.getAllMovies()
   }
 
   doOnSearch = e => {
@@ -37,7 +43,8 @@ class Home extends React.Component {
   }
 
   render() {
-    const { results, recent } = this.state
+    const { results } = this.state
+    const { movies } = this.props
     return (
       <Page>
         <SearchLibrary
@@ -47,8 +54,8 @@ class Home extends React.Component {
         />
         <Main>
           <H1>Recent</H1>
-          {recent.length ? (
-            <MoviesList key={1} movies={recent} />
+          {movies.length ? (
+            <MoviesList movies={movies} />
           ) : (
             <NoRatingsYet>No ratings added yet</NoRatingsYet>
           )}
@@ -59,4 +66,15 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+const mapStateToProps = ({ movies }) => ({
+  movies: movies.movies,
+})
+
+const mapDispatchToProps = {
+  getAllMovies,
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Library)
