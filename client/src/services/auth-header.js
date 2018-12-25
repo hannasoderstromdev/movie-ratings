@@ -6,5 +6,8 @@ export default function authHeader() {
         'Content-Type': 'application/json',
         'x-access-token': user.token,
       }
-    : {}
+    : {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }
 }
