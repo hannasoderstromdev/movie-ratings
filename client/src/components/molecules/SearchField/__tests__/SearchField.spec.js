@@ -10,7 +10,7 @@ describe('Components/Molecules/SearchField', () => {
     onChange,
     name: 'searchfield',
   }
-  const { getByTestId, getByText, debug } = render(
+  const { getByTestId, getByText } = render(
     <Theme>
       <SearchField {...props} />
     </Theme>,
@@ -20,7 +20,6 @@ describe('Components/Molecules/SearchField', () => {
     expect(getByTestId('searchfield').tagName).toBe('INPUT')
     expect(getByTestId('searchfield').type).toBe('search')
     expect(getByText('Search')).toBeDefined()
-    debug()
   })
 
   it('handles change', () => {
