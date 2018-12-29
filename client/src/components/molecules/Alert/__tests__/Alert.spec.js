@@ -35,7 +35,7 @@ describe('Components/Molecules/Alert', () => {
       </Provider>,
     )
 
-    expect(getByText('Success!').tagName).toBe('DIV')
+    expect(getByText('Success!').tagName).toBe('SPAN')
   })
 
   it('render type "danger"', () => {
@@ -59,7 +59,7 @@ describe('Components/Molecules/Alert', () => {
       </Provider>,
     )
 
-    expect(getByText('Danger!').tagName).toBe('DIV')
+    expect(getByText('Danger!').tagName).toBe('SPAN')
   })
 
   it('render type "alert"', () => {
@@ -83,6 +83,6 @@ describe('Components/Molecules/Alert', () => {
       </Provider>,
     )
 
-    expect(getByText('Alert!').tagName).toBe('DIV')
+    expect(getByText('Alert!').tagName).toBe('SPAN')
   })
 })
