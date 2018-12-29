@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import Icon from 'components/atoms/Icon'
+
 const Wrapper = styled.div`
   display: flex;
 `
@@ -13,7 +15,7 @@ const SearchStyle = styled.input`
   color: ${({ theme }) => theme.colors.textPrimary};
   display: flex;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   font-size: 1.4rem;
   flex: 1.9;
   outline: none;
@@ -58,7 +60,9 @@ const SearchField = ({ name, onChange, placeholder }) => (
       placeholder={placeholder}
       type="search"
     />
-    <SearchButton type="submit">Search</SearchButton>
+    <SearchButton type="submit">
+      <Icon icon={['fas', 'search']} iconsize="18px" />
+    </SearchButton>
   </Wrapper>
 )
 
