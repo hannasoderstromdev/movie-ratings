@@ -12,9 +12,10 @@ import ErrorBoundary from 'components/hoc/ErrorBoundary'
 import PrivateRoute from 'components/hoc/PrivateRoute'
 
 import Alert from 'components/molecules/Alert'
-
 import Header from 'components/molecules/Header'
 import Navigation from 'components/molecules/Navigation'
+
+import SearchLibrary from 'components/organisms/SearchLibrary'
 
 import Library from './pages/Library'
 import New from './pages/New'
@@ -29,7 +30,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `
 
-const App = ({ loggedIn }) => (
+const App = () => (
   <ErrorBoundary>
     <Root store={store}>
       <Theme>
@@ -37,6 +38,7 @@ const App = ({ loggedIn }) => (
           <Wrapper>
             <Normalize />
             <Header />
+            <SearchLibrary />
 
             <div>
               <PrivateRoute path="/new" exact component={New} />
@@ -46,7 +48,7 @@ const App = ({ loggedIn }) => (
             </div>
 
             <Alert />
-            <Navigation loggedIn={loggedIn} />
+            <Navigation />
           </Wrapper>
         </Router>
       </Theme>
