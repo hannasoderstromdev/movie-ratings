@@ -12,11 +12,11 @@ const StarButton = styled.button`
   cursor: pointer;
 `
 
-const Star = ({ onClick, isSelected, onMouseOver, onMouseOut }) => (
+const Star = ({ onClick, isSelected, onMouseOver, onMouseOut, small }) => (
   <StarButton onClick={onClick} data-testid="star">
     <Icon
       icon={['fas', 'star']}
-      iconsize="2.5rem"
+      iconsize={small ? '1.75rem' : '2.5rem'}
       color={isSelected ? '#FEDC9B' : '#666'}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
@@ -27,9 +27,11 @@ const Star = ({ onClick, isSelected, onMouseOver, onMouseOut }) => (
 Star.defaultProps = {
   isSelected: false,
   onClick: null,
+  small: false,
 }
 
 Star.propTypes = {
+  small: PropTypes.bool,
   isSelected: PropTypes.bool,
   onClick: PropTypes.func,
   onMouseOver: PropTypes.func.isRequired,
