@@ -1,12 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+
+import { MovieType } from 'types'
 
 import { getAllMovies } from 'actions/movies/movies.actions'
 
-import SearchLibrary from 'components/molecules/SearchLibrary'
-
 import { H1 } from 'components/atoms/Typography'
+import Spinner from 'components/atoms/Spinner'
 
 import MoviesList from 'components/molecules/MoviesList'
 
@@ -23,51 +25,44 @@ const NoRatingsYet = styled.div`
 `
 
 class Library extends React.Component {
-  state = {
-    search: '',
-    results: [],
-  }
-
   async componentDidMount() {
     await this.props.getAllMovies()
   }
 
-  doOnSearch = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
-  doOnSubmit = e => {
-    e.preventDefault()
-
-    console.log('search for ', this.state.search)
-  }
-
   render() {
-    const { results } = this.state
     const { movies } = this.props
-    return (
+
+    // if (movies.error) return <Page />
+
+    return movies.loading ? (
       <Page>
-        <SearchLibrary
-          name="search"
-          onChange={this.doOnSearch}
-          onSubmit={this.doOnSubmit}
-        />
+        <Spinner />
+      </Page>
+    ) : (
+      <Page>
         <Main>
           <H1>Recent</H1>
-          {movies.length ? (
-            <MoviesList movies={movies} />
+          {movies && movies.movies && movies.movies.length ? (
+            <MoviesList movies={movies.movies} />
           ) : (
             <NoRatingsYet>No ratings added yet</NoRatingsYet>
           )}
-          {!!results.length && <MoviesList movies={results} />}
         </Main>
       </Page>
     )
   }
 }
 
+Library.propTypes = {
+  movies: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    movies: PropTypes.arrayOf(PropTypes.shape(MovieType)),
+    error: PropTypes.bool,
+  }).isRequired,
+}
+
 const mapStateToProps = ({ movies }) => ({
-  movies: movies.movies,
+  movies,
 })
 
 const mapDispatchToProps = {
