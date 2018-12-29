@@ -9,7 +9,7 @@ import Icon from 'components/atoms/Icon'
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.colors.black};
   color: ${({ theme }) => theme.colors.textPrimary};
-  height: 10vh;
+  height: 8vh;
   padding: 1rem 2rem 1rem 3rem;
   display: flex;
   justify-content: center;
@@ -28,7 +28,7 @@ const Nav = styled.nav`
   a {
     text-decoration: none;
     font-size: 1.4rem;
-    font-family: 'Open Sans', sans-serif;
+    font-family: ${({ theme }) => theme.fonts.primary};
   }
 
   a:link,
@@ -79,7 +79,7 @@ Navigation.propTypes = {
 }
 
 const mapStateToProps = ({ user }) => ({
-  loggedIn: user.loggedIn,
+  loggedIn: user && user.loggedIn,
 })
 
 export default connect(mapStateToProps)(Navigation)
