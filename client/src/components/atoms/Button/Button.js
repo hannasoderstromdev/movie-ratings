@@ -45,7 +45,33 @@ const Secondary = styled.button`
   }
 `
 
-const Button = ({ secondary, children, onClick, disabled, type }) => {
+const Thirdiary = styled.button`
+  background-color: transparent;
+  border: 1px solid transparent;
+  height: 30px;
+  min-width: 30px;
+  outline: none;
+  color: ${({ theme }) => theme.colors.black};
+  font-size: 1.6rem;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:focus {
+    border: 1px solid transparent;
+  }
+`
+
+const Button = ({
+  thirdiary,
+  secondary,
+  children,
+  onClick,
+  disabled,
+  type,
+}) => {
   if (secondary) {
     return (
       <Secondary
@@ -56,6 +82,19 @@ const Button = ({ secondary, children, onClick, disabled, type }) => {
       >
         {children}
       </Secondary>
+    )
+  }
+
+  if (thirdiary) {
+    return (
+      <Thirdiary
+        data-testid="thirdiary-button"
+        onClick={onClick}
+        disabled={disabled}
+        type={type}
+      >
+        {children}
+      </Thirdiary>
     )
   }
 
@@ -75,6 +114,8 @@ Button.defaultProps = {
   type: null,
   disabled: false,
   onClick: null,
+  thirdiary: null,
+  secondary: null,
 }
 
 Button.propTypes = {
