@@ -27,18 +27,17 @@ describe('<Button />', () => {
     expect(getByTestId('primary-button').tagName).toBe('BUTTON')
   })
 
-  xit('runs onClick when clicked', () => {
+  it('runs onClick when clicked', () => {
     props = {
       onClick,
-      disabled: true,
+      disabled: false,
     }
-    const { getByTestId, debug } = render(
+    const { getByTestId } = render(
       <Theme>
         <Button {...props}>Test Button</Button>
       </Theme>,
     )
-    const button = getByTestId('primary-button')
-    fireEvent.click(button)
-    expect(onClick).toBeCalled()
+    fireEvent.click(getByTestId('primary-button'))
+    expect(onClick).toHaveBeenCalledTimes(1)
   })
 })
