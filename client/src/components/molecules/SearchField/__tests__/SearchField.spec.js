@@ -19,7 +19,6 @@ describe('Components/Molecules/SearchField', () => {
   it('renders', () => {
     expect(getByTestId('searchfield').tagName).toBe('INPUT')
     expect(getByTestId('searchfield').type).toBe('search')
-    expect(getByText('Search')).toBeDefined()
   })
 
   it('handles change', () => {
