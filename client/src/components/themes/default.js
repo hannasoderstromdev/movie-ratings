@@ -3,10 +3,13 @@ const theme = {}
 theme.colors = {
   primary: '#FEDC9B',
   secondary: '',
+  dangerDark: '#6A2525',
   danger: '#832D2D',
   dangerLight: '#F7CCCC',
+  alertDark: '#B39549',
   alert: '#CFAD54',
   alertLight: '#FFEFC6',
+  successDark: '#416B27',
   success: '#4E832D',
   successLight: '#DCF7CC',
   white: '',
@@ -24,9 +27,15 @@ theme.shadows = {
 }
 
 theme.fonts = {
-  primary: 'Helvetica Neue, Helvetica, Roboto, sans-serif',
+  primary: 'Open Sans, sans-serif',
   pre: 'Consolas, Liberation Mono, Menlo, Courier, monospace',
   quote: 'Georgia, serif',
+}
+
+theme.weight = {
+  light: 300,
+  regular: 400,
+  bold: 600,
 }
 
 theme.sizes = {
