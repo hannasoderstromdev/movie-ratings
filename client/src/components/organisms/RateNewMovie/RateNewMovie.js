@@ -38,15 +38,10 @@ class RateNewMovie extends Component {
     rating: 0,
   }
 
-  increaseRating = () =>
-    this.setState(prevState => ({
-      rating: prevState.rating++,
-    }))
-
-  decreaseRating = () =>
-    this.setState(prevState => ({
-      rating: prevState.rating--,
-    }))
+  setRating = rating =>
+    this.setState({
+      rating,
+    })
 
   saveNewRating = () => {
     const { createMovie, movie } = this.props
@@ -58,18 +53,17 @@ class RateNewMovie extends Component {
   }
 
   render() {
-    const { movie } = this.props
+    const { loading, movie } = this.props
+
+    if (loading) return <div>Loading...</div>
+
     return movie ? (
       <SearchResult>
         <div>Result</div>
         <MoviesList movies={[movie]} />
         <RateWrapper>
           Rate this movie:
-          <Rating
-            increase={this.increaseRating}
-            decrease={this.decreaseRating}
-            rating={this.state.rating}
-          />
+          <Rating setRating={this.setRating} rating={this.state.rating} />
           <Button onClick={this.saveNewRating}>Save</Button>
         </RateWrapper>
       </SearchResult>
@@ -81,7 +75,31 @@ class RateNewMovie extends Component {
 
 RateNewMovie.propTypes = {
   loading: PropTypes.bool.isRequired,
-  movie: PropTypes.oneOf([PropTypes.null, PropTypes.shape({})]),
+  movie: PropTypes.oneOf([
+    PropTypes.null,
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      actors: PropTypes.string.isRequired,
+      awards: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired,
+      director: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+      imdbID: PropTypes.string.isRequired,
+      imdbRating: PropTypes.string.isRequired,
+      language: PropTypes.string.isRequired,
+      metascore: PropTypes.string.isRequired,
+      plot: PropTypes.string.isRequired,
+      poster: PropTypes.string.isRequired,
+      production: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      released: PropTypes.number.isRequired,
+      runtime: PropTypes.number.isRequired,
+      title: PropTypes.number.isRequired,
+      website: PropTypes.number.isRequired,
+      writer: PropTypes.number.isRequired,
+      year: PropTypes.number.isRequired,
+    }),
+  ]),
   error: PropTypes.oneOf([PropTypes.bool, PropTypes.null]),
 }
 
