@@ -4,7 +4,18 @@ import theme from '../components/themes/default'
 import Normalize from '../components/Normalize'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faStar, faTimes } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCheckCircle,
+  faChevronDown,
+  faChevronUp,
+  faEllipsisV,
+  faEllipsisH,
+  faExclamationCircle,
+  faExclamationTriangle,
+  faSearch,
+  faStar,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons'
 
 import Root from '../components/Root'
 import { createStore, applyMiddleware } from 'redux'
@@ -13,7 +24,7 @@ import { combineReducers } from 'redux'
 
 const rootReducer = combineReducers({
   alerts: () => ({
-    visible: true,
+    display: true,
     type: 'alert',
     message: 'message',
   }),
@@ -22,7 +33,18 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 // Add all icons used here
-library.add(faStar, faTimes)
+library.add(
+  faCheckCircle,
+  faChevronDown,
+  faChevronUp,
+  faEllipsisV,
+  faEllipsisH,
+  faExclamationCircle,
+  faExclamationTriangle,
+  faSearch,
+  faStar,
+  faTimes,
+)
 
 export default class ThemeWrapper extends Component {
   render() {
