@@ -6,27 +6,40 @@ import Theme from '../../../Theme'
 
 describe('Components/Molecules/Movie', () => {
   it('renders', () => {
+    const toggleFullMovie = jest.fn()
+    const toggleDetails = jest.fn()
     const props = {
+      id: 'movieid01',
+      country: 'USA',
+      genre: 'Action',
+      language: 'ENG',
       title: 'Movie Title',
       year: '1998',
       runtime: '128 min',
-      director: 'Me',
       actors: 'Me and Someone Else',
+      director: 'Me',
+      plot: '',
       poster: 'http://www.url.com/picture.jpg',
+      production: 'Xena and Zeus',
       rating: 4,
-      decrease: jest.fn(),
-      increase: jest.fn(),
+      ratings: [
+        { Source: '', Value: '' },
+        { Source: '', Value: '' },
+        { Source: '', Value: '' },
+      ],
+      released: 'May 1st 1998',
+      writer: 'Someone Else',
+      toggleFullMovie,
+      toggleDetails,
     }
-    const { getByAltText, getByText } = render(
+    const { getByAltText, getByText, debug } = render(
       <Theme>
         <Movie {...props} />
       </Theme>,
     )
+
     expect(getByAltText(props.title).tagName).toBe('IMG')
     expect(getByText(props.title).tagName).toBe('H2')
-    expect(getByText(props.year)).toBeDefined()
-    expect(getByText(props.runtime)).toBeDefined()
-    expect(getByText(`Director: ${props.director}`)).toBeDefined()
-    expect(getByText(`Actors: ${props.actors}`)).toBeDefined()
+    expect(getByText(`${props.year}, ${props.runtime}`)).toBeDefined()
   })
 })
