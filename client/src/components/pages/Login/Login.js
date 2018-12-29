@@ -69,6 +69,7 @@ class Login extends React.Component {
                 type="email"
                 value={username}
                 onChange={this.doOnChange}
+                placeholder="Enter your e-mail here"
               />
             </FormField>
 
@@ -79,6 +80,7 @@ class Login extends React.Component {
                 type="password"
                 value={password}
                 onChange={this.doOnChange}
+                placeholder="Enter your password here"
               />
             </FormField>
 
