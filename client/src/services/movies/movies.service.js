@@ -38,6 +38,25 @@ const create = async movie => {
   }
 }
 
-const moviesService = { getAll, create }
+const update = async (movieId, newProps) => {
+  const user = JSON.parse(localStorage.getItem('user'))
+
+  if (user) {
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'x-access-token': user.token,
+      },
+      body: JSON.stringify({ ...newProps }),
+    }
+
+    const response = await fetch(`/movies/${movieId}`, requestOptions)
+    return await handleResponse(response)
+  }
+}
+
+const moviesService = { getAll, create, update }
 
 export default moviesService
