@@ -6,22 +6,20 @@ import {
 
 import reducer from '../search.reducer'
 
-describe('Reducers/Movies', () => {
+describe('Reducers/Search', () => {
   it(`handles ${SEARCH_FOR_MOVIE_TITLE}`, () => {
     const action = {
       type: SEARCH_FOR_MOVIE_TITLE,
     }
-    const expectedState = { error: null, loading: true, movie: null }
+    const expectedState = { error: false, loading: true, movie: null }
     expect(reducer({}, action)).toEqual(expectedState)
   })
 
   it(`handles ${SEARCH_FOR_MOVIE_TITLE_FAILURE}`, () => {
-    const error = 'Failed'
     const action = {
       type: SEARCH_FOR_MOVIE_TITLE_FAILURE,
-      payload: { error },
     }
-    const expectedState = { error: 'Failed', loading: false, movie: null }
+    const expectedState = { error: true, loading: false, movie: null }
     expect(reducer({}, action)).toEqual(expectedState)
   })
 
@@ -31,7 +29,7 @@ describe('Reducers/Movies', () => {
       type: SEARCH_FOR_MOVIE_TITLE_SUCCESS,
       payload: { movie },
     }
-    const expectedState = { error: null, loading: false, movie: {} }
+    const expectedState = { error: false, loading: false, movie: {} }
     expect(reducer({}, action)).toEqual(expectedState)
   })
 })
