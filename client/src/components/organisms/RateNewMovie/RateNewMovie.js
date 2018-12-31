@@ -100,7 +100,7 @@ RateNewMovie.propTypes = {
       year: PropTypes.number.isRequired,
     }),
   ]),
-  error: PropTypes.oneOf([PropTypes.bool, PropTypes.null]),
+  error: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = ({ search }) => ({
