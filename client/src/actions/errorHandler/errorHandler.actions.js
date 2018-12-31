@@ -1,11 +1,11 @@
 export const SET_ERROR = 'SET_ERROR'
 export const CLEAR_ERROR = 'CLEAR_ERROR'
 
-export const setError = ({ errorType, errorMessage }) => ({
+export const setErrorAction = ({ status, type, message }) => ({
   type: SET_ERROR,
-  payload: { errorType, errorMessage },
+  payload: { status, type, message },
 })
 
-export const clearError = () => ({
+export const clearErrorAction = () => ({
   type: CLEAR_ERROR,
 })
