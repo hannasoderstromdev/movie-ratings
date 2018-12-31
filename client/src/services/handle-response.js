@@ -8,11 +8,17 @@ import userService from './user/user.service'
 
 const handleResponse = async response => {
   const text = await response.text()
-  const data = await JSON.parse(text)
   if (!response.ok) {
-    const error = (await data.message) || (await response.statusText)
+    // This only happens if token exists but is invalid, logout to clear the invalid token
+    if (response.status === 403) {
+      userService.logout()
+    }
+    const error = {
+      message: response.statusText,
+      status: response.status,
+    }
     return Promise.reject(error)
   }
-  return data
+  return JSON.parse(text)
 }
 export default handleResponse
