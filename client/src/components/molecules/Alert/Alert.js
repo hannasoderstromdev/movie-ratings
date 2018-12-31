@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { alertClearAction } from 'actions/alerts/alerts.actions'
+import { clearErrorAction } from 'actions/errorHandler/errorHandler.actions'
 
 import { Text } from 'components/atoms/Typography'
 import Icon from 'components/atoms/Icon'
@@ -59,8 +59,8 @@ const TextWrapper = styled(Text)`
   flex: 1;
 `
 
-const Alert = ({ display, type, message, alertClearAction }) => {
-  return display ? (
+const Alert = ({ status, error, type, message, clearErrorAction }) => {
+  return error ? (
     <AlertWrapper type={type}>
       <IconWrapper type={type}>
         {type === 'success' && (
@@ -74,9 +74,11 @@ const Alert = ({ display, type, message, alertClearAction }) => {
         )}
       </IconWrapper>
 
-      <TextWrapper>{message}</TextWrapper>
+      <TextWrapper>
+        {status}: {message}
+      </TextWrapper>
 
-      <Button thirdiary onClick={alertClearAction}>
+      <Button thirdiary onClick={clearErrorAction}>
         <AlertIcon
           icon={['fas', 'times']}
           type={type}
@@ -89,25 +91,27 @@ const Alert = ({ display, type, message, alertClearAction }) => {
 }
 
 Alert.defaultProps = {
+  status: 0,
   type: 'alert',
   message: '',
-  visible: false,
+  error: false,
   onClick: null,
 }
 
 Alert.propTypes = {
+  status: PropTypes.number,
   type: PropTypes.string,
   message: PropTypes.string,
-  visible: PropTypes.bool,
+  error: PropTypes.bool,
   onClick: PropTypes.func,
 }
 
-const mapStateToProps = ({ alerts }) => ({
-  ...alerts,
+const mapStateToProps = ({ errorHandler }) => ({
+  ...errorHandler,
 })
 
 const mapDispatchToProps = {
-  alertClearAction,
+  clearErrorAction,
 }
 
 export default connect(
