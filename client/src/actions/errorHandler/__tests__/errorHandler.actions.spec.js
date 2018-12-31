@@ -1,26 +1,27 @@
 import {
   SET_ERROR,
   CLEAR_ERROR,
-  setError,
-  clearError,
+  setErrorAction,
+  clearErrorAction,
 } from '../errorHandler.actions'
 
 describe('Actions/ErrorHandler', () => {
-  describe('setError', () => {
+  describe('setErrorAction', () => {
     it(`returns ${SET_ERROR} with correct payload`, () => {
-      const errorType = 403
-      const errorMessage = 'JWT Expired'
+      const status = 403
+      const type = 'danger'
+      const message = 'JWT Expired'
 
-      expect(setError({ errorType, errorMessage })).toEqual({
+      expect(setErrorAction({ status, type, message })).toEqual({
         type: SET_ERROR,
-        payload: { errorType, errorMessage },
+        payload: { status, type, message },
       })
     })
   })
 
-  describe('clearError', () => {
+  describe('clearErrorAction', () => {
     it(`returns ${CLEAR_ERROR}`, () => {
-      expect(clearError()).toEqual({
+      expect(clearErrorAction()).toEqual({
         type: CLEAR_ERROR,
       })
     })
