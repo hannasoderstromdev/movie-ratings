@@ -1,44 +1,72 @@
 import React from 'react'
-import { render, fireEvent } from 'react-testing-library'
+import { render, fireEvent, cleanup } from 'react-testing-library'
 
 import Root from 'components/Root'
 import { store } from 'helpers/store'
 import SearchLibrary from '..'
-import Theme from '../../../Theme'
+import Theme from 'components/Theme'
 
 describe('Components/Molecules/SearchLibrary', () => {
-  const doOnChange = jest.fn()
-  const doOnSubmit = jest.fn()
-  const findMovieByTitle = jest.fn()
+  let doOnChange
+  let doOnSubmit
+  let findMovieByTitle
+  let props
 
-  const props = {
-    findMovieByTitle,
-    doOnChange,
-    doOnSubmit,
-    name: 'searchfield',
-    placeholder: 'search here',
-  }
-  const { getByTestId, getByText, debug } = render(
-    <Root store={store}>
-      <Theme>
-        <SearchLibrary {...props} />
-      </Theme>
-    </Root>,
-  )
+  beforeEach(() => {
+    doOnChange = jest.fn()
+    doOnSubmit = jest.fn()
+    findMovieByTitle = jest.fn()
+
+    props = {
+      findMovieByTitle,
+      doOnChange,
+      doOnSubmit,
+      name: 'searchfield',
+      placeholder: 'search here',
+    }
+  })
+
+  afterEach(cleanup)
 
   it('renders', () => {
-    expect(getByTestId('searchfield').tagName).toBe('INPUT')
-    expect(getByTestId('searchfield').type).toBe('search')
-    expect(getByTestId('searchbutton')).toBeDefined()
+    const { getByTestId, debug } = render(
+      <Root store={store}>
+        <Theme>
+          <SearchLibrary {...props} />
+        </Theme>
+      </Root>,
+    )
+
+    expect(getByTestId('search-field').children[0].tagName).toBe('INPUT')
+    expect(getByTestId('search-field').children[0].type).toBe('search')
+    expect(getByTestId('search-button')).toBeDefined()
   })
 
   it('handles change', () => {
-    fireEvent.change(getByTestId('searchfield'), { target: { value: 'a' } })
+    const { getByTestId, debug } = render(
+      <Root store={store}>
+        <Theme>
+          <SearchLibrary {...props} />
+        </Theme>
+      </Root>,
+    )
+
+    fireEvent.change(getByTestId('search-field').children[0], {
+      target: { value: 'A' },
+    })
     expect(doOnChange).toHaveBeenCalledTimes(1)
   })
 
   it('handles submit', () => {
-    fireEvent.click(getByTestId('searchbutton'))
-    expect(findMovieByTitle).toHaveBeenCalledTimes(1)
+    const { getByTestId, debug } = render(
+      <Root store={store}>
+        <Theme>
+          <SearchLibrary {...props} />
+        </Theme>
+      </Root>,
+    )
+
+    fireEvent.submit(getByTestId('search-field'))
+    expect(doOnSubmit).toHaveBeenCalledTimes(1)
   })
 })
