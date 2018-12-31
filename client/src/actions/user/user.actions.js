@@ -1,7 +1,5 @@
 import userService from 'services/user/user.service'
-
-import { alertErrorAction, alertSuccessAction } from '../alerts/alerts.actions'
-
+import { setErrorAction } from 'actions/errorHandler/errorHandler.actions'
 /**
  * Action Constants
  */
@@ -24,9 +22,8 @@ export const loginSuccessAction = user => ({
   payload: { user },
 })
 
-export const loginFailureAction = error => ({
+export const loginFailureAction = () => ({
   type: LOGIN_FAILURE,
-  payload: { error },
 })
 
 export const logoutUserAction = () => ({
@@ -43,10 +40,22 @@ export const login = (username, password) => async dispatch => {
   try {
     const user = await userService.login(username, password)
     dispatch(loginSuccessAction(user))
-    dispatch(alertSuccessAction('Logged in!'))
+    dispatch(
+      setErrorAction({
+        type: 'success',
+        status: 200,
+        message: 'Logged in',
+      }),
+    )
   } catch (error) {
-    dispatch(loginFailureAction(error.message))
-    dispatch(alertErrorAction(error.message))
+    dispatch(loginFailureAction(true))
+    dispatch(
+      setErrorAction({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
   }
 }
 
