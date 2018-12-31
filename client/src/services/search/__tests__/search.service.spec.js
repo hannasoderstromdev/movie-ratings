@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock'
 import searchService from '../search.service'
 
-describe('Services/SearchService', () => {
+describe('Services/Search', () => {
   fetchMock.config.overwriteRoutes = true
 
   describe('search', () => {
@@ -47,7 +47,7 @@ describe('Services/SearchService', () => {
       try {
         await searchService.search('test')
       } catch (error) {
-        expect(error).toEqual('Internal Server Error')
+        expect(error).toEqual(new Error({}))
       }
     })
   })
