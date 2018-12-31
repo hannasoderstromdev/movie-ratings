@@ -89,9 +89,20 @@ export const createMovie = movie => async dispatch => {
   }
 }
 
-export const updateMovie = (id, { rating }) => async dispatch => {
+export const updateMovie = (id, newProps) => async dispatch => {
   // update movie
-  console.log('update', id, rating)
+  try {
+    const { data } = await moviesService.update(id, newProps)
+    dispatch(updateMovieSuccessAction(data))
+  } catch (error) {
+    dispatch(
+      setErrorAction({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
+  }
 }
 
 export const findMovieByTitle = title => async dispatch => {
