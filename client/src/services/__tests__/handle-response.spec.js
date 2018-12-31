@@ -48,7 +48,7 @@ describe('Services/handle-response', () => {
       const response = await fetch('/fake', options)
       await handleResponse(response)
     } catch (error) {
-      expect(error).toEqual('Server error')
+      expect(error).toEqual({ message: 'Internal Server Error', status: 500 })
     }
   })
 })
