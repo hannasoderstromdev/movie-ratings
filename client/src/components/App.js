@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { store } from 'helpers/store'
@@ -21,6 +21,7 @@ import Library from './pages/Library'
 import New from './pages/New'
 import Login from './pages/Login'
 import Account from './pages/Account'
+import Error404 from './pages/Error404'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -40,12 +41,13 @@ const App = () => (
             <Header />
             <SearchLibrary />
 
-            <div>
+            <Switch>
               <PrivateRoute path="/new" exact component={New} />
               <Route path="/login" exact component={Login} />
               <PrivateRoute path="/account" exact component={Account} />
               <PrivateRoute path="/" exact component={Library} />
-            </div>
+              <Route component={Error404} />
+            </Switch>
 
             <Alert />
             <Navigation />
