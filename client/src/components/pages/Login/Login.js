@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { Redirect, withRouter } from 'react-router-dom'
 
-import { login } from 'actions/user/user.actions'
+import { login, logout } from 'actions/user/user.actions'
 
 import Page from 'components/templates/Page'
 import Main from 'components/templates/Main'
@@ -35,7 +35,7 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    // logout user
+    this.props.logout()
   }
 
   doOnChange = e => this.setState({ [e.target.name]: e.target.value })
@@ -102,6 +102,7 @@ const mapStateToProps = ({ user }) => ({
 
 const mapDispatchToProps = {
   login,
+  logout,
 }
 
 export default connect(
