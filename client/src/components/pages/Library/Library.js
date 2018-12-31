@@ -54,7 +54,7 @@ class Library extends React.Component {
 Library.propTypes = {
   movies: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
-    movies: PropTypes.arrayOf(PropTypes.shape(MovieType)),
+    movies: PropTypes.arrayOf(PropTypes.shape(MovieType)).isRequired,
     error: PropTypes.bool,
   }).isRequired,
 }
