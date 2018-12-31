@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+
+import { updateMovie } from 'actions/movies/movies.actions'
 
 import Button from 'components/atoms/Button'
 
@@ -27,9 +30,16 @@ const PosterImg = styled.img`
 `
 
 class Movie extends React.Component {
-  state = {
-    preview: true,
-    detailsOpen: false,
+  constructor(props) {
+    super(props)
+    this.state = {
+      preview: true,
+      detailsOpen: false,
+    }
+  }
+
+  setRating = rating => {
+    this.props.updateMovie(this.props.id, { rating })
   }
 
   toggleFullMovie = () => {
@@ -83,6 +93,7 @@ class Movie extends React.Component {
             genre={genre}
             rating={rating}
             poster={poster}
+            setRating={this.setRating}
           />
           <Button thirdiary onClick={this.toggleFullMovie}>
             <img src={contractImg} alt="minimize" />
@@ -107,6 +118,7 @@ class Movie extends React.Component {
 }
 
 Movie.propTypes = {
+  id: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
@@ -129,4 +141,11 @@ Movie.propTypes = {
   writer: PropTypes.string.isRequired,
 }
 
-export default Movie
+const mapDispatchToProps = {
+  updateMovie,
+}
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Movie)
