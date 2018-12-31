@@ -1,5 +1,5 @@
 import moviesService from 'services/movies/movies.service'
-import { alertErrorAction } from '../alerts/alerts.actions'
+import { setErrorAction } from 'actions/errorHandler/errorHandler.actions'
 
 export const GET_ALL_MOVIES = 'GET_ALL_MOVIES'
 export const GET_ALL_MOVIES_SUCCESS = 'GET_ALL_MOVIES_SUCCESS'
@@ -13,14 +13,13 @@ export const getAllMoviesAction = () => ({
   type: GET_ALL_MOVIES,
 })
 
-export const getAllMoviesSuccessAction = movies => ({
+export const getAllMoviesSuccessAction = ({ movies }) => ({
   type: GET_ALL_MOVIES_SUCCESS,
   payload: { movies },
 })
 
-export const getAllMoviesFailureAction = error => ({
+export const getAllMoviesFailureAction = () => ({
   type: GET_ALL_MOVIES_FAILURE,
-  payload: { error },
 })
 
 export const createMovieAction = () => ({
@@ -32,20 +31,26 @@ export const createMovieSuccessAction = movie => ({
   payload: { movie },
 })
 
-export const createMovieFailureAction = error => ({
+export const createMovieFailureAction = () => ({
   type: CREATE_MOVIE_FAILURE,
-  payload: { error },
 })
 
 export const getAllMovies = () => async dispatch => {
   dispatch(getAllMoviesAction())
 
   try {
-    const movies = await moviesService.getAll()
-    dispatch(getAllMoviesSuccessAction(movies))
+    const response = await moviesService.getAll()
+    dispatch(getAllMoviesSuccessAction({ movies: response.data }))
   } catch (error) {
-    dispatch(getAllMoviesFailureAction(error.message))
-    dispatch(alertErrorAction(error.message))
+    console.log('error', error)
+    dispatch(
+      setErrorAction({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
+    dispatch(getAllMoviesFailureAction(true))
   }
 }
 
@@ -56,7 +61,27 @@ export const createMovie = movie => async dispatch => {
     const createdMovie = await moviesService.create(movie)
     dispatch(createMovieSuccessAction(createdMovie))
   } catch (error) {
-    dispatch(createMovieFailureAction(error.message))
-    dispatch(alertErrorAction(error.message))
+    dispatch(createMovieFailureAction(true))
+    dispatch(
+      setErrorAction({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
+  }
+}
+
+export const findMovieByTitle = title => async dispatch => {
+  try {
+    // find movie by title
+  } catch (error) {
+    dispatch(
+      setErrorAction({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
   }
 }
