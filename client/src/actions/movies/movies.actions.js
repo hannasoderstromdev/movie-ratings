@@ -9,6 +9,10 @@ export const CREATE_MOVIE = 'CREATE_MOVIE'
 export const CREATE_MOVIE_SUCCESS = 'CREATE_MOVIE_SUCCESS'
 export const CREATE_MOVIE_FAILURE = 'CREATE_MOVIE_FAILURE'
 
+export const UPDATE_MOVIE = 'UPDATE_MOVIE'
+export const UPDATE_MOVIE_SUCCESS = 'UPDATE_MOVIE_SUCCESS'
+export const UPDATE_MOVIE_FAILURE = 'UPDATE_MOVIE_FAILURE'
+
 export const getAllMoviesAction = () => ({
   type: GET_ALL_MOVIES,
 })
@@ -33,6 +37,19 @@ export const createMovieSuccessAction = movie => ({
 
 export const createMovieFailureAction = () => ({
   type: CREATE_MOVIE_FAILURE,
+})
+
+export const updateMovieAction = () => ({
+  type: UPDATE_MOVIE,
+})
+
+export const updateMovieSuccessAction = movie => ({
+  type: UPDATE_MOVIE_SUCCESS,
+  payload: { movie },
+})
+
+export const updateMovieFailureAction = () => ({
+  type: UPDATE_MOVIE_FAILURE,
 })
 
 export const getAllMovies = () => async dispatch => {
@@ -70,6 +87,11 @@ export const createMovie = movie => async dispatch => {
       }),
     )
   }
+}
+
+export const updateMovie = (id, { rating }) => async dispatch => {
+  // update movie
+  console.log('update', id, rating)
 }
 
 export const findMovieByTitle = title => async dispatch => {
