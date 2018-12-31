@@ -6,29 +6,23 @@ const getAll = async () => {
   const user = await JSON.parse(localStorage.getItem('user'))
 
   if (user) {
-    try {
-      const requestOptions = {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'x-access-token': user.token,
-        },
-      }
-
-      const response = await fetch('/movies', requestOptions)
-      const { data } = await handleResponse(response)
-
-      return data
-    } catch (error) {
-      throw new Error(error)
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'x-access-token': user.token,
+      },
     }
+
+    const response = await fetch('/movies', requestOptions)
+    return await handleResponse(response)
   }
 }
 
 const create = async movie => {
-  try {
-    const user = JSON.parse(localStorage.getItem('user'))
+  const user = JSON.parse(localStorage.getItem('user'))
 
+  if (user) {
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -40,10 +34,7 @@ const create = async movie => {
     }
 
     const response = await fetch('/movies/create', requestOptions)
-    const data = await handleResponse(response)
-    return data
-  } catch (error) {
-    return error
+    return await handleResponse(response)
   }
 }
 
