@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Icon from 'components/atoms/Icon'
@@ -49,30 +49,42 @@ const Nav = styled.nav`
   }
 `
 
-const Navigation = ({ loggedIn }) => (
-  <Nav>
-    <ul>
-      <li>
-        <Link to="/">Library</Link>
-      </li>
-      <li>
-        <Link to="/new">New</Link>
-      </li>
-      <li>
-        {loggedIn ? (
-          <Link to="/account">Account</Link>
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
-      </li>
-      <li>
-        <Link to="/settings">
-          <Icon icon={['fas', 'ellipsis-v']} iconsize="18px" />
-        </Link>
-      </li>
-    </ul>
-  </Nav>
-)
+const isActive = (path, match, location) =>
+  !!(match || path === location.pathname)
+
+const Navigation = ({ loggedIn, history }) => {
+  console.log('nav', history)
+  return (
+    <Nav>
+      <ul>
+        <li>
+          <NavLink exact to="/" isActive={isActive.bind(this, '/')}>
+            Library
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/new" isActive={isActive.bind(this, '/new')}>
+            New
+          </NavLink>
+        </li>
+        <li>
+          {loggedIn ? (
+            <NavLink to="/account" isActive={isActive.bind(this, '/account')}>
+              Account
+            </NavLink>
+          ) : (
+            <NavLink to="/login">Login</NavLink>
+          )}
+        </li>
+        <li>
+          <NavLink to="/settings">
+            <Icon icon={['fas', 'ellipsis-v']} iconsize="18px" />
+          </NavLink>
+        </li>
+      </ul>
+    </Nav>
+  )
+}
 
 Navigation.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
@@ -82,4 +94,6 @@ const mapStateToProps = ({ user }) => ({
   loggedIn: user && user.loggedIn,
 })
 
-export default connect(mapStateToProps)(Navigation)
+// NOTE! isActive only works if withRouter is the outermost HOC,
+// see this for more details: https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
+export default withRouter(connect(mapStateToProps)(Navigation))
