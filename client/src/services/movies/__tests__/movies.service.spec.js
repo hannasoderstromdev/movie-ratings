@@ -4,6 +4,14 @@ import moviesService from '../movies.service'
 describe('Services/Movies', () => {
   fetchMock.config.overwriteRoutes = true
 
+  beforeEach(() => {
+    localStorage.setItem('user', JSON.stringify({ token: 'fake token' }))
+  })
+
+  afterEach(() => {
+    localStorage.clear()
+  })
+
   describe('getAll', () => {
     it('handles successful request', async () => {
       const data = [
@@ -49,23 +57,20 @@ describe('Services/Movies', () => {
     })
 
     it('handles failed request', async () => {
-      const data = null
-
       fetchMock.mock('/movies', {
         status: 403,
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          data,
-          message: 'Unauthorized',
+          data: null,
         }),
       })
 
       try {
         await moviesService.getAll()
       } catch (error) {
-        const expectedResult = 'Unauthorized'
+        const expectedResult = { message: 'Forbidden', status: 403 }
         expect(error).toEqual(expectedResult)
       }
     })
@@ -100,16 +105,14 @@ describe('Services/Movies', () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          message: 'Unauthorized',
-        }),
+        body: { data: null },
       })
 
       try {
         const movie = {}
         await moviesService.create(movie)
       } catch (error) {
-        const expectedResult = 'Unauthorized'
+        const expectedResult = { message: 'Forbidden', status: 403 }
 
         expect(error).toEqual(expectedResult)
       }
