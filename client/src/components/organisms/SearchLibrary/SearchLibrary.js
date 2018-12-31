@@ -52,7 +52,7 @@ class SearchLibrary extends React.Component {
     title: '',
   }
 
-  doOnSearch = e => {
+  doOnChange = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
@@ -63,16 +63,15 @@ class SearchLibrary extends React.Component {
 
   render() {
     return (
-      <Wrapper onSubmit={this.doOnSubmit}>
+      <Wrapper onSubmit={this.doOnSubmit} data-testid="search-field">
         <SearchLibraryField
-          data-testid="searchfield"
           name="title"
           type="search"
           value={this.state.title}
           onChange={this.doOnChange}
           placeholder="Search library..."
         />
-        <SearchButton type="submit" data-testid="searchbutton">
+        <SearchButton type="submit" data-testid="search-button">
           <Icon icon={['fas', 'search']} iconsize="16px" />
         </SearchButton>
       </Wrapper>
