@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
     case GET_ALL_MOVIES_FAILURE:
       return {
         ...initialState,
-        error: action.payload.error,
+        error: true,
       }
 
     default:
