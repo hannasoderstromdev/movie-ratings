@@ -1,5 +1,5 @@
 import searchService from 'services/search/search.service'
-import { alertErrorAction } from '../alerts/alerts.actions'
+import { setErrorAction } from 'actions/errorHandler/errorHandler.actions'
 
 export const SEARCH_FOR_MOVIE_TITLE = 'SEARCH_FOR_MOVIE_TITLE'
 export const SEARCH_FOR_MOVIE_TITLE_SUCCESS = 'SEARCH_FOR_MOVIE_TITLE_SUCCESS'
@@ -14,9 +14,8 @@ export const searchForMovieTitleSuccessAction = movie => ({
   payload: { movie },
 })
 
-export const searchForMovieTitleFailureAction = error => ({
+export const searchForMovieTitleFailureAction = () => ({
   type: SEARCH_FOR_MOVIE_TITLE_FAILURE,
-  payload: { error },
 })
 
 export const searchOMDB = movieTitle => async dispatch => {
@@ -27,7 +26,13 @@ export const searchOMDB = movieTitle => async dispatch => {
 
     dispatch(searchForMovieTitleSuccessAction(result.data))
   } catch (error) {
-    dispatch(searchForMovieTitleFailureAction(error.message))
-    dispatch(alertErrorAction(error.message))
+    dispatch(searchForMovieTitleFailureAction())
+    dispatch(
+      setErrorAction({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
   }
 }
