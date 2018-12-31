@@ -39,12 +39,10 @@ describe('Actions/Search', () => {
 
   describe('searchForMovieTitleFailureAction', () => {
     it(`returns ${SEARCH_FOR_MOVIE_TITLE_FAILURE}`, () => {
-      const error = 'Error'
-      const action = searchForMovieTitleFailureAction(error)
+      const action = searchForMovieTitleFailureAction()
 
       expect(action).toEqual({
         type: SEARCH_FOR_MOVIE_TITLE_FAILURE,
-        payload: { error },
       })
     })
   })
@@ -59,13 +57,14 @@ describe('Actions/Search', () => {
         const actions = store.getActions()
         const expected = [
           { type: 'SEARCH_FOR_MOVIE_TITLE' },
+          { type: 'SEARCH_FOR_MOVIE_TITLE_FAILURE' },
           {
-            payload: { error: "Cannot read property 'token' of null" },
-            type: 'SEARCH_FOR_MOVIE_TITLE_FAILURE',
-          },
-          {
-            payload: { message: "Cannot read property 'token' of null" },
-            type: 'ALERT_ERROR',
+            payload: {
+              message: "TypeError: Cannot read property 'token' of null",
+              status: undefined,
+              type: 'danger',
+            },
+            type: 'SET_ERROR',
           },
         ]
 
