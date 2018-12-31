@@ -39,11 +39,9 @@ describe('Actions/User', () => {
 
   describe('loginFailureAction', () => {
     it(`returns ${LOGIN_FAILURE} and correct payload`, () => {
-      const error = 'Login failed'
-      const action = loginFailureAction(error)
+      const action = loginFailureAction()
 
       expect(action).toEqual({
-        payload: { error: 'Login failed' },
         type: 'LOGIN_FAILURE',
       })
     })
