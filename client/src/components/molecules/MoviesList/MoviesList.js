@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import MoviePreview from 'components/molecules/MoviePreview'
+import Movie from 'components/organisms/Movie'
 
 const MoviesListWrapper = styled.div`
   display: grid;
@@ -13,7 +13,7 @@ const MoviesList = ({ movies }) => {
   return movies.length ? (
     <MoviesListWrapper>
       {movies.map(movie => (
-        <MoviePreview key={movie.id} {...movie} />
+        <Movie key={movie.id} {...movie} />
       ))}
     </MoviesListWrapper>
   ) : null
