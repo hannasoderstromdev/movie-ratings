@@ -13,7 +13,7 @@ describe('Reducers/User', () => {
       type: LOGIN_REQUEST,
     }
     const expectedState = {
-      error: null,
+      error: false,
       loggedIn: false,
       loggingIn: true,
       profile: null,
@@ -27,7 +27,7 @@ describe('Reducers/User', () => {
       payload: { user: {} },
     }
     const expectedState = {
-      error: null,
+      error: false,
       loggedIn: true,
       loggingIn: false,
       profile: {},
@@ -38,10 +38,9 @@ describe('Reducers/User', () => {
   it(`handles ${LOGIN_FAILURE}`, () => {
     const action = {
       type: LOGIN_FAILURE,
-      payload: { error: 'Failed' },
     }
     const expectedState = {
-      error: 'Failed',
+      error: true,
       loggedIn: false,
       loggingIn: false,
       profile: null,
@@ -54,7 +53,7 @@ describe('Reducers/User', () => {
       type: LOGOUT,
     }
     const expectedState = {
-      error: null,
+      error: false,
       loggedIn: false,
       loggingIn: false,
       profile: null,
