@@ -19,7 +19,6 @@ const IconWrapper = styled.div`
 const MoreDetailsContent = styled.div`
   padding: 2rem;
   border-top: 1px solid ${({ theme }) => theme.colors.lightGray};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
 `
 
 const Plot = styled.div`
