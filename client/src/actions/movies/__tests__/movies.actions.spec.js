@@ -34,8 +34,8 @@ describe('Actions/Movies', () => {
 
   describe('getAllMoviesSuccessAction', () => {
     it(`returns ${GET_ALL_MOVIES_SUCCESS} and correct payload`, () => {
-      const movies = []
-      const action = getAllMoviesSuccessAction(movies)
+      const movies = { data: [] }
+      const action = getAllMoviesSuccessAction({ movies: movies.data })
 
       expect(action).toEqual({
         type: GET_ALL_MOVIES_SUCCESS,
@@ -46,12 +46,10 @@ describe('Actions/Movies', () => {
 
   describe('getAllMoviesFailureAction', () => {
     it(`returns ${GET_ALL_MOVIES_FAILURE} and correct payload`, () => {
-      const error = 'Error'
-      const action = getAllMoviesFailureAction(error)
+      const action = getAllMoviesFailureAction()
 
       expect(action).toEqual({
         type: GET_ALL_MOVIES_FAILURE,
-        payload: { error },
       })
     })
   })
@@ -80,12 +78,10 @@ describe('Actions/Movies', () => {
 
   describe('createMovieFailureAction', () => {
     it(`returns ${CREATE_MOVIE_FAILURE} and correct payload`, () => {
-      const error = 'Error'
-      const action = createMovieFailureAction(error)
+      const action = createMovieFailureAction()
 
       expect(action).toEqual({
         type: CREATE_MOVIE_FAILURE,
-        payload: { error },
       })
     })
   })
