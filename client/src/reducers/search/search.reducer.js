@@ -7,7 +7,7 @@ import {
 const initialState = {
   loading: false,
   movie: null,
-  error: null,
+  error: false,
 }
 
 export default (state = initialState, action) => {
@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
     case SEARCH_FOR_MOVIE_TITLE_FAILURE:
       return {
         ...initialState,
-        error: action.payload.error,
+        error: true,
       }
 
     default:
