@@ -15,8 +15,13 @@ import {
   faLock,
   faUnlock,
 } from '@fortawesome/free-solid-svg-icons'
+import { whyDidYouUpdate } from 'why-did-you-update'
 
 import App from './components/App'
+
+if (process.env.NODE_ENV !== 'production') {
+  whyDidYouUpdate(React, { include: [/^pure/], exclude: [/^Connect/] })
+}
 
 // Add all icons used here
 library.add(
