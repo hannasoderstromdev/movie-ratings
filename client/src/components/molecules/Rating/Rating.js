@@ -25,6 +25,14 @@ class Rating extends React.Component {
     this.setState({ rating: this.props.rating, stars: this.props.rating })
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.rating !== prevState.rating) {
+      return { rating: nextProps.rating }
+    }
+    return prevState
+  }
+  
+
   onMouseOver = newRating => {
     if (!this.state.locked) {
       this.setState({ stars: newRating })
@@ -40,7 +48,6 @@ class Rating extends React.Component {
   onClickStar = rating => {
     if (!this.state.locked) {
       const { setRating } = this.props
-      console.log('setRating', setRating)
       if (setRating) {
         setRating(rating)
       }
