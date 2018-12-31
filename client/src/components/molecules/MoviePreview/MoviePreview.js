@@ -2,18 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Icon from 'components/atoms/Icon'
+import Button from 'components/atoms/Button'
 import MovieHeader from 'components/molecules/MovieHeader'
+
+import expandImg from './expand.png'
 
 const Wrapper = styled.article`
   display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
-  align-items: center;
+  grid-template-columns: 1.8fr 5fr 1fr;
+  align-items: start;
   grid-gap: 2rem;
 `
 
 const PosterImg = styled.img`
-  max-width: 18vw;
+  width: 100%;
   height: auto;
 `
 
@@ -31,7 +33,7 @@ const MoviePreview = ({
   toggleFullMovie,
 }) => (
   <Wrapper>
-    <PosterImg src={poster} alt={title} onClick={() => toggleFullMovie()} />
+    <PosterImg src={poster} alt={title} onClick={toggleFullMovie} />
     <MovieHeader
       title={title}
       year={year}
@@ -41,12 +43,9 @@ const MoviePreview = ({
       poster={poster}
     />
     <RightAligned>
-      <Icon
-        icon={['fas', 'ellipsis-h']}
-        iconsize="24px"
-        color="#666"
-        onClick={toggleFullMovie}
-      />
+      <Button onClick={toggleFullMovie} thirdiary>
+        <img src={expandImg} />
+      </Button>
     </RightAligned>
   </Wrapper>
 )
