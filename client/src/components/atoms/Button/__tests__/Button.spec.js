@@ -28,10 +28,6 @@ describe('<Button />', () => {
   })
 
   it('runs onClick when clicked', () => {
-    props = {
-      onClick,
-      disabled: false,
-    }
     const { getByTestId } = render(
       <Theme>
         <Button {...props}>Test Button</Button>
