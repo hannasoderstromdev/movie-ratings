@@ -41,7 +41,7 @@ describe('Components/Molecules/Alert', () => {
   it('render type "danger"', () => {
     initialState = {
       alerts: {
-        display: true,
+        error: true,
         type: 'danger',
         message: 'Danger!',
       },
