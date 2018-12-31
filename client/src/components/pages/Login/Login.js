@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { login, logout } from 'actions/user/user.actions'
 
@@ -40,22 +40,21 @@ class Login extends React.Component {
 
   doOnChange = e => this.setState({ [e.target.name]: e.target.value })
 
-  doOnSubmit = e => {
+  doOnSubmit = async e => {
     e.preventDefault()
     // attempt login
     const { username, password } = this.state
 
-    this.props.login(username, password)
+    await this.props.login(username, password)
     // redirect to home
+    await this.props.history.push('/')
   }
 
   render() {
     const { username, password } = this.state
-    const { user, location } = this.props
+    const { user } = this.props
 
-    return user.loggedIn ? (
-      <Redirect to={{ pathname: '/', state: { from: location } }} />
-    ) : (
+    return (
       <Page>
         {user && user.loggingIn && <FullscreenSpinner />}
         <Main>
@@ -105,7 +104,9 @@ const mapDispatchToProps = {
   logout,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withRouter(Login))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(withRouter(Login)),
+)
