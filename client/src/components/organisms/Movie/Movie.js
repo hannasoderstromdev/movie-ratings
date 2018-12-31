@@ -38,8 +38,8 @@ class Movie extends React.Component {
     }
   }
 
-  setRating = rating => {
-    this.props.updateMovie(this.props.id, { rating })
+  setRating = async rating => {
+    await this.props.updateMovie(this.props.id, { rating })
   }
 
   toggleFullMovie = () => {
