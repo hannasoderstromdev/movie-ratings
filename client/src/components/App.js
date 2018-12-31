@@ -32,10 +32,10 @@ const Wrapper = styled.div`
 `
 
 const App = () => (
-  <ErrorBoundary>
-    <Root store={store}>
-      <Theme>
-        <Router>
+  <Root store={store}>
+    <Theme>
+      <Router>
+        <ErrorBoundary>
           <Wrapper>
             <Normalize />
             <Header />
@@ -52,10 +52,10 @@ const App = () => (
             <Alert />
             <Navigation />
           </Wrapper>
-        </Router>
-      </Theme>
-    </Root>
-  </ErrorBoundary>
+        </ErrorBoundary>
+      </Router>
+    </Theme>
+  </Root>
 )
 
 export default App

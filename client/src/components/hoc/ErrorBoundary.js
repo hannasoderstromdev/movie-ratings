@@ -1,4 +1,10 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const ErrorWrapper = styled.div`
+  background-color: ${({ theme }) => theme.colors.red};
+  color: ${({ theme }) => theme.colors.white};
+`
 
 class ErrorBoundary extends React.Component {
   state = {
@@ -14,11 +20,11 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.error) {
       return (
-        <div>
+        <ErrorWrapper>
           <h1>Oups, something went wrong :(</h1>
           <p>The error: {this.state.error.toString()}</p>
           <p>Where it occured: {this.state.info.componentStack}</p>
-        </div>
+        </ErrorWrapper>
       )
     }
     return this.props.children
