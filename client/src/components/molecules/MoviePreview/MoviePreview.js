@@ -29,6 +29,7 @@ const MoviePreview = ({
   year,
   runtime,
   genre,
+  setRating,
   rating,
   toggleFullMovie,
 }) => (
@@ -41,10 +42,11 @@ const MoviePreview = ({
       genre={genre}
       rating={rating}
       poster={poster}
+      setRating={setRating}
     />
     <RightAligned>
       <Button onClick={toggleFullMovie} thirdiary>
-        <img src={expandImg} />
+        <img src={expandImg} alt={title} />
       </Button>
     </RightAligned>
   </Wrapper>
@@ -58,6 +60,7 @@ MoviePreview.propTypes = {
   genre: PropTypes.string.isRequired,
   rating: PropTypes.number,
   toggleFullMovie: PropTypes.func.isRequired,
+  setRating: PropTypes.func,
 }
 
 export default MoviePreview
