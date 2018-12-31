@@ -12,13 +12,13 @@ const initialState = user
       loggingIn: false,
       loggedIn: true,
       profile: user,
-      error: null,
+      error: false,
     }
   : {
       loggingIn: false,
       loggedIn: false,
       profile: null,
-      error: null,
+      error: false,
     }
 
 export default (state = initialState, action) => {
@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
     case LOGIN_FAILURE:
       return {
         ...initialState,
-        error: action.payload.error,
+        error: true,
       }
 
     case LOGOUT:
