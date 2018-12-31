@@ -32,8 +32,6 @@ class Library extends React.Component {
   render() {
     const { movies } = this.props
 
-    // if (movies.error) return <Page />
-
     return movies.loading ? (
       <Page>
         <Spinner />
