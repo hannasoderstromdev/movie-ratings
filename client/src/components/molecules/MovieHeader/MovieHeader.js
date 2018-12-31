@@ -23,18 +23,24 @@ const Genre = styled(Text)`
   margin-top: 0.5rem;
 `
 
-const MovieHeader = ({ title, year, runtime, genre, rating }) => (
-  <Wrapper>
-    <H2>{title}</H2>
-    <Meta>
-      <YearRuntime>
-        {year}, {runtime}
-      </YearRuntime>
-      <Genre>{genre}</Genre>
-    </Meta>
-    {!!rating ? <Rating small rating={rating} /> : <div>No rating</div>}
-  </Wrapper>
-)
+const MovieHeader = ({ title, year, runtime, genre, rating, setRating }) => {
+  return (
+    <Wrapper>
+      <H2>{title}</H2>
+      <Meta>
+        <YearRuntime>
+          {year}, {runtime}
+        </YearRuntime>
+        <Genre>{genre}</Genre>
+      </Meta>
+      {!!rating ? (
+        <Rating small rating={rating} setRating={setRating} />
+      ) : (
+        <div>No rating</div>
+      )}
+    </Wrapper>
+  )
+}
 
 MovieHeader.propTypes = {
   poster: PropTypes.string.isRequired,
@@ -43,6 +49,7 @@ MovieHeader.propTypes = {
   runtime: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   rating: PropTypes.number,
+  setRating: PropTypes.func,
 }
 
 export default MovieHeader
