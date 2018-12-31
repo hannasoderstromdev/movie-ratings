@@ -3,13 +3,20 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import Star from '../Star'
+import Button from 'components/atoms/Button'
+import Icon from 'components/atoms/Icon'
 
 const RatingStyle = styled.div`
   display: flex;
+
+  button:last-of-type {
+    margin-left: 1rem;
+  }
 `
 
 class Rating extends React.Component {
   state = {
+    locked: true,
     rating: 0,
     stars: 0,
   }
@@ -19,17 +26,40 @@ class Rating extends React.Component {
   }
 
   onMouseOver = newRating => {
-    this.setState({ stars: newRating })
+    if (!this.state.locked) {
+      this.setState({ stars: newRating })
+    }
   }
 
   onMouseOut = () => {
-    this.setState(prevState => ({ stars: prevState.rating }))
+    if (!this.state.locked) {
+      this.setState(prevState => ({ stars: prevState.rating }))
+    }
   }
 
   onClickStar = rating => {
-    const { setRating } = this.props
-    if (setRating) {
-      setRating(rating)
+    if (!this.state.locked) {
+      const { setRating } = this.props
+      console.log('setRating', setRating)
+      if (setRating) {
+        setRating(rating)
+      }
+    }
+  }
+
+  toggleLocked = () => {
+    this.setState(prevState => ({
+      locked: !prevState.locked,
+    }))
+  }
+
+  renderLockIcon() {
+    if (this.props.setRating) {
+      return this.state.locked ? (
+        <Icon icon={['fas', 'lock']} color="#666" />
+      ) : (
+        <Icon icon={['fas', 'unlock']} color="#FEDC9B" />
+      )
     }
   }
 
@@ -63,7 +93,14 @@ class Rating extends React.Component {
       )
     }
 
-    return <RatingStyle data-testid="rating">{starsToRender}</RatingStyle>
+    return (
+      <RatingStyle data-testid="rating">
+        {starsToRender}
+        <Button thirdiary onClick={this.toggleLocked}>
+          {this.renderLockIcon()}
+        </Button>
+      </RatingStyle>
+    )
   }
 }
 
