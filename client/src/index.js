@@ -12,6 +12,8 @@ import {
   faSearch,
   faStar,
   faTimes,
+  faLock,
+  faUnlock,
 } from '@fortawesome/free-solid-svg-icons'
 
 import App from './components/App'
@@ -21,13 +23,15 @@ library.add(
   faCheckCircle,
   faChevronDown,
   faChevronUp,
+  faEllipsisV,
+  faEllipsisH,
   faExclamationCircle,
   faExclamationTriangle,
   faSearch,
   faStar,
   faTimes,
-  faEllipsisV,
-  faEllipsisH,
+  faLock,
+  faUnlock,
 )
 
 ReactDOM.render(<App />, document.getElementById('root'))
