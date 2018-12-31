@@ -52,39 +52,36 @@ const Nav = styled.nav`
 const isActive = (path, match, location) =>
   !!(match || path === location.pathname)
 
-const Navigation = ({ loggedIn, history }) => {
-  console.log('nav', history)
-  return (
-    <Nav>
-      <ul>
-        <li>
-          <NavLink exact to="/" isActive={isActive.bind(this, '/')}>
-            Library
+const Navigation = ({ loggedIn, history }) => (
+  <Nav>
+    <ul>
+      <li>
+        <NavLink exact to="/" isActive={isActive.bind(this, '/')}>
+          Library
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/new" isActive={isActive.bind(this, '/new')}>
+          New
+        </NavLink>
+      </li>
+      <li>
+        {loggedIn ? (
+          <NavLink to="/account" isActive={isActive.bind(this, '/account')}>
+            Account
           </NavLink>
-        </li>
-        <li>
-          <NavLink to="/new" isActive={isActive.bind(this, '/new')}>
-            New
-          </NavLink>
-        </li>
-        <li>
-          {loggedIn ? (
-            <NavLink to="/account" isActive={isActive.bind(this, '/account')}>
-              Account
-            </NavLink>
-          ) : (
-            <NavLink to="/login">Login</NavLink>
-          )}
-        </li>
-        <li>
-          <NavLink to="/settings">
-            <Icon icon={['fas', 'ellipsis-v']} iconsize="18px" />
-          </NavLink>
-        </li>
-      </ul>
-    </Nav>
-  )
-}
+        ) : (
+          <NavLink to="/login">Login</NavLink>
+        )}
+      </li>
+      <li>
+        <NavLink to="/settings">
+          <Icon icon={['fas', 'ellipsis-v']} iconsize="18px" />
+        </NavLink>
+      </li>
+    </ul>
+  </Nav>
+)
 
 Navigation.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
