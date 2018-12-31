@@ -26,12 +26,10 @@ describe('Reducers/Movies', () => {
   })
 
   it(`handles ${GET_ALL_MOVIES_FAILURE}`, () => {
-    const error = 'Error message'
     const action = {
       type: GET_ALL_MOVIES_FAILURE,
-      payload: { error },
     }
-    const expectedState = { error: 'Error message', loading: false, movies: [] }
+    const expectedState = { error: true, loading: false, movies: [] }
     expect(reducer({}, action)).toEqual(expectedState)
   })
 })
