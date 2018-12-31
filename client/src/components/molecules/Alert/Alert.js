@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 
 import { clearErrorAction } from 'actions/errorHandler/errorHandler.actions'
 
+import Expire from 'components/hoc/Expire'
+
 import { Text } from 'components/atoms/Typography'
 import Icon from 'components/atoms/Icon'
 import Button from 'components/atoms/Button'
@@ -61,32 +63,34 @@ const TextWrapper = styled(Text)`
 
 const Alert = ({ status, error, type, message, clearErrorAction }) => {
   return error ? (
-    <AlertWrapper type={type}>
-      <IconWrapper type={type}>
-        {type === 'success' && (
-          <Icon icon={['fas', 'check-circle']} iconsize="18px" />
-        )}
-        {type === 'danger' && (
-          <Icon icon={['fas', 'exclamation-triangle']} iconsize="18px" />
-        )}
-        {type === 'alert' && (
-          <Icon icon={['fas', 'exclamation-circle']} iconsize="18px" />
-        )}
-      </IconWrapper>
+    <Expire callOnFinish={clearErrorAction}>
+      <AlertWrapper type={type}>
+        <IconWrapper type={type}>
+          {type === 'success' && (
+            <Icon icon={['fas', 'check-circle']} iconsize="18px" />
+          )}
+          {type === 'danger' && (
+            <Icon icon={['fas', 'exclamation-triangle']} iconsize="18px" />
+          )}
+          {type === 'alert' && (
+            <Icon icon={['fas', 'exclamation-circle']} iconsize="18px" />
+          )}
+        </IconWrapper>
 
-      <TextWrapper>
-        {status}: {message}
-      </TextWrapper>
+        <TextWrapper>
+          {status}: {message}
+        </TextWrapper>
 
-      <Button thirdiary onClick={clearErrorAction}>
-        <AlertIcon
-          icon={['fas', 'times']}
-          type={type}
-          iconsize="16px"
-          color="rgba(0,0,0, .25)"
-        />
-      </Button>
-    </AlertWrapper>
+        <Button thirdiary onClick={clearErrorAction}>
+          <AlertIcon
+            icon={['fas', 'times']}
+            type={type}
+            iconsize="16px"
+            color="rgba(0,0,0, .25)"
+          />
+        </Button>
+      </AlertWrapper>
+    </Expire>
   ) : null
 }
 
