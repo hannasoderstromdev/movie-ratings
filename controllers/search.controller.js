@@ -6,6 +6,7 @@ module.exports = {
    * Search for movies in the Open Movie Database
    */
 
+  // Sets res.locals and then defers to movie.controller.findExisting
   search: function(req, res, next) {
     const response = request(
       `http://www.omdbapi.com/?apikey=${keys.OMDB_API_KEY}&t=${
@@ -17,7 +18,7 @@ module.exports = {
         } else {
           const data = JSON.parse(response.body)
 
-          res.json({
+          res.locals = {
             status: 'success',
             message: 'movie found',
             data: {
@@ -42,7 +43,8 @@ module.exports = {
               production: data.Production,
               website: data.Website,
             },
-          })
+          }
+          next()
         }
       },
     )
