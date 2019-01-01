@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
     case SEARCH_FOR_MOVIE_TITLE_SUCCESS:
       return {
         ...initialState,
-        movie: action.payload.movie,
+        movie: { ...action.payload.movie, inLibrary: action.payload.inLibrary },
       }
 
     case SEARCH_FOR_MOVIE_TITLE_FAILURE:
