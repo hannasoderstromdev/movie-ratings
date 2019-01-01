@@ -3,12 +3,14 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { createMovie } from 'actions/movies/movies.actions'
+import { createMovie } from 'actions/movies/movies.thunks'
 
+import { TextDark } from 'components/atoms/Typography'
 import Button from 'components/atoms/Button'
 
-import MoviesList from 'components/molecules/MoviesList'
 import Rating from 'components/molecules/Rating'
+
+import Movie from 'components/organisms/Movie'
 
 const SearchResult = styled.div`
   margin-top: 2rem;
@@ -60,11 +62,20 @@ class RateNewMovie extends Component {
     return movie ? (
       <SearchResult>
         <div>Result</div>
-        <MoviesList movies={[movie]} />
+        {movie.inLibrary && (
+          <TextDark>This movie already exists in the library</TextDark>
+        )}
+        <Movie {...movie} />
         <RateWrapper>
-          Rate this movie:
-          <Rating setRating={this.setRating} rating={this.state.rating} />
-          <Button onClick={this.saveNewRating}>Save</Button>
+          {!movie.inLibrary && (
+            <div>
+              Rate this movie:
+              <Rating setRating={this.setRating} rating={this.state.rating} />
+              <Button disabled={movie.inLibrary} onClick={this.saveNewRating}>
+                Save
+              </Button>
+            </div>
+          )}
         </RateWrapper>
       </SearchResult>
     ) : (
