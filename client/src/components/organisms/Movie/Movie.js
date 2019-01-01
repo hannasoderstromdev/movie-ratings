@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { updateMovie } from 'actions/movies/movies.actions'
+import { updateMovie } from 'actions/movies/movies.thunks'
 
 import Button from 'components/atoms/Button'
 
@@ -42,6 +42,8 @@ class Movie extends React.Component {
     await this.props.updateMovie(this.props.id, { rating })
   }
 
+  deleteMovie = id => {}
+
   toggleFullMovie = () => {
     this.setState(prevState => ({
       preview: !prevState.preview,
@@ -55,6 +57,7 @@ class Movie extends React.Component {
 
   render() {
     const {
+      id,
       country,
       genre,
       language,
@@ -87,6 +90,7 @@ class Movie extends React.Component {
         <MovieStyle>
           <PosterImg src={poster} alt={title} onClick={this.toggleFullMovie} />
           <MovieHeader
+            id={id}
             title={title}
             year={year}
             runtime={runtime}
@@ -94,6 +98,8 @@ class Movie extends React.Component {
             rating={rating}
             poster={poster}
             setRating={this.setRating}
+            showDelete
+            deleteMovie={this.deleteMovie}
           />
           <Button thirdiary onClick={this.toggleFullMovie}>
             <img src={contractImg} alt="minimize" />
