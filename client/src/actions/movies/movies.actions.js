@@ -1,6 +1,3 @@
-import moviesService from 'services/movies/movies.service'
-import { setErrorAction } from 'actions/errorHandler/errorHandler.actions'
-
 export const GET_ALL_MOVIES = 'GET_ALL_MOVIES'
 export const GET_ALL_MOVIES_SUCCESS = 'GET_ALL_MOVIES_SUCCESS'
 export const GET_ALL_MOVIES_FAILURE = 'GET_ALL_MOVIES_FAILURE'
@@ -12,6 +9,10 @@ export const CREATE_MOVIE_FAILURE = 'CREATE_MOVIE_FAILURE'
 export const UPDATE_MOVIE = 'UPDATE_MOVIE'
 export const UPDATE_MOVIE_SUCCESS = 'UPDATE_MOVIE_SUCCESS'
 export const UPDATE_MOVIE_FAILURE = 'UPDATE_MOVIE_FAILURE'
+
+export const DELETE_MOVIE = 'DELETE_MOVIE'
+export const DELETE_MOVIE_SUCCESS = 'DELETE_MOVIE_SUCCESS'
+export const DELETE_MOVIE_FAILURE = 'DELETE_MOVIE_FAILURE'
 
 export const getAllMoviesAction = () => ({
   type: GET_ALL_MOVIES,
@@ -52,69 +53,15 @@ export const updateMovieFailureAction = () => ({
   type: UPDATE_MOVIE_FAILURE,
 })
 
-export const getAllMovies = () => async dispatch => {
-  dispatch(getAllMoviesAction())
+export const deleteMovieAction = () => ({
+  type: DELETE_MOVIE,
+})
 
-  try {
-    const response = await moviesService.getAll()
-    dispatch(getAllMoviesSuccessAction({ movies: response.data }))
-  } catch (error) {
-    console.log('error', error)
-    dispatch(
-      setErrorAction({
-        type: 'danger',
-        status: error.status,
-        message: error.message,
-      }),
-    )
-    dispatch(getAllMoviesFailureAction(true))
-  }
-}
+export const deleteMovieSuccessAction = id => ({
+  type: DELETE_MOVIE_SUCCESS,
+  payload: { id },
+})
 
-export const createMovie = movie => async dispatch => {
-  dispatch(createMovieAction())
-
-  try {
-    const createdMovie = await moviesService.create(movie)
-    dispatch(createMovieSuccessAction(createdMovie))
-  } catch (error) {
-    dispatch(createMovieFailureAction(true))
-    dispatch(
-      setErrorAction({
-        type: 'danger',
-        status: error.status,
-        message: error.message,
-      }),
-    )
-  }
-}
-
-export const updateMovie = (id, newProps) => async dispatch => {
-  // update movie
-  try {
-    const { data } = await moviesService.update(id, newProps)
-    dispatch(updateMovieSuccessAction(data))
-  } catch (error) {
-    dispatch(
-      setErrorAction({
-        type: 'danger',
-        status: error.status,
-        message: error.message,
-      }),
-    )
-  }
-}
-
-export const findMovieByTitle = title => async dispatch => {
-  try {
-    // find movie by title
-  } catch (error) {
-    dispatch(
-      setErrorAction({
-        type: 'danger',
-        status: error.status,
-        message: error.message,
-      }),
-    )
-  }
-}
+export const deleteMovieFailureAction = () => ({
+  type: DELETE_MOVIE_FAILURE,
+})
