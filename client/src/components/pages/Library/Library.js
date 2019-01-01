@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { MovieType } from 'types'
 
-import { getAllMovies } from 'actions/movies/movies.actions'
+import { getAllMovies } from 'actions/movies/movies.thunks'
 
 import { H1 } from 'components/atoms/Typography'
 import Spinner from 'components/atoms/Spinner'
