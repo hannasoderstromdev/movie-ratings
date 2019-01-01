@@ -12,6 +12,7 @@ import {
   faSearch,
   faStar,
   faTimes,
+  faTrashAlt,
   faLock,
   faUnlock,
 } from '@fortawesome/free-solid-svg-icons'
@@ -35,6 +36,7 @@ library.add(
   faSearch,
   faStar,
   faTimes,
+  faTrashAlt,
   faLock,
   faUnlock,
 )
