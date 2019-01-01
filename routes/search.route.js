@@ -1,8 +1,9 @@
 const { Router } = require('express')
 const router = new Router()
 
-const movieController = require('../controllers/search.controller')
+const searchController = require('../controllers/search.controller')
+const movieController = require('../controllers/movie.controller')
 
-router.get('/', movieController.search)
+router.get('/', searchController.search, movieController.findExisting)
 
 module.exports = router
