@@ -228,4 +228,26 @@ module.exports = {
       },
     )
   },
+
+  // Middleware
+  // depends on search.controller.search to set res.locals
+  findExisting: function(req, res, next) {
+    // compare result to database titles and find out if it already exists
+    movieModel.find(
+      {
+        title: res.locals.data.title,
+      },
+      function(err, result) {
+        if (err) {
+          next(err)
+        } else {
+          if (result.length) {
+            res.json({ ...res.locals, inLibrary: true })
+          } else {
+            res.json({ ...res.locals, inLibrary: false })
+          }
+        }
+      },
+    )
+  },
 }
