@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { findMovieByTitle } from 'actions/movies/movies.actions'
+import { findMovieByTitle } from 'actions/movies/movies.thunks'
 
 import Icon from 'components/atoms/Icon'
 
