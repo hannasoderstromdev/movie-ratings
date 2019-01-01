@@ -9,9 +9,9 @@ export const searchForMovieTitleAction = () => ({
   type: SEARCH_FOR_MOVIE_TITLE,
 })
 
-export const searchForMovieTitleSuccessAction = movie => ({
+export const searchForMovieTitleSuccessAction = (movie, inLibrary) => ({
   type: SEARCH_FOR_MOVIE_TITLE_SUCCESS,
-  payload: { movie },
+  payload: { movie, inLibrary },
 })
 
 export const searchForMovieTitleFailureAction = () => ({
@@ -23,8 +23,7 @@ export const searchOMDB = movieTitle => async dispatch => {
 
   try {
     const result = await searchService.search(movieTitle)
-
-    dispatch(searchForMovieTitleSuccessAction(result.data))
+    dispatch(searchForMovieTitleSuccessAction(result.data, result.inLibrary))
   } catch (error) {
     dispatch(searchForMovieTitleFailureAction())
     dispatch(
