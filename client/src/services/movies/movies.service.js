@@ -57,6 +57,24 @@ const update = async (movieId, newProps) => {
   }
 }
 
-const moviesService = { getAll, create, update }
+const deleteById = async id => {
+  const user = JSON.parse(localStorage.getItem('user'))
+
+  if (user) {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'x-access-token': user.token,
+      },
+    }
+
+    const response = await fetch(`/movies/${id}`, requestOptions)
+    return await handleResponse(response)
+  }
+}
+
+const moviesService = { getAll, create, update, deleteById }
 
 export default moviesService
