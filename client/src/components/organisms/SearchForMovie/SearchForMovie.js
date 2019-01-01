@@ -17,7 +17,6 @@ class SearchForMovie extends Component {
 
   searchOMDB = e => {
     e.preventDefault()
-    console.log('search for movie ', this.state.movieTitle)
     this.props.searchOMDB(this.state.movieTitle)
   }
 
