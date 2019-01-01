@@ -3,12 +3,15 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { H2, Text } from 'components/atoms/Typography'
+import Button from 'components/atoms/Button'
+import Icon from 'components/atoms/Icon'
 
 import Rating from 'components/molecules/Rating'
 
 const Wrapper = styled.header`
   display: flex;
   flex-direction: column;
+  align-items: start;
 `
 
 const Meta = styled.div`
@@ -23,7 +26,23 @@ const Genre = styled(Text)`
   margin-top: 0.5rem;
 `
 
-const MovieHeader = ({ title, year, runtime, genre, rating, setRating }) => {
+const DeleteText = styled(Text)`
+  color: ${({ theme }) => theme.colors.danger};
+  margin-right: 0.5rem;
+  text-decoration: underline;
+`
+
+const MovieHeader = ({
+  id,
+  deleteMovie,
+  title,
+  year,
+  runtime,
+  genre,
+  rating,
+  setRating,
+  showDelete,
+}) => {
   return (
     <Wrapper>
       <H2>{title}</H2>
@@ -33,13 +52,22 @@ const MovieHeader = ({ title, year, runtime, genre, rating, setRating }) => {
         </YearRuntime>
         <Genre>{genre}</Genre>
       </Meta>
-      {!!rating ? (
-        <Rating small rating={rating} setRating={setRating} />
-      ) : (
-        <div>No rating</div>
+      {!!rating && <Rating small rating={rating} setRating={setRating} />}
+      {showDelete && (
+        <Button thirdiary onClick={() => deleteMovie(id)}>
+          <DeleteText>Delete</DeleteText>
+          <Icon icon={['fas', 'trash-alt']} color="#832D2D" iconsize="12px" />
+        </Button>
       )}
     </Wrapper>
   )
+}
+
+MovieHeader.defaultProps = {
+  rating: 0,
+  setRating: null,
+  deleteMovie: null,
+  showDelete: false,
 }
 
 MovieHeader.propTypes = {
@@ -50,6 +78,8 @@ MovieHeader.propTypes = {
   genre: PropTypes.string.isRequired,
   rating: PropTypes.number,
   setRating: PropTypes.func,
+  showDelete: PropTypes.bool,
+  deleteMovie: PropTypes.func,
 }
 
 export default MovieHeader
