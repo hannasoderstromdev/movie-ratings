@@ -1,32 +1,28 @@
-import {
-  SEARCH_FOR_MOVIE_TITLE,
-  SEARCH_FOR_MOVIE_TITLE_FAILURE,
-  SEARCH_FOR_MOVIE_TITLE_SUCCESS,
-} from 'actions/search/search.actions'
+import searchTypes from 'actions/search/search.types'
 
 import reducer from '../search.reducer'
 
 describe('Reducers/Search', () => {
-  it(`handles ${SEARCH_FOR_MOVIE_TITLE}`, () => {
+  it(`handles ${searchTypes.SEARCH_FOR_MOVIE_TITLE}`, () => {
     const action = {
-      type: SEARCH_FOR_MOVIE_TITLE,
+      type: searchTypes.SEARCH_FOR_MOVIE_TITLE,
     }
     const expectedState = { error: false, loading: true, movie: null }
     expect(reducer({}, action)).toEqual(expectedState)
   })
 
-  it(`handles ${SEARCH_FOR_MOVIE_TITLE_FAILURE}`, () => {
+  it(`handles ${searchTypes.SEARCH_FOR_MOVIE_TITLE_FAILURE}`, () => {
     const action = {
-      type: SEARCH_FOR_MOVIE_TITLE_FAILURE,
+      type: searchTypes.SEARCH_FOR_MOVIE_TITLE_FAILURE,
     }
     const expectedState = { error: true, loading: false, movie: null }
     expect(reducer({}, action)).toEqual(expectedState)
   })
 
-  it(`handles ${SEARCH_FOR_MOVIE_TITLE_SUCCESS}`, () => {
+  it(`handles ${searchTypes.SEARCH_FOR_MOVIE_TITLE_SUCCESS}`, () => {
     const movie = {}
     const action = {
-      type: SEARCH_FOR_MOVIE_TITLE_SUCCESS,
+      type: searchTypes.SEARCH_FOR_MOVIE_TITLE_SUCCESS,
       payload: { movie },
     }
     const expectedState = { error: false, loading: false, movie: {} }
