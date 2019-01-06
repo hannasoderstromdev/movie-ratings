@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { findMovieByTitle } from 'actions/movies/movies.thunks'
+import moviesThunks from 'actions/movies/movies.thunks'
 
 import Icon from 'components/atoms/Icon'
 
@@ -63,8 +63,9 @@ class SearchLibrary extends React.Component {
 
   render() {
     return (
-      <Wrapper onSubmit={this.doOnSubmit} data-testid="search-field">
+      <Wrapper onSubmit={this.doOnSubmit} data-testid="wrapper">
         <SearchLibraryField
+          data-testid="search-field"
           name="title"
           type="search"
           value={this.state.title}
@@ -88,7 +89,7 @@ const mapStateToProps = ({ movies }) => ({
 })
 
 const mapDispatchToProps = {
-  findMovieByTitle,
+  findMovieByTitle: moviesThunks.findMovieByTitle,
 }
 
 export default connect(
