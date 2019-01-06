@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { updateMovie } from 'actions/movies/movies.thunks'
+import moviesThunks from 'actions/movies/movies.thunks'
 
 import Button from 'components/atoms/Button'
 
@@ -42,8 +42,6 @@ class Movie extends React.Component {
     await this.props.updateMovie(this.props.id, { rating })
   }
 
-  deleteMovie = id => {}
-
   toggleFullMovie = () => {
     this.setState(prevState => ({
       preview: !prevState.preview,
@@ -73,6 +71,8 @@ class Movie extends React.Component {
       ratings,
       released,
       writer,
+      deleteMovie,
+      showDelete,
     } = this.props
 
     return this.state.preview ? (
@@ -98,8 +98,8 @@ class Movie extends React.Component {
             rating={rating}
             poster={poster}
             setRating={this.setRating}
-            showDelete
-            deleteMovie={this.deleteMovie}
+            showDelete={showDelete}
+            deleteMovie={deleteMovie}
           />
           <Button thirdiary onClick={this.toggleFullMovie}>
             <img src={contractImg} alt="minimize" />
@@ -121,6 +121,11 @@ class Movie extends React.Component {
       </FullMovie>
     )
   }
+}
+
+Movie.defaultProps = {
+  showDelete: true,
+  rating: 0,
 }
 
 Movie.propTypes = {
@@ -145,10 +150,12 @@ Movie.propTypes = {
   rating: PropTypes.number,
   released: PropTypes.string.isRequired,
   writer: PropTypes.string.isRequired,
+  showDelete: PropTypes.bool,
 }
 
 const mapDispatchToProps = {
-  updateMovie,
+  updateMovie: moviesThunks.updateMovie,
+  deleteMovie: moviesThunks.deleteMovie,
 }
 
 export default connect(
