@@ -9,14 +9,14 @@ import Icon from 'components/atoms/Icon'
 const RatingStyle = styled.div`
   display: flex;
 
-  button:last-of-type {
+  button:nth-of-type(6) {
     margin-left: 1rem;
   }
 `
 
 class Rating extends React.Component {
   state = {
-    locked: true,
+    locked: this.props.useLock,
     rating: 0,
     stars: 0,
   }
@@ -31,7 +31,6 @@ class Rating extends React.Component {
     }
     return prevState
   }
-  
 
   onMouseOver = newRating => {
     if (!this.state.locked) {
@@ -103,9 +102,11 @@ class Rating extends React.Component {
     return (
       <RatingStyle data-testid="rating">
         {starsToRender}
-        <Button thirdiary onClick={this.toggleLocked}>
-          {this.renderLockIcon()}
-        </Button>
+        {this.props.useLock && (
+          <Button thirdiary onClick={this.toggleLocked}>
+            {this.renderLockIcon()}
+          </Button>
+        )}
       </RatingStyle>
     )
   }
@@ -114,12 +115,14 @@ class Rating extends React.Component {
 Rating.defaultProps = {
   setRating: null,
   small: false,
+  useLock: true,
 }
 
 Rating.propTypes = {
   setRating: PropTypes.func,
   rating: PropTypes.number.isRequired,
   small: PropTypes.bool,
+  useLock: PropTypes.bool,
 }
 
 export default Rating
