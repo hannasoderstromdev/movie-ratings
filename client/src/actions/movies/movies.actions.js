@@ -1,71 +1,73 @@
+import moviesTypes from './movies.types'
+
 // getAllMovies
 const getAllMovies = () => ({
-  type: GET_ALL_MOVIES,
+  type: moviesTypes.GET_ALL_MOVIES,
 })
 
 const getAllMoviesSuccess = ({ movies }) => ({
-  type: GET_ALL_MOVIES_SUCCESS,
+  type: moviesTypes.GET_ALL_MOVIES_SUCCESS,
   payload: { movies },
 })
 
 const getAllMoviesFailure = () => ({
-  type: GET_ALL_MOVIES_FAILURE,
+  type: moviesTypes.GET_ALL_MOVIES_FAILURE,
 })
 
 // getLatestMovie
 const getLatestMovies = () => ({
-  type: GET_LATEST_MOVIES,
+  type: moviesTypes.GET_LATEST_MOVIES,
 })
 
 const getLatestMoviesSuccess = ({ movies }) => ({
-  type: GET_LATEST_MOVIES_SUCCESS,
+  type: moviesTypes.GET_LATEST_MOVIES_SUCCESS,
   payload: { movies },
 })
 
 const getLatestMoviesFailure = () => ({
-  type: GET_LATEST_MOVIES_FAILURE,
+  type: moviesTypes.GET_LATEST_MOVIES_FAILURE,
 })
 
 // createMovie
 const createMovie = () => ({
-  type: CREATE_MOVIE,
+  type: moviesTypes.CREATE_MOVIE,
 })
 
 const createMovieSuccess = movie => ({
-  type: CREATE_MOVIE_SUCCESS,
+  type: moviesTypes.CREATE_MOVIE_SUCCESS,
   payload: { movie },
 })
 
 const createMovieFailure = () => ({
-  type: CREATE_MOVIE_FAILURE,
+  type: moviesTypes.CREATE_MOVIE_FAILURE,
 })
 
 // updateMovie
 const updateMovie = () => ({
-  type: UPDATE_MOVIE,
+  type: moviesTypes.UPDATE_MOVIE,
 })
 
 const updateMovieSuccess = movie => ({
-  type: UPDATE_MOVIE_SUCCESS,
+  type: moviesTypes.UPDATE_MOVIE_SUCCESS,
   payload: { movie },
 })
 
 const updateMovieFailure = () => ({
-  type: UPDATE_MOVIE_FAILURE,
+  type: moviesTypes.UPDATE_MOVIE_FAILURE,
 })
 
 // deleteMovie
 const deleteMovie = () => ({
-  type: DELETE_MOVIE,
+  type: moviesTypes.DELETE_MOVIE,
 })
 
 const deleteMovieSuccess = id => ({
-  type: DELETE_MOVIE_SUCCESS,
+  type: moviesTypes.DELETE_MOVIE_SUCCESS,
   payload: { id },
 })
 
 const deleteMovieFailure = () => ({
-  type: DELETE_MOVIE_FAILURE,
+  type: moviesTypes.DELETE_MOVIE_FAILURE,
 })
 
 const moviesActions = {
