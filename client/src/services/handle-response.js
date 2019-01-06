@@ -2,8 +2,8 @@ import userService from './user/user.service'
 
 /**
  * Handles response from fetch
- * return Promise.reject on error
- * return data if ok
+ * @return Promise.reject on error
+ * @return data if ok
  */
 
 const handleResponse = async response => {
