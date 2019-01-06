@@ -39,7 +39,7 @@ class Library extends React.Component {
     ) : (
       <Page>
         <Main>
-          <H1>Recent</H1>
+          <H1>Library</H1>
           {movies && movies.movies && movies.movies.length ? (
             <MoviesList movies={movies.movies} />
           ) : (
