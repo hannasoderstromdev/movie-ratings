@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { MovieType } from 'types'
 
-import { getAllMovies } from 'actions/movies/movies.thunks'
+import moviesThunks from 'actions/movies/movies.thunks'
 
 import { H1 } from 'components/atoms/Typography'
 import Spinner from 'components/atoms/Spinner'
@@ -64,7 +64,7 @@ const mapStateToProps = ({ movies }) => ({
 })
 
 const mapDispatchToProps = {
-  getAllMovies,
+  getAllMovies: moviesThunks.getAllMovies,
 }
 
 export default connect(
