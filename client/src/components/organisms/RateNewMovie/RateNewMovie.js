@@ -2,22 +2,30 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-import { createMovie } from 'actions/movies/movies.thunks'
+import moviesThunks from 'actions/movies/movies.thunks'
 
-import { TextDark } from 'components/atoms/Typography'
+import { TextDark, Text } from 'components/atoms/Typography'
 import Button from 'components/atoms/Button'
+import Message from 'components/atoms/Message'
+import Spinner from 'components/atoms/Spinner'
 
 import Rating from 'components/molecules/Rating'
 
 import Movie from 'components/organisms/Movie'
 
+const MarginTop = styled.div`
+  margin-top: 2rem;
+`
+
+const MessageWithMargins = styled(Message)`
+  margin-bottom: 2rem;
+`
+
 const SearchResult = styled.div`
   margin-top: 2rem;
-  height: 50vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  margin-bottom: 2rem;
 `
 
 const SearchForTitle = styled.div`
@@ -30,6 +38,7 @@ const SearchForTitle = styled.div`
 `
 
 const RateWrapper = styled.div`
+  margin-top: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,39 +54,53 @@ class RateNewMovie extends Component {
       rating,
     })
 
-  saveNewRating = () => {
-    const { createMovie, movie } = this.props
+  saveNewRating = async () => {
+    const { createMovie, movie, history } = this.props
     const newMovie = {
       ...movie,
       rating: this.state.rating,
     }
-    createMovie(newMovie)
+    await createMovie(newMovie)
+    await history.push('/')
   }
 
   render() {
     const { loading, movie } = this.props
 
-    if (loading) return <div>Loading...</div>
+    if (loading) return <Spinner />
 
     return movie ? (
-      <SearchResult>
-        <div>Result</div>
+      <div>
+        <SearchResult>
+          <TextDark>Search result</TextDark>
+        </SearchResult>
         {movie.inLibrary && (
-          <TextDark>This movie already exists in the library</TextDark>
+          <MessageWithMargins>
+            <Text>This movie already exists in the library</Text>
+          </MessageWithMargins>
         )}
-        <Movie {...movie} />
+        <MarginTop>
+          <Movie {...movie} showDelete={false} />
+        </MarginTop>
         <RateWrapper>
           {!movie.inLibrary && (
-            <div>
-              Rate this movie:
-              <Rating setRating={this.setRating} rating={this.state.rating} />
-              <Button disabled={movie.inLibrary} onClick={this.saveNewRating}>
+            <>
+              <span>Rate this movie</span>
+              <Rating
+                setRating={this.setRating}
+                rating={this.state.rating}
+                useLock={false}
+              />
+              <Button
+                disabled={this.state.rating === 0}
+                onClick={this.saveNewRating}
+              >
                 Save
               </Button>
-            </div>
+            </>
           )}
         </RateWrapper>
-      </SearchResult>
+      </div>
     ) : (
       <SearchForTitle>Search for a title</SearchForTitle>
     )
@@ -119,10 +142,12 @@ const mapStateToProps = ({ search }) => ({
 })
 
 const mapDispatchToProps = {
-  createMovie,
+  createMovie: moviesThunks.createMovie,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(RateNewMovie)
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(RateNewMovie),
+)
