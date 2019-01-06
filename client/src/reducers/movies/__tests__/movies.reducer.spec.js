@@ -1,35 +1,37 @@
-import {
-  GET_ALL_MOVIES,
-  GET_ALL_MOVIES_SUCCESS,
-  GET_ALL_MOVIES_FAILURE,
-} from 'actions/movies/movies.actions'
+import moviesTypes from 'actions/movies/movies.types'
 
 import reducer from '../movies.reducer'
 
 describe('Reducers/Movies', () => {
-  it(`handles ${GET_ALL_MOVIES}`, () => {
+  const initialState = {
+    error: false,
+    loading: false,
+    movies: [],
+  }
+
+  it(`handles ${moviesTypes.GET_ALL_MOVIES}`, () => {
     const action = {
-      type: GET_ALL_MOVIES,
+      type: moviesTypes.GET_ALL_MOVIES,
     }
-    const expectedState = { error: null, loading: true, movies: [] }
-    expect(reducer({}, action)).toEqual(expectedState)
+    const expectedState = { error: false, loading: true, movies: [] }
+    expect(reducer(initialState, action)).toEqual(expectedState)
   })
 
-  it(`handles ${GET_ALL_MOVIES_SUCCESS}`, () => {
+  it(`handles ${moviesTypes.GET_ALL_MOVIES_SUCCESS}`, () => {
     const movies = []
     const action = {
-      type: GET_ALL_MOVIES_SUCCESS,
+      type: moviesTypes.GET_ALL_MOVIES_SUCCESS,
       payload: { movies },
     }
-    const expectedState = { error: null, loading: false, movies: [] }
-    expect(reducer({}, action)).toEqual(expectedState)
+    const expectedState = { error: false, loading: false, movies: [] }
+    expect(reducer(initialState, action)).toEqual(expectedState)
   })
 
-  it(`handles ${GET_ALL_MOVIES_FAILURE}`, () => {
+  it(`handles ${moviesTypes.GET_ALL_MOVIES_FAILURE}`, () => {
     const action = {
-      type: GET_ALL_MOVIES_FAILURE,
+      type: moviesTypes.GET_ALL_MOVIES_FAILURE,
     }
     const expectedState = { error: true, loading: false, movies: [] }
-    expect(reducer({}, action)).toEqual(expectedState)
+    expect(reducer(initialState, action)).toEqual(expectedState)
   })
 })
