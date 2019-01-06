@@ -1,11 +1,17 @@
-export const SET_ERROR = 'SET_ERROR'
-export const CLEAR_ERROR = 'CLEAR_ERROR'
+import errorHandlerTypes from './errorHandler.types'
 
-export const setErrorAction = ({ status, type, message }) => ({
-  type: SET_ERROR,
+const setError = ({ status, type, message }) => ({
+  type: errorHandlerTypes.SET_ERROR,
   payload: { status, type, message },
 })
 
-export const clearErrorAction = () => ({
-  type: CLEAR_ERROR,
+const clearError = () => ({
+  type: errorHandlerTypes.CLEAR_ERROR,
 })
+
+const errorHandlerActions = {
+  setError,
+  clearError
+}
+
+export default errorHandlerActions
