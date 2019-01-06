@@ -10,6 +10,7 @@ import {
   faTimes,
   faEllipsisV,
   faEllipsisH,
+  faLock,
 } from '@fortawesome/free-solid-svg-icons'
 import 'jest-localstorage-mock'
 
@@ -24,4 +25,5 @@ library.add(
   faTimes,
   faEllipsisV,
   faEllipsisH,
+  faLock,
 )
