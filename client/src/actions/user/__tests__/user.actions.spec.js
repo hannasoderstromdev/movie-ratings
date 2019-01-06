@@ -1,99 +1,43 @@
-import configureStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT,
-  loginRequestAction,
-  loginSuccessAction,
-  loginFailureAction,
-  logoutUserAction,
-  login,
-  logout,
-} from '../user.actions'
-
-const middlewares = [thunk]
-const mockStore = configureStore(middlewares)
+import userTypes from '../user.types'
+import userActions from '../user.actions'
+import userService from 'services/user/user.service'
 
 describe('Actions/User', () => {
-  describe('loginRequestAction', () => {
-    it(`returns ${LOGIN_REQUEST}`, () => {
-      const action = loginRequestAction()
+  describe('loginRequest', () => {
+    it(`returns ${userTypes.LOGIN_REQUEST}`, () => {
+      const action = userActions.loginRequest()
 
       expect(action).toEqual({
-        type: LOGIN_REQUEST,
+        type: userTypes.LOGIN_REQUEST,
       })
     })
   })
 
-  describe('loginSuccessAction', () => {
-    it(`returns ${LOGIN_SUCCESS} and correct payload`, () => {
+  describe('loginSuccess', () => {
+    it(`returns ${userTypes.LOGIN_SUCCESS} and correct payload`, () => {
       const user = {}
-      const action = loginSuccessAction(user)
+      const action = userActions.loginSuccess(user)
 
-      expect(action).toEqual({ payload: { user: {} }, type: 'LOGIN_SUCCESS' })
+      expect(action).toEqual({ payload: { user: {} }, type: userTypes.LOGIN_SUCCESS })
     })
   })
 
-  describe('loginFailureAction', () => {
-    it(`returns ${LOGIN_FAILURE} and correct payload`, () => {
-      const action = loginFailureAction()
+  describe('loginFailure', () => {
+    it(`returns ${userTypes.LOGIN_FAILURE} and correct payload`, () => {
+      const action = userActions.loginFailure()
 
       expect(action).toEqual({
-        type: 'LOGIN_FAILURE',
+        type: userTypes.LOGIN_FAILURE,
       })
     })
   })
 
   describe('logoutUserAction', () => {
-    it(`returns ${LOGOUT}`, () => {
-      const action = logoutUserAction()
+    it(`returns ${userTypes.LOGOUT}`, () => {
+      const action = userActions.logoutUser()
 
       expect(action).toEqual({
-        type: 'LOGOUT',
-      })
-    })
-  })
-
-  describe('Thunks', () => {
-    let initialState
-    let store
-
-    beforeEach(() => {
-      initialState = {}
-      store = mockStore(initialState)
-    })
-
-    xdescribe('login', () => {
-      // TODO: mock fetch-request
-      it('dispatches the correct actions failed network request', async () => {
-        await store.dispatch(login('email@test.com', 'password123'))
-        const actions = store.getActions()
-        const expected = [
-          { type: 'LOGIN_REQUEST' },
-          {
-            payload: { error: 'TypeError: Network request failed' },
-            type: 'LOGIN_FAILURE',
-          },
-          {
-            payload: { message: 'TypeError: Network request failed' },
-            type: 'ALERT_ERROR',
-          },
-        ]
-
-        expect(actions).toEqual(expected)
-      })
-    })
-
-    describe('logout', () => {
-      it(`dispatches ${LOGOUT}`, async () => {
-        await store.dispatch(logout('email@test.com', 'password123'))
-        const actions = store.getActions()
-        const expected = [{ type: 'LOGOUT' }]
-
-        expect(actions).toEqual(expected)
+        type: userTypes.LOGOUT,
       })
     })
   })
