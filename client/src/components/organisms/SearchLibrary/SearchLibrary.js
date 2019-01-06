@@ -12,6 +12,7 @@ const Wrapper = styled.form`
   height: 7vh;
   display: flex;
   position: relative;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.75);
 `
 const SearchLibraryField = styled.input`
   height: 100%;
