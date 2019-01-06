@@ -1,67 +1,89 @@
-export const GET_ALL_MOVIES = 'GET_ALL_MOVIES'
-export const GET_ALL_MOVIES_SUCCESS = 'GET_ALL_MOVIES_SUCCESS'
-export const GET_ALL_MOVIES_FAILURE = 'GET_ALL_MOVIES_FAILURE'
-
-export const CREATE_MOVIE = 'CREATE_MOVIE'
-export const CREATE_MOVIE_SUCCESS = 'CREATE_MOVIE_SUCCESS'
-export const CREATE_MOVIE_FAILURE = 'CREATE_MOVIE_FAILURE'
-
-export const UPDATE_MOVIE = 'UPDATE_MOVIE'
-export const UPDATE_MOVIE_SUCCESS = 'UPDATE_MOVIE_SUCCESS'
-export const UPDATE_MOVIE_FAILURE = 'UPDATE_MOVIE_FAILURE'
-
-export const DELETE_MOVIE = 'DELETE_MOVIE'
-export const DELETE_MOVIE_SUCCESS = 'DELETE_MOVIE_SUCCESS'
-export const DELETE_MOVIE_FAILURE = 'DELETE_MOVIE_FAILURE'
-
-export const getAllMoviesAction = () => ({
+// getAllMovies
+const getAllMovies = () => ({
   type: GET_ALL_MOVIES,
 })
 
-export const getAllMoviesSuccessAction = ({ movies }) => ({
+const getAllMoviesSuccess = ({ movies }) => ({
   type: GET_ALL_MOVIES_SUCCESS,
   payload: { movies },
 })
 
-export const getAllMoviesFailureAction = () => ({
+const getAllMoviesFailure = () => ({
   type: GET_ALL_MOVIES_FAILURE,
 })
 
-export const createMovieAction = () => ({
+// getLatestMovie
+const getLatestMovies = () => ({
+  type: GET_LATEST_MOVIES,
+})
+
+const getLatestMoviesSuccess = ({ movies }) => ({
+  type: GET_LATEST_MOVIES_SUCCESS,
+  payload: { movies },
+})
+
+const getLatestMoviesFailure = () => ({
+  type: GET_LATEST_MOVIES_FAILURE,
+})
+
+// createMovie
+const createMovie = () => ({
   type: CREATE_MOVIE,
 })
 
-export const createMovieSuccessAction = movie => ({
+const createMovieSuccess = movie => ({
   type: CREATE_MOVIE_SUCCESS,
   payload: { movie },
 })
 
-export const createMovieFailureAction = () => ({
+const createMovieFailure = () => ({
   type: CREATE_MOVIE_FAILURE,
 })
 
-export const updateMovieAction = () => ({
+// updateMovie
+const updateMovie = () => ({
   type: UPDATE_MOVIE,
 })
 
-export const updateMovieSuccessAction = movie => ({
+const updateMovieSuccess = movie => ({
   type: UPDATE_MOVIE_SUCCESS,
   payload: { movie },
 })
 
-export const updateMovieFailureAction = () => ({
+const updateMovieFailure = () => ({
   type: UPDATE_MOVIE_FAILURE,
 })
 
-export const deleteMovieAction = () => ({
+// deleteMovie
+const deleteMovie = () => ({
   type: DELETE_MOVIE,
 })
 
-export const deleteMovieSuccessAction = id => ({
+const deleteMovieSuccess = id => ({
   type: DELETE_MOVIE_SUCCESS,
   payload: { id },
 })
 
-export const deleteMovieFailureAction = () => ({
+const deleteMovieFailure = () => ({
   type: DELETE_MOVIE_FAILURE,
 })
+
+const moviesActions = {
+  getAllMovies,
+  getAllMoviesSuccess,
+  getAllMoviesFailure,
+  getLatestMovies,
+  getLatestMoviesSuccess,
+  getLatestMoviesFailure,
+  createMovie,
+  createMovieSuccess,
+  createMovieFailure,
+  updateMovie,
+  updateMovieSuccess,
+  updateMovieFailure,
+  deleteMovie,
+  deleteMovieSuccess,
+  deleteMovieFailure,
+}
+
+export default moviesActions
