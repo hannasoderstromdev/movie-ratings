@@ -31,6 +31,6 @@ const deleteById = async id => {
   return await handleResponse(response)
 }
 
-const moviesService = { getAll, create, update, deleteById }
+const moviesService = { getAll, getLatest, create, update, deleteById }
 
 export default moviesService
