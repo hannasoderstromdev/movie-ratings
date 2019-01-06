@@ -1,7 +1,4 @@
-import {
-  SET_ERROR,
-  CLEAR_ERROR,
-} from 'actions/errorHandler/errorHandler.actions'
+import errorHandlerTypes from 'actions/errorHandler/errorHandler.types'
 
 const initialState = {
   error: false,
@@ -12,7 +9,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_ERROR:
+    case errorHandlerTypes.SET_ERROR:
       return {
         error: true,
         type: action.payload.type,
@@ -20,7 +17,7 @@ export default (state = initialState, action) => {
         status: action.payload.status,
       }
 
-    case CLEAR_ERROR:
+    case errorHandlerTypes.CLEAR_ERROR:
       return initialState
 
     default:

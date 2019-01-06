@@ -1,9 +1,4 @@
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT,
-} from 'actions/user/user.actions'
+import userTypes from 'actions/user/user.types'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
@@ -23,13 +18,13 @@ const initialState = user
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case userTypes.LOGIN_REQUEST:
       return {
         ...initialState,
         loggingIn: true,
       }
 
-    case LOGIN_SUCCESS:
+    case userTypes.LOGIN_SUCCESS:
       return {
         ...initialState,
         loggingIn: false,
@@ -37,13 +32,13 @@ export default (state = initialState, action) => {
         profile: action.payload.user,
       }
 
-    case LOGIN_FAILURE:
+    case userTypes.LOGIN_FAILURE:
       return {
         ...initialState,
         error: true,
       }
 
-    case LOGOUT:
+    case userTypes.LOGOUT:
       return initialState
 
     default:

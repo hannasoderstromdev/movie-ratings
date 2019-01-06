@@ -1,11 +1,4 @@
-import {
-  GET_ALL_MOVIES,
-  GET_ALL_MOVIES_SUCCESS,
-  GET_ALL_MOVIES_FAILURE,
-  UPDATE_MOVIE,
-  UPDATE_MOVIE_FAILURE,
-  UPDATE_MOVIE_SUCCESS,
-} from 'actions/movies/movies.actions'
+import moviesTypes from 'actions/movies/movies.types'
 
 const initialState = {
   loading: false,
@@ -15,13 +8,15 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALL_MOVIES:
+    case moviesTypes.GET_ALL_MOVIES:
       return {
         ...state,
+        movies: [],
         loading: true,
+        error: false,
       }
 
-    case GET_ALL_MOVIES_SUCCESS:
+    case moviesTypes.GET_ALL_MOVIES_SUCCESS:
       return {
         ...state,
         error: false,
@@ -29,28 +24,72 @@ export default (state = initialState, action) => {
         movies: action.payload.movies,
       }
 
-    case GET_ALL_MOVIES_FAILURE:
+    case moviesTypes.GET_ALL_MOVIES_FAILURE:
       return {
         ...state,
         error: true,
         loading: false,
       }
 
-    case UPDATE_MOVIE:
+    case moviesTypes.GET_LATEST_MOVIES:
       return {
         ...state,
         error: false,
         loading: true,
       }
 
-    case UPDATE_MOVIE_FAILURE:
+    case moviesTypes.GET_LATEST_MOVIES_SUCCESS:
+      return {
+        ...state,
+        error: false,
+        loading: false,
+        movies: action.payload.movies,
+      }
+
+    case moviesTypes.GET_LATEST_MOVIES_FAILURE:
       return {
         ...state,
         error: true,
         loading: false,
       }
 
-    case UPDATE_MOVIE_SUCCESS:
+    case moviesTypes.CREATE_MOVIE:
+      return {
+        ...state,
+        error: false,
+        loading: true,
+      }
+
+    case moviesTypes.CREATE_MOVIE_SUCCESS:
+      return {
+        ...state,
+        error: false,
+        loading: false,
+        movies: state.movies.push(action.payload.movie),
+      }
+
+    case moviesTypes.CREATE_MOVIE_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false,
+      }
+
+    case moviesTypes.UPDATE_MOVIE:
+      return {
+        ...state,
+        error: false,
+        loading: true,
+      }
+
+    case moviesTypes.UPDATE_MOVIE_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false,
+      }
+
+    case moviesTypes.UPDATE_MOVIE_SUCCESS:
       return {
         ...state,
         error: false,
@@ -61,6 +100,28 @@ export default (state = initialState, action) => {
           }
           return movie
         }),
+      }
+
+    case moviesTypes.DELETE_MOVIE:
+      return {
+        ...state,
+        error: false,
+        loading: true,
+      }
+
+    case moviesTypes.DELETE_MOVIE_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false,
+      }
+
+    case moviesTypes.DELETE_MOVIE_SUCCESS:
+      return {
+        ...state,
+        error: false,
+        loading: false,
+        movies: state.movies.filter(movie => movie.id !== action.payload.id),
       }
 
     default:
