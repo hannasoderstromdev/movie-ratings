@@ -25,7 +25,9 @@ class Expire extends React.Component {
 
     this._timer = setTimeout(() => {
       this.setState({ visible: false })
-      this.props.callOnFinish()
+      if (this.props.callOnFinish) {
+        this.props.callOnFinish()
+      }
       this._timer = null
     }, this.props.delay)
   }
