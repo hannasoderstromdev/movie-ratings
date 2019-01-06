@@ -25,7 +25,8 @@ const getLatestMovies = amount => async dispatch => {
   dispatch(moviesActions.getLatestMovies())
 
   try {
-    dispatch(moviesActions.getLatestMoviesSuccess())
+    const { data } = await moviesService.getLatest()
+    dispatch(moviesActions.getLatestMoviesSuccess({ movies: data }))
   } catch (error) {
     dispatch(moviesActions.getLatestMoviesFailure())
   }
