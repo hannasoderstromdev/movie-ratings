@@ -6,11 +6,12 @@ import Theme from '../../../Theme'
 
 describe('Components/Molecules/Header', () => {
   it('renders', () => {
-    const { getByText } = render(
+    const { getByTestId } = render(
       <Theme>
         <Header />
       </Theme>,
     )
-    expect(getByText('Movie Ratings').tagName).toBe('HEADER')
+    expect(getByTestId('clapper').tagName).toBe('IMG')
+    expect(getByTestId('logo').tagName).toBe('IMG')
   })
 })

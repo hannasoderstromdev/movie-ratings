@@ -30,8 +30,8 @@ const HeaderStyle = styled.header`
 
 const Header = () => (
   <HeaderStyle>
-    <Clapper src={clapperImg} alt="logo" />
-    <Logo src={logoImg} alt="movie ratings" />
+    <Clapper src={clapperImg} alt="logo" data-testid="clapper" />
+    <Logo src={logoImg} alt="movie ratings" data-testid="logo" />
   </HeaderStyle>
 )
 
