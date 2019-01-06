@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-import { getAllMovies, createMovie } from '../movies.thunks'
+import moviesThunks from '../movies.thunks'
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
@@ -18,7 +18,7 @@ describe('Actions/Movies/Thunks', () => {
   // TODO: mock fetch
   xdescribe('getAllMovies', () => {
     it('dispatches the correct actions', async () => {
-      await store.dispatch(getAllMovies())
+      await store.dispatch(moviesThunks.getAllMovies())
       const actions = store.getActions()
       const expected = [
         { type: 'GET_ALL_MOVIES' },
@@ -39,7 +39,7 @@ describe('Actions/Movies/Thunks', () => {
   // TODO: mock fetch
   xdescribe('createMovie', () => {
     it('dispatches the correct actions', async () => {
-      await store.dispatch(createMovie())
+      await store.dispatch(moviesThunks.createMovie())
       const actions = store.getActions()
       const expected = [
         { type: 'CREATE_MOVIE' },
