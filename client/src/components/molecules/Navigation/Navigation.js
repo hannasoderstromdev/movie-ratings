@@ -14,6 +14,8 @@ const Nav = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px -4px 45px 0px rgba(0, 0, 0, 0.75);
+  z-index: 1;
 
   ul {
     width: 100%;
