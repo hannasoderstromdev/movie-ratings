@@ -1,37 +1,22 @@
-import searchService from 'services/search/search.service'
-import { setErrorAction } from 'actions/errorHandler/errorHandler.actions'
+import searchTypes from './search.types'
 
-export const SEARCH_FOR_MOVIE_TITLE = 'SEARCH_FOR_MOVIE_TITLE'
-export const SEARCH_FOR_MOVIE_TITLE_SUCCESS = 'SEARCH_FOR_MOVIE_TITLE_SUCCESS'
-export const SEARCH_FOR_MOVIE_TITLE_FAILURE = 'SEARCH_FOR_MOVIE_TITLE_FAILURE'
-
-export const searchForMovieTitleAction = () => ({
-  type: SEARCH_FOR_MOVIE_TITLE,
+const searchForMovieTitle = () => ({
+  type: searchTypes.SEARCH_FOR_MOVIE_TITLE,
 })
 
-export const searchForMovieTitleSuccessAction = (movie, inLibrary) => ({
-  type: SEARCH_FOR_MOVIE_TITLE_SUCCESS,
+const searchForMovieTitleSuccess = (movie, inLibrary) => ({
+  type: searchTypes.SEARCH_FOR_MOVIE_TITLE_SUCCESS,
   payload: { movie, inLibrary },
 })
 
-export const searchForMovieTitleFailureAction = () => ({
-  type: SEARCH_FOR_MOVIE_TITLE_FAILURE,
+const searchForMovieTitleFailure = () => ({
+  type: searchTypes.SEARCH_FOR_MOVIE_TITLE_FAILURE,
 })
 
-export const searchOMDB = movieTitle => async dispatch => {
-  dispatch(searchForMovieTitleAction())
-
-  try {
-    const result = await searchService.search(movieTitle)
-    dispatch(searchForMovieTitleSuccessAction(result.data, result.inLibrary))
-  } catch (error) {
-    dispatch(searchForMovieTitleFailureAction())
-    dispatch(
-      setErrorAction({
-        type: 'danger',
-        status: error.status,
-        message: error.message,
-      }),
-    )
-  }
+const searchActions = {
+  searchForMovieTitle,
+  searchForMovieTitleSuccess,
+  searchForMovieTitleFailure,
 }
+
+export default searchActions
