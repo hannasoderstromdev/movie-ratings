@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { login, logout } from 'actions/user/user.actions'
+import userThunks from 'actions/user/user.thunks'
 
 import Page from 'components/templates/Page'
 import Main from 'components/templates/Main'
@@ -100,8 +100,8 @@ const mapStateToProps = ({ user }) => ({
 })
 
 const mapDispatchToProps = {
-  login,
-  logout,
+  login: userThunks.login,
+  logout: userThunks.logout,
 }
 
 export default withRouter(
