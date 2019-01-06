@@ -3,6 +3,8 @@ import { render } from 'react-testing-library'
 
 import Movie from '../index'
 import Theme from '../../../Theme'
+import Root from 'components/Root'
+import { store } from 'helpers/store'
 
 describe('Components/Molecules/Movie', () => {
   it('renders', () => {
@@ -33,9 +35,11 @@ describe('Components/Molecules/Movie', () => {
       toggleDetails,
     }
     const { getByAltText, getByText, debug } = render(
-      <Theme>
-        <Movie {...props} />
-      </Theme>,
+      <Root store={store}>
+        <Theme>
+          <Movie {...props} />
+        </Theme>
+      </Root>,
     )
 
     expect(getByAltText(props.title).tagName).toBe('IMG')
