@@ -184,7 +184,7 @@ module.exports = {
         res.json({
           status: 'success',
           message: 'Movie deleted successfully',
-          data: null,
+          data: { id: movieInfo._id },
         })
       }
     })
@@ -249,5 +249,20 @@ module.exports = {
         }
       },
     )
+  },
+
+  getLatest: async function(req, res, next) {
+    // get the latest X nr of movies added
+    try {
+      const result = await movieModel
+        .find({})
+        .sort({ createdAt: 'desc' })
+        .limit(10)
+        .exec()
+
+      console.log('result', result)
+    } catch (error) {
+      next(error)
+    }
   },
 }
