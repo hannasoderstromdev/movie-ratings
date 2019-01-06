@@ -1,57 +1,65 @@
 import React from 'react'
-import { render } from 'react-testing-library'
+import { render, cleanup } from 'react-testing-library'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 import Alert from '..'
 import Theme from '../../../Theme'
 
-import reducer from 'reducers/alerts/alerts.reducer'
+import reducer from 'reducers/errorHandler/errorHandler.reducer'
 
 describe('Components/Molecules/Alert', () => {
   let initialState
   let store
+  let props
 
-  beforeEach(() => {})
+  beforeEach(() => {
+    props = {
+      onClick: jest.fn(),
+    }
+  })
+  afterEach(cleanup)
 
   it('render type "success"', () => {
     initialState = {
-      alerts: {
-        display: true,
+      errorHandler: {
+        error: true,
         type: 'success',
         message: 'Success!',
+        status: 200,
       },
     }
-
     store = createStore(reducer, initialState)
-    const props = {
-      onClick: jest.fn(),
-    }
-    const { getByText } = render(
+
+    const { getByTestId, getByText } = render(
       <Provider store={store}>
         <Theme>
           <Alert {...props} />
         </Theme>
       </Provider>,
     )
-
-    expect(getByText('Success!').tagName).toBe('SPAN')
+    expect(getByTestId('message').tagName).toBeDefined()
+    expect(
+      getByText(
+        `${initialState.errorHandler.status}: ${
+          initialState.errorHandler.message
+        }`,
+      ),
+    ).toBeDefined()
   })
 
   it('render type "danger"', () => {
     initialState = {
-      alerts: {
+      errorHandler: {
         error: true,
         type: 'danger',
         message: 'Danger!',
+        status: 500,
       },
     }
-
     store = createStore(reducer, initialState)
-    const props = {
-      onClick: jest.fn(),
-    }
-    const { getByText } = render(
+
+    const { getByTestId, getByText } = render(
       <Provider store={store}>
         <Theme>
           <Alert {...props} />
@@ -59,23 +67,28 @@ describe('Components/Molecules/Alert', () => {
       </Provider>,
     )
 
-    expect(getByText('Danger!').tagName).toBe('SPAN')
+    expect(getByTestId('message').tagName).toBeDefined()
+    expect(
+      getByText(
+        `${initialState.errorHandler.status}: ${
+          initialState.errorHandler.message
+        }`,
+      ),
+    ).toBeDefined()
   })
 
   it('render type "alert"', () => {
     initialState = {
-      alerts: {
-        display: true,
+      errorHandler: {
+        error: true,
         type: 'alert',
         message: 'Alert!',
+        status: 304,
       },
     }
-
     store = createStore(reducer, initialState)
-    const props = {
-      onClick: jest.fn(),
-    }
-    const { getByText } = render(
+
+    const { getByTestId, getByText } = render(
       <Provider store={store}>
         <Theme>
           <Alert {...props} />
@@ -83,6 +96,13 @@ describe('Components/Molecules/Alert', () => {
       </Provider>,
     )
 
-    expect(getByText('Alert!').tagName).toBe('SPAN')
+    expect(getByTestId('message').tagName).toBeDefined()
+    expect(
+      getByText(
+        `${initialState.errorHandler.status}: ${
+          initialState.errorHandler.message
+        }`,
+      ),
+    ).toBeDefined()
   })
 })

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { clearErrorAction } from 'actions/errorHandler/errorHandler.actions'
+import errorHandlerActions from 'actions/errorHandler/errorHandler.actions'
 
 import Expire from 'components/hoc/Expire'
 
@@ -77,7 +77,7 @@ const Alert = ({ status, error, type, message, clearErrorAction }) => {
           )}
         </IconWrapper>
 
-        <TextWrapper>
+        <TextWrapper data-testid="message">
           {status}: {message}
         </TextWrapper>
 
@@ -115,7 +115,7 @@ const mapStateToProps = ({ errorHandler }) => ({
 })
 
 const mapDispatchToProps = {
-  clearErrorAction,
+  clearError: errorHandlerActions.clearError,
 }
 
 export default connect(
