@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Icon from '../../atoms/Icon'
+import Icon from 'components/atoms/Icon'
 
 const StarButton = styled.button`
   border: none;
