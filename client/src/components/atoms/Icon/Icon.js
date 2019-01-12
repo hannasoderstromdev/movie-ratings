@@ -21,7 +21,7 @@ const Icon = ({ color, icon, iconsize, onMouseOver, onMouseOut }) => (
 
 Icon.defaultProps = {
   iconsize: '1rem',
-  color: '#000',
+  color: '',
   onMouseOver: null,
   onMouseOut: null,
 }
