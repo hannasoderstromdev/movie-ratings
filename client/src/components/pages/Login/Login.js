@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import userThunks from 'actions/user/user.thunks'
 
@@ -55,7 +56,7 @@ class Login extends React.Component {
     const { user } = this.props
 
     return (
-      <Page>
+      <Page data-testid="login-screen">
         {user && user.loggingIn && <FullscreenSpinner />}
         <Main>
           <H1>Login</H1>
@@ -93,6 +94,13 @@ class Login extends React.Component {
       </Page>
     )
   }
+}
+
+Login.propTypes = {
+  user: PropTypes.shape({
+    loggingIn: PropTypes.bool.isRequired,
+    loggedIn: PropTypes.bool.isRequired,
+  }).isRequired,
 }
 
 const mapStateToProps = ({ user }) => ({
