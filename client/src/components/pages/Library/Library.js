@@ -37,7 +37,7 @@ class Library extends React.Component {
         <Spinner />
       </Page>
     ) : (
-      <Page>
+      <Page data-testid="library-screen">
         <Main>
           <H1>Library</H1>
           {movies && movies.movies && movies.movies.length ? (
