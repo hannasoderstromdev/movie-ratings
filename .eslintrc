@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "plugins": ["react"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jsx-a11y/recommended"],
+  "plugins": ["react", "jsx-a11y"],
   "env": {
     "browser": true,
     "node": true,
