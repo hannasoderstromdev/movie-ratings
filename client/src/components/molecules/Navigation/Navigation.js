@@ -55,7 +55,7 @@ const isActive = (path, match, location) =>
   !!(match || path === location.pathname)
 
 const Navigation = ({ loggedIn, history }) => (
-  <Nav>
+  <Nav data-testid="main-navigation">
     <ul>
       <li>
         <NavLink exact to="/" isActive={isActive.bind(this, '/')}>
