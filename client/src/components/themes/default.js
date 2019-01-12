@@ -32,6 +32,14 @@ theme.fonts = {
   quote: 'Georgia, serif',
 }
 
+theme.fontSizes = {
+  h1: '1.6rem',
+  h2: '1.4rem',
+  label: '1.2rem',
+  text: '1.2rem',
+  textLarge: '1.6rem',
+}
+
 theme.weight = {
   light: 300,
   regular: 400,
