@@ -83,7 +83,11 @@ class SearchLibrary extends React.Component {
 
 SearchLibrary.defaultProps = {}
 
-SearchLibrary.propTypes = {}
+SearchLibrary.propTypes = {
+  movies: PropTypes.shape({
+    movies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  }).isRequired,
+}
 
 const mapStateToProps = ({ movies }) => ({
   movies,
