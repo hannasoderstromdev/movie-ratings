@@ -10,18 +10,23 @@ describe('Components/Molecules/SearchField', () => {
     onChange,
     name: 'searchfield',
   }
-  const { getByTestId, getByText } = render(
-    <Theme>
-      <SearchField {...props} />
-    </Theme>,
-  )
 
   it('renders', () => {
+    const { getByTestId } = render(
+      <Theme>
+        <SearchField {...props} />
+      </Theme>,
+    )
     expect(getByTestId('searchfield').tagName).toBe('INPUT')
     expect(getByTestId('searchfield').type).toBe('search')
   })
 
   it('handles change', () => {
+    const { getByTestId } = render(
+      <Theme>
+        <SearchField {...props} />
+      </Theme>,
+    )
     fireEvent.change(getByTestId('searchfield'), { target: { value: 'a' } })
     expect(onChange).toHaveBeenCalledTimes(1)
   })
