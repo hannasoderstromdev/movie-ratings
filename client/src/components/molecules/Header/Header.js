@@ -29,7 +29,7 @@ const HeaderStyle = styled.header`
 `
 
 const Header = () => (
-  <HeaderStyle>
+  <HeaderStyle data-testid="main-header">
     <Clapper src={clapperImg} alt="logo" data-testid="clapper" />
     <Logo src={logoImg} alt="movie ratings" data-testid="logo" />
   </HeaderStyle>
