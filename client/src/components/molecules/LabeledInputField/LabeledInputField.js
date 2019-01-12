@@ -24,11 +24,11 @@ const LabeledInputField = ({
       value={value}
       placeholder={placeholder}
     />
-    {
+    {error && (
       <ErrorMessage renderIcon={<Icon icon={['fa', 'exclamation-triangle']} />}>
         {error}
       </ErrorMessage>
-    }
+    )}
   </Label>
 )
 
