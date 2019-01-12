@@ -65,6 +65,7 @@ const mapStateToProps = ({ movies }) => ({
 
 const mapDispatchToProps = {
   getAllMovies: moviesThunks.getAllMovies,
+  getLatestMovies: moviesThunks.getLatestMovies,
 }
 
 export default connect(
