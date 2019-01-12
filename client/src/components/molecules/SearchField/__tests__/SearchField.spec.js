@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent } from 'react-testing-library'
 
 import SearchField from '..'
-import Theme from '../../../Theme'
+import Theme from 'components/Theme'
 
 describe('Components/Molecules/SearchField', () => {
   const onChange = jest.fn()
