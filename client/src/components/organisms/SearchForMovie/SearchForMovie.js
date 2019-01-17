@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import searchActions from 'actions/search/search.actions'
+import searchThunks from 'actions/search/search.thunks'
 
 import SearchField from 'components/molecules/SearchField'
 
@@ -34,7 +34,7 @@ class SearchForMovie extends Component {
 }
 
 const mapDispatchToProps = {
-  searchOMDB: searchActions.searchOMDB,
+  searchOMDB: searchThunks.searchOMDB,
 }
 
 SearchForMovie.propTypes = {
