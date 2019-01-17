@@ -26,7 +26,7 @@ const NoRatingsYet = styled.div`
 
 class Library extends React.Component {
   async componentDidMount() {
-    await this.props.getAllMovies()
+    await this.props.getLatestMovies()
   }
 
   render() {
@@ -41,7 +41,7 @@ class Library extends React.Component {
         <Main>
           <H1>Library</H1>
           {movies && movies.movies && movies.movies.length ? (
-            <MoviesList movies={movies.movies} />
+            <MoviesList movies={movies.movies} listStyle="tiles" />
           ) : (
             <NoRatingsYet>No ratings added yet</NoRatingsYet>
           )}
