@@ -1,5 +1,36 @@
 const movieModel = require('../models/Movie')
 
+function addIdToMovies(movies) {
+  const moviesWithId = []
+  for (const movie of movies) {
+    moviesWithId.push({
+      id: movie._id,
+      actors: movie.actors,
+      awards: movie.awards,
+      country: movie.country,
+      director: movie.director,
+      genre: movie.genre,
+      imdbID: movie.imdbID,
+      imdbRating: movie.imdbRating,
+      imdbVotes: movie.imdbVotes,
+      language: movie.language,
+      metascore: movie.metascore,
+      plot: movie.plot,
+      poster: movie.poster,
+      production: movie.production,
+      rating: movie.rating,
+      ratings: movie.ratings,
+      released: movie.released,
+      runtime: movie.runtime,
+      title: movie.title,
+      website: movie.website,
+      writer: movie.writer,
+      year: movie.year,
+    })
+  }
+  return moviesWithId
+}
+
 module.exports = {
   /**
    * Get Movie By ID
@@ -191,29 +222,52 @@ module.exports = {
   },
 
   create: function(req, res, next) {
+    const {
+      actors,
+      awards,
+      country,
+      director,
+      genre,
+      imdbID,
+      imdbRating,
+      imdbVotes,
+      language,
+      metascore,
+      plot,
+      poster,
+      production,
+      rating,
+      ratings,
+      released,
+      runtime,
+      title,
+      website,
+      writer,
+      year,
+    } = req.body
     movieModel.create(
       {
-        actors: req.body.actors,
-        awards: req.body.awards,
-        country: req.body.country,
-        director: req.body.director,
-        genre: req.body.genre,
-        imdbID: req.body.imdbID,
-        imdbRating: req.body.imdbRating,
-        imdbVotes: req.body.imdbVotes,
-        language: req.body.language,
-        metascore: req.body.metascore,
-        plot: req.body.plot,
-        poster: req.body.poster,
-        production: req.body.production,
-        rating: req.body.rating,
-        ratings: req.body.ratings,
-        released: req.body.released,
-        runtime: req.body.runtime,
-        title: req.body.title,
-        website: req.body.website,
-        writer: req.body.writer,
-        year: req.body.year,
+        actors,
+        awards,
+        country,
+        director,
+        genre,
+        imdbID,
+        imdbRating,
+        imdbVotes,
+        language,
+        metascore,
+        plot,
+        poster,
+        production,
+        rating,
+        ratings,
+        released,
+        runtime,
+        title,
+        website,
+        writer,
+        year,
       },
       function(err, result) {
         if (err) {
@@ -222,7 +276,7 @@ module.exports = {
           res.json({
             status: 'success',
             message: 'Movie added successfully',
-            data: null,
+            data: { id: result._id },
           })
         }
       },
@@ -257,10 +311,16 @@ module.exports = {
       const result = await movieModel
         .find({})
         .sort({ createdAt: 'desc' })
-        .limit(10)
+        .limit(parseInt(req.params.amount, 10))
         .exec()
 
-      console.log('result', result)
+      const moviesWithId = addIdToMovies(result)
+
+      res.json({
+        status: 'success',
+        message: 'Found recent movies',
+        data: moviesWithId,
+      })
     } catch (error) {
       next(error)
     }
