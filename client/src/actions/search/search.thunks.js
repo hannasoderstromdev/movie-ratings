@@ -1,5 +1,5 @@
-import { setErrorAction } from 'actions/errorHandler/errorHandler.actions'
 import searchActions from './search.actions'
+import searchService from 'services/search/search.service'
 import errorHandlerActions from 'actions/errorHandler/errorHandler.actions'
 
 const searchOMDB = movieTitle => async dispatch => {
@@ -7,7 +7,9 @@ const searchOMDB = movieTitle => async dispatch => {
 
   try {
     const result = await searchService.search(movieTitle)
-    dispatch(searchActions.searchForMovieTitleSuccess(result.data, result.inLibrary))
+    dispatch(
+      searchActions.searchForMovieTitleSuccess(result.data, result.inLibrary),
+    )
   } catch (error) {
     dispatch(searchActions.searchForMovieTitleFailure())
     dispatch(
@@ -21,7 +23,7 @@ const searchOMDB = movieTitle => async dispatch => {
 }
 
 const searchThunks = {
-  searchOMDB
+  searchOMDB,
 }
 
 export default searchThunks
