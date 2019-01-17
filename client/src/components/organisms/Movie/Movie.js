@@ -7,6 +7,7 @@ import moviesThunks from 'actions/movies/movies.thunks'
 
 import Button from 'components/atoms/Button'
 
+import MovieTile from 'components/molecules/MovieTile'
 import MovieHeader from 'components/molecules/MovieHeader'
 import MoviePreview from 'components/molecules/MoviePreview'
 import MovieDetails from 'components/molecules/MovieDetails'
@@ -73,9 +74,20 @@ class Movie extends React.Component {
       writer,
       deleteMovie,
       showDelete,
+      listStyle,
     } = this.props
 
-    return this.state.preview ? (
+    const { preview } = this.state
+
+    if (listStyle === 'tiles') {
+      return preview ? (
+        <MovieTile poster={poster} title={title} rating={rating} />
+      ) : (
+        <MovieTile fullSize />
+      )
+    }
+
+    return preview ? (
       <MoviePreview
         toggleFullMovie={this.toggleFullMovie}
         poster={poster}
@@ -126,6 +138,7 @@ class Movie extends React.Component {
 Movie.defaultProps = {
   showDelete: true,
   rating: 0,
+  listStyle: 'rows',
 }
 
 Movie.propTypes = {
@@ -151,6 +164,7 @@ Movie.propTypes = {
   released: PropTypes.string.isRequired,
   writer: PropTypes.string.isRequired,
   showDelete: PropTypes.bool,
+  listStyle: PropTypes.string,
 }
 
 const mapDispatchToProps = {
