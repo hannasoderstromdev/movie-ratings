@@ -3,6 +3,7 @@ const theme = {}
 theme.colors = {
   primary: '#FEDC9B',
   secondary: '',
+  darkTransparent: 'rgba(0, 0, 0, 0.75)',
   dangerDark: '#6A2525',
   danger: '#832D2D',
   dangerLight: '#F7CCCC',
