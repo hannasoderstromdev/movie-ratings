@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Button from 'components/atoms/Button'
 import Movie from 'components/organisms/Movie'
 
 const MoviesListWrapper = styled.div`
@@ -12,40 +11,49 @@ const MoviesListWrapper = styled.div`
   grid-gap: 2rem;
 `
 
-const ToggleWrapper = styled.div`
-  display: flex;
-  flex-wrap: no-wrap;
-`
+const MoviesList = ({ movies, listStyle }) => (
+  <MoviesListWrapper listStyle={listStyle}>
+    {movies.map(movie => (
+      <Movie key={movie.id} {...movie} listStyle={listStyle} />
+    ))}
+  </MoviesListWrapper>
+)
 
-class MoviesList extends React.Component {
-  state = {
-    listStyle: 'rows',
-  }
-
-  setStyleRows = () => this.setState({ listStyle: 'rows' })
-
-  setStyleTiles = () => this.setState({ listStyle: 'tiles' })
-
-  render() {
-    const { movies, listStyle } = this.props
-    return movies.length ? (
-      <React.Fragment>
-        <ToggleWrapper>
-          <Button onClick={this.setStyleRows}>Rows</Button>
-          <Button onClick={this.setStyleTiles}>Tiles</Button>
-        </ToggleWrapper>
-        <MoviesListWrapper listStyle={this.state.listStyle}>
-          {movies.map(movie => (
-            <Movie key={movie.id} {...movie} listStyle={listStyle} />
-          ))}
-        </MoviesListWrapper>
-      </React.Fragment>
-    ) : null
-  }
+MoviesList.defaultProps = {
+  listStyle: 'rows',
 }
 
-MoviesList.defaultProps = {}
-
-MoviesList.propTypes = {}
+MoviesList.propTypes = {
+  listStyle: PropTypes.string,
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      actors: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired,
+      deleteMovie: PropTypes.func.isRequired,
+      director: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      language: PropTypes.string.isRequired,
+      listStyle: PropTypes.string,
+      plot: PropTypes.string.isRequired,
+      poster: PropTypes.string.isRequired,
+      production: PropTypes.string.isRequired,
+      rating: PropTypes.number,
+      ratings: PropTypes.arrayOf(
+        PropTypes.shape({
+          Source: PropTypes.string.isRequired,
+          Value: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+      released: PropTypes.string.isRequired,
+      runtime: PropTypes.string.isRequired,
+      showDelete: PropTypes.bool,
+      title: PropTypes.string.isRequired,
+      updateMovie: PropTypes.func.isRequired,
+      writer: PropTypes.string.isRequired,
+      year: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+}
 
 export default MoviesList
