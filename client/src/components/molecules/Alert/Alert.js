@@ -81,12 +81,12 @@ const Alert = ({ status, error, type, message, clearErrorAction }) => {
           {status}: {message}
         </TextWrapper>
 
-        <Button thirdiary onClick={clearErrorAction}>
+        <Button onClick={clearErrorAction} thirdiary>
           <AlertIcon
-            icon={['fas', 'times']}
-            type={type}
-            iconsize="16px"
             color="rgba(0,0,0, .25)"
+            icon={['fas', 'times']}
+            iconsize="16px"
+            type={type}
           />
         </Button>
       </AlertWrapper>
@@ -95,19 +95,18 @@ const Alert = ({ status, error, type, message, clearErrorAction }) => {
 }
 
 Alert.defaultProps = {
+  error: false,
+  message: '',
   status: 0,
   type: 'alert',
-  message: '',
-  error: false,
-  onClick: null,
 }
 
 Alert.propTypes = {
+  clearErrorAction: PropTypes.func.isRequired,
+  error: PropTypes.bool,
+  message: PropTypes.string,
   status: PropTypes.number,
   type: PropTypes.string,
-  message: PropTypes.string,
-  error: PropTypes.bool,
-  onClick: PropTypes.func,
 }
 
 const mapStateToProps = ({ errorHandler }) => ({

@@ -30,27 +30,27 @@ const InputField = ({ name, type, placeholder, value, onChange }) => (
   <InputStyle
     data-testid="input"
     name={name}
-    type={type}
-    placeholder={placeholder}
-    value={value}
     onChange={onChange}
+    placeholder={placeholder}
+    type={type}
+    value={value}
   />
 )
 
 InputField.defaultProps = {
   name: '',
-  type: 'text',
-  placeholder: '',
-  value: '',
   onChange: () => console.log('onChange handler missing'),
+  placeholder: '',
+  type: 'text',
+  value: '',
 }
 
 InputField.propTypes = {
   name: PropTypes.string,
-  type: PropTypes.string,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
   onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.string,
 }
 
 export default InputField

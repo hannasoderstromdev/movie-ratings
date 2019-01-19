@@ -6,7 +6,7 @@ import Main from 'components/templates/Main'
 
 import { H1, Text, TextDark } from 'components/atoms/Typography'
 
-const Account = ({ role, id, firstName, lastName, email }) => (
+const Account = ({ role, firstName, lastName, email }) => (
   <Page>
     <Main>
       <H1>Account</H1>
@@ -27,11 +27,10 @@ const Account = ({ role, id, firstName, lastName, email }) => (
 )
 
 Account.propTypes = {
-  role: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = ({ user }) => ({

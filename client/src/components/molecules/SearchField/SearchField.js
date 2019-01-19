@@ -71,8 +71,8 @@ SearchField.defaultProps = {
 }
 
 SearchField.propTypes = {
+  name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  name: PropTypes.string.isRequired,
 }
 export default SearchField

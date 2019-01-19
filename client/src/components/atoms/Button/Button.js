@@ -76,8 +76,8 @@ const Button = ({
     return (
       <Secondary
         data-testid="secondary-button"
-        onClick={onClick}
         disabled={disabled}
+        onClick={onClick}
         type={type}
       >
         {children}
@@ -89,8 +89,8 @@ const Button = ({
     return (
       <Thirdiary
         data-testid="thirdiary-button"
-        onClick={onClick}
         disabled={disabled}
+        onClick={onClick}
         type={type}
       >
         {children}
@@ -101,8 +101,8 @@ const Button = ({
   return (
     <Primary
       data-testid="primary-button"
-      onClick={onClick}
       disabled={disabled}
+      onClick={onClick}
       type={type}
     >
       {children}
@@ -111,17 +111,19 @@ const Button = ({
 }
 
 Button.defaultProps = {
-  type: null,
   disabled: false,
   onClick: null,
-  thirdiary: null,
   secondary: null,
+  thirdiary: null,
+  type: null,
 }
 
 Button.propTypes = {
-  children: PropTypes.node,
-  onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
   disabled: PropTypes.bool,
+  onClick: PropTypes.func,
+  secondary: PropTypes.bool,
+  thirdiary: PropTypes.bool,
   type: PropTypes.string,
 }
 

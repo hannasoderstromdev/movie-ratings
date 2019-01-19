@@ -87,8 +87,8 @@ class RateNewMovie extends Component {
             <>
               <span>Rate this movie</span>
               <Rating
-                setRating={this.setRating}
                 rating={this.state.rating}
+                setRating={this.setRating}
                 useLock={false}
               />
               <Button
@@ -108,6 +108,7 @@ class RateNewMovie extends Component {
 }
 
 RateNewMovie.propTypes = {
+  error: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   movie: PropTypes.oneOf([
     PropTypes.null,
@@ -133,8 +134,7 @@ RateNewMovie.propTypes = {
       writer: PropTypes.number.isRequired,
       year: PropTypes.number.isRequired,
     }),
-  ]),
-  error: PropTypes.bool.isRequired,
+  ]).isRequired,
 }
 
 const mapStateToProps = ({ search }) => ({
