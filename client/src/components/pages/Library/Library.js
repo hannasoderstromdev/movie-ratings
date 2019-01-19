@@ -99,7 +99,7 @@ class Library extends React.Component {
 }
 
 Library.propTypes = {
-  getAllMovies: PropTypes.func.isRequired,
+  // getAllMovies: PropTypes.func.isRequired,
   getLatestMovies: PropTypes.func.isRequired,
   movies: PropTypes.shape({
     loading: PropTypes.bool.isRequired,

@@ -39,7 +39,7 @@ const InputField = ({ name, type, placeholder, value, onChange }) => (
 
 InputField.defaultProps = {
   name: '',
-  onChange: () => console.log('onChange handler missing'),
+  onChange: () => console.log('onChange handler missing'), // eslint-disable-line
   placeholder: '',
   type: 'text',
   value: '',

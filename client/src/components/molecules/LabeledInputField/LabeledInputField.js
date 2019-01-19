@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Label from 'components/atoms/Label'
 import InputField from 'components/atoms/InputField'
@@ -19,10 +20,10 @@ const LabeledInputField = ({
     <InputField
       data-testid="input"
       name={name}
-      type={type}
       onChange={onChange}
-      value={value}
       placeholder={placeholder}
+      type={type}
+      value={value}
     />
     {error && (
       <ErrorMessage renderIcon={<Icon icon={['fa', 'exclamation-triangle']} />}>
@@ -31,5 +32,15 @@ const LabeledInputField = ({
     )}
   </Label>
 )
+
+LabeledInputField.propTypes = {
+  error: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+}
 
 export default LabeledInputField

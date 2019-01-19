@@ -66,10 +66,10 @@ class Login extends React.Component {
               <LabeledInputField
                 label="Email"
                 name="username"
-                type="email"
-                value={username}
                 onChange={this.doOnChange}
                 placeholder="Enter your e-mail here"
+                type="email"
+                value={username}
               />
             </FormField>
 
@@ -77,10 +77,10 @@ class Login extends React.Component {
               <LabeledInputField
                 label="Password"
                 name="password"
-                type="password"
-                value={password}
                 onChange={this.doOnChange}
                 placeholder="Enter your password here"
+                type="password"
+                value={password}
               />
             </FormField>
 
@@ -97,6 +97,11 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
   user: PropTypes.shape({
     loggingIn: PropTypes.bool.isRequired,
     loggedIn: PropTypes.bool.isRequired,

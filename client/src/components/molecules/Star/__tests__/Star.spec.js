@@ -15,7 +15,7 @@ describe('Components/Molecules/Star', () => {
   }
 
   it('renders', () => {
-    const { getByTestId, debug } = render(<Star {...props} />)
+    const { getByTestId } = render(<Star {...props} />)
     expect(getByTestId('star').tagName).toBe('BUTTON')
   })
 

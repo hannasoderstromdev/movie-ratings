@@ -46,7 +46,7 @@ describe('<Button />', () => {
       props = {
         disabled: true,
       }
-      const { debug, getByTestId } = render(
+      const { getByTestId } = render(
         <Theme>
           <Button {...props}>Test Button</Button>
         </Theme>,
@@ -59,7 +59,7 @@ describe('<Button />', () => {
       props = {
         secondary: true,
       }
-      const { debug, getByTestId } = render(
+      const { getByTestId } = render(
         <Theme>
           <Button {...props}>Test Button</Button>
         </Theme>,
@@ -72,7 +72,7 @@ describe('<Button />', () => {
       props = {
         thirdiary: true,
       }
-      const { debug, getByTestId } = render(
+      const { getByTestId } = render(
         <Theme>
           <Button {...props}>Test Button</Button>
         </Theme>,
@@ -83,7 +83,7 @@ describe('<Button />', () => {
   })
 
   it('runs onClick when clicked', () => {
-    const { getByTestId, debug } = render(
+    const { getByTestId } = render(
       <Theme>
         <Button {...props}>Test Button</Button>
       </Theme>,

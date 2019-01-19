@@ -39,7 +39,7 @@ describe('Content', () => {
   it('renders login screen as default', () => {
     const history = createMemoryHistory({ initialEntries: ['/'] })
     store = mockStore(initialState)
-    const { getByTestId, debug } = render(
+    const { getByTestId } = render(
       <Root store={store}>
         <Theme>
           <Router history={history}>
@@ -56,7 +56,7 @@ describe('Content', () => {
   it('handles 404', () => {
     const history = createMemoryHistory({ initialEntries: ['/does-not-exist'] })
     store = mockStore(initialState)
-    const { getByTestId, debug } = render(
+    const { getByTestId } = render(
       <Root store={store}>
         <Theme>
           <Router history={history}>
@@ -76,7 +76,7 @@ describe('Content', () => {
     initialState.isLoggedIn = true
 
     store = mockStore(initialState)
-    const { getByTestId, debug } = render(
+    const { getByTestId } = render(
       <Root store={store}>
         <Theme>
           <Router history={history}>

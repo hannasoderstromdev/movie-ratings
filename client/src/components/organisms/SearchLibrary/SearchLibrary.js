@@ -64,16 +64,16 @@ class SearchLibrary extends React.Component {
 
   render() {
     return (
-      <Wrapper onSubmit={this.doOnSubmit} data-testid="wrapper">
+      <Wrapper data-testid="wrapper" onSubmit={this.doOnSubmit}>
         <SearchLibraryField
           data-testid="search-field"
           name="title"
-          type="search"
-          value={this.state.title}
           onChange={this.doOnChange}
           placeholder="Search library..."
+          type="search"
+          value={this.state.title}
         />
-        <SearchButton type="submit" data-testid="search-button">
+        <SearchButton data-testid="search-button" type="submit">
           <Icon icon={['fas', 'search']} iconsize="16px" />
         </SearchButton>
       </Wrapper>
@@ -84,6 +84,7 @@ class SearchLibrary extends React.Component {
 SearchLibrary.defaultProps = {}
 
 SearchLibrary.propTypes = {
+  findMovieByTitle: PropTypes.func.isRequired,
   movies: PropTypes.shape({
     movies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   }).isRequired,

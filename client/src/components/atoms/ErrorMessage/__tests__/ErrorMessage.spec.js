@@ -6,15 +6,13 @@ import Icon from 'components/atoms/Icon'
 import Theme from '../../../Theme'
 
 describe('<ErrorMessage />', () => {
-  let props
-
-  props = {
+  const props = {
     renderIcon: <Icon icon={['fa', 'exclamation-triangle']} />,
   }
 
   it('renders', () => {
     const textMessage = 'Error Message'
-    const { debug, container } = render(
+    const { container } = render(
       <Theme>
         <ErrorMessage {...props}>{textMessage}</ErrorMessage>
       </Theme>,

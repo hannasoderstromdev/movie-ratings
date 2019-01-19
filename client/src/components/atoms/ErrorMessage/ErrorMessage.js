@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const ErrorStyle = styled.div`
   height: 2rem;
@@ -22,11 +23,16 @@ const IconWrapper = styled.div`
   height: 100%;
 `
 
-const ErrorMessage = ({ renderIcon, children }, props) => (
+const ErrorMessage = ({ renderIcon, children }) => (
   <ErrorStyle>
     <IconWrapper>{renderIcon}</IconWrapper>
     {children}
   </ErrorStyle>
 )
+
+ErrorMessage.propTypes = {
+  children: PropTypes.node.isRequired,
+  renderIcon: PropTypes.string.isRequired,
+}
 
 export default ErrorMessage

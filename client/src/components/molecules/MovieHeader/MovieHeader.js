@@ -73,6 +73,7 @@ MovieHeader.defaultProps = {
 MovieHeader.propTypes = {
   deleteMovie: PropTypes.func,
   genre: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   rating: PropTypes.number,
   runtime: PropTypes.string.isRequired,
   setRating: PropTypes.func,

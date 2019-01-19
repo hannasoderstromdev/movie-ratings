@@ -7,14 +7,11 @@ import SearchLibrary from '..'
 import Theme from 'components/Theme'
 
 describe('Components/Molecules/SearchLibrary', () => {
-  let doOnChange
-  let doOnSubmit
-  let findMovieByTitle
   let props
 
-  doOnChange = jest.fn()
-  doOnSubmit = jest.fn()
-  findMovieByTitle = jest.fn()
+  const doOnChange = jest.fn()
+  const doOnSubmit = jest.fn()
+  const findMovieByTitle = jest.fn()
 
   beforeEach(() => {
     props = {
@@ -44,7 +41,7 @@ describe('Components/Molecules/SearchLibrary', () => {
   })
 
   xit('handles change', () => {
-    const { getByTestId, debug } = render(
+    const { getByTestId } = render(
       <Root store={store}>
         <Theme>
           <SearchLibrary {...props} />

@@ -11,7 +11,7 @@ describe('<Label />', () => {
     const props = {
       htmlFor: 'thing',
     }
-    const { getByTestId, debug } = render(
+    const { getByTestId } = render(
       <Theme>
         <Label {...props}>Label</Label>
       </Theme>,

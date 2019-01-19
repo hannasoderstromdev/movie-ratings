@@ -48,7 +48,9 @@ describe('Services/User', () => {
         }
 
         expect(result).toEqual(expectedResult)
-      } catch (error) {}
+      } catch (error) {
+        //
+      }
     })
 
     it('handles failed request', async () => {

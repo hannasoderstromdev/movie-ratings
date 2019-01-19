@@ -18,7 +18,7 @@ describe('hoc/<ErrorBoundary />', () => {
   })
 
   afterEach(() => {
-    console.error.mockRestore()
+    console.error.mockRestore() // eslint-disable-line no-console
   })
 
   it('catches errors', () => {
@@ -39,6 +39,6 @@ describe('hoc/<ErrorBoundary />', () => {
     )
 
     expect(container).toHaveTextContent('Oups, something went wrong :(')
-    expect(console.error).toHaveBeenCalledTimes(2)
+    expect(console.error).toHaveBeenCalledTimes(2) // eslint-disable-line no-console
   })
 })

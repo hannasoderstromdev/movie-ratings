@@ -54,22 +54,22 @@ const Nav = styled.nav`
 const isActive = (path, match, location) =>
   !!(match || path === location.pathname)
 
-const Navigation = ({ loggedIn, history }) => (
+const Navigation = ({ loggedIn }) => (
   <Nav data-testid="main-navigation">
     <ul>
       <li>
-        <NavLink exact to="/" isActive={isActive.bind(this, '/')}>
+        <NavLink exact isActive={isActive.bind(this, '/')} to="/">
           Library
         </NavLink>
       </li>
       <li>
-        <NavLink to="/new" isActive={isActive.bind(this, '/new')}>
+        <NavLink isActive={isActive.bind(this, '/new')} to="/new">
           New
         </NavLink>
       </li>
       <li>
         {loggedIn ? (
-          <NavLink to="/account" isActive={isActive.bind(this, '/account')}>
+          <NavLink isActive={isActive.bind(this, '/account')} to="/account">
             Account
           </NavLink>
         ) : (
