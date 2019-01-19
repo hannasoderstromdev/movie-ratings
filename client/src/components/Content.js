@@ -8,6 +8,7 @@ import PrivateRoute from 'components/hoc/PrivateRoute'
 import Alert from 'components/molecules/Alert'
 import Header from 'components/molecules/Header'
 import Navigation from 'components/molecules/Navigation'
+import Modals from 'components/molecules/Modals'
 
 import SearchLibrary from 'components/organisms/SearchLibrary'
 
@@ -31,13 +32,14 @@ const Content = () => (
       <SearchLibrary />
 
       <Switch>
-        <PrivateRoute path="/new" exact component={New} />
-        <Route path="/login" exact component={Login} />
-        <PrivateRoute path="/account" exact component={Account} />
-        <PrivateRoute path="/" exact component={Library} />
+        <PrivateRoute component={New} exact path="/new" />
+        <Route component={Login} exact path="/login" />
+        <PrivateRoute component={Account} exact path="/account" />
+        <PrivateRoute component={Library} exact path="/" />
         <Route component={Error404} />
       </Switch>
 
+      <Modals />
       <Alert />
       <Navigation />
     </Wrapper>
