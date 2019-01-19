@@ -30,7 +30,10 @@
     "test:coverage": "npm test -- --coverage",
     "eject": "react-scripts eject",
     "styleguide": "NODE_PATH=src styleguidist server",
-    "styleguide:build": "npm styleguidist build"
+    "styleguide:build": "npm styleguidist build",
+    "lint": "eslint src",
+    "format": "prettier --write **/*.js",
+    "validate": "npm run lint && prettier --list-different **/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -61,7 +64,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": ""
     }
   },
   "lint-staged": {
