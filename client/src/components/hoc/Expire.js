@@ -7,11 +7,15 @@ class Expire extends React.Component {
     visible: true,
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.children !== this.props.children) {
-      this.setTimer()
-      this.setState({ visible: true })
+  componentDidUpdate(prevProps) {
+    if (prevProps.children !== this.props.children) {
+      this.resetTimer()
     }
+  }
+
+  resetTimer() {
+    this.setTimer()
+    this.setState({ visible: true })
   }
 
   componentDidMount() {
@@ -42,13 +46,14 @@ class Expire extends React.Component {
 }
 
 Expire.defaultProps = {
-  delay: 1000,
   callOnFinish: null,
+  delay: 1000,
 }
 
 Expire.propTypes = {
-  delay: PropTypes.number,
   callOnFinish: PropTypes.func,
+  children: PropTypes.node.isRequired,
+  delay: PropTypes.number,
 }
 
 export default Expire
