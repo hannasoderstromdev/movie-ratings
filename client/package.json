@@ -32,8 +32,9 @@
     "styleguide": "NODE_PATH=src styleguidist server",
     "styleguide:build": "npm styleguidist build",
     "lint": "eslint src",
-    "format": "prettier --write **/*.js",
-    "validate": "npm run lint && prettier --list-different **/*.js"
+    "format": "npm run prettier -- --write",
+    "prettier": "prettier '**/*.+(js)'",
+    "validate": "npm run lint && npm run prettier -- --list-different"
   },
   "eslintConfig": {
     "extends": "react-app"
