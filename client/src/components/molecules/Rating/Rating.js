@@ -15,14 +15,13 @@ const RatingStyle = styled.div`
 `
 
 class Rating extends React.Component {
-  state = {
-    locked: this.props.useLock,
-    rating: 0,
-    stars: 0,
-  }
-
-  componentDidMount() {
-    this.setState({ rating: this.props.rating, stars: this.props.rating })
+  constructor(props) {
+    super(props)
+    this.state = {
+      locked: this.props.useLock,
+      rating: props.rating,
+      stars: props.rating,
+    }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -62,9 +61,9 @@ class Rating extends React.Component {
   renderLockIcon() {
     if (this.props.setRating) {
       return this.state.locked ? (
-        <Icon icon={['fas', 'lock']} color="#666" />
+        <Icon color="#666" icon={['fas', 'lock']} />
       ) : (
-        <Icon icon={['fas', 'unlock']} color="#FEDC9B" />
+        <Icon color="#FEDC9B" icon={['fas', 'unlock']} />
       )
     }
   }
@@ -77,12 +76,14 @@ class Rating extends React.Component {
     for (let i = 0; i < stars; i++) {
       starsToRender.push(
         <Star
-          small={small}
-          key={i + 1}
           isSelected
+          key={i + 1}
+          onBlur={this.onMouseOut}
           onClick={() => this.onClickStar(i + 1)}
-          onMouseOver={() => this.onMouseOver(i + 1)}
+          onFocus={() => this.onMouseOver(i + 1)}
           onMouseOut={this.onMouseOut}
+          onMouseOver={() => this.onMouseOver(i + 1)}
+          small={small}
         />,
       )
     }
@@ -90,11 +91,13 @@ class Rating extends React.Component {
     for (let i = 0; i < 5 - stars; i++) {
       starsToRender.push(
         <Star
-          small={small}
           key={stars + 1 + i}
+          onBlur={this.onMouseOut}
           onClick={() => this.onClickStar(stars + i + 1)}
-          onMouseOver={() => this.onMouseOver(stars + 1 + i)}
+          onFocus={() => this.onMouseOver(stars + 1 + i)}
           onMouseOut={this.onMouseOut}
+          onMouseOver={() => this.onMouseOver(stars + 1 + i)}
+          small={small}
         />,
       )
     }
@@ -103,7 +106,7 @@ class Rating extends React.Component {
       <RatingStyle data-testid="rating">
         {starsToRender}
         {this.props.useLock && (
-          <Button thirdiary onClick={this.toggleLocked}>
+          <Button onClick={this.toggleLocked} thirdiary>
             {this.renderLockIcon()}
           </Button>
         )}
@@ -119,8 +122,8 @@ Rating.defaultProps = {
 }
 
 Rating.propTypes = {
-  setRating: PropTypes.func,
   rating: PropTypes.number.isRequired,
+  setRating: PropTypes.func,
   small: PropTypes.bool,
   useLock: PropTypes.bool,
 }
