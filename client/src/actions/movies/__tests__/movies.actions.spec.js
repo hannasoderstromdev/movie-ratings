@@ -14,7 +14,9 @@ describe('Actions/Movies', () => {
     })
 
     describe('getAllMoviesSuccess', () => {
-      it(`returns ${moviesTypes.GET_ALL_MOVIES_SUCCESS} and correct payload`, () => {
+      it(`returns ${
+        moviesTypes.GET_ALL_MOVIES_SUCCESS
+      } and correct payload`, () => {
         const movies = { data: [] }
         const action = moviesActions.getAllMoviesSuccess({ movies: movies })
 
@@ -26,7 +28,9 @@ describe('Actions/Movies', () => {
     })
 
     describe('getAllMoviesFailure', () => {
-      it(`returns ${moviesTypes.GET_ALL_MOVIES_FAILURE} and correct payload`, () => {
+      it(`returns ${
+        moviesTypes.GET_ALL_MOVIES_FAILURE
+      } and correct payload`, () => {
         const action = moviesActions.getAllMoviesFailure()
 
         expect(action).toEqual({
@@ -54,7 +58,7 @@ describe('Actions/Movies', () => {
 
         expect(action).toEqual({
           type: moviesTypes.GET_LATEST_MOVIES_SUCCESS,
-          payload: { movies }
+          payload: { movies },
         })
       })
     })
@@ -82,7 +86,9 @@ describe('Actions/Movies', () => {
     })
 
     describe('createMovieSuccess', () => {
-      it(`returns ${moviesTypes.CREATE_MOVIE_SUCCESS} and correct payload`, () => {
+      it(`returns ${
+        moviesTypes.CREATE_MOVIE_SUCCESS
+      } and correct payload`, () => {
         const movie = {}
         const action = moviesActions.createMovieSuccess(movie)
 
@@ -94,7 +100,9 @@ describe('Actions/Movies', () => {
     })
 
     describe('createMovieFailure', () => {
-      it(`returns ${moviesTypes.CREATE_MOVIE_FAILURE} and correct payload`, () => {
+      it(`returns ${
+        moviesTypes.CREATE_MOVIE_FAILURE
+      } and correct payload`, () => {
         const action = moviesActions.createMovieFailure()
 
         expect(action).toEqual({
@@ -122,7 +130,7 @@ describe('Actions/Movies', () => {
 
         expect(action).toEqual({
           type: moviesTypes.UPDATE_MOVIE_SUCCESS,
-          payload: { movie }
+          payload: { movie },
         })
       })
     })
@@ -156,7 +164,7 @@ describe('Actions/Movies', () => {
 
         expect(action).toEqual({
           type: moviesTypes.DELETE_MOVIE_SUCCESS,
-          payload: { id }
+          payload: { id },
         })
       })
     })

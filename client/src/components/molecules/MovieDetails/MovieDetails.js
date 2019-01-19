@@ -68,16 +68,16 @@ const MovieDetails = ({
   writer,
 }) => (
   <MoreDetails>
-    <Button thirdiary onClick={toggle}>
+    <Button onClick={toggle} thirdiary>
       <Text>More details</Text>
       <IconWrapper>
         {isOpen ? (
-          <Icon icon={['fas', 'chevron-up']} iconsize="14px" color="#F3F3F3" />
+          <Icon color="#F3F3F3" icon={['fas', 'chevron-up']} iconsize="14px" />
         ) : (
           <Icon
+            color="#F3F3F3"
             icon={['fas', 'chevron-down']}
             iconsize="14px"
-            color="#F3F3F3"
           />
         )}
       </IconWrapper>
@@ -115,15 +115,15 @@ const MovieDetails = ({
 
         <Ratings>
           <RatingsItem>
-            <Img src={imdbImage} alt={ratings[0].Source} />
+            <Img alt={ratings[0].Source} src={imdbImage} />
             <Text>{ratings[0].Value}</Text>
           </RatingsItem>
           <RatingsItem>
-            <Img src={rtImage} alt={ratings[1].Source} />
+            <Img alt={ratings[1].Source} src={rtImage} />
             <Text>{ratings[1].Value}</Text>
           </RatingsItem>
           <RatingsItem>
-            <Img src={mcImage} alt={ratings[2].Source} />
+            <Img alt={ratings[2].Source} src={mcImage} />
             <Text>{ratings[2].Value}</Text>
           </RatingsItem>
         </Ratings>
@@ -134,11 +134,11 @@ const MovieDetails = ({
 
 MovieDetails.propTypes = {
   actors: PropTypes.string.isRequired,
-  director: PropTypes.string.isRequired,
-  plot: PropTypes.string.isRequired,
-  released: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
+  director: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   language: PropTypes.string.isRequired,
+  plot: PropTypes.string.isRequired,
   production: PropTypes.string.isRequired,
   ratings: PropTypes.arrayOf(
     PropTypes.shape({
@@ -146,7 +146,7 @@ MovieDetails.propTypes = {
       Value: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
-  isOpen: PropTypes.bool.isRequired,
+  released: PropTypes.string.isRequired,
   toggle: PropTypes.func.isRequired,
   writer: PropTypes.string.isRequired,
 }

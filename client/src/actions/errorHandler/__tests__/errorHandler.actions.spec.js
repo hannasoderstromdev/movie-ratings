@@ -1,7 +1,6 @@
 import errorHandlerTypes from '../errorHandler.types'
 import errorHandlerActions from '../errorHandler.actions'
 
-
 describe('Actions/ErrorHandler', () => {
   describe('setError', () => {
     it(`returns ${errorHandlerTypes.SET_ERROR} with correct payload`, () => {

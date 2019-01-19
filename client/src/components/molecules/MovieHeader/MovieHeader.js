@@ -52,11 +52,11 @@ const MovieHeader = ({
         </YearRuntime>
         <Genre>{genre}</Genre>
       </Meta>
-      {!!rating && <Rating small rating={rating} setRating={setRating} />}
+      {!!rating && <Rating rating={rating} setRating={setRating} small />}
       {showDelete && (
-        <Button thirdiary onClick={() => deleteMovie(id)}>
+        <Button onClick={() => deleteMovie(id)} thirdiary>
           <DeleteText>Delete</DeleteText>
-          <Icon icon={['fas', 'trash-alt']} color="#832D2D" iconsize="12px" />
+          <Icon color="#832D2D" icon={['fas', 'trash-alt']} iconsize="12px" />
         </Button>
       )}
     </Wrapper>
@@ -64,22 +64,21 @@ const MovieHeader = ({
 }
 
 MovieHeader.defaultProps = {
+  deleteMovie: null,
   rating: 0,
   setRating: null,
-  deleteMovie: null,
   showDelete: false,
 }
 
 MovieHeader.propTypes = {
-  poster: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  runtime: PropTypes.string.isRequired,
+  deleteMovie: PropTypes.func,
   genre: PropTypes.string.isRequired,
   rating: PropTypes.number,
+  runtime: PropTypes.string.isRequired,
   setRating: PropTypes.func,
   showDelete: PropTypes.bool,
-  deleteMovie: PropTypes.func,
+  title: PropTypes.string.isRequired,
+  year: PropTypes.string.isRequired,
 }
 
 export default MovieHeader

@@ -15,15 +15,16 @@ describe('Actions/Search/Thunks', () => {
       await store.dispatch(searchThunks.searchOMDB('test'))
       const actions = store.getActions()
       const expected = [
-        {"type": "SEARCH_FOR_MOVIE_TITLE" }, 
-        {"type": "SEARCH_FOR_MOVIE_TITLE_FAILURE" }, 
+        { type: 'SEARCH_FOR_MOVIE_TITLE' },
+        { type: 'SEARCH_FOR_MOVIE_TITLE_FAILURE' },
         {
-          "payload": {
-            "message": "searchService is not defined", 
-            "status": undefined, "type": "danger"
-          }, 
-          "type": "SET_ERROR" 
-        }
+          payload: {
+            message: 'searchService is not defined',
+            status: undefined,
+            type: 'danger',
+          },
+          type: 'SET_ERROR',
+        },
       ]
 
       expect(actions).toEqual(expected)
