@@ -7,7 +7,7 @@ import Button from 'components/atoms/Button'
 const ModalWrapper = styled.div`
   display: flex;
   position: fixed;
-  background-color: ${({ theme }) => theme.color.darkTransparent};
+  background-color: ${({ theme }) => theme.colors.darkTransparent};
   z-index: ${({ zIndex }) => zIndex};
 `
 const ModalBox = styled.section`
@@ -29,7 +29,7 @@ class Modal extends Component {
     const { item, onClose } = this.props
     if (item.onConfirm) {
       item.onConfirm()
-      onClose(item).id
+      onClose(item.id)
     }
   }
 
@@ -41,7 +41,7 @@ class Modal extends Component {
         return (
           <ModalWrapper zIndex={(zIndex + 1) * 10}>
             <ModalBox>
-              <div>{item.text}</div>
+              <div>{item.content.text}</div>
               <div>
                 <Button onClick={this.onConfirm}>Confirm</Button>
                 <Button onClick={this.onClose}>Close</Button>
@@ -55,7 +55,7 @@ class Modal extends Component {
           <ModalWrapper zIndex={(zIndex + 1) * 10}>
             <ModalBox>
               <Button onClick={this.onClose}>Close</Button>
-              <div>{item.content}</div>
+              <div>{item.content.text}</div>
             </ModalBox>
           </ModalWrapper>
         )
@@ -75,8 +75,9 @@ Modal.propTypes = {
     id: PropTypes.string.isRequired,
     onConfirm: PropTypes.func,
     onClose: PropTypes.func,
-    text: PropTypes.string,
-    content: PropTypes.string,
+    content: PropTypes.shape({
+      text: PropTypes.string,
+    }),
   }).isRequired,
   onClose: PropTypes.func.isRequired,
   zIndex: PropTypes.number,
