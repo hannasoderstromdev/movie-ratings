@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import Rating from 'components/molecules/Rating'
 
@@ -14,22 +15,21 @@ const Wrapper = styled.div`
   background-size: cover;
 `
 
-// const Title = styled.div`
-//   background-color: rgba(0, 0, 0, 0.5);
-//   color: ${({ theme }) => theme.colors.primary};
-//   text-align: center;
-// `
-
 const RatingWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `
 
-const MovieTile = ({ poster, title, rating }) => (
+const MovieTile = ({ poster, rating }) => (
   <Wrapper imgUrl={poster}>
     <RatingWrapper>
-      <Rating small rating={rating} useLock={false} />
+      <Rating rating={rating} small useLock={false} />
     </RatingWrapper>
   </Wrapper>
 )
+
+MovieTile.propTypes = {
+  poster: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+}
 
 export default MovieTile
