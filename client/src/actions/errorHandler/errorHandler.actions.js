@@ -11,7 +11,7 @@ const clearError = () => ({
 
 const errorHandlerActions = {
   setError,
-  clearError
+  clearError,
 }
 
 export default errorHandlerActions
