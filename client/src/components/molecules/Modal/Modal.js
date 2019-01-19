@@ -4,6 +4,8 @@ import styled from 'styled-components'
 
 import Button from 'components/atoms/Button'
 
+import MovieFull from 'components/organisms/MovieFull'
+
 const ModalWrapper = styled.div`
   display: flex;
   position: fixed;
@@ -55,7 +57,7 @@ class Modal extends Component {
           <ModalWrapper zIndex={(zIndex + 1) * 10}>
             <ModalBox>
               <Button onClick={this.onClose}>Close</Button>
-              <div>{item.content.text}</div>
+              <MovieFull movieId={item.content.movieId} />
             </ModalBox>
           </ModalWrapper>
         )
