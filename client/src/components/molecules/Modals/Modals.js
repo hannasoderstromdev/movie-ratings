@@ -7,7 +7,7 @@ import modalsActions from 'actions/modals/modals.actions'
 import Modal from 'components/molecules/Modal'
 
 const Modals = ({ modals, closeModal }) => (
-  <div>
+  <div data-testid="modals">
     {modals &&
       modals.map((item, i) => (
         <Modal
@@ -25,8 +25,9 @@ Modals.propTypes = {
   modals: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      text: PropTypes.string,
-      content: PropTypes.string,
+      content: PropTypes.shape({
+        text: PropTypes.string,
+      }),
       onConfirm: PropTypes.func,
     }),
   ).isRequired,
