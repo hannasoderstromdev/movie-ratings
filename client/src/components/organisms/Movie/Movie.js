@@ -8,8 +8,8 @@ import moviesThunks from 'actions/movies/movies.thunks'
 import Button from 'components/atoms/Button'
 
 import MovieTile from 'components/molecules/MovieTile'
+import MovieRow from 'components/molecules/MovieRow'
 import MovieHeader from 'components/molecules/MovieHeader'
-import MoviePreview from 'components/molecules/MoviePreview'
 import MovieDetails from 'components/molecules/MovieDetails'
 
 import contractImg from './contract.png'
@@ -31,12 +31,9 @@ const PosterImg = styled.img`
 `
 
 class Movie extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      preview: true,
-      detailsOpen: false,
-    }
+  state = {
+    preview: true,
+    detailsOpen: false,
   }
 
   setRating = async rating => {
@@ -79,55 +76,53 @@ class Movie extends React.Component {
 
     const { preview } = this.state
 
-    if (listStyle === 'tiles') {
-      return preview ? (
-        <MovieTile poster={poster} title={title} rating={rating} />
+    if (preview) {
+      return listStyle === 'tiles' ? (
+        <MovieTile poster={poster} rating={rating} title={title} />
       ) : (
-        <MovieTile fullSize />
+        <MovieRow
+          genre={genre}
+          poster={poster}
+          rating={rating}
+          runtime={runtime}
+          title={title}
+          toggleFullMovie={this.toggleFullMovie}
+          year={year}
+        />
       )
     }
 
-    return preview ? (
-      <MoviePreview
-        toggleFullMovie={this.toggleFullMovie}
-        poster={poster}
-        title={title}
-        year={year}
-        runtime={runtime}
-        genre={genre}
-        rating={rating}
-      />
-    ) : (
+    return (
       <FullMovie>
         <MovieStyle>
-          <PosterImg src={poster} alt={title} onClick={this.toggleFullMovie} />
+          <PosterImg alt={title} onClick={this.toggleFullMovie} src={poster} />
           <MovieHeader
-            id={id}
-            title={title}
-            year={year}
-            runtime={runtime}
+            deleteMovie={deleteMovie}
             genre={genre}
-            rating={rating}
+            id={id}
             poster={poster}
+            rating={rating}
+            runtime={runtime}
             setRating={this.setRating}
             showDelete={showDelete}
-            deleteMovie={deleteMovie}
+            title={title}
+            year={year}
           />
-          <Button thirdiary onClick={this.toggleFullMovie}>
-            <img src={contractImg} alt="minimize" />
+          <Button onClick={this.toggleFullMovie} thirdiary>
+            <img alt="minimize" src={contractImg} />
           </Button>
         </MovieStyle>
         <MovieDetails
+          actors={actors}
           country={country}
+          director={director}
+          isOpen={this.state.detailsOpen}
           language={language}
-          ratings={ratings}
-          released={released}
           plot={plot}
           production={production}
+          ratings={ratings}
+          released={released}
           toggle={this.toggleDetails}
-          isOpen={this.state.detailsOpen}
-          director={director}
-          actors={actors}
           writer={writer}
         />
       </FullMovie>
@@ -136,35 +131,37 @@ class Movie extends React.Component {
 }
 
 Movie.defaultProps = {
-  showDelete: true,
-  rating: 0,
   listStyle: 'rows',
+  rating: 0,
+  showDelete: true,
 }
 
 Movie.propTypes = {
-  id: PropTypes.string.isRequired,
-  country: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  language: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  runtime: PropTypes.string.isRequired,
-  director: PropTypes.string.isRequired,
   actors: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
+  deleteMovie: PropTypes.func.isRequired,
+  director: PropTypes.string.isRequired,
+  genre: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  language: PropTypes.string.isRequired,
+  listStyle: PropTypes.string,
   plot: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
   production: PropTypes.string.isRequired,
+  rating: PropTypes.number,
   ratings: PropTypes.arrayOf(
     PropTypes.shape({
       Source: PropTypes.string.isRequired,
       Value: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
-  rating: PropTypes.number,
   released: PropTypes.string.isRequired,
-  writer: PropTypes.string.isRequired,
+  runtime: PropTypes.string.isRequired,
   showDelete: PropTypes.bool,
-  listStyle: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  updateMovie: PropTypes.func.isRequired,
+  writer: PropTypes.string.isRequired,
+  year: PropTypes.string.isRequired,
 }
 
 const mapDispatchToProps = {
