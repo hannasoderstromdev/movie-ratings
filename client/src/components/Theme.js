@@ -9,7 +9,7 @@ const Theme = ({ children }) => (
 )
 
 Theme.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 }
 
 export default Theme
