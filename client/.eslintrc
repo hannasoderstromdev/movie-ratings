@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
-  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jsx-a11y/recommended"],
-  "plugins": ["react", "jsx-a11y"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jsx-a11y/recommended", "plugin:prettier/recommended"],
+  "plugins": ["react", "jsx-a11y", "prettier"],
   "env": {
     "browser": true,
     "node": true,
@@ -67,7 +67,8 @@
     "key-spacing": 0,
     "no-new-wrappers": "error",
     "no-unused-expressions": 0,
-    "no-unused-vars": 2
+    "no-unused-vars": 2,
+    "prettier/prettier": "error"
   },
   "settings": {
     "react": {
