@@ -15,8 +15,10 @@ import {
   faTrashAlt,
   faLock,
   faUnlock,
+  faTh,
+  faThList,
 } from '@fortawesome/free-solid-svg-icons'
-import { whyDidYouUpdate } from 'why-did-you-update'
+import { whyDidYouUpdate } from 'why-did-you-update'
 
 import App from './components/App'
 
@@ -39,6 +41,8 @@ library.add(
   faTrashAlt,
   faLock,
   faUnlock,
+  faTh,
+  faThList,
 )
 
 ReactDOM.render(<App />, document.getElementById('root'))
