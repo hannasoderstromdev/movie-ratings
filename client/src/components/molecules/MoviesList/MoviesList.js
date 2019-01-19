@@ -29,7 +29,6 @@ MoviesList.propTypes = {
     PropTypes.shape({
       actors: PropTypes.string.isRequired,
       country: PropTypes.string.isRequired,
-      deleteMovie: PropTypes.func.isRequired,
       director: PropTypes.string.isRequired,
       genre: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
@@ -49,7 +48,6 @@ MoviesList.propTypes = {
       runtime: PropTypes.string.isRequired,
       showDelete: PropTypes.bool,
       title: PropTypes.string.isRequired,
-      updateMovie: PropTypes.func.isRequired,
       writer: PropTypes.string.isRequired,
       year: PropTypes.string.isRequired,
     }),
