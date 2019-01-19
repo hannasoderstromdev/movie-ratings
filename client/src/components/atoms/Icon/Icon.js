@@ -10,28 +10,30 @@ const IconStyle = styled(FontAwesomeIcon)`
 
 const Icon = ({ color, icon, iconsize, onMouseOver, onMouseOut }) => (
   <IconStyle
-    data-testid="icon"
     color={color}
+    data-testid="icon"
     icon={icon}
     iconsize={iconsize}
-    onMouseOver={onMouseOver}
+    onBlur={onMouseOut}
+    onFocus={onMouseOver}
     onMouseOut={onMouseOut}
+    onMouseOver={onMouseOver}
   />
 )
 
 Icon.defaultProps = {
-  iconsize: '1rem',
   color: '',
-  onMouseOver: null,
+  iconsize: '1rem',
   onMouseOut: null,
+  onMouseOver: null,
 }
 
 Icon.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   iconsize: PropTypes.string,
-  onMouseOver: PropTypes.func,
   onMouseOut: PropTypes.func,
+  onMouseOver: PropTypes.func,
 }
 
 export default Icon
