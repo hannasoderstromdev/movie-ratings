@@ -1,7 +1,6 @@
 import handleResponse from '../handle-response'
 
 const search = async movieTitle => {
-
   try {
     const user = JSON.parse(localStorage.getItem('user'))
 

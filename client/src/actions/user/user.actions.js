@@ -1,6 +1,3 @@
-import userService from 'services/user/user.service'
-import { setErrorAction } from 'actions/errorHandler/errorHandler.actions'
-
 import userTypes from './user.types'
 
 const loginRequest = () => ({
@@ -24,7 +21,7 @@ const userActions = {
   loginRequest,
   loginSuccess,
   loginFailure,
-  logoutUser
+  logoutUser,
 }
 
 export default userActions

@@ -1,6 +1,5 @@
 import userTypes from '../user.types'
 import userActions from '../user.actions'
-import userService from 'services/user/user.service'
 
 describe('Actions/User', () => {
   describe('loginRequest', () => {
@@ -18,7 +17,10 @@ describe('Actions/User', () => {
       const user = {}
       const action = userActions.loginSuccess(user)
 
-      expect(action).toEqual({ payload: { user: {} }, type: userTypes.LOGIN_SUCCESS })
+      expect(action).toEqual({
+        payload: { user: {} },
+        type: userTypes.LOGIN_SUCCESS,
+      })
     })
   })
 
