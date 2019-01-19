@@ -23,7 +23,7 @@ const RightAligned = styled.div`
   justify-self: end;
 `
 
-const MoviePreview = ({
+const MovieRow = ({
   poster,
   title,
   year,
@@ -34,33 +34,38 @@ const MoviePreview = ({
   toggleFullMovie,
 }) => (
   <Wrapper>
-    <PosterImg src={poster} alt={title} onClick={toggleFullMovie} />
+    <PosterImg alt={title} onClick={toggleFullMovie} src={poster} />
     <MovieHeader
+      genre={genre}
+      poster={poster}
+      rating={rating}
+      runtime={runtime}
+      setRating={setRating}
       title={title}
       year={year}
-      runtime={runtime}
-      genre={genre}
-      rating={rating}
-      poster={poster}
-      setRating={setRating}
     />
     <RightAligned>
       <Button onClick={toggleFullMovie} thirdiary>
-        <img src={expandImg} alt={title} />
+        <img alt={title} src={expandImg} />
       </Button>
     </RightAligned>
   </Wrapper>
 )
 
-MoviePreview.propTypes = {
-  poster: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  runtime: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  rating: PropTypes.number,
-  toggleFullMovie: PropTypes.func.isRequired,
-  setRating: PropTypes.func,
+MovieRow.defaultProps = {
+  rating: null,
+  setRating: null,
 }
 
-export default MoviePreview
+MovieRow.propTypes = {
+  genre: PropTypes.string.isRequired,
+  poster: PropTypes.string.isRequired,
+  rating: PropTypes.number,
+  runtime: PropTypes.string.isRequired,
+  setRating: PropTypes.func,
+  title: PropTypes.string.isRequired,
+  toggleFullMovie: PropTypes.func.isRequired,
+  year: PropTypes.string.isRequired,
+}
+
+export default MovieRow
