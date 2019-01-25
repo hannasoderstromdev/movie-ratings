@@ -19,8 +19,8 @@ const RatingWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `
 
-const MovieTile = ({ poster, rating }) => (
-  <Wrapper imgUrl={poster}>
+const MovieTile = ({ poster, rating, openFullMovie }) => (
+  <Wrapper imgUrl={poster} onClick={openFullMovie}>
     <RatingWrapper>
       <Rating rating={rating} small useLock={false} />
     </RatingWrapper>
@@ -28,6 +28,7 @@ const MovieTile = ({ poster, rating }) => (
 )
 
 MovieTile.propTypes = {
+  openFullMovie: PropTypes.func.isRequired,
   poster: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
 }
