@@ -22,6 +22,7 @@ class Movie extends React.Component {
 
   render() {
     const {
+      id,
       genre,
       title,
       year,
@@ -33,6 +34,7 @@ class Movie extends React.Component {
 
     return listStyle === 'tiles' ? (
       <MovieTile
+        id={id}
         openFullMovie={this.openFullMovie}
         poster={poster}
         rating={rating}
@@ -41,6 +43,7 @@ class Movie extends React.Component {
     ) : (
       <MovieRow
         genre={genre}
+        id={id}
         openFullMovie={this.openFullMovie}
         poster={poster}
         rating={rating}
