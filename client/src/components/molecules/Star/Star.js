@@ -10,10 +10,11 @@ const StarButton = styled.button`
   outline: none;
   background-color: transparent;
   cursor: pointer;
+  font-size: ${({ small }) => (small ? '1.75rem' : '2.5rem')};
 `
 
 const Star = ({ onClick, isSelected, onMouseOver, onMouseOut, small }) => (
-  <StarButton data-testid="star" onClick={onClick}>
+  <StarButton data-testid="star" onClick={onClick} small={small}>
     <Icon
       color={isSelected ? '#FEDC9B' : '#666'}
       icon={['fas', 'star']}
