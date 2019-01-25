@@ -6,12 +6,15 @@ const Normalize = createGlobalStyle`
   /* Document
     ========================================================================== */
 
-  html {
+  html, body {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
     font-size: 62.5%;
+    width: 100%;
     height: 100%;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   *, *:before, *:after {
@@ -27,8 +30,8 @@ const Normalize = createGlobalStyle`
 
   body {
     margin: 0;
+    padding: 0;
     font-family: 'Open Sans', sans-serif;
-    height: 100%;
   }
 
 
