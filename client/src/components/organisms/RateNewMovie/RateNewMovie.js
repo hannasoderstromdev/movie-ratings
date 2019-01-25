@@ -13,7 +13,7 @@ import Spinner from 'components/atoms/Spinner'
 
 import Rating from 'components/molecules/Rating'
 
-import Movie from 'components/organisms/Movie'
+import MovieFull from 'components/organisms/MovieFull'
 
 const MarginTop = styled.div`
   margin-top: 2rem;
@@ -80,7 +80,7 @@ class RateNewMovie extends Component {
           </MessageWithMargins>
         )}
         <MarginTop>
-          <Movie {...movie} showDelete={false} />
+          <MovieFull movie={movie} showDelete={false} />
         </MarginTop>
         <RateWrapper>
           {!movie.inLibrary && (
@@ -108,7 +108,6 @@ class RateNewMovie extends Component {
 }
 
 RateNewMovie.propTypes = {
-  error: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   movie: PropTypes.oneOf([
     PropTypes.null,
