@@ -2,28 +2,46 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import Icon from 'components/atoms/Icon'
 import Button from 'components/atoms/Button'
 
 import MovieFull from 'components/organisms/MovieFull'
 
 const ModalWrapper = styled.div`
   display: flex;
-  position: fixed;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background-color: ${({ theme }) => theme.colors.darkTransparent};
   z-index: ${({ zIndex }) => zIndex};
 `
 const ModalBox = styled.section`
+  background-color: ${({ theme }) => theme.colors.darkTransparent};
   border: 1px solid ${({ theme }) => theme.colors.primary};
+  position: relative;
+  margin: 1rem;
+  padding: 2rem;
+`
+
+const TopRight = styled.div`
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
 `
 
 class Modal extends Component {
   onClose = () => {
     const { item, onClose } = this.props
+
     if (item.onClose) {
       item.onClose()
-      onClose(item.id)
+      onClose()
     } else {
-      onClose(item.id)
+      onClose()
     }
   }
 
@@ -31,7 +49,7 @@ class Modal extends Component {
     const { item, onClose } = this.props
     if (item.onConfirm) {
       item.onConfirm()
-      onClose(item.id)
+      onClose()
     }
   }
 
@@ -46,7 +64,9 @@ class Modal extends Component {
               <div>{item.content.text}</div>
               <div>
                 <Button onClick={this.onConfirm}>Confirm</Button>
-                <Button onClick={this.onClose}>Close</Button>
+                <Button onClick={this.onClose}>
+                  <Icon icon={['fas', 'times']} iconsize="2.5rem" />
+                </Button>
               </div>
             </ModalBox>
           </ModalWrapper>
@@ -56,7 +76,11 @@ class Modal extends Component {
         return (
           <ModalWrapper zIndex={(zIndex + 1) * 10}>
             <ModalBox>
-              <Button onClick={this.onClose}>Close</Button>
+              <TopRight>
+                <Button onClick={this.onClose}>
+                  <Icon icon={['fas', 'times']} />
+                </Button>
+              </TopRight>
               <MovieFull movieId={item.content.movieId} />
             </ModalBox>
           </ModalWrapper>
