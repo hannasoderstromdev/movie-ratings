@@ -33,8 +33,12 @@ const LabeledInputField = ({
   </Label>
 )
 
+LabeledInputField.defaultProps = {
+  error: false,
+}
+
 LabeledInputField.propTypes = {
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
