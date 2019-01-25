@@ -39,9 +39,9 @@ const Content = () => (
         <Route component={Error404} />
       </Switch>
 
-      <Modals />
       <Alert />
       <Navigation />
+      <Modals />
     </Wrapper>
   </ErrorBoundary>
 )
