@@ -61,9 +61,9 @@ const TextWrapper = styled(Text)`
   flex: 1;
 `
 
-const Alert = ({ status, error, type, message, clearErrorAction }) => {
+const Alert = ({ status, error, type, message, clearError }) => {
   return error ? (
-    <Expire callOnFinish={clearErrorAction}>
+    <Expire callOnFinish={clearError}>
       <AlertWrapper type={type}>
         <IconWrapper type={type}>
           {type === 'success' && (
@@ -81,7 +81,7 @@ const Alert = ({ status, error, type, message, clearErrorAction }) => {
           {status}: {message}
         </TextWrapper>
 
-        <Button onClick={clearErrorAction} thirdiary>
+        <Button onClick={clearError} thirdiary>
           <AlertIcon
             color="rgba(0,0,0, .25)"
             icon={['fas', 'times']}
@@ -102,7 +102,7 @@ Alert.defaultProps = {
 }
 
 Alert.propTypes = {
-  clearErrorAction: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
   error: PropTypes.bool,
   message: PropTypes.string,
   status: PropTypes.number,
