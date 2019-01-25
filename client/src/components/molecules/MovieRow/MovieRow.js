@@ -24,6 +24,7 @@ const RightAligned = styled.div`
 `
 
 const MovieRow = ({
+  id,
   poster,
   title,
   year,
@@ -31,12 +32,13 @@ const MovieRow = ({
   genre,
   setRating,
   rating,
-  toggleFullMovie,
+  openFullMovie,
 }) => (
   <Wrapper>
-    <PosterImg alt={title} onClick={toggleFullMovie} src={poster} />
+    <PosterImg alt={title} onClick={openFullMovie} src={poster} />
     <MovieHeader
       genre={genre}
+      id={id}
       poster={poster}
       rating={rating}
       runtime={runtime}
@@ -45,7 +47,7 @@ const MovieRow = ({
       year={year}
     />
     <RightAligned>
-      <Button onClick={toggleFullMovie} thirdiary>
+      <Button onClick={openFullMovie} thirdiary>
         <img alt={title} src={expandImg} />
       </Button>
     </RightAligned>
@@ -59,12 +61,13 @@ MovieRow.defaultProps = {
 
 MovieRow.propTypes = {
   genre: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  openFullMovie: PropTypes.func.isRequired,
   poster: PropTypes.string.isRequired,
   rating: PropTypes.number,
   runtime: PropTypes.string.isRequired,
   setRating: PropTypes.func,
   title: PropTypes.string.isRequired,
-  toggleFullMovie: PropTypes.func.isRequired,
   year: PropTypes.string.isRequired,
 }
 
