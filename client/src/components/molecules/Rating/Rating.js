@@ -59,17 +59,15 @@ class Rating extends React.Component {
   }
 
   renderLockIcon() {
-    if (this.props.setRating) {
-      return this.state.locked ? (
-        <Icon color="#666" icon={['fas', 'lock']} />
-      ) : (
-        <Icon color="#FEDC9B" icon={['fas', 'unlock']} />
-      )
-    }
+    return this.state.locked ? (
+      <Icon color="#666" icon={['fas', 'lock']} />
+    ) : (
+      <Icon color="#FEDC9B" icon={['fas', 'unlock']} />
+    )
   }
 
   render() {
-    const { small } = this.props
+    const { small, useLock, setRating } = this.props
     const { stars } = this.state
 
     const starsToRender = []
@@ -105,7 +103,7 @@ class Rating extends React.Component {
     return (
       <RatingStyle data-testid="rating">
         {starsToRender}
-        {this.props.useLock && (
+        {useLock && setRating && (
           <Button onClick={this.toggleLocked} thirdiary>
             {this.renderLockIcon()}
           </Button>
