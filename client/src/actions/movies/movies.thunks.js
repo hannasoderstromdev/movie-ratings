@@ -92,20 +92,20 @@ const deleteMovie = id => async dispatch => {
 }
 
 // TODO:
-// const findMovieByTitle = title => async dispatch => {
-//   dispatch(moviesActions.findMovieByTitle())
-//   try {
-//     // find movie by title
-//   } catch (error) {
-//     dispatch(
-//       errorHandlerActions.setError({
-//         type: 'danger',
-//         status: error.status,
-//         message: error.message,
-//       }),
-//     )
-//   }
-// }
+const findMovieByTitle = (/*title*/) => async dispatch => {
+  dispatch(moviesActions.findMovieByTitle())
+  try {
+    // find movie by title
+  } catch (error) {
+    dispatch(
+      errorHandlerActions.setError({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
+  }
+}
 
 const moviesThunks = {
   getAllMovies,
@@ -113,7 +113,7 @@ const moviesThunks = {
   createMovie,
   updateMovie,
   deleteMovie,
-  // findMovieByTitle,
+  findMovieByTitle,
 }
 
 export default moviesThunks
