@@ -6,6 +6,9 @@ import PropTypes from 'prop-types'
 const IconStyle = styled(FontAwesomeIcon)`
   color: ${({ color, theme }) => (color ? color : theme.lightGray)};
   font-size: ${({ iconsize }) => (iconsize ? iconsize : '1rem')};
+  svg {
+    font-size: ${({ iconsize }) => (iconsize ? iconsize : '1rem')};
+  }
 `
 
 const Icon = ({ color, icon, iconsize, onMouseOver, onMouseOut }) => (
