@@ -13,7 +13,7 @@ const Modals = ({ modals, closeModal }) => (
         <Modal
           item={item}
           key={item.id}
-          onClose={() => closeModal(item)}
+          onClose={() => closeModal(item.id)}
           zIndex={i}
         />
       ))}
