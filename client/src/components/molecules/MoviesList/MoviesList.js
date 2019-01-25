@@ -2,19 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Movie from 'components/organisms/Movie'
+import MoviePreview from 'components/organisms/MoviePreview'
 
 const MoviesListWrapper = styled.div`
+  width: 100%;
   display: grid;
   grid-template-columns: ${({ listStyle }) =>
     listStyle === 'rows' ? 'auto' : '1fr 1fr 1fr'};
-  grid-gap: 2rem;
+  grid-gap: 0.5rem;
 `
 
 const MoviesList = ({ movies, listStyle }) => (
   <MoviesListWrapper listStyle={listStyle}>
     {movies.map(movie => (
-      <Movie key={movie.id} {...movie} listStyle={listStyle} />
+      <MoviePreview key={movie.id} {...movie} listStyle={listStyle} />
     ))}
   </MoviesListWrapper>
 )
