@@ -26,6 +26,7 @@ const HeaderStyle = styled.header`
   font-size: 1.8rem;
   padding: 0;
   margin: 0;
+  overflow: hidden;
 `
 
 const Header = () => (
