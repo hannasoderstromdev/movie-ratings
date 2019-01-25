@@ -15,12 +15,12 @@ const FullMovie = styled.div`
 const MovieStyle = styled.article`
   display: grid;
   grid-template-columns: 2.5fr 5fr 1fr;
-  grid-gap: 1.5rem;
+  grid-gap: 1rem;
   margin-bottom: 1rem;
 `
 
 const PosterImg = styled.img`
-  max-width: 40vw;
+  width: 100%;
   height: auto;
 `
 
@@ -37,18 +37,13 @@ class MovieFull extends React.Component {
 
   setRating = async rating => {
     const { updateMovie, id } = this.props
+
     await updateMovie(id, { rating })
   }
 
-  getMovie = movieId => {
-    return this.props.movies.filter(movie => movie.id === movieId)
-  }
-
   render() {
-    const { deleteMovie, movieId } = this.props
-    const { showDelete } = this.state
-
     const {
+      deleteMovie,
       title,
       poster,
       genre,
@@ -65,10 +60,12 @@ class MovieFull extends React.Component {
       ratings,
       released,
       writer,
-    } = this.getMovie(movieId)
+    } = this.props
+
+    const { showDelete } = this.state
 
     return (
-      <FullMovie>
+      <FullMovie data-testid="full-movie">
         <MovieStyle>
           <PosterImg alt={title} src={poster} />
           <MovieHeader
@@ -107,34 +104,34 @@ MovieFull.defaultProps = {
 }
 
 MovieFull.propTypes = {
+  actors: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
   deleteMovie: PropTypes.func.isRequired,
-  movieId: PropTypes.string.isRequired,
-  movies: PropTypes.arrayOf(
-    PropTypes.shape({
-      actors: PropTypes.string.isRequired,
-      country: PropTypes.string.isRequired,
-      director: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-      language: PropTypes.string.isRequired,
-      plot: PropTypes.string.isRequired,
-      poster: PropTypes.string.isRequired,
-      production: PropTypes.string.isRequired,
-      rating: PropTypes.number,
-      ratings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-      released: PropTypes.string.isRequired,
-      runtime: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      writer: PropTypes.string.isRequired,
-      year: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  director: PropTypes.string.isRequired,
+  genre: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  language: PropTypes.string.isRequired,
+  plot: PropTypes.string.isRequired,
+  poster: PropTypes.string.isRequired,
+  production: PropTypes.string.isRequired,
+  rating: PropTypes.number,
+  ratings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  released: PropTypes.string.isRequired,
+  runtime: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   updateMovie: PropTypes.func.isRequired,
+  writer: PropTypes.string.isRequired,
+  year: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = ({ movies }) => ({
-  movies,
-})
+const mapStateToProps = ({ movies }, { movieId }) => {
+  const movieFound = movies.movies.find(movie => movie.id === movieId)
+  if (movieFound) {
+    return {
+      ...movieFound,
+    }
+  }
+}
 
 const mapDispatchToProps = {
   updateMovie: moviesThunks.updateMovie,
