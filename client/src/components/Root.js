@@ -8,7 +8,7 @@ const Root = ({ children, store }) => (
 
 Root.propTypes = {
   children: PropTypes.node.isRequired,
-  store: PropTypes.func.isRequired,
+  store: PropTypes.object.isRequired,
 }
 
 export default Root
