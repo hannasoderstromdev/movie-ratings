@@ -31,6 +31,19 @@ const deleteById = async id => {
   return await handleResponse(response)
 }
 
-const moviesService = { getAll, getLatest, create, update, deleteById }
+const findByTitle = async title => {
+  const options = await headers('GET::AUTH')
+  const response = await fetch(`/movies/title/${title}`, options)
+  return await handleResponse(response)
+}
+
+const moviesService = {
+  getAll,
+  getLatest,
+  create,
+  update,
+  deleteById,
+  findByTitle,
+}
 
 export default moviesService
