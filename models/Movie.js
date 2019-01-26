@@ -82,6 +82,8 @@ const MovieSchema = new Schema({
   },
 })
 
+MovieSchema.index({ title: 'text' })
+
 const Movie = mongoose.model('Movie', MovieSchema)
 
 module.exports = Movie
