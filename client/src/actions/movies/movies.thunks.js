@@ -92,10 +92,12 @@ const deleteMovie = id => async dispatch => {
 }
 
 // TODO:
-const findMovieByTitle = (/*title*/) => async dispatch => {
-  dispatch(moviesActions.findMovieByTitle())
+const findMovieByTitle = title => async dispatch => {
+  dispatch(moviesActions.findByTitle())
   try {
     // find movie by title
+    const { data } = await moviesService.findByTitle(title)
+    dispatch(moviesActions.findByTitleSuccess(data))
   } catch (error) {
     dispatch(
       errorHandlerActions.setError({
@@ -104,6 +106,7 @@ const findMovieByTitle = (/*title*/) => async dispatch => {
         message: error.message,
       }),
     )
+    dispatch(moviesActions.findByTitleFailure())
   }
 }
 
