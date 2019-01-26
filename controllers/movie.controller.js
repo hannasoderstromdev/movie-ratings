@@ -35,7 +35,6 @@ module.exports = {
   /**
    * Get Movie By ID
    */
-
   getById: function(req, res, next) {
     movieModel.findById(req.params.movieId, function(err, movieInfo) {
       if (err) {
@@ -326,11 +325,16 @@ module.exports = {
     }
   },
 
-  findByTitle: function(req, res, next) {
+  findByTitle: async function(req, res, next) {
     try {
-      const result = await.movieModel.find({
-        title: req.params.title,
-      }).exec()
+      const result = await movieModel
+        .find({
+          $text: {
+            $search: req.params.title.toLowerCase(),
+          },
+        })
+        .exec()
+      console.log('findByTitle', result)
 
       const movieWithId = addIdToMovies(result)
 
