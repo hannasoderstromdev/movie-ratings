@@ -325,4 +325,22 @@ module.exports = {
       next(error)
     }
   },
+
+  findByTitle: function(req, res, next) {
+    try {
+      const result = await.movieModel.find({
+        title: req.params.title,
+      }).exec()
+
+      const movieWithId = addIdToMovies(result)
+
+      res.json({
+        status: 'success',
+        message: 'Found matching movie',
+        data: movieWithId,
+      })
+    } catch (error) {
+      next(error)
+    }
+  },
 }
