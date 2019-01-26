@@ -64,23 +64,19 @@ class Library extends React.Component {
           <TopWrapper>
             <H1>Library</H1>
             <ButtonWrapper>
-              <Button
-                active={listStyle === 'rows'}
-                onClick={this.setStyleRows}
-                secondary
-              >
+              <Button onClick={this.setStyleRows} secondary>
                 <Icon
-                  color="#FEDC9B"
+                  color={listStyle === 'rows' ? '#FEDC9B' : '#666'}
                   icon={['fas', 'th-list']}
                   iconsize="2.6rem"
                 />
               </Button>
-              <Button
-                active={listStyle === 'rows'}
-                onClick={this.setStyleTiles}
-                secondary
-              >
-                <Icon color="#FEDC9B" icon={['fas', 'th']} iconsize="2.6rem" />
+              <Button onClick={this.setStyleTiles} secondary>
+                <Icon
+                  color={listStyle === 'tiles' ? '#FEDC9B' : '#666'}
+                  icon={['fas', 'th']}
+                  iconsize="2.6rem"
+                />
               </Button>
             </ButtonWrapper>
           </TopWrapper>
