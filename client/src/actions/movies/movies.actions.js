@@ -70,6 +70,20 @@ const deleteMovieFailure = () => ({
   type: moviesTypes.DELETE_MOVIE_FAILURE,
 })
 
+// find by title
+const findByTitle = () => ({
+  type: moviesTypes.FIND_MOVIE_BY_TITLE,
+})
+
+const findByTitleSuccess = movie => ({
+  type: moviesTypes.FIND_MOVIE_BY_TITLE_SUCCESS,
+  payload: { movie },
+})
+
+const findByTitleFailure = () => ({
+  type: moviesTypes.FIND_MOVIE_BY_TITLE_FAILURE,
+})
+
 const moviesActions = {
   getAllMovies,
   getAllMoviesSuccess,
@@ -86,6 +100,9 @@ const moviesActions = {
   deleteMovie,
   deleteMovieSuccess,
   deleteMovieFailure,
+  findByTitle,
+  findByTitleSuccess,
+  findByTitleFailure,
 }
 
 export default moviesActions
