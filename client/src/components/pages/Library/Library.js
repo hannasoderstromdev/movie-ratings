@@ -54,7 +54,7 @@ class Library extends React.Component {
   }
 
   render() {
-    const { movies } = this.props
+    const { movies, filterByRating } = this.props
     const { listStyle } = this.state
 
     return movies.loading ? (
@@ -66,7 +66,7 @@ class Library extends React.Component {
         <Main>
           <TopWrapper>
             <H1>Library</H1>
-            <FilterByRating />
+            <FilterByRating filterByRating={filterByRating} />
             <ButtonWrapper>
               <Button onClick={this.setStyleRows} thirdiary>
                 <Icon
@@ -100,6 +100,7 @@ class Library extends React.Component {
 
 Library.propTypes = {
   // getAllMovies: PropTypes.func.isRequired,
+  filterByRating: PropTypes.func.isRequired,
   getLatestMovies: PropTypes.func.isRequired,
   movies: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
@@ -115,6 +116,7 @@ const mapStateToProps = ({ movies }) => ({
 const mapDispatchToProps = {
   getAllMovies: moviesThunks.getAllMovies,
   getLatestMovies: moviesThunks.getLatestMovies,
+  filterByRating: moviesThunks.filterByRating,
 }
 
 export default connect(
