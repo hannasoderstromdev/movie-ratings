@@ -9,7 +9,7 @@ const MoviesListWrapper = styled.div`
   display: grid;
   grid-template-columns: ${({ listStyle }) =>
     listStyle === 'rows' ? 'auto' : '1fr 1fr 1fr'};
-  grid-gap: 0.5rem;
+  grid-gap: 2rem;
 `
 
 const MoviesList = ({ movies, listStyle }) => (
