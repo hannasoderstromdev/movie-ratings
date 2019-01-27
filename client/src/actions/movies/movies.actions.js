@@ -84,6 +84,20 @@ const findByTitleFailure = () => ({
   type: moviesTypes.FIND_MOVIE_BY_TITLE_FAILURE,
 })
 
+// filter by rating
+const filterByRating = () => ({
+  type: moviesTypes.FILTER_BY_RATING,
+})
+
+const filterByRatingSuccess = movie => ({
+  type: moviesTypes.FILTER_BY_RATING_SUCCESS,
+  payload: { movie },
+})
+
+const filterByRatingFailure = () => ({
+  type: moviesTypes.FILTER_BY_RATING_FAILURE,
+})
+
 const moviesActions = {
   getAllMovies,
   getAllMoviesSuccess,
@@ -103,6 +117,9 @@ const moviesActions = {
   findByTitle,
   findByTitleSuccess,
   findByTitleFailure,
+  filterByRating,
+  filterByRatingSuccess,
+  filterByRatingFailure,
 }
 
 export default moviesActions
