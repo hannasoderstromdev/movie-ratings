@@ -13,6 +13,7 @@ import Button from 'components/atoms/Button'
 import Icon from 'components/atoms/Icon'
 
 import MoviesList from 'components/molecules/MoviesList'
+import FilterByRating from 'components/molecules/FilterByRating'
 
 import Page from 'components/templates/Page'
 import Main from 'components/templates/Main'
@@ -34,7 +35,9 @@ const TopWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
   flex-wrap: no-wrap;
+  width: 7rem;
 `
 
 class Library extends React.Component {
@@ -63,15 +66,16 @@ class Library extends React.Component {
         <Main>
           <TopWrapper>
             <H1>Library</H1>
+            <FilterByRating />
             <ButtonWrapper>
-              <Button onClick={this.setStyleRows} secondary>
+              <Button onClick={this.setStyleRows} thirdiary>
                 <Icon
                   color={listStyle === 'rows' ? '#FEDC9B' : '#666'}
                   icon={['fas', 'th-list']}
                   iconsize="2.6rem"
                 />
               </Button>
-              <Button onClick={this.setStyleTiles} secondary>
+              <Button onClick={this.setStyleTiles} thirdiary>
                 <Icon
                   color={listStyle === 'tiles' ? '#FEDC9B' : '#666'}
                   icon={['fas', 'th']}
