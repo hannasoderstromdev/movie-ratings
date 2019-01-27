@@ -7,7 +7,7 @@ router.get('/', movieController.getAll)
 router.get('/title/:title', movieController.findByTitle)
 router.get('/latest/:amount', movieController.getLatest)
 router.post('/create', movieController.create)
-router.get('/:movieId', movieController.getById)
+router.get('/:movieId(d+)', movieController.getById)
 router.put('/:movieId', movieController.updateById)
 router.delete('/:movieId', movieController.deleteById)
 
