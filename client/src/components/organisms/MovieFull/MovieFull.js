@@ -29,6 +29,14 @@ class MovieFull extends React.Component {
     detailsOpen: false,
   }
 
+  onDelete = id => {
+    const { deleteMovie, onClose } = this.props
+    deleteMovie(id)
+    if (onClose) {
+      onClose()
+    }
+  }
+
   toggleDetails = () =>
     this.setState(prevState => ({
       detailsOpen: !prevState.detailsOpen,
@@ -42,7 +50,6 @@ class MovieFull extends React.Component {
 
   render() {
     const {
-      deleteMovie,
       title,
       poster,
       genre,
@@ -67,7 +74,7 @@ class MovieFull extends React.Component {
         <MovieStyle>
           <PosterImg alt={title} src={poster} />
           <MovieHeader
-            deleteMovie={deleteMovie}
+            deleteMovie={this.onDelete}
             genre={genre}
             id={id}
             poster={poster}
@@ -98,6 +105,7 @@ class MovieFull extends React.Component {
 }
 
 MovieFull.defaultProps = {
+  onClose: null,
   rating: 0,
   showDelete: false,
 }
@@ -110,6 +118,7 @@ MovieFull.propTypes = {
   genre: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
+  onClose: PropTypes.func,
   plot: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
   production: PropTypes.string.isRequired,
@@ -125,7 +134,11 @@ MovieFull.propTypes = {
 }
 
 const mapStateToProps = ({ movies }, { movieId }) => {
-  const movieFound = movies.movies[movieId]
+  const movieFound =
+    movies &&
+    movies.movies.length &&
+    movies.movies.find(movie => movie.id === movieId)
+
   if (movieFound) {
     return {
       ...movieFound,
