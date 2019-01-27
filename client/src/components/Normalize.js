@@ -1,14 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
 
+// normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css
+
 const Normalize = createGlobalStyle`
-  /*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
-
-  /* Document
-    ========================================================================== */
-
   html, body {
-    line-height: 1.15; /* 1 */
-    -webkit-text-size-adjust: 100%; /* 2 */
+    line-height: 1.15; 
+    -webkit-text-size-adjust: 100%;
     font-size: 62.5%;
     width: 100%;
     height: 100%;
@@ -21,50 +18,36 @@ const Normalize = createGlobalStyle`
     box-sizing: inherit;
   }
 
-  /* Sections
-    ========================================================================== */
-
-  /**
-  * Remove the margin in all browsers.
-  */
-
   body {
     margin: 0;
     padding: 0;
     font-family: 'Open Sans', sans-serif;
   }
 
-
   h1 {
     font-size: 2em;
     margin: 0.67em 0;
   }
 
-  /* Grouping content
-    ========================================================================== */
-
   hr {
-    box-sizing: content-box; /* 1 */
-    height: 0; /* 1 */
-    overflow: visible; /* 2 */
+    box-sizing: content-box;
+    height: 0; 
+    overflow: visible; 
   }
 
   pre {
-    font-family: monospace, monospace; /* 1 */
-    font-size: 1em; /* 2 */
+    font-family: monospace, monospace; 
+    font-size: 1em; 
   }
-
-  /* Text-level semantics
-    ========================================================================== */
 
   a {
     background-color: transparent;
   }
 
   abbr[title] {
-    border-bottom: none; /* 1 */
-    text-decoration: underline; /* 2 */
-    text-decoration: underline dotted; /* 2 */
+    border-bottom: none; 
+    text-decoration: underline; 
+    text-decoration: underline dotted; 
   }
 
   b,
@@ -75,8 +58,8 @@ const Normalize = createGlobalStyle`
   code,
   kbd,
   samp {
-    font-family: monospace, monospace; /* 1 */
-    font-size: 1em; /* 2 */
+    font-family: monospace, monospace; 
+    font-size: 1em; 
   }
 
   small {
@@ -103,27 +86,24 @@ const Normalize = createGlobalStyle`
     border-style: none;
   }
 
-  /* Forms
-    ========================================================================== */
-
   button,
   input,
   optgroup,
   select,
   textarea {
-    font-family: inherit; /* 1 */
-    font-size: 100%; /* 1 */
-    line-height: 1.15; /* 1 */
-    margin: 0; /* 2 */
+    font-family: inherit; 
+    font-size: 100%; 
+    line-height: 1.15; 
+    margin: 0; 
   }
 
   button,
-  input { /* 1 */
+  input { 
     overflow: visible;
   }
 
   button,
-  select { /* 1 */
+  select { 
     text-transform: none;
   }
 
@@ -154,12 +134,12 @@ const Normalize = createGlobalStyle`
   }
 
   legend {
-    box-sizing: border-box; /* 1 */
-    color: inherit; /* 2 */
-    display: table; /* 1 */
-    max-width: 100%; /* 1 */
-    padding: 0; /* 3 */
-    white-space: normal; /* 1 */
+    box-sizing: border-box; 
+    color: inherit; 
+    display: table; 
+    max-width: 100%; 
+    padding: 0; 
+    white-space: normal; 
   }
 
   progress {
@@ -172,8 +152,8 @@ const Normalize = createGlobalStyle`
 
   [type="checkbox"],
   [type="radio"] {
-    box-sizing: border-box; /* 1 */
-    padding: 0; /* 2 */
+    box-sizing: border-box; 
+    padding: 0; 
   }
 
   [type="number"]::-webkit-inner-spin-button,
@@ -182,8 +162,8 @@ const Normalize = createGlobalStyle`
   }
 
   [type="search"] {
-    -webkit-appearance: textfield; /* 1 */
-    outline-offset: -2px; /* 2 */
+    -webkit-appearance: textfield; 
+    outline-offset: -2px; 
   }
 
   [type="search"]::-webkit-search-decoration {
@@ -191,12 +171,9 @@ const Normalize = createGlobalStyle`
   }
 
   ::-webkit-file-upload-button {
-    -webkit-appearance: button; /* 1 */
-    font: inherit; /* 2 */
+    -webkit-appearance: button; 
+    font: inherit; 
   }
-
-  /* Interactive
-    ========================================================================== */
 
   details {
     display: block;
@@ -205,9 +182,6 @@ const Normalize = createGlobalStyle`
   summary {
     display: list-item;
   }
-
-  /* Misc
-    ========================================================================== */
 
   template {
     display: none;
