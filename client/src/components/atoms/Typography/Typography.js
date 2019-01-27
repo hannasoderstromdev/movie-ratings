@@ -27,3 +27,9 @@ export const TextDark = styled.span`
   font-size: 1.2rem;
   color: ${({ theme }) => theme.colors.textSecondary};
 `
+
+export const TextPrimary = styled.span`
+  font-family: ${({ theme }) => theme.fonts.primary};
+  font-size: 1.2rem;
+  color: ${({ theme }) => theme.colors.primary};
+`
