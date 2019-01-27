@@ -81,7 +81,11 @@ class Modal extends Component {
                   <Icon icon={['fas', 'times']} />
                 </Button>
               </TopRight>
-              <MovieFull movieId={item.content.movieId} />
+              <MovieFull
+                movieId={item.content.movieId}
+                onClose={this.onClose}
+                showDelete
+              />
             </ModalBox>
           </ModalWrapper>
         )
@@ -103,6 +107,7 @@ Modal.propTypes = {
     onClose: PropTypes.func,
     content: PropTypes.shape({
       text: PropTypes.string,
+      movieId: PropTypes.string,
     }),
   }).isRequired,
   onClose: PropTypes.func.isRequired,
