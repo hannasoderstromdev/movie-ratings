@@ -55,10 +55,6 @@ const Option = styled.div`
 `
 
 class FilterByRating extends Component {
-  state = {
-    isOpen: false,
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -95,10 +91,11 @@ class FilterByRating extends Component {
   }
 
   render() {
-    const { filterBy } = this.props
+    const { filterByRating } = this.props
     return (
       <Wrapper>
         <Selected
+          data-testid="selected"
           onBlur={this.closeDropdown}
           onClick={this.toggleOpen}
           onFocus={this.setFocus}
@@ -112,9 +109,10 @@ class FilterByRating extends Component {
           )}
         </Selected>
         {this.state.isOpen && (
-          <Dropdown>
+          <Dropdown data-testid="dropdown">
             <Option
-              onClick={() => filterBy('none')}
+              data-testid="filter-none"
+              onClick={() => filterByRating('none')}
               onFocus={this.openDropdown}
             >
               <TextPrimary>Show all ratings</TextPrimary>
@@ -122,19 +120,36 @@ class FilterByRating extends Component {
             <Center>
               <TextDark>- or -</TextDark>
             </Center>
-            <Option onClick={() => filterBy('1')} onFocus={this.openDropdown}>
+            <Option
+              data-testid="filter-one"
+              onClick={() => filterByRating('1')}
+              onFocus={this.openDropdown}
+            >
               <Rating rating={1} small />
             </Option>
-            <Option onClick={() => filterBy('2')} onFocus={this.openDropdown}>
+            <Option
+              data-testid="filter-two"
+              onClick={() => filterByRating('2')}
+              onFocus={this.openDropdown}
+            >
               <Rating rating={2} small />
             </Option>
-            <Option onClick={() => filterBy('3')} onFocus={this.openDropdown}>
+            <Option
+              onClick={() => filterByRating('3')}
+              onFocus={this.openDropdown}
+            >
               <Rating rating={3} small />
             </Option>
-            <Option onClick={() => filterBy('4')} onFocus={this.openDropdown}>
+            <Option
+              onClick={() => filterByRating('4')}
+              onFocus={this.openDropdown}
+            >
               <Rating rating={4} small />
             </Option>
-            <Option onClick={() => filterBy('5')} onFocus={this.openDropdown}>
+            <Option
+              onClick={() => filterByRating('5')}
+              onFocus={this.openDropdown}
+            >
               <Rating rating={5} small />
             </Option>
           </Dropdown>
@@ -145,7 +160,7 @@ class FilterByRating extends Component {
 }
 
 FilterByRating.propTypes = {
-  filterBy: PropTypes.func.isRequired,
+  filterByRating: PropTypes.func.isRequired,
 }
 
 export default FilterByRating
