@@ -124,6 +124,14 @@ export default (state = initialState, action) => {
         movies: state.movies.filter(movie => movie.id !== action.payload.id),
       }
 
+    case moviesTypes.FIND_MOVIE_BY_TITLE_SUCCESS:
+      return {
+        ...state,
+        error: false,
+        loading: false,
+        movies: action.payload.movie,
+      }
+
     default:
       return state
   }
