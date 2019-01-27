@@ -32,7 +32,7 @@ const ErrorMessage = ({ renderIcon, children }) => (
 
 ErrorMessage.propTypes = {
   children: PropTypes.node.isRequired,
-  renderIcon: PropTypes.string.isRequired,
+  renderIcon: PropTypes.node.isRequired,
 }
 
 export default ErrorMessage
