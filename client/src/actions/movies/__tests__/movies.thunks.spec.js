@@ -58,13 +58,14 @@ describe('Actions/Movies/Thunks', () => {
         },
         body: { message: 'Movie added successfully' },
       })
-      await store.dispatch(moviesThunks.createMovie())
+      const movie = {}
+      await store.dispatch(moviesThunks.createMovie(movie))
       const actions = store.getActions()
       const expected = [
         { type: 'CREATE_MOVIE' },
         {
           payload: {
-            movie: { message: 'Movie added successfully' },
+            movie,
           },
           type: 'CREATE_MOVIE_SUCCESS',
         },
