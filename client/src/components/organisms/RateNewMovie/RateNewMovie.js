@@ -69,7 +69,7 @@ class RateNewMovie extends Component {
 
     if (loading) return <Spinner />
 
-    return movie ? (
+    return movie && movie.title ? (
       <div>
         <SearchResult>
           <TextDark>Search result</TextDark>
