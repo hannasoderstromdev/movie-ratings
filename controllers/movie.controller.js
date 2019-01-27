@@ -1,3 +1,5 @@
+const { body, param } = require('express-validator/check')
+
 const movieModel = require('../models/Movie')
 
 function filterValidMovieProps(props) {
@@ -82,59 +84,10 @@ module.exports = {
     console.log('getAll')
 
     try {
-      const moviesList = []
-
       const movies = await movieModel.find({})
 
-      for (const {
-        _id,
-        actors,
-        awards,
-        country,
-        director,
-        genre,
-        imdbID,
-        imdbRating,
-        imdbVotes,
-        language,
-        metascore,
-        plot,
-        poster,
-        production,
-        rating,
-        ratings,
-        released,
-        runtime,
-        title,
-        website,
-        writer,
-        year,
-      } of movies) {
-        moviesList.push({
-          id: _id,
-          actors,
-          awards,
-          country,
-          director,
-          genre,
-          imdbID,
-          imdbRating,
-          imdbVotes,
-          language,
-          metascore,
-          plot,
-          poster,
-          production,
-          rating,
-          ratings,
-          released,
-          runtime,
-          title,
-          website,
-          writer,
-          year,
-        })
-      }
+      const moviesList = addIdToMovies(movies)
+
       if (moviesList.length === 0) {
         res.status(204).json({
           status: 'success',
@@ -210,7 +163,6 @@ module.exports = {
       const result = await movieModel.create({
         ...filterValidMovieProps(req.body),
       })
-      console.log('result', result)
 
       res.json({
         status: 'success',
@@ -218,7 +170,6 @@ module.exports = {
         data: { id: result._id },
       })
     } catch (error) {
-      console.log(error)
       next(error)
     }
   },
@@ -251,12 +202,10 @@ module.exports = {
         .limit(parseInt(req.params.amount, 10))
         .exec()
 
-      const moviesWithId = addIdToMovies(result)
-
       res.json({
         status: 'success',
         message: 'Found recent movies',
-        data: moviesWithId,
+        data: addIdToMovies(result),
       })
     } catch (error) {
       next(error)
@@ -269,21 +218,132 @@ module.exports = {
       const result = await movieModel
         .find({
           $text: {
-            $search: `\"${req.params.title.toLowerCase()}\"`,
+            $search: `\"${req.params.title}\"`,
           },
         })
         .exec()
 
-      const movieWithId = addIdToMovies(result)
-
       res.json({
         status: 'success',
         message: 'Found matching movie',
-        data: movieWithId,
+        data: addIdToMovies(result),
       })
     } catch (error) {
       console.error(error)
       next(error)
+    }
+  },
+
+  // TODO: not confirmed working
+  findByRating: async (req, res, next) => {
+    console.log('findByRating')
+    try {
+      const result = await movieModel
+        .find({
+          rating: req.params.rating,
+        })
+        .exec()
+
+      res.json({
+        status: 'success',
+        message: 'Found matching movies',
+        data: addIdToMovies(result),
+      })
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  validate: method => {
+    switch (method) {
+      case 'findByTitle':
+        return [
+          body('title', 'title does not exists').exists(),
+          body('title', 'Invalid title').isString(),
+        ]
+
+      case 'create':
+        return [
+          body('title', 'title must be a String')
+            .exists()
+            .isString(),
+          body('year', 'year must be a String')
+            .exists()
+            .isString(),
+          body('released', 'released must be a String')
+            .exists()
+            .isString(),
+          body('runtime', 'runtime must be a String')
+            .exists()
+            .isString(),
+          body('genre', 'genre must be a String')
+            .exists()
+            .isString(),
+          body('director', 'director must be a String')
+            .exists()
+            .isString(),
+          body('writer', 'writer must be a String')
+            .exists()
+            .isString(),
+          body('actors', 'actors must be a String')
+            .exists()
+            .isString(),
+          body('plot', 'plot must be a String')
+            .exists()
+            .isString(),
+          body('language', 'language must be a String')
+            .exists()
+            .isString(),
+          body('country', 'country must be a String')
+            .exists()
+            .isString(),
+          body('awards', 'awards must be a String')
+            .exists()
+            .isString(),
+          body('poster', 'poster must be a String')
+            .exists()
+            .isString(),
+          body('ratings', 'ratings must be included').exists(),
+          body('metascore', 'metascore must be a String')
+            .exists()
+            .isString(),
+          body('imdbRating', 'imdbRating must be a String')
+            .exists()
+            .isString(),
+          body('imdbID', 'imdbID must be a String')
+            .exists()
+            .isString(),
+          body('production', 'production must be a String')
+            .exists()
+            .isString(),
+          body('website', 'website must be a String')
+            .optional()
+            .isString(),
+          body('rating', 'rating must be an Integer')
+            .optional()
+            .isInt(),
+        ]
+
+      case 'getById':
+        return [
+          param('movieId', 'movieId must be a number')
+            .exists()
+            .isInt(),
+        ]
+
+      case 'updateById':
+        return [
+          param('movieId', 'movieId must be a number')
+            .exists()
+            .isInt(),
+        ]
+
+      case 'deleteById':
+        return [
+          param('movieId', 'movieId must be a number')
+            .exists()
+            .isInt(),
+        ]
     }
   },
 }
