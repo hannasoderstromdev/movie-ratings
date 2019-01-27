@@ -80,7 +80,7 @@ class RateNewMovie extends Component {
           </MessageWithMargins>
         )}
         <MarginTop>
-          <MovieFull movie={movie} showDelete={false} />
+          <MovieFull {...movie} />
         </MarginTop>
         <RateWrapper>
           {!movie.inLibrary && (
