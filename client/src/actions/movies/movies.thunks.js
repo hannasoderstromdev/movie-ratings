@@ -36,8 +36,8 @@ const createMovie = movie => async dispatch => {
   dispatch(moviesActions.createMovie())
 
   try {
-    const createdMovie = await moviesService.create(movie)
-    dispatch(moviesActions.createMovieSuccess(createdMovie))
+    await moviesService.create(movie) // will throw error if it fails
+    dispatch(moviesActions.createMovieSuccess(movie))
   } catch (error) {
     dispatch(moviesActions.createMovieFailure())
     dispatch(
