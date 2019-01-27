@@ -33,6 +33,7 @@ describe('Content', () => {
         profile: null,
         error: false,
       },
+      modals: [],
     }
   })
 
