@@ -91,11 +91,9 @@ const deleteMovie = id => async dispatch => {
   }
 }
 
-// TODO:
 const findMovieByTitle = title => async dispatch => {
   dispatch(moviesActions.findByTitle())
   try {
-    // find movie by title
     const { data } = await moviesService.findByTitle(title)
     dispatch(moviesActions.findByTitleSuccess(data))
   } catch (error) {
@@ -110,6 +108,23 @@ const findMovieByTitle = title => async dispatch => {
   }
 }
 
+const filterByRating = rating => async dispatch => {
+  dispatch(moviesActions.filterByRating())
+  try {
+    const { data } = await moviesService.filterByRating(rating)
+    dispatch(moviesActions.filterByRatingSuccess(data))
+  } catch (error) {
+    dispatch(
+      errorHandlerActions.setError({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
+    dispatch(moviesActions.filterByRatingsFailure())
+  }
+}
+
 const moviesThunks = {
   getAllMovies,
   getLatestMovies,
@@ -117,6 +132,7 @@ const moviesThunks = {
   updateMovie,
   deleteMovie,
   findMovieByTitle,
+  filterByRating,
 }
 
 export default moviesThunks
