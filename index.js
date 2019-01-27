@@ -1,6 +1,7 @@
 const express = require('express')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
+const expressValidator = require('express-validator')
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 
@@ -14,7 +15,7 @@ const app = express()
 app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }))
-
+app.use(expressValidator())
 /**
  * Connect to MongoDB
  */
@@ -68,14 +69,9 @@ app.use(function(err, req, res, next) {
  * Utilities
  */
 function validateUser(req, res, next) {
-  jwt.verify(req.headers['x-access-token'], keys.JWT_SECRET, function(
-    err,
-    decoded,
-  ) {
+  jwt.verify(req.headers['x-access-token'], keys.JWT_SECRET, function(err, decoded) {
     if (err) {
-      res
-        .status(403)
-        .json({ status: 'error', message: err.message, data: null })
+      res.status(403).json({ status: 'error', message: err.message, data: null })
     } else {
       req.body.userId = decoded.id
       next()
