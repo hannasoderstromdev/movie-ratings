@@ -27,7 +27,6 @@ const PosterImg = styled.img`
 class MovieFull extends React.Component {
   state = {
     detailsOpen: false,
-    showDelete: false,
   }
 
   toggleDetails = () =>
@@ -60,9 +59,8 @@ class MovieFull extends React.Component {
       ratings,
       released,
       writer,
+      showDelete,
     } = this.props
-
-    const { showDelete } = this.state
 
     return (
       <FullMovie data-testid="full-movie">
@@ -101,6 +99,7 @@ class MovieFull extends React.Component {
 
 MovieFull.defaultProps = {
   rating: 0,
+  showDelete: false,
 }
 
 MovieFull.propTypes = {
@@ -118,6 +117,7 @@ MovieFull.propTypes = {
   ratings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   released: PropTypes.string.isRequired,
   runtime: PropTypes.string.isRequired,
+  showDelete: PropTypes.bool,
   title: PropTypes.string.isRequired,
   updateMovie: PropTypes.func.isRequired,
   writer: PropTypes.string.isRequired,
@@ -125,7 +125,7 @@ MovieFull.propTypes = {
 }
 
 const mapStateToProps = ({ movies }, { movieId }) => {
-  const movieFound = movies.movies.find(movie => movie.id === movieId)
+  const movieFound = movies.movies[movieId]
   if (movieFound) {
     return {
       ...movieFound,
