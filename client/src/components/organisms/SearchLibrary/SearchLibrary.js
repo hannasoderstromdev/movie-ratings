@@ -59,7 +59,14 @@ class SearchLibrary extends React.Component {
 
   doOnSubmit = e => {
     e.preventDefault()
-    this.props.findMovieByTitle(this.state.title)
+    const { title } = this.state
+    const { findMovieByTitle, getAllMovies } = this.props
+
+    if (title.length) {
+      findMovieByTitle(title)
+    } else {
+      getAllMovies()
+    }
   }
 
   render() {
@@ -85,6 +92,7 @@ SearchLibrary.defaultProps = {}
 
 SearchLibrary.propTypes = {
   findMovieByTitle: PropTypes.func.isRequired,
+  getAllMovies: PropTypes.func.isRequired,
   movies: PropTypes.shape({
     movies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   }).isRequired,
@@ -96,6 +104,7 @@ const mapStateToProps = ({ movies }) => ({
 
 const mapDispatchToProps = {
   findMovieByTitle: moviesThunks.findMovieByTitle,
+  getAllMovies: moviesThunks.getAllMovies,
 }
 
 export default connect(
