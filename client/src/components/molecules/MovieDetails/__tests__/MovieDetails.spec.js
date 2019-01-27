@@ -1,12 +1,16 @@
 import React from 'react'
-import { render, fireEvent, cleanup } from 'react-testing-library'
+import { render, fireEvent } from 'react-testing-library'
+
+import { store } from 'helpers/store'
 
 import MovieDetails from '../MovieDetails'
+import Root from 'components/Root'
 import Theme from 'components/Theme'
 
 describe('Components/Molecules/MovieDetails', () => {
   let toggle
   let props
+  let utils
 
   beforeEach(() => {
     toggle = jest.fn()
@@ -27,37 +31,33 @@ describe('Components/Molecules/MovieDetails', () => {
       toggle,
       writer: 'Someone Else',
     }
+    utils = render(
+      <Root store={store}>
+        <Theme>
+          <MovieDetails {...props} />
+        </Theme>
+      </Root>,
+    )
   })
 
-  afterEach(cleanup)
-
   it('renders', () => {
-    const { getByText } = render(
-      <Theme>
-        <MovieDetails {...props} />
-      </Theme>,
-    )
-    expect(getByText(props.actors)).toBeDefined()
-    expect(getByText(props.plot)).toBeDefined()
+    expect(utils.getByText(props.actors)).toBeDefined()
+    expect(utils.getByText(props.plot)).toBeDefined()
     expect(
-      getByText(`${props.released}, ${props.country} (${props.language})`),
+      utils.getByText(
+        `${props.released}, ${props.country} (${props.language})`,
+      ),
     ).toBeDefined()
-    expect(getByText(props.director)).toBeDefined()
-    expect(getByText(props.production)).toBeDefined()
-    expect(getByText(props.writer)).toBeDefined()
-    expect(getByText(props.ratings[0].Value)).toBeDefined()
-    expect(getByText(props.ratings[1].Value)).toBeDefined()
-    expect(getByText(props.ratings[2].Value)).toBeDefined()
+    expect(utils.getByText(props.director)).toBeDefined()
+    expect(utils.getByText(props.production)).toBeDefined()
+    expect(utils.getByText(props.writer)).toBeDefined()
+    expect(utils.getByText(props.ratings[0].Value)).toBeDefined()
+    expect(utils.getByText(props.ratings[1].Value)).toBeDefined()
+    expect(utils.getByText(props.ratings[2].Value)).toBeDefined()
   })
 
   it('toggles', () => {
-    const { getByTestId } = render(
-      <Theme>
-        <MovieDetails {...props} />
-      </Theme>,
-    )
-
-    fireEvent.click(getByTestId('thirdiary-button'))
+    fireEvent.click(utils.getByTestId('thirdiary-button'))
     expect(toggle).toHaveBeenCalledTimes(1)
   })
 })
