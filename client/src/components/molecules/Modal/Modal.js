@@ -64,9 +64,7 @@ class Modal extends Component {
               <div>{item.content.text}</div>
               <div>
                 <Button onClick={this.onConfirm}>Confirm</Button>
-                <Button onClick={this.onClose}>
-                  <Icon icon={['fas', 'times']} iconsize="2.5rem" />
-                </Button>
+                <Button onClick={this.onClose}>Close</Button>
               </div>
             </ModalBox>
           </ModalWrapper>
