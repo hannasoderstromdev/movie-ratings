@@ -25,9 +25,12 @@ Modals.propTypes = {
   modals: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
       content: PropTypes.shape({
         text: PropTypes.string,
+        movieId: PropTypes.string,
       }),
+      onClose: PropTypes.func,
       onConfirm: PropTypes.func,
     }),
   ).isRequired,
