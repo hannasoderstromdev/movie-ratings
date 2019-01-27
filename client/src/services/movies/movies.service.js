@@ -37,6 +37,12 @@ const findByTitle = async title => {
   return await handleResponse(response)
 }
 
+const filterByRating = async rating => {
+  const options = await headers('GET::AUTH')
+  const response = await fetch(`/movies/rating/${rating}`, options)
+  return await handleResponse(response)
+}
+
 const moviesService = {
   getAll,
   getLatest,
@@ -44,6 +50,7 @@ const moviesService = {
   update,
   deleteById,
   findByTitle,
+  filterByRating,
 }
 
 export default moviesService
