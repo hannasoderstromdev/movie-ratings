@@ -82,7 +82,7 @@ const MovieSchema = new Schema({
   },
 })
 
-MovieSchema.index({ title: 'text' })
+MovieSchema.index({ title: 'text' }, { default_language: 'en', language_override: 'en' })
 
 const Movie = mongoose.model('Movie', MovieSchema)
 
