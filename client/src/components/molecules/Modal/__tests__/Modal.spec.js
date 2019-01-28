@@ -46,6 +46,7 @@ describe('Components/Molecules/Modal', () => {
       content: {
         text: 'Do you confirm?',
       },
+      onConfirm: jest.fn(),
     }
     props = {
       item,
