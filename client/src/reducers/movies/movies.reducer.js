@@ -65,7 +65,7 @@ export default (state = initialState, action) => {
         ...state,
         error: false,
         loading: false,
-        movies: state.movies.push(action.payload.movie),
+        movies: [...state.movies, action.payload.movie],
       }
 
     case moviesTypes.CREATE_MOVIE_FAILURE:
@@ -122,6 +122,20 @@ export default (state = initialState, action) => {
         error: false,
         loading: false,
         movies: state.movies.filter(movie => movie.id !== action.payload.id),
+      }
+
+    case moviesTypes.FIND_MOVIE_BY_TITLE:
+      return {
+        ...state,
+        error: false,
+        loading: true,
+      }
+
+    case moviesTypes.FIND_MOVIE_BY_TITLE_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false,
       }
 
     case moviesTypes.FIND_MOVIE_BY_TITLE_SUCCESS:
