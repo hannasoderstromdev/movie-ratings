@@ -43,10 +43,13 @@ const Center = styled.div`
   font-style: italic;
 `
 
-const Option = styled.div`
+const Option = styled.button`
   background-color: ${({ theme }) => theme.colors.dark};
   padding: 0 1.5rem;
   margin: 2px 0;
+  border: none;
+  display: block;
+  width: 100%;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.alertDark};
