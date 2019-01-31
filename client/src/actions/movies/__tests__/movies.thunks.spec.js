@@ -192,7 +192,7 @@ describe('Actions/Movies/Thunks', () => {
       const actions = store.getActions()
       const expected = [
         { type: 'FILTER_BY_RATING' },
-        { payload: { movie: [{}] }, type: 'FILTER_BY_RATING_SUCCESS' },
+        { payload: { movies: [{}] }, type: 'FILTER_BY_RATING_SUCCESS' },
       ]
 
       expect(actions).toEqual(expected)
