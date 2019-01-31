@@ -143,7 +143,29 @@ export default (state = initialState, action) => {
         ...state,
         error: false,
         loading: false,
-        movies: action.payload.movie,
+        movies: [action.payload.movie],
+      }
+
+    case moviesTypes.FILTER_BY_RATING:
+      return {
+        ...state,
+        error: false,
+        loading: true,
+      }
+
+    case moviesTypes.FILTER_BY_RATING_FAILURE:
+      return {
+        ...state,
+        error: true,
+        loading: false,
+      }
+
+    case moviesTypes.FILTER_BY_RATING_SUCCESS:
+      return {
+        ...state,
+        error: false,
+        loading: false,
+        movies: action.payload.movies,
       }
 
     default:
