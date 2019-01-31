@@ -98,7 +98,7 @@ class Library extends React.Component {
               movies={movies.movies}
             />
           ) : (
-            <NoRatingsYet>No ratings added yet</NoRatingsYet>
+            <NoRatingsYet>Nothing found</NoRatingsYet>
           )}
         </Main>
       </Page>
