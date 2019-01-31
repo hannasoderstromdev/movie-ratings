@@ -179,4 +179,58 @@ describe('Reducers/Movies', () => {
       expect(reducer(initialState, action)).toEqual(expectedState)
     })
   })
+
+  describe('findByTitle', () => {
+    it(`handles ${moviesTypes.FIND_MOVIE_BY_TITLE}`, () => {
+      const action = {
+        type: moviesTypes.FIND_MOVIE_BY_TITLE,
+      }
+      const expectedState = { error: false, loading: true, movies: [] }
+      expect(reducer(initialState, action)).toEqual(expectedState)
+    })
+    it(`handles ${moviesTypes.FIND_MOVIE_BY_TITLE_FAILURE}`, () => {
+      const action = {
+        type: moviesTypes.FIND_MOVIE_BY_TITLE_FAILURE,
+      }
+      const expectedState = { error: true, loading: false, movies: [] }
+      expect(reducer(initialState, action)).toEqual(expectedState)
+    })
+    it(`handles ${moviesTypes.FIND_MOVIE_BY_TITLE_SUCCESS}`, () => {
+      const movie = {}
+      const action = {
+        type: moviesTypes.FIND_MOVIE_BY_TITLE_SUCCESS,
+        payload: { movie },
+      }
+      const expectedState = { error: false, loading: false, movies: [movie] }
+      expect(reducer(initialState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('filterByRating', () => {
+    it(`handles ${moviesTypes.FILTER_BY_RATING}`, () => {
+      const action = {
+        type: moviesTypes.FILTER_BY_RATING,
+      }
+      const expectedState = { error: false, loading: true, movies: [] }
+      expect(reducer(initialState, action)).toEqual(expectedState)
+    })
+
+    it(`handles ${moviesTypes.FILTER_BY_RATING_FAILURE}`, () => {
+      const action = {
+        type: moviesTypes.FILTER_BY_RATING_FAILURE,
+      }
+      const expectedState = { error: true, loading: false, movies: [] }
+      expect(reducer(initialState, action)).toEqual(expectedState)
+    })
+
+    it(`handles ${moviesTypes.FILTER_BY_RATING_SUCCESS}`, () => {
+      const movies = [{}]
+      const action = {
+        type: moviesTypes.FILTER_BY_RATING_SUCCESS,
+        payload: { movies },
+      }
+      const expectedState = { error: false, loading: false, movies }
+      expect(reducer(initialState, action)).toEqual(expectedState)
+    })
+  })
 })
