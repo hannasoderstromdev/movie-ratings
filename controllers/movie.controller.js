@@ -235,7 +235,7 @@ module.exports = {
   },
 
   // TODO: not confirmed working
-  findByRating: async (req, res, next) => {
+  getByRating: async (req, res, next) => {
     console.log('findByRating')
     try {
       const result = await movieModel
