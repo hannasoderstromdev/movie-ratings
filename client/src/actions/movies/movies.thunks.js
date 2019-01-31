@@ -121,7 +121,7 @@ const filterByRating = rating => async dispatch => {
         message: error.message,
       }),
     )
-    dispatch(moviesActions.filterByRatingsFailure())
+    dispatch(moviesActions.filterByRatingFailure())
   }
 }
 
