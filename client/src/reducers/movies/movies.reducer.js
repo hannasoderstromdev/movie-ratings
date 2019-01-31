@@ -143,7 +143,7 @@ export default (state = initialState, action) => {
         ...state,
         error: false,
         loading: false,
-        movies: [action.payload.movie],
+        movies: action.payload.movie,
       }
 
     case moviesTypes.FILTER_BY_RATING:
