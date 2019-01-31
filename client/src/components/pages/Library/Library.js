@@ -53,8 +53,16 @@ class Library extends React.Component {
     await this.props.getLatestMovies()
   }
 
+  onFilterByRating = rating => {
+    if (rating === 'none') {
+      this.props.getLatestMovies()
+    } else {
+      this.props.filterByRating(rating)
+    }
+  }
+
   render() {
-    const { movies, filterByRating } = this.props
+    const { movies } = this.props
     const { listStyle } = this.state
 
     return movies.loading ? (
@@ -66,7 +74,7 @@ class Library extends React.Component {
         <Main>
           <TopWrapper>
             <H1>Library</H1>
-            <FilterByRating filterByRating={filterByRating} />
+            <FilterByRating filterByRating={this.onFilterByRating} />
             <ButtonWrapper>
               <Button onClick={this.setStyleRows} thirdiary>
                 <Icon
