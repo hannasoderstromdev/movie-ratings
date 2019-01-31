@@ -9,6 +9,8 @@ router.get('/title/:title', movieController.validate('findByTitle'), movieContro
 
 router.get('/latest/:amount', movieController.getLatest)
 
+router.get('/rating/:rating', movieController.getByRating)
+
 router.post('/create', movieController.validate('create'), movieController.create)
 
 router.get('/:movieId(d+)', movieController.validate('getById'), movieController.getById)
