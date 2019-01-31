@@ -89,9 +89,9 @@ const filterByRating = () => ({
   type: moviesTypes.FILTER_BY_RATING,
 })
 
-const filterByRatingSuccess = movie => ({
+const filterByRatingSuccess = movies => ({
   type: moviesTypes.FILTER_BY_RATING_SUCCESS,
-  payload: { movie },
+  payload: { movies },
 })
 
 const filterByRatingFailure = () => ({
