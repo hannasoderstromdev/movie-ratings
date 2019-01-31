@@ -196,12 +196,12 @@ describe('Reducers/Movies', () => {
       expect(reducer(initialState, action)).toEqual(expectedState)
     })
     it(`handles ${moviesTypes.FIND_MOVIE_BY_TITLE_SUCCESS}`, () => {
-      const movie = {}
+      const movie = [{}]
       const action = {
         type: moviesTypes.FIND_MOVIE_BY_TITLE_SUCCESS,
         payload: { movie },
       }
-      const expectedState = { error: false, loading: false, movies: [movie] }
+      const expectedState = { error: false, loading: false, movies: movie }
       expect(reducer(initialState, action)).toEqual(expectedState)
     })
   })
