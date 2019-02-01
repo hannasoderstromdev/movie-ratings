@@ -2,9 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Star from '../Star'
 import Button from 'components/atoms/Button'
+import Star from 'components/atoms/Star'
 import Icon from 'components/atoms/Icon'
+
+const StarButton = styled.button`
+  border: none;
+  padding: 0;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: ${({ small }) => (small ? '1.75rem' : '2.5rem')};
+`
 
 const RatingStyle = styled.div`
   display: flex;
@@ -72,32 +81,41 @@ class Rating extends React.Component {
 
     const starsToRender = []
     for (let i = 0; i < stars; i++) {
-      starsToRender.push(
-        <Star
-          isSelected
-          key={i + 1}
-          onBlur={this.onMouseOut}
-          onClick={() => this.onClickStar(i + 1)}
-          onFocus={() => this.onMouseOver(i + 1)}
-          onMouseOut={this.onMouseOut}
-          onMouseOver={() => this.onMouseOver(i + 1)}
-          small={small}
-        />,
-      )
+      if (setRating) {
+        starsToRender.push(
+          <StarButton
+            key={i + 1}
+            onBlur={this.onMouseOut}
+            onClick={() => this.onClickStar(i + 1)}
+            onFocus={() => this.onMouseOver(i + 1)}
+            onMouseOut={this.onMouseOut}
+            onMouseOver={() => this.onMouseOver(i + 1)}
+          >
+            <Star isSelected small={small} />
+          </StarButton>,
+        )
+      } else {
+        starsToRender.push(<Star isSelected key={i + 1} small={small} />)
+      }
     }
 
     for (let i = 0; i < 5 - stars; i++) {
-      starsToRender.push(
-        <Star
-          key={stars + 1 + i}
-          onBlur={this.onMouseOut}
-          onClick={() => this.onClickStar(stars + i + 1)}
-          onFocus={() => this.onMouseOver(stars + 1 + i)}
-          onMouseOut={this.onMouseOut}
-          onMouseOver={() => this.onMouseOver(stars + 1 + i)}
-          small={small}
-        />,
-      )
+      if (setRating) {
+        starsToRender.push(
+          <StarButton
+            key={stars + 1 + i}
+            onBlur={this.onMouseOut}
+            onClick={() => this.onClickStar(stars + i + 1)}
+            onFocus={() => this.onMouseOver(stars + 1 + i)}
+            onMouseOut={this.onMouseOut}
+            onMouseOver={() => this.onMouseOver(stars + 1 + i)}
+          >
+            <Star small={small} />
+          </StarButton>,
+        )
+      } else {
+        starsToRender.push(<Star key={stars + 1 + i} small={small} />)
+      }
     }
 
     return (
