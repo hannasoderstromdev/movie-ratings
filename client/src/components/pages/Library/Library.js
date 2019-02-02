@@ -14,6 +14,7 @@ import Icon from 'components/atoms/Icon'
 
 import MoviesList from 'components/molecules/MoviesList'
 import FilterByRating from 'components/molecules/FilterByRating'
+import Pagination from 'components/molecules/Pagination'
 
 import Page from 'components/templates/Page'
 import Main from 'components/templates/Main'
@@ -93,10 +94,13 @@ class Library extends React.Component {
             </ButtonWrapper>
           </TopWrapper>
           {movies && movies.movies && movies.movies.length ? (
-            <MoviesList
-              listStyle={this.state.listStyle}
-              movies={movies.movies}
-            />
+            <>
+              <MoviesList
+                listStyle={this.state.listStyle}
+                movies={movies.movies}
+              />
+              <Pagination itemsTotal={100} pageLimit={10} pageNeighbors={1} />
+            </>
           ) : (
             <NoRatingsYet>Nothing found</NoRatingsYet>
           )}
