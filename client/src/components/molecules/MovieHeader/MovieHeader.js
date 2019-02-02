@@ -11,13 +11,14 @@ import Rating from 'components/molecules/Rating'
 const Wrapper = styled.header`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   align-items: start;
 `
 
 const Meta = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
 `
 
 const YearRuntime = styled(Text)``
