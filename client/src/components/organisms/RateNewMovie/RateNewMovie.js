@@ -107,33 +107,35 @@ class RateNewMovie extends Component {
   }
 }
 
+RateNewMovie.defaultProps = {
+  movie: null,
+}
+
 RateNewMovie.propTypes = {
   loading: PropTypes.bool.isRequired,
-  movie: PropTypes.oneOf([
-    PropTypes.null,
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      actors: PropTypes.string.isRequired,
-      awards: PropTypes.string.isRequired,
-      country: PropTypes.string.isRequired,
-      director: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      imdbID: PropTypes.string.isRequired,
-      imdbRating: PropTypes.string.isRequired,
-      language: PropTypes.string.isRequired,
-      metascore: PropTypes.string.isRequired,
-      plot: PropTypes.string.isRequired,
-      poster: PropTypes.string.isRequired,
-      production: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      released: PropTypes.number.isRequired,
-      runtime: PropTypes.number.isRequired,
-      title: PropTypes.number.isRequired,
-      website: PropTypes.number.isRequired,
-      writer: PropTypes.number.isRequired,
-      year: PropTypes.number.isRequired,
-    }),
-  ]).isRequired,
+  movie: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    actors: PropTypes.string.isRequired,
+    awards: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    imdbID: PropTypes.string.isRequired,
+    imdbRating: PropTypes.string.isRequired,
+    language: PropTypes.string.isRequired,
+    metascore: PropTypes.string.isRequired,
+    plot: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    production: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    ratings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    released: PropTypes.string.isRequired,
+    runtime: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    website: PropTypes.string.isRequired,
+    writer: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired,
+  }),
 }
 
 const mapStateToProps = ({ search }) => ({
