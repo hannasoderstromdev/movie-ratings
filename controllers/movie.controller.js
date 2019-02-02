@@ -64,7 +64,6 @@ module.exports = {
    * Get Movie By ID
    */
   getById: async (req, res, next) => {
-    console.log('getById')
     try {
       const movieInfo = await movieModel.findById(req.params.movieId)
       res.json({
@@ -81,14 +80,16 @@ module.exports = {
    * Get all Movies
    */
   getAll: async (req, res, next) => {
-    console.log('getAll')
-
     try {
-      const movies = await movieModel.find({})
+      const { limit, page } = req.query
 
-      const moviesList = addIdToMovies(movies)
+      const movies = await movieModel
+        .find({})
+        .skip(limit * (page - 1))
+        .limit(parseInt(limit, 10))
+      const numberOfItems = await movieModel.count()
 
-      if (moviesList.length === 0) {
+      if (movies.length === 0) {
         res.status(204).json({
           status: 'success',
           message: 'No movies available',
@@ -98,7 +99,12 @@ module.exports = {
         res.status(200).json({
           status: 'success',
           message: 'All movies',
-          data: moviesList,
+          data: {
+            movies: addIdToMovies(movies),
+            numberOfItems: numberOfItems,
+            page,
+            limit,
+          },
         })
       }
     } catch (error) {
