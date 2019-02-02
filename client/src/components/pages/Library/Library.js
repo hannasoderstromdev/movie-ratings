@@ -7,7 +7,7 @@ import { MovieType } from 'types'
 
 import moviesThunks from 'actions/movies/movies.thunks'
 
-import { H1 } from 'components/atoms/Typography'
+import { H1, TextDark } from 'components/atoms/Typography'
 import Spinner from 'components/atoms/Spinner'
 import Button from 'components/atoms/Button'
 import Icon from 'components/atoms/Icon'
@@ -51,7 +51,7 @@ class Library extends React.Component {
   setStyleTiles = () => this.setState({ listStyle: 'tiles' })
 
   async componentDidMount() {
-    await this.props.getLatestMovies()
+    await this.props.getAllMovies()
   }
 
   onFilterByRating = rating => {
@@ -74,7 +74,9 @@ class Library extends React.Component {
       <Page data-testid="library-screen">
         <Main>
           <TopWrapper>
-            <H1>Library</H1>
+            <H1>
+              Library <TextDark>({movies.numberOfItems})</TextDark>
+            </H1>
             <FilterByRating filterByRating={this.onFilterByRating} />
             <ButtonWrapper>
               <Button onClick={this.setStyleRows} thirdiary>
@@ -111,10 +113,12 @@ class Library extends React.Component {
 }
 
 Library.propTypes = {
-  // getAllMovies: PropTypes.func.isRequired,
   filterByRating: PropTypes.func.isRequired,
+  getAllMovies: PropTypes.func.isRequired,
   getLatestMovies: PropTypes.func.isRequired,
   movies: PropTypes.shape({
+    numberOfItems: PropTypes.number.isRequired,
+    limit: PropTypes.number.isRequired,
     loading: PropTypes.bool.isRequired,
     movies: PropTypes.arrayOf(PropTypes.shape(MovieType)).isRequired,
     error: PropTypes.bool,
