@@ -32,7 +32,6 @@ describe('Reducers/ErrorHandler', () => {
       type: 'danger',
       message: 'Unauthorized',
       status: 403,
-
     }
     const action = {
       type: errorHandlerTypes.CLEAR_ERROR,
