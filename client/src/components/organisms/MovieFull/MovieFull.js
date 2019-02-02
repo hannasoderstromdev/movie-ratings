@@ -69,7 +69,7 @@ class MovieFull extends React.Component {
       showDelete,
     } = this.props
 
-    return (
+    return title ? (
       <FullMovie data-testid="full-movie">
         <MovieStyle>
           <PosterImg alt={title} src={poster} />
@@ -100,7 +100,7 @@ class MovieFull extends React.Component {
           writer={writer}
         />
       </FullMovie>
-    )
+    ) : null
   }
 }
 
@@ -144,6 +144,7 @@ const mapStateToProps = ({ movies }, { movieId }) => {
       ...movieFound,
     }
   }
+  return {}
 }
 
 const mapDispatchToProps = {
