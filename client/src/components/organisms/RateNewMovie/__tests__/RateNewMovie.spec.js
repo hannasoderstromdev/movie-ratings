@@ -20,6 +20,9 @@ let state
 describe('Components/Organisms/RateNewMovie', () => {
   beforeEach(() => {
     state = {
+      movies: {
+        movies: [],
+      },
       search: {
         loading: false,
         movie: {
@@ -53,6 +56,9 @@ describe('Components/Organisms/RateNewMovie', () => {
 
   it('renders without movie', () => {
     state = {
+      movies: {
+        movies: [],
+      },
       search: {
         loading: false,
         movie: null,
