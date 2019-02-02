@@ -234,7 +234,6 @@ module.exports = {
     }
   },
 
-  // TODO: not confirmed working
   getByRating: async (req, res, next) => {
     console.log('findByRating')
     try {
@@ -247,6 +246,21 @@ module.exports = {
       res.json({
         status: 'success',
         message: 'Found matching movies',
+        data: addIdToMovies(result),
+      })
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  getRandom: async (req, res, next) => {
+    console.log('getRandom')
+    try {
+      const result = await movieModel.aggregate([{ $sample: { size: req.params.amount } }]).exec()
+
+      res.json({
+        status: 'success',
+        message: `Found ${req.params.amount} movies`,
         data: addIdToMovies(result),
       })
     } catch (error) {
