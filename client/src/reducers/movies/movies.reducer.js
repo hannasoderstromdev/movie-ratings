@@ -4,6 +4,9 @@ const initialState = {
   loading: false,
   movies: [],
   error: null,
+  numberOfItems: 0,
+  limit: 0,
+  page: 1,
 }
 
 export default (state = initialState, action) => {
@@ -22,6 +25,9 @@ export default (state = initialState, action) => {
         error: false,
         loading: false,
         movies: action.payload.movies,
+        numberOfItems: action.payload.numberOfItems,
+        limit: action.payload.limit,
+        page: action.payload.page,
       }
 
     case moviesTypes.GET_ALL_MOVIES_FAILURE:
@@ -44,6 +50,7 @@ export default (state = initialState, action) => {
         error: false,
         loading: false,
         movies: action.payload.movies,
+        numberOfItems: action.payload.movies.length,
       }
 
     case moviesTypes.GET_LATEST_MOVIES_FAILURE:
