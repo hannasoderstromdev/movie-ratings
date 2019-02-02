@@ -5,9 +5,9 @@ const getAllMovies = () => ({
   type: moviesTypes.GET_ALL_MOVIES,
 })
 
-const getAllMoviesSuccess = ({ movies }) => ({
+const getAllMoviesSuccess = ({ movies, numberOfItems, limit, page }) => ({
   type: moviesTypes.GET_ALL_MOVIES_SUCCESS,
-  payload: { movies },
+  payload: { movies, numberOfItems, limit, page },
 })
 
 const getAllMoviesFailure = () => ({
