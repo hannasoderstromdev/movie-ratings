@@ -17,10 +17,12 @@ const Wrapper = styled.div`
 
 const RatingWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
 `
 
 const MovieTile = ({ poster, rating, openFullMovie }) => (
-  <Wrapper imgUrl={poster} onClick={openFullMovie}>
+  <Wrapper data-testid="movie-tile" imgUrl={poster} onClick={openFullMovie}>
     <RatingWrapper>
       <Rating rating={rating} small useLock={false} />
     </RatingWrapper>
