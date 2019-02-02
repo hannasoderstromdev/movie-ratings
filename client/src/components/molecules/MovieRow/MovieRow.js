@@ -9,7 +9,7 @@ import expandImg from './expand.png'
 
 const Wrapper = styled.article`
   display: grid;
-  grid-template-columns: 1.8fr 5fr 1fr;
+  grid-template-columns: 1.5fr 5fr 1fr;
   align-items: start;
   grid-gap: 2rem;
 `
@@ -17,6 +17,7 @@ const Wrapper = styled.article`
 const PosterImg = styled.img`
   width: 100%;
   height: auto;
+  cursor: pointer;
 `
 
 const RightAligned = styled.div`
