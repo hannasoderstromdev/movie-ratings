@@ -13,13 +13,12 @@ describe('Components/Molecules/Pagination', () => {
       itemsTotal: 100,
       pageNeighbors: 1,
     }
-    const { debug, getByTestId } = render(
+    const { getByTestId } = render(
       <Theme>
         <Pagination {...props} />
       </Theme>,
     )
     expect(getByTestId('navigation').children[0].children.length).toEqual(7)
-    debug()
   })
 
   it('is accessible', async () => {
