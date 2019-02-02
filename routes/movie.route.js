@@ -11,6 +11,8 @@ router.get('/latest/:amount', movieController.getLatest)
 
 router.get('/rating/:rating', movieController.getByRating)
 
+router.get('/random/:amount', movieController.getRandom)
+
 router.post('/create', movieController.validate('create'), movieController.create)
 
 router.get('/:movieId(d+)', movieController.validate('getById'), movieController.getById)
