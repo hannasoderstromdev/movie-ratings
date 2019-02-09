@@ -3,17 +3,17 @@ import errorHandlerActions from 'actions/errorHandler/errorHandler.actions'
 
 import moviesService from 'services/movies/movies.service'
 
-const getAllMovies = (limit, page) => async dispatch => {
+const getAllMovies = ({ limit, page }) => async dispatch => {
   dispatch(moviesActions.getAllMovies())
 
   try {
-    const { data } = await moviesService.getAll(limit, page)
+    const { data } = await moviesService.getAll({ limit, page })
     dispatch(
       moviesActions.getAllMoviesSuccess({
         movies: data.movies,
-        numberOfItems: data.numberOfItems,
-        limit: data.limit,
-        page: data.page,
+        numberOfItems: parseInt(data.numberOfItems),
+        limit: parseInt(data.limit),
+        page: parseInt(data.page),
       }),
     )
   } catch (error) {
