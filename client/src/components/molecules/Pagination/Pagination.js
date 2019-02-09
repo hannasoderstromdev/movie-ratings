@@ -10,6 +10,8 @@ const Wrapper = styled.nav`
   ul {
     display: flex;
     list-style-type: none;
+    padding: 0;
+    justify-content: center;
   }
 
   li {
@@ -24,6 +26,7 @@ const Wrapper = styled.nav`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
 `
 
@@ -62,22 +65,18 @@ class Pagination extends React.Component {
     this.totalPages = Math.ceil(props.itemsTotal / props.pageLimit)
   }
 
-  componentDidMount() {
-    this.toPage(1)
-  }
-
   toNext = () => {
-    this.toPage(this.state.currentPage - this.props.pageNeighbors * 2 - 1)
+    this.toPage(this.props.currentPage - this.props.pageNeighbors * 2 - 1)
   }
 
   toPrev = () => {
-    this.toPage(this.state.currentPage + this.props.pageNeighbors * 2 + 1)
+    this.toPage(this.props.currentPage + this.props.pageNeighbors * 2 + 1)
   }
 
   toPage = page => {
-    const currentPage = Math.max(0, Math.min(page, this.totalPages))
-    if (page !== currentPage) {
-      this.props.onPageChange(page)
+    const validPage = Math.max(0, Math.min(page, this.totalPages))
+    if (page !== this.props.currentPage) {
+      this.props.onPageChange(validPage)
     }
   }
 
@@ -106,8 +105,10 @@ class Pagination extends React.Component {
       } else if (hasLeftSpill && hasRightSpill) {
         pages = [LEFT, ...pages, RIGHT]
       }
+
       return [1, ...pages, this.totalPages]
     }
+    return range(1, this.totalPages)
   }
 
   render() {
@@ -151,7 +152,7 @@ class Pagination extends React.Component {
                 <li key={i}>
                   <Page
                     aria-label={`go to page ${page}`}
-                    isActive={page === 1}
+                    isActive={page === currentPage}
                     onClick={() => this.toPage(page)}
                   >
                     {page}
