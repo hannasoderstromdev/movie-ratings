@@ -60,9 +60,6 @@ class Pagination extends React.Component {
   constructor(props) {
     super(props)
     this.totalPages = Math.ceil(props.itemsTotal / props.pageLimit)
-    this.state = {
-      currentPage: 1,
-    }
   }
 
   componentDidMount() {
@@ -79,12 +76,13 @@ class Pagination extends React.Component {
 
   toPage = page => {
     const currentPage = Math.max(0, Math.min(page, this.totalPages))
-    this.setState({ currentPage })
+    if (page !== currentPage) {
+      this.props.onPageChange(page)
+    }
   }
 
   fetchPageNumbers = () => {
-    const { pageNeighbors } = this.props
-    const { currentPage } = this.state
+    const { pageNeighbors, currentPage } = this.props
 
     const totalNumbers = pageNeighbors * 2 + 3
     const totalBlocks = totalNumbers + 2
@@ -113,7 +111,7 @@ class Pagination extends React.Component {
   }
 
   render() {
-    const { currentPage } = this.state
+    const { currentPage } = this.props
 
     const pages = this.fetchPageNumbers()
 
@@ -168,7 +166,9 @@ class Pagination extends React.Component {
 }
 
 Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
   itemsTotal: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
   pageLimit: PropTypes.number.isRequired,
   pageNeighbors: PropTypes.number.isRequired,
 }
