@@ -8,14 +8,14 @@ import Main from 'components/templates/Main'
 import SearchForMovie from 'components/organisms/SearchForMovie'
 import RateNewMovie from 'components/organisms/RateNewMovie'
 
-const New = () => (
+const Add = () => (
   <Page>
     <Main>
-      <H1>New</H1>
+      <H1>Add</H1>
       <SearchForMovie />
       <RateNewMovie />
     </Main>
   </Page>
 )
 
-export default New
+export default Add
