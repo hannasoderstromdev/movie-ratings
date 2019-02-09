@@ -114,7 +114,6 @@ RateNewMovie.defaultProps = {
 RateNewMovie.propTypes = {
   loading: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
-    id: PropTypes.string.isRequired,
     actors: PropTypes.string.isRequired,
     awards: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
