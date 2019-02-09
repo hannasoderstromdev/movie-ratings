@@ -14,8 +14,8 @@ const MoviesListWrapper = styled.div`
 
 const MoviesList = ({ movies, listStyle }) => (
   <MoviesListWrapper listStyle={listStyle}>
-    {movies.map(movie => (
-      <MoviePreview key={movie.id} {...movie} listStyle={listStyle} />
+    {movies.map((movie, i) => (
+      <MoviePreview key={i} {...movie} listStyle={listStyle} />
     ))}
   </MoviesListWrapper>
 )
@@ -32,7 +32,7 @@ MoviesList.propTypes = {
       country: PropTypes.string.isRequired,
       director: PropTypes.string.isRequired,
       genre: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
+      id: PropTypes.string,
       language: PropTypes.string.isRequired,
       listStyle: PropTypes.string,
       plot: PropTypes.string.isRequired,
