@@ -9,8 +9,10 @@ import Pagination from '..'
 describe('Components/Molecules/Pagination', () => {
   it('renders', () => {
     const props = {
-      pageLimit: 10,
+      currentPage: 1,
       itemsTotal: 100,
+      onPageChange: jest.fn(),
+      pageLimit: 10,
       pageNeighbors: 1,
     }
     const { getByTestId } = render(
@@ -23,8 +25,10 @@ describe('Components/Molecules/Pagination', () => {
 
   it('is accessible', async () => {
     const props = {
-      pageLimit: 10,
+      currentPage: 1,
       itemsTotal: 100,
+      onPageChange: jest.fn(),
+      pageLimit: 10,
       pageNeighbors: 1,
     }
     const { container } = render(
