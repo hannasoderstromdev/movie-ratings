@@ -1,7 +1,7 @@
 import handleResponse from '../handle-response'
 import headers from 'helpers/headers'
 
-const getAll = async (limit = 10, page = 1) => {
+const getAll = async ({ limit = 10, page = 1 }) => {
   const options = await headers('GET::AUTH')
   const response = await fetch(`/movies/?limit=${limit}&page=${page}`, options)
   return await handleResponse(response)
