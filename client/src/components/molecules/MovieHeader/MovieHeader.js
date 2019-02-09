@@ -54,7 +54,7 @@ const MovieHeader = ({
         <Genre>{genre}</Genre>
       </Meta>
       {!!rating && <Rating rating={rating} setRating={setRating} small />}
-      {showDelete && (
+      {showDelete && id && (
         <Button onClick={() => deleteMovie(id)} thirdiary>
           <DeleteText>Delete</DeleteText>
           <Icon color="#832D2D" icon={['fas', 'trash-alt']} iconsize="12px" />
@@ -66,6 +66,7 @@ const MovieHeader = ({
 
 MovieHeader.defaultProps = {
   deleteMovie: null,
+  id: null,
   rating: 0,
   setRating: null,
   showDelete: false,
@@ -74,7 +75,7 @@ MovieHeader.defaultProps = {
 MovieHeader.propTypes = {
   deleteMovie: PropTypes.func,
   genre: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   rating: PropTypes.number,
   runtime: PropTypes.string.isRequired,
   setRating: PropTypes.func,
