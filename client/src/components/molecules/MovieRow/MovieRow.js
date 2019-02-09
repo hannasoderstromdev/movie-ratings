@@ -56,13 +56,14 @@ const MovieRow = ({
 )
 
 MovieRow.defaultProps = {
+  id: null,
   rating: null,
   setRating: null,
 }
 
 MovieRow.propTypes = {
   genre: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   openFullMovie: PropTypes.func.isRequired,
   poster: PropTypes.string.isRequired,
   rating: PropTypes.number,
