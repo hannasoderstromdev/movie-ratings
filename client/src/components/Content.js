@@ -13,7 +13,7 @@ import Modals from 'components/molecules/Modals'
 import SearchLibrary from 'components/organisms/SearchLibrary'
 
 import Library from './pages/Library'
-import New from './pages/New'
+import Add from './pages/Add'
 import Login from './pages/Login'
 import Account from './pages/Account'
 import Error404 from './pages/Error404'
@@ -32,7 +32,7 @@ const Content = () => (
       <SearchLibrary />
 
       <Switch>
-        <PrivateRoute component={New} exact path="/new" />
+        <PrivateRoute component={Add} exact path="/add" />
         <Route component={Login} exact path="/login" />
         <PrivateRoute component={Account} exact path="/account" />
         <PrivateRoute component={Library} exact path="/" />
