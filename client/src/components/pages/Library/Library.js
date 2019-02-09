@@ -8,10 +8,10 @@ import { MovieType } from 'types'
 import moviesThunks from 'actions/movies/movies.thunks'
 
 import { H1, TextDark } from 'components/atoms/Typography'
-import Spinner from 'components/atoms/Spinner'
 import Button from 'components/atoms/Button'
 import Icon from 'components/atoms/Icon'
 
+import FullscreenSpinner from 'components/molecules/FullscreenSpinner'
 import MoviesList from 'components/molecules/MoviesList'
 import FilterByRating from 'components/molecules/FilterByRating'
 import Pagination from 'components/molecules/Pagination'
@@ -39,6 +39,12 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
   flex-wrap: no-wrap;
   width: 7rem;
+`
+
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 `
 
 class Library extends React.Component {
@@ -72,15 +78,13 @@ class Library extends React.Component {
 
     return movies.loading ? (
       <Page>
-        <Spinner />
+        <FullscreenSpinner />
       </Page>
     ) : (
       <Page data-testid="library-screen">
         <Main>
           <TopWrapper>
-            <H1>
-              Library <TextDark>({movies.numberOfItems})</TextDark>
-            </H1>
+            <H1>Library</H1>
             <FilterByRating filterByRating={this.onFilterByRating} />
             <ButtonWrapper>
               <Button onClick={this.setStyleRows} thirdiary>
@@ -99,6 +103,15 @@ class Library extends React.Component {
               </Button>
             </ButtonWrapper>
           </TopWrapper>
+          <Center>
+            <TextDark>
+              {movies.limit * (movies.page - 1) + 1}
+              {'-'}
+              {movies.limit * (movies.page - 1) + movies.movies.length}
+              {' of '}
+              {movies.numberOfItems}
+            </TextDark>
+          </Center>
           {movies && movies.movies && movies.movies.length ? (
             <>
               <MoviesList
