@@ -8,7 +8,7 @@ import modalsActions from 'actions/modals/modals.actions'
 import MovieTile from 'components/molecules/MovieTile'
 import MovieRow from 'components/molecules/MovieRow'
 
-class Movie extends React.Component {
+class MoviePreview extends React.Component {
   openFullMovie = () => {
     const { id } = this.props
     this.props.openModal({
@@ -55,12 +55,12 @@ class Movie extends React.Component {
   }
 }
 
-Movie.defaultProps = {
+MoviePreview.defaultProps = {
   listStyle: 'rows',
   rating: 0,
 }
 
-Movie.propTypes = {
+MoviePreview.propTypes = {
   genre: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   listStyle: PropTypes.string,
@@ -79,4 +79,4 @@ const mapDispatchToProps = {
 export default connect(
   null,
   mapDispatchToProps,
-)(Movie)
+)(MoviePreview)
