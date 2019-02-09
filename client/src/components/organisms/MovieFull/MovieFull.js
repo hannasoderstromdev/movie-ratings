@@ -105,6 +105,7 @@ class MovieFull extends React.Component {
 }
 
 MovieFull.defaultProps = {
+  id: null,
   onClose: null,
   rating: 0,
   showDelete: false,
@@ -116,7 +117,7 @@ MovieFull.propTypes = {
   deleteMovie: PropTypes.func.isRequired,
   director: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   language: PropTypes.string.isRequired,
   onClose: PropTypes.func,
   plot: PropTypes.string.isRequired,
