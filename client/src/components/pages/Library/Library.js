@@ -51,7 +51,7 @@ class Library extends React.Component {
   setStyleTiles = () => this.setState({ listStyle: 'tiles' })
 
   async componentDidMount() {
-    await this.props.getAllMovies()
+    await this.props.getAllMovies({ limit: 10, page: 1 })
   }
 
   onFilterByRating = rating => {
@@ -60,6 +60,10 @@ class Library extends React.Component {
     } else {
       this.props.filterByRating(rating)
     }
+  }
+
+  onPageChange = page => {
+    this.props.getAllMovies({ limit: 10, page })
   }
 
   render() {
@@ -101,7 +105,13 @@ class Library extends React.Component {
                 listStyle={this.state.listStyle}
                 movies={movies.movies}
               />
-              <Pagination itemsTotal={100} pageLimit={10} pageNeighbors={1} />
+              <Pagination
+                currentPage={movies.page}
+                itemsTotal={movies.numberOfItems}
+                onPageChange={this.onPageChange}
+                pageLimit={movies.limit}
+                pageNeighbors={1}
+              />
             </>
           ) : (
             <NoRatingsYet>Nothing found</NoRatingsYet>
@@ -119,6 +129,7 @@ Library.propTypes = {
   movies: PropTypes.shape({
     numberOfItems: PropTypes.number.isRequired,
     limit: PropTypes.number.isRequired,
+    page: PropTypes.number.isRequired,
     loading: PropTypes.bool.isRequired,
     movies: PropTypes.arrayOf(PropTypes.shape(MovieType)).isRequired,
     error: PropTypes.bool,
