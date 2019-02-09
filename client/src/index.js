@@ -20,12 +20,12 @@ import {
   faTh,
   faThList,
 } from '@fortawesome/free-solid-svg-icons'
-import { whyDidYouUpdate } from 'why-did-you-update'
 
 import App from './components/App'
 
 if (process.env.NODE_ENV !== 'production') {
-  whyDidYouUpdate(React, { include: [/^pure/], exclude: [/^Connect/] })
+  const whyDidYouRender = require('@welldone-software/why-did-you-render')
+  whyDidYouRender(React)
 }
 
 // Add all icons used here
