@@ -63,8 +63,8 @@ const Navigation = ({ loggedIn }) => (
         </NavLink>
       </li>
       <li>
-        <NavLink isActive={isActive.bind(this, '/new')} to="/new">
-          New
+        <NavLink isActive={isActive.bind(this, '/add')} to="/add">
+          Add
         </NavLink>
       </li>
       <li>
