@@ -26,10 +26,11 @@ const InputStyle = styled.input`
   }
 `
 
-const InputField = ({ name, type, placeholder, value, onChange }) => (
+const InputField = ({ name, type, placeholder, value, onBlur, onChange }) => (
   <InputStyle
     data-testid="input"
     name={name}
+    onBlur={onBlur}
     onChange={onChange}
     placeholder={placeholder}
     type={type}
@@ -39,7 +40,6 @@ const InputField = ({ name, type, placeholder, value, onChange }) => (
 
 InputField.defaultProps = {
   name: '',
-  onChange: () => console.log('onChange handler missing'), // eslint-disable-line
   placeholder: '',
   type: 'text',
   value: '',
@@ -47,7 +47,8 @@ InputField.defaultProps = {
 
 InputField.propTypes = {
   name: PropTypes.string,
-  onChange: PropTypes.func,
+  onBlur: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.string,
