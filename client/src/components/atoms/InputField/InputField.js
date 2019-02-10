@@ -40,6 +40,7 @@ const InputField = ({ name, type, placeholder, value, onBlur, onChange }) => (
 
 InputField.defaultProps = {
   name: '',
+  onBlur: null,
   placeholder: '',
   type: 'text',
   value: '',
@@ -47,7 +48,7 @@ InputField.defaultProps = {
 
 InputField.propTypes = {
   name: PropTypes.string,
-  onBlur: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   type: PropTypes.string,
