@@ -10,6 +10,7 @@ const LabeledInputField = ({
   label,
   name,
   type,
+  onBlur,
   onChange,
   value,
   placeholder,
@@ -20,6 +21,7 @@ const LabeledInputField = ({
     <InputField
       data-testid="input"
       name={name}
+      onBlur={onBlur}
       onChange={onChange}
       placeholder={placeholder}
       type={type}
@@ -35,12 +37,14 @@ const LabeledInputField = ({
 
 LabeledInputField.defaultProps = {
   error: false,
+  onBlur: null,
 }
 
 LabeledInputField.propTypes = {
   error: PropTypes.bool,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
