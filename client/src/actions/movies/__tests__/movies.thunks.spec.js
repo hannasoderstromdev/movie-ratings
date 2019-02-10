@@ -24,20 +24,35 @@ describe('Actions/Movies/Thunks', () => {
 
   describe('getAllMovies', () => {
     it('dispatches the correct actions', async () => {
-      fetchMock.mock('/movies', {
+      const limit = 10
+      const page = 1
+
+      fetchMock.mock('/movies/?limit=10&page=1', {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: { data: [{}] },
+        body: {
+          message: '',
+          data: {
+            movies: [{}],
+            limit,
+            numberOfItems: 1,
+            page,
+          },
+        },
       })
-      await store.dispatch(moviesThunks.getAllMovies())
+
+      await store.dispatch(moviesThunks.getAllMovies({ limit, page }))
       const actions = store.getActions()
       const expected = [
         { type: 'GET_ALL_MOVIES' },
         {
           payload: {
             movies: [{}],
+            limit,
+            numberOfItems: 1,
+            page,
           },
           type: 'GET_ALL_MOVIES_SUCCESS',
         },
