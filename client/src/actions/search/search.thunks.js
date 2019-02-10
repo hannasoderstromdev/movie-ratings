@@ -2,16 +2,32 @@ import searchActions from './search.actions'
 import searchService from 'services/search/search.service'
 import errorHandlerActions from 'actions/errorHandler/errorHandler.actions'
 
-const searchOMDB = movieTitle => async dispatch => {
-  dispatch(searchActions.searchForMovieTitle())
+const searchByTitle = movieTitle => async dispatch => {
+  dispatch(searchActions.searchByTitle())
 
   try {
     const result = await searchService.search(movieTitle)
-    dispatch(
-      searchActions.searchForMovieTitleSuccess(result.data, result.inLibrary),
-    )
+    dispatch(searchActions.searchByTitleSuccess(result.data, result.inLibrary))
   } catch (error) {
-    dispatch(searchActions.searchForMovieTitleFailure())
+    dispatch(searchActions.searchByTitleFailure())
+    dispatch(
+      errorHandlerActions.setError({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
+  }
+}
+
+const searchById = imdbId => async dispatch => {
+  dispatch(searchActions.searchById())
+
+  try {
+    const result = await searchService.search(imdbId)
+    dispatch(searchActions.searchByIdSuccess(result.data, result.inLibrary))
+  } catch (error) {
+    dispatch(searchActions.searchByIdFailure())
     dispatch(
       errorHandlerActions.setError({
         type: 'danger',
@@ -23,7 +39,8 @@ const searchOMDB = movieTitle => async dispatch => {
 }
 
 const searchThunks = {
-  searchOMDB,
+  searchByTitle,
+  searchById,
 }
 
 export default searchThunks
