@@ -58,6 +58,7 @@ class SearchForMovie extends Component {
     return (
       <form onSubmit={this.searchOMDB}>
         <SearchField
+          label="Search by title"
           name="movieTitle"
           onChange={this.doOnChange}
           placeholder="Enter a Movie Title"
@@ -66,6 +67,7 @@ class SearchForMovie extends Component {
           <TextDark>- or -</TextDark>
         </Center>
         <SearchField
+          label="Search by IMDB-link"
           name="imdbId"
           onBlur={this.validateIMDBId}
           onChange={this.doOnChange}
