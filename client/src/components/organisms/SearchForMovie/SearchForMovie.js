@@ -30,13 +30,13 @@ class SearchForMovie extends Component {
   searchOMDB = e => {
     e.preventDefault()
 
-    const { movieTitle, imdbId } = this.state
+    const { movieTitle, validId } = this.state
     const { searchByTitle, searchById } = this.props
 
     if (movieTitle.length) {
       searchByTitle(movieTitle)
-    } else if (imdbId.length) {
-      searchById(imdbId)
+    } else if (validId.length) {
+      searchById(validId)
     }
   }
 
@@ -50,7 +50,7 @@ class SearchForMovie extends Component {
     const pattern = new RegExp(/(tt\d{1,})/g)
 
     if (pathItems.length > 2) {
-      this.setState({ validId: !!pathItems[2].match(pattern) })
+      this.setState({ validId: pathItems[2].match(pattern)[0] })
     }
   }
 
