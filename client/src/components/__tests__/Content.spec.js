@@ -26,6 +26,9 @@ describe('Content', () => {
       movies: {
         movies: [],
         loading: false,
+        numberOfItems: 0,
+        page: 1,
+        limit: 10,
       },
       user: {
         loggingIn: false,
