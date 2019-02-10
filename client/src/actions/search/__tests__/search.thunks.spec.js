@@ -12,7 +12,7 @@ describe('Actions/Search/Thunks', () => {
   const store = mockStore(initialState)
   fetchMock.config.overwriteRoutes = true
 
-  describe('searchOMDB', () => {
+  describe('searchByTitle', () => {
     beforeEach(() => {
       localStorage.setItem('user', JSON.stringify({ token: 'fake token' }))
     })
@@ -28,7 +28,7 @@ describe('Actions/Search/Thunks', () => {
         body: { status: 'success', data: [{}], inLibrary: false },
       })
 
-      await store.dispatch(searchThunks.searchOMDB('test'))
+      await store.dispatch(searchThunks.searchByTitle('test'))
       const actions = store.getActions()
       const expected = [
         { type: 'SEARCH_FOR_MOVIE_TITLE' },
