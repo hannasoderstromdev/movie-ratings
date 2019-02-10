@@ -39,7 +39,7 @@ describe('Services/Movies', () => {
         },
       ]
 
-      fetchMock.mock('/movies', {
+      fetchMock.mock('/movies/?limit=10&page=1', {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ describe('Services/Movies', () => {
         }),
       })
 
-      const result = await moviesService.getAll()
+      const result = await moviesService.getAll({ limit: 10, page: 1 })
 
       const expectedResult = { data }
 
@@ -57,7 +57,7 @@ describe('Services/Movies', () => {
     })
 
     it('handles failed request', async () => {
-      fetchMock.mock('/movies', {
+      fetchMock.mock('/movies/?limit=10&page=1', {
         status: 403,
         headers: {
           'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ describe('Services/Movies', () => {
       })
 
       try {
-        await moviesService.getAll()
+        await moviesService.getAll({ limit: 10, page: 1 })
       } catch (error) {
         const expectedResult = { message: 'Forbidden', status: 403 }
         expect(error).toEqual(expectedResult)
