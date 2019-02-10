@@ -26,6 +26,24 @@ export default (state = initialState, action) => {
         error: true,
       }
 
+    case searchTypes.SEARCH_FOR_MOVIE_ID:
+      return {
+        ...initialState,
+        loading: true,
+      }
+
+    case searchTypes.SEARCH_FOR_MOVIE_ID_SUCCESS:
+      return {
+        ...initialState,
+        movie: { ...action.payload.movie, inLibrary: action.payload.inLibrary },
+      }
+
+    case searchTypes.SEARCH_FOR_MOVIE_ID_FAILURE:
+      return {
+        ...initialState,
+        error: true,
+      }
+
     default:
       return state
   }
