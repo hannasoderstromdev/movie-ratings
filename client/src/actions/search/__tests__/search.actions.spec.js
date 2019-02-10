@@ -2,9 +2,9 @@ import searchActions from '../search.actions'
 import searchTypes from '../search.types'
 
 describe('Actions/Search', () => {
-  describe('searchForMovieTitle', () => {
+  describe('searchByTitle', () => {
     it(`returns ${searchTypes.SEARCH_FOR_MOVIE_TITLE}`, () => {
-      const action = searchActions.searchForMovieTitle()
+      const action = searchActions.searchByTitle()
 
       expect(action).toEqual({
         type: searchTypes.SEARCH_FOR_MOVIE_TITLE,
@@ -12,10 +12,10 @@ describe('Actions/Search', () => {
     })
   })
 
-  describe('searchForMovieTitleSuccess', () => {
+  describe('searchByTitleSuccess', () => {
     it(`returns ${searchTypes.SEARCH_FOR_MOVIE_TITLE_SUCCESS}`, () => {
       const movie = {}
-      const action = searchActions.searchForMovieTitleSuccess(movie)
+      const action = searchActions.searchByTitleSuccess(movie)
 
       expect(action).toEqual({
         type: searchTypes.SEARCH_FOR_MOVIE_TITLE_SUCCESS,
@@ -24,9 +24,9 @@ describe('Actions/Search', () => {
     })
   })
 
-  describe('searchForMovieTitleFailure', () => {
+  describe('searchByTitleFailure', () => {
     it(`returns ${searchTypes.SEARCH_FOR_MOVIE_TITLE_FAILURE}`, () => {
-      const action = searchActions.searchForMovieTitleFailure()
+      const action = searchActions.searchByTitleFailure()
 
       expect(action).toEqual({
         type: searchTypes.SEARCH_FOR_MOVIE_TITLE_FAILURE,
