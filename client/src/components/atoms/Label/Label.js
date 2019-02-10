@@ -7,18 +7,20 @@ const LabelStyle = styled.label`
   font-size: 1.4rem;
 `
 
-const Label = ({ children, htmlFor }) => (
-  <LabelStyle data-testid="label" htmlFor={htmlFor}>
+const Label = ({ className, children, htmlFor }) => (
+  <LabelStyle className={className} data-testid="label" htmlFor={htmlFor}>
     {children}
   </LabelStyle>
 )
 
 Label.defaultProps = {
+  className: '',
   htmlFor: '',
 }
 
 Label.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
   htmlFor: PropTypes.string,
 }
 
