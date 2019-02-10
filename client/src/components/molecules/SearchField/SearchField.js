@@ -51,11 +51,12 @@ const SearchButton = styled.button`
   }
 `
 
-const SearchField = ({ name, onChange, placeholder }) => (
+const SearchField = ({ name, onBlur, onChange, placeholder }) => (
   <Wrapper>
     <SearchStyle
       data-testid="searchfield"
       name={name}
+      onBlur={onBlur}
       onChange={onChange}
       placeholder={placeholder}
       type="search"
@@ -67,11 +68,13 @@ const SearchField = ({ name, onChange, placeholder }) => (
 )
 
 SearchField.defaultProps = {
+  onBlur: null,
   placeholder: 'Search...',
 }
 
 SearchField.propTypes = {
   name: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
 }
