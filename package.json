@@ -18,7 +18,8 @@
     "mongoose": "^5.4.5",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.9",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5"
   },
   "scripts": {
     "start": "node index.js",
