@@ -9,8 +9,8 @@ import moviesThunks from 'actions/movies/movies.thunks'
 import { TextDark, Text } from 'components/atoms/Typography'
 import Button from 'components/atoms/Button'
 import Message from 'components/atoms/Message'
-import Spinner from 'components/atoms/Spinner'
 
+import FullscreenSpinner from 'components/molecules/FullscreenSpinner'
 import Rating from 'components/molecules/Rating'
 
 import MovieFull from 'components/organisms/MovieFull'
@@ -29,7 +29,7 @@ const SearchResult = styled.div`
 `
 
 const SearchForTitle = styled.div`
-  height: 40rem;
+  height: 30rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,7 +67,7 @@ class RateNewMovie extends Component {
   render() {
     const { loading, movie } = this.props
 
-    if (loading) return <Spinner />
+    if (loading) return <FullscreenSpinner />
 
     return movie && movie.title ? (
       <div>
@@ -102,7 +102,7 @@ class RateNewMovie extends Component {
         </RateWrapper>
       </div>
     ) : (
-      <SearchForTitle>Search for a title</SearchForTitle>
+      <SearchForTitle>Search for a movie to add</SearchForTitle>
     )
   }
 }
