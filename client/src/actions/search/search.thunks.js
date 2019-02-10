@@ -6,7 +6,7 @@ const searchByTitle = movieTitle => async dispatch => {
   dispatch(searchActions.searchByTitle())
 
   try {
-    const result = await searchService.search(movieTitle)
+    const result = await searchService.searchByTitle(movieTitle)
     dispatch(searchActions.searchByTitleSuccess(result.data, result.inLibrary))
   } catch (error) {
     dispatch(searchActions.searchByTitleFailure())
@@ -24,7 +24,7 @@ const searchById = imdbId => async dispatch => {
   dispatch(searchActions.searchById())
 
   try {
-    const result = await searchService.search(imdbId)
+    const result = await searchService.searchById(imdbId)
     dispatch(searchActions.searchByIdSuccess(result.data, result.inLibrary))
   } catch (error) {
     dispatch(searchActions.searchByIdFailure())
