@@ -1,30 +1,18 @@
 import handleResponse from '../handle-response'
+import headers from 'helpers/headers'
 
-const search = async movieTitle => {
-  try {
-    const user = JSON.parse(localStorage.getItem('user'))
-
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'x-access-token': user.token,
-      },
-    }
-
-    const response = await fetch(
-      `/search/?movieTitle=${movieTitle}`,
-      requestOptions,
-    )
-
-    const data = await handleResponse(response)
-
-    return data
-  } catch (error) {
-    throw new Error(error)
-  }
+const searchByTitle = async movieTitle => {
+  const options = await headers('GET::AUTH')
+  const response = await fetch(`/search/?movieTitle=${movieTitle}`, options)
+  return await handleResponse(response)
 }
 
-const searchService = { search }
+const searchById = async imdbId => {
+  const options = await headers('GET::AUTH')
+  const response = await fetch(`/search/?imdbId=${imdbId}`, options)
+  return await handleResponse(response)
+}
+
+const searchService = { searchByTitle, searchById }
 
 export default searchService
