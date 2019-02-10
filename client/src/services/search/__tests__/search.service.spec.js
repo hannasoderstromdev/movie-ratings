@@ -25,7 +25,7 @@ describe('Services/Search', () => {
           data,
         }),
       })
-      const response = await searchService.search('test')
+      const response = await searchService.searchByTitle('test')
       expect(response).toEqual({ data: {} })
     })
 
@@ -45,9 +45,9 @@ describe('Services/Search', () => {
       })
 
       try {
-        await searchService.search('test')
+        await searchService.searchByTitle('test')
       } catch (error) {
-        expect(error).toEqual(new Error({}))
+        expect(error).toEqual({ message: 'Internal Server Error', status: 500 })
       }
     })
   })
