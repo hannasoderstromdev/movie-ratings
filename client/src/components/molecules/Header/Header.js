@@ -49,9 +49,15 @@ const Header = ({ showSearchLibrary, toggleLibrarySearch }) => (
     <Logo alt="movie ratings" data-testid="logo" src={logoImg} />
     <RightAlignedButton onClick={toggleLibrarySearch} thirdiary>
       {showSearchLibrary ? (
-        <Icon color="#FEDC9B" icon={['fas', 'search']} iconsize="2rem" />
+        <React.Fragment>
+          <Icon color="#FEDC9B" icon={['fas', 'search']} iconsize="2rem" />
+          <Icon color="#FEDC9B" icon={['fas', 'chevron-up']} iconsize="1rem" />
+        </React.Fragment>
       ) : (
-        <Icon color="#666" icon={['fas', 'search']} iconsize="2rem" />
+        <React.Fragment>
+          <Icon color="#666" icon={['fas', 'search']} iconsize="2rem" />
+          <Icon color="#666" icon={['fas', 'chevron-down']} iconsize="1rem" />
+        </React.Fragment>
       )}
     </RightAlignedButton>
   </HeaderStyle>
