@@ -1,8 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+
+import moviesActions from 'actions/movies/movies.actions'
+
+import Button from 'components/atoms/Button'
+import Icon from 'components/atoms/Icon'
 
 import logoImg from './logo.svg'
 import clapperImg from './clapper.svg'
+
+const RightAlignedButton = styled(Button)`
+  position: absolute;
+  right: 1rem;
+`
 
 const Logo = styled.img`
   max-height: 2.25vh;
@@ -15,7 +27,8 @@ const Clapper = styled.img`
 
 const HeaderStyle = styled.header`
   width: 100%;
-  height: 8vh;
+  min-height: 7vh;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,13 +40,37 @@ const HeaderStyle = styled.header`
   padding: 0;
   margin: 0;
   overflow: hidden;
+  position: relative;
 `
 
-const Header = () => (
+const Header = ({ showSearchLibrary, toggleLibrarySearch }) => (
   <HeaderStyle data-testid="main-header">
     <Clapper alt="logo" data-testid="clapper" src={clapperImg} />
     <Logo alt="movie ratings" data-testid="logo" src={logoImg} />
+    <RightAlignedButton onClick={toggleLibrarySearch} thirdiary>
+      {showSearchLibrary ? (
+        <Icon color="#FEDC9B" icon={['fas', 'search']} iconsize="2rem" />
+      ) : (
+        <Icon color="#666" icon={['fas', 'search']} iconsize="2rem" />
+      )}
+    </RightAlignedButton>
   </HeaderStyle>
 )
 
-export default Header
+Header.propTypes = {
+  showSearchLibrary: PropTypes.bool.isRequired,
+  toggleLibrarySearch: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = ({ movies }) => ({
+  showSearchLibrary: movies && movies.showSearchLibrary,
+})
+
+const mapDispatchToProps = {
+  toggleLibrarySearch: moviesActions.toggleSearchLibrary,
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Header)

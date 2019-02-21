@@ -65,6 +65,7 @@ const Thirdiary = styled.button`
 `
 
 const Button = ({
+  className,
   thirdiary,
   secondary,
   children,
@@ -75,6 +76,7 @@ const Button = ({
   if (secondary) {
     return (
       <Secondary
+        className={className}
         data-testid="secondary-button"
         disabled={disabled}
         onClick={onClick}
@@ -88,6 +90,7 @@ const Button = ({
   if (thirdiary) {
     return (
       <Thirdiary
+        className={className}
         data-testid="thirdiary-button"
         disabled={disabled}
         onClick={onClick}
@@ -100,6 +103,7 @@ const Button = ({
 
   return (
     <Primary
+      className={className}
       data-testid="primary-button"
       disabled={disabled}
       onClick={onClick}
@@ -111,6 +115,7 @@ const Button = ({
 }
 
 Button.defaultProps = {
+  className: null,
   disabled: false,
   onClick: null,
   secondary: null,
@@ -120,6 +125,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   secondary: PropTypes.bool,

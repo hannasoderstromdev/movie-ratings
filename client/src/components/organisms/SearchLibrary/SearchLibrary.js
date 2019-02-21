@@ -9,7 +9,8 @@ import Icon from 'components/atoms/Icon'
 
 const Wrapper = styled.form`
   width: 100%;
-  height: 7vh;
+  min-height: 7vh;
+  flex: 1;
   display: flex;
   position: relative;
   box-shadow: 0 4px 40px rgba(0, 0, 0, 0.75);
@@ -70,7 +71,9 @@ class SearchLibrary extends React.Component {
   }
 
   render() {
-    return (
+    const { movies } = this.props
+
+    return movies && movies.showSearchLibrary ? (
       <Wrapper data-testid="wrapper" onSubmit={this.doOnSubmit}>
         <SearchLibraryField
           data-testid="search-field"
@@ -84,16 +87,15 @@ class SearchLibrary extends React.Component {
           <Icon icon={['fas', 'search']} iconsize="16px" />
         </SearchButton>
       </Wrapper>
-    )
+    ) : null
   }
 }
-
-SearchLibrary.defaultProps = {}
 
 SearchLibrary.propTypes = {
   findMovieByTitle: PropTypes.func.isRequired,
   getAllMovies: PropTypes.func.isRequired,
   movies: PropTypes.shape({
+    showSearchLibrary: PropTypes.bool.isRequired,
     movies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   }).isRequired,
 }

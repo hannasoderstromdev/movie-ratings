@@ -69,6 +69,8 @@ class MovieFull extends React.Component {
       showDelete,
     } = this.props
 
+    const { detailsOpen } = this.state
+
     return title ? (
       <FullMovie data-testid="full-movie">
         <MovieStyle>
@@ -90,7 +92,7 @@ class MovieFull extends React.Component {
           actors={actors}
           country={country}
           director={director}
-          isOpen={this.state.detailsOpen}
+          isOpen={detailsOpen}
           language={language}
           plot={plot}
           production={production}
@@ -102,6 +104,11 @@ class MovieFull extends React.Component {
       </FullMovie>
     ) : null
   }
+}
+
+MovieFull.whyDidYouRender = {
+  logOnDifferentValues: true,
+  customName: 'MovieFull',
 }
 
 MovieFull.defaultProps = {
