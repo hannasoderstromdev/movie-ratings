@@ -1,76 +1,69 @@
 import React from 'react'
 import { render, fireEvent } from 'react-testing-library'
+import configureStore from 'redux-mock-store'
 
 import Root from 'components/Root'
-import { store } from 'helpers/store'
 import SearchLibrary from '..'
 import Theme from 'components/Theme'
 
+const mockStore = configureStore()
+
+const utils = (doOnSubmit = jest.fn()) => {
+  const store = mockStore({
+    movies: {
+      movies: [],
+      showSearchLibrary: true,
+    },
+  })
+  const props = {
+    findMovieByTitle: jest.fn(),
+    getAllMovies: jest.fn(),
+    doOnChange: jest.fn(),
+    doOnSubmit,
+    name: 'searchfield',
+    placeholder: 'search here',
+  }
+
+  return render(
+    <Root store={store}>
+      <Theme>
+        <SearchLibrary {...props} />
+      </Theme>
+    </Root>,
+  )
+}
+
 describe('Components/Molecules/SearchLibrary', () => {
-  let props
-
-  const doOnChange = jest.fn()
-  const doOnSubmit = jest.fn()
-  const findMovieByTitle = jest.fn()
-
-  beforeEach(() => {
-    props = {
-      findMovieByTitle,
-      doOnChange,
-      doOnSubmit,
-      name: 'searchfield',
-      placeholder: 'search here',
-    }
-  })
-
-  it('renders', () => {
-    const { getByTestId } = render(
-      <Root store={store}>
-        <Theme>
-          <SearchLibrary {...props} />
-        </Theme>
-      </Root>,
-    )
-
-    expect(getByTestId('search-field')).toBeDefined()
-    expect(getByTestId('search-field').tagName).toBe('INPUT')
-    expect(getByTestId('search-field').type).toBe('search')
-    expect(getByTestId('search-button')).toBeDefined()
-    expect(getByTestId('search-button').tagName).toBe('BUTTON')
-    expect(getByTestId('search-button').type).toBe('submit')
-  })
-
-  xit('handles change', () => {
-    const { getByTestId } = render(
-      <Root store={store}>
-        <Theme>
-          <SearchLibrary {...props} />
-        </Theme>
-      </Root>,
-    )
-
-    const input = getByTestId('search-field')
-    expect(input).toBeDefined()
-
-    fireEvent.change(input, {
-      target: { name: 'title', value: 'A' },
+  describe('renders', () => {
+    it('Input-field', () => {
+      expect(utils().getByTestId('search-field')).toBeDefined()
+      expect(utils().getByTestId('search-field').tagName).toBe('INPUT')
+      expect(utils().getByTestId('search-field').type).toBe('search')
     })
-    expect(doOnChange).toHaveBeenCalledTimes(1)
+
+    it('Search-button', () => {
+      expect(utils().getByTestId('search-button')).toBeDefined()
+      expect(utils().getByTestId('search-button').tagName).toBe('BUTTON')
+      expect(utils().getByTestId('search-button').type).toBe('submit')
+    })
   })
 
-  xit('handles submit', () => {
-    const { getByTestId, debug } = render(
-      <Root store={store}>
-        <Theme>
-          <SearchLibrary {...props} />
-        </Theme>
-      </Root>,
-    )
+  describe('SearchLibraryField', () => {
+    it('handles input', () => {
+      const input = utils().getByTestId('search-field')
 
-    debug()
-    const button = getByTestId('search-button')
-    expect(button).toBeDefined()
-    fireEvent.click(button)
-    expect(doOnSubmit).toHaveBeenCalledTimes(1)
+      expect(input).toBeDefined()
+      fireEvent.change(utils().getByTestId('search-field'), {
+        target: { value: 'A' },
+      })
+      expect(input.value).toEqual('A')
+    })
+  })
+
+  describe('Form', () => {
+    it('handles submit', () => {
+      const SearchButton = utils().getByTestId('search-button')
+      fireEvent.click(SearchButton)
+    })
   })
 })
