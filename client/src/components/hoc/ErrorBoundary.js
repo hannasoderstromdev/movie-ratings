@@ -10,11 +10,16 @@ const ErrorWrapper = styled.div`
 class ErrorBoundary extends React.Component {
   state = {
     error: null,
-    info: null,
   }
 
   componentDidCatch(error, info) {
-    this.setState({ error, info })
+    this.setState({ error })
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      console.error('Error', error) // eslint-disable-line
+      console.error('ErrorInfo', JSON.stringify(info)) // eslint-disable-line
+    } else {
+      // Handle error in production
+    }
   }
 
   render() {
@@ -22,8 +27,10 @@ class ErrorBoundary extends React.Component {
       return (
         <ErrorWrapper>
           <h1>Oups, something went wrong :(</h1>
-          <p>The error: {this.state.error.toString()}</p>
-          <p>Where it occurred: {this.state.info.componentStack}</p>
+          <p>
+            Feel free to{' '}
+            <a href="mailto:contact@hannasoderstrom.com">report this error</a>.
+          </p>
         </ErrorWrapper>
       )
     }
