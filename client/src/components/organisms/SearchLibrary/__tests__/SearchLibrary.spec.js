@@ -1,17 +1,24 @@
 import React from 'react'
 import { render, fireEvent } from 'react-testing-library'
 import configureStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 
 import Root from 'components/Root'
 import SearchLibrary from '..'
 import Theme from 'components/Theme'
 
-const mockStore = configureStore()
+const middlewares = [thunk]
+const mockStore = configureStore(middlewares)
 
 const utils = (doOnSubmit = jest.fn()) => {
   const store = mockStore({
     movies: {
+      loading: false,
       movies: [],
+      error: false,
+      numberOfItems: 0,
+      limit: 10,
+      page: 1,
       showSearchLibrary: true,
     },
   })
@@ -57,13 +64,6 @@ describe('Components/Molecules/SearchLibrary', () => {
         target: { value: 'A' },
       })
       expect(input.value).toEqual('A')
-    })
-  })
-
-  describe('Form', () => {
-    it('handles submit', () => {
-      const SearchButton = utils().getByTestId('search-button')
-      fireEvent.click(SearchButton)
     })
   })
 })
