@@ -23,7 +23,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  justify-content: space-between;
 `
 const Content = () => (
   <ErrorBoundary>

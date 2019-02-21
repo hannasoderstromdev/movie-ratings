@@ -9,7 +9,8 @@ import Icon from 'components/atoms/Icon'
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.colors.black};
   color: ${({ theme }) => theme.colors.textPrimary};
-  height: 8vh;
+  min-height: 7vh;
+  flex: 1;
   padding: 1rem 2rem 1rem 3rem;
   display: flex;
   justify-content: center;

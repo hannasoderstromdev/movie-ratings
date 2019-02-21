@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Page = styled.div`
-  height: 77vh;
+  flex: 1 auto;
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.dark};
