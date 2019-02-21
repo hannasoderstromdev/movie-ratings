@@ -76,11 +76,7 @@ class Library extends React.Component {
     const { movies } = this.props
     const { listStyle } = this.state
 
-    return movies.loading ? (
-      <Page>
-        <FullscreenSpinner />
-      </Page>
-    ) : (
+    return (
       <Page data-testid="library-screen">
         <Main>
           <TopWrapper>
@@ -112,6 +108,7 @@ class Library extends React.Component {
               {movies.numberOfItems}
             </TextDark>
           </Center>
+          {movies.loading && <FullscreenSpinner />}
           {movies && movies.movies && movies.movies.length ? (
             <>
               <MoviesList
