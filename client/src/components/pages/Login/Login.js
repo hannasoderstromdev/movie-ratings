@@ -11,12 +11,9 @@ import Main from 'components/templates/Main'
 
 import { H1 } from 'components/atoms/Typography'
 import Button from 'components/atoms/Button'
-// import Spinner from 'components/atoms/Spinner'
 
 import LabeledInputField from 'components/molecules/LabeledInputField'
 import FullscreenSpinner from 'components/molecules/FullscreenSpinner/FullscreenSpinner'
-
-// import Spinner from 'components/atoms/Spinner'
 
 const FormField = styled.div`
   display: flex;
