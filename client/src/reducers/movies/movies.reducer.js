@@ -7,6 +7,7 @@ const initialState = {
   numberOfItems: 0,
   limit: 0,
   page: 1,
+  showSearchLibrary: false,
 }
 
 export default (state = initialState, action) => {
@@ -173,6 +174,12 @@ export default (state = initialState, action) => {
         error: false,
         loading: false,
         movies: action.payload.movies,
+      }
+
+    case moviesTypes.TOGGLE_SEARCH_LIBRARY:
+      return {
+        ...state,
+        showSearchLibrary: !state.showSearchLibrary,
       }
 
     default:

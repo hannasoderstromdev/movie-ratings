@@ -98,6 +98,11 @@ const filterByRatingFailure = () => ({
   type: moviesTypes.FILTER_BY_RATING_FAILURE,
 })
 
+// toggle search library
+const toggleSearchLibrary = () => ({
+  type: moviesTypes.TOGGLE_SEARCH_LIBRARY,
+})
+
 const moviesActions = {
   getAllMovies,
   getAllMoviesSuccess,
@@ -120,6 +125,7 @@ const moviesActions = {
   filterByRating,
   filterByRatingSuccess,
   filterByRatingFailure,
+  toggleSearchLibrary,
 }
 
 export default moviesActions
