@@ -2,15 +2,13 @@ import React from 'react'
 import { render } from 'react-testing-library'
 import { BrowserRouter as Router } from 'react-router-dom'
 import configureStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
 
 import Root from 'components/Root'
 import Theme from 'components/Theme'
 
 import RateNewMovie from '..'
 
-const middlewares = [thunk]
-const mockStore = configureStore(middlewares)
+const mockStore = configureStore()
 
 let utils
 let props
@@ -75,7 +73,7 @@ describe('Components/Organisms/RateNewMovie', () => {
       </Root>,
     )
 
-    const searchText = utils.getByText(/Search for a title/i)
+    const searchText = utils.getByText(/Search for a movie to add/i)
     expect(searchText).toBeDefined()
   })
 
