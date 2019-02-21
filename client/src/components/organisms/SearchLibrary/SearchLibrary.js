@@ -84,7 +84,7 @@ class SearchLibrary extends React.Component {
           value={this.state.title}
         />
         <SearchButton data-testid="search-button" type="submit">
-          <Icon icon={['fas', 'search']} iconsize="16px" />
+          <Icon icon={['fas', 'search']} iconsize="1rem" />
         </SearchButton>
       </Wrapper>
     ) : null
