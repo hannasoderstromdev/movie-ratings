@@ -43,33 +43,41 @@ const HeaderStyle = styled.header`
   position: relative;
 `
 
-const Header = ({ showSearchLibrary, toggleLibrarySearch }) => (
+const Header = ({ showSearchLibrary, toggleLibrarySearch, userLoggedIn }) => (
   <HeaderStyle data-testid="main-header">
     <Clapper alt="logo" data-testid="clapper" src={clapperImg} />
     <Logo alt="movie ratings" data-testid="logo" src={logoImg} />
-    <RightAlignedButton onClick={toggleLibrarySearch} thirdiary>
-      {showSearchLibrary ? (
-        <React.Fragment>
-          <Icon color="#FEDC9B" icon={['fas', 'search']} iconsize="2rem" />
-          <Icon color="#FEDC9B" icon={['fas', 'chevron-up']} iconsize="1rem" />
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <Icon color="#666" icon={['fas', 'search']} iconsize="2rem" />
-          <Icon color="#666" icon={['fas', 'chevron-down']} iconsize="1rem" />
-        </React.Fragment>
-      )}
-    </RightAlignedButton>
+    {userLoggedIn && (
+      <RightAlignedButton onClick={toggleLibrarySearch} thirdiary>
+        {showSearchLibrary ? (
+          <React.Fragment>
+            <Icon color="#FEDC9B" icon={['fas', 'search']} iconsize="2rem" />
+            <Icon
+              color="#FEDC9B"
+              icon={['fas', 'chevron-up']}
+              iconsize="1rem"
+            />
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <Icon color="#666" icon={['fas', 'search']} iconsize="2rem" />
+            <Icon color="#666" icon={['fas', 'chevron-down']} iconsize="1rem" />
+          </React.Fragment>
+        )}
+      </RightAlignedButton>
+    )}
   </HeaderStyle>
 )
 
 Header.propTypes = {
   showSearchLibrary: PropTypes.bool.isRequired,
   toggleLibrarySearch: PropTypes.func.isRequired,
+  userLoggedIn: PropTypes.bool.isRequired,
 }
 
-const mapStateToProps = ({ movies }) => ({
+const mapStateToProps = ({ movies, user }) => ({
   showSearchLibrary: movies && movies.showSearchLibrary,
+  userLoggedIn: user && user.loggedIn,
 })
 
 const mapDispatchToProps = {
