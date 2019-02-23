@@ -29,6 +29,7 @@ describe('Content', () => {
         numberOfItems: 0,
         page: 1,
         limit: 10,
+        showSearchLibrary: false,
       },
       user: {
         loggingIn: false,
