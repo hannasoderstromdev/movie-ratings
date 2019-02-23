@@ -6,10 +6,10 @@ import ErrorBoundary from 'components/hoc/ErrorBoundary'
 import PrivateRoute from 'components/hoc/PrivateRoute'
 
 import Alert from 'components/molecules/Alert'
-import Header from 'components/molecules/Header'
-import Navigation from 'components/molecules/Navigation'
 import Modals from 'components/molecules/Modals'
 
+import Header from 'components/organisms/Header'
+import Navigation from 'components/organisms/Navigation'
 import SearchLibrary from 'components/organisms/SearchLibrary'
 
 import Library from './pages/Library'
