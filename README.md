@@ -14,10 +14,11 @@ Mono-repo for Movie-Ratings API and Client.
 - Single-page Application built with React.
 - The UI is designed for mobile, future versions will handle desktop as well.
 - Design can be viewed on figma: https://www.figma.com/file/a4lVBProS8RJi8IySHItU8Nc/Movie-Ratings?node-id=0%3A1
+- Features and backlog can be seen at trello: https://trello.com/b/ZnvGM75b/movie-ratings
 
 ### Architecture
 
-The client architecture it split into three layers. *The UI-layer* (what you see and interact with). *The domain-layer* (the store and data-objects) and *the data-access-layer* with services that handles the communication with the API for fetching and updating stuff.
+The client architecture it split into three layers. _The UI-layer_ (what you see and interact with). _The domain-layer_ (the store and data-objects) and _the data-access-layer_ with services that handles the communication with the API for fetching and updating stuff.
 
 I'm trying this out as I've found that testing asynchronous thunks with a lot of side-effects is quite complex, and also I don't particularly like the Redux-Saga pattern with generators, as they are a bit hard to grasp intuitively.
 
@@ -31,7 +32,7 @@ In order to build components separately from the application, I've used Stylegui
 
 ### Atomic Design
 
-For the UI-components I've implemented the Atomic Design-structure. This means you start with the basic building blocks as *atoms* (labels, inputfields, buttons) and then combine them to more complex *molecules* (menus, formfields) and then *organisms* for even more complex sections of components.
+For the UI-components I've implemented the Atomic Design-structure. This means you start with the basic building blocks as _atoms_ (labels, inputfields, buttons) and then combine them to more complex _molecules_ (menus, formfields) and then _organisms_ for even more complex sections of components.
 
 These then combines into Pages which are the routes for the application.
 
