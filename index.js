@@ -16,31 +16,39 @@ app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }))
 app.use(expressValidator())
+
 /**
  * Connect to MongoDB
  */
-
-mongoose
-  .connect(
-    keys.MONGO_URI,
-    { useNewUrlParser: true },
-  )
-  .catch(err => console.error(err))
+mongoose.connect(keys.MONGO_URI, { useNewUrlParser: true }).catch(err => console.error(err))
 
 /**
  * Routes
  */
-
 const movie = require('./routes/movie.route')
 const user = require('./routes/user.route')
 const search = require('./routes/search.route')
 
-app.get('/', function(req, res) {
-  res.json({ message: 'Welcome to Movie Ratings API' })
-})
+// app.get('/', function(req, res) {
+//   res.json({ message: 'Welcome to Movie Ratings API' })
+// })
 app.use('/users', user)
 app.use('/movies', validateUser, movie)
 app.use('/search', validateUser, search)
+
+/**
+ * Serve assets (React App) in production
+ */
+if (process.env.NODE_ENV === 'production') {
+  // First hand: Serve specific file
+  app.use(express.static('client/build'))
+
+  // Fallback: Serve index.html
+  const path = require('path')
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 /**
  * Error Handler
