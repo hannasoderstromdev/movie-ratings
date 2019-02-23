@@ -13,8 +13,8 @@
     "history": "^4.7.2",
     "http-proxy-middleware": "^0.19.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
@@ -39,7 +39,8 @@
     "lint:fix": "eslint src --fix",
     "format": "npm run prettier -- --write",
     "prettier": "prettier '**/*.+(js)'",
-    "validate": "npm run lint && npm run prettier -- --list-different"
+    "validate": "npm run lint && npm run prettier -- --list-different",
+    "analyze": "react-scripts build --stats && webpack-bundle-analyzer build/bundle-stats.json -m static -r build/bundle-stats.html -O"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -61,7 +62,8 @@
     "prettier": "1.16.4",
     "prettier-eslint": "^8.8.2",
     "react-styleguidist": "^9.0.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "webpack-bundle-analyzer": "^3.0.4"
   },
   "husky": {
     "hooks": {
