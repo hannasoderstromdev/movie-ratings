@@ -1,4 +1,4 @@
-modules.export = {
+module.exports = {
   ENV: 'production',
   ROOT_URL: process.env.ROOT_URL,
   MONGO_URI: process.env.MONGO_URI,
