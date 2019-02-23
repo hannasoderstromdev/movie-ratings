@@ -85,6 +85,7 @@ module.exports = {
 
       const movies = await movieModel
         .find({})
+        .sort({ createdAt: 'desc' })
         .skip(limit * (page - 1))
         .limit(parseInt(limit, 10))
       const numberOfItems = await movieModel.count()
