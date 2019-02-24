@@ -67,7 +67,7 @@ const MovieHeader = ({
 MovieHeader.defaultProps = {
   deleteMovie: null,
   id: null,
-  rating: 0,
+  rating: null,
   setRating: null,
   showDelete: false,
 }
