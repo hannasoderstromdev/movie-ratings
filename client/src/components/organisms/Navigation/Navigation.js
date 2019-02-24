@@ -9,14 +9,13 @@ import Icon from 'components/atoms/Icon'
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.colors.black};
   color: ${({ theme }) => theme.colors.textPrimary};
-  min-height: 7vh;
   flex: 1;
-  padding: 1rem 2rem 1rem 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0px -4px 45px 0px rgba(0, 0, 0, 0.75);
   z-index: 1;
+  min-height: 7vh;
 
   ul {
     width: 100%;
@@ -26,12 +25,6 @@ const Nav = styled.nav`
     justify-content: space-between;
     padding: 0;
     margin: 0;
-  }
-
-  a {
-    text-decoration: none;
-    font-size: 1.4rem;
-    font-family: ${({ theme }) => theme.fonts.primary};
   }
 
   a:link,
@@ -52,37 +45,85 @@ const Nav = styled.nav`
   }
 `
 
+const LinkItem = styled.li`
+  flex: 3;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-family: ${({ theme }) => theme.fonts.primary};
+  color: ${({ theme }) => theme.colors.textSecondary};
+
+  svg {
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+
+  &:last-of-type {
+    flex: 1;
+  }
+
+  a {
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    margin-right: 1rem;
+  }
+
+  &:not(:last-of-type) {
+    border-right: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  }
+`
+
+const DisabledItem = styled(LinkItem)`
+  min-height: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: not-allowed;
+`
+
 const isActive = (path, match, location) =>
   !!(match || path === location.pathname)
 
 const Navigation = ({ loggedIn }) => (
   <Nav data-testid="main-navigation">
-    <ul>
-      <li>
-        <NavLink exact isActive={isActive.bind(this, '/')} to="/">
-          Library
-        </NavLink>
-      </li>
-      <li>
-        <NavLink isActive={isActive.bind(this, '/add')} to="/add">
-          Add
-        </NavLink>
-      </li>
-      <li>
-        {loggedIn ? (
-          <NavLink isActive={isActive.bind(this, '/account')} to="/account">
-            Account
+    {loggedIn ? (
+      <ul>
+        <LinkItem>
+          <NavLink exact isActive={isActive.bind(this, '/')} to="/">
+            <span>Library</span>
+            <Icon icon={['fas', 'list']} iconsize="1.8rem" />
           </NavLink>
-        ) : (
-          <NavLink to="/login">Login</NavLink>
-        )}
-      </li>
-      <li>
-        <NavLink to="/settings">
-          <Icon icon={['fas', 'ellipsis-v']} iconsize="18px" />
-        </NavLink>
-      </li>
-    </ul>
+        </LinkItem>
+        <LinkItem>
+          <NavLink isActive={isActive.bind(this, '/add')} to="/add">
+            <span>Add</span>
+            <Icon icon={['fas', 'plus-circle']} iconsize="1.8rem" />
+          </NavLink>
+        </LinkItem>
+        <LinkItem>
+          <NavLink to="/settings">
+            <Icon icon={['fas', 'cog']} iconsize="1.8rem" />
+          </NavLink>
+        </LinkItem>
+      </ul>
+    ) : (
+      <ul>
+        <DisabledItem>
+          <span>Library</span>
+          <Icon icon={['fas', 'list']} iconsize="1.8rem" />
+        </DisabledItem>
+        <DisabledItem>
+          <span>Add</span>
+          <Icon icon={['fas', 'plus-circle']} iconsize="1.8rem" />
+        </DisabledItem>
+        <DisabledItem>
+          <Icon icon={['fas', 'cog']} iconsize="1.8rem" />
+        </DisabledItem>
+      </ul>
+    )}
   </Nav>
 )
 
