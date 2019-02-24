@@ -148,7 +148,7 @@ RateNewMovie.propTypes = {
 
 const mapStateToProps = ({ search, user }) => ({
   ...search,
-  userRole: user && user.role,
+  userRole: user && user.profile && user.profile.user && user.profile.user.role,
 })
 
 const mapDispatchToProps = {
