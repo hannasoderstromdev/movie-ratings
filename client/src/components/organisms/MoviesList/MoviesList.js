@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import MoviePreview from 'components/organisms/MoviePreview'
+import MoviePreview from 'components/molecules/MoviePreview'
 
 const MoviesListWrapper = styled.div`
   width: 100%;

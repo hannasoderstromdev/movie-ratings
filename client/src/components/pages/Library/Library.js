@@ -12,9 +12,10 @@ import Button from 'components/atoms/Button'
 import Icon from 'components/atoms/Icon'
 
 import FullscreenSpinner from 'components/molecules/FullscreenSpinner'
-import MoviesList from 'components/molecules/MoviesList'
-import FilterByRating from 'components/molecules/FilterByRating'
 import Pagination from 'components/molecules/Pagination'
+
+import FilterByRating from 'components/organisms/FilterByRating'
+import MoviesList from 'components/organisms/MoviesList'
 
 import Page from 'components/templates/Page'
 import Main from 'components/templates/Main'
