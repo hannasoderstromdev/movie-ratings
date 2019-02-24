@@ -10,10 +10,17 @@ const Wrapper = styled.div`
   padding: 0.5rem;
 `
 
-const Message = ({ children }) => <Wrapper>{children}</Wrapper>
+const Message = ({ children, className }) => (
+  <Wrapper className={className}>{children}</Wrapper>
+)
+
+Message.defaultProps = {
+  className: null,
+}
 
 Message.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 }
 
 export default Message
