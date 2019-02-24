@@ -15,7 +15,7 @@ import SearchLibrary from 'components/organisms/SearchLibrary'
 import Library from './pages/Library'
 import Add from './pages/Add'
 import Login from './pages/Login'
-import Account from './pages/Account'
+import Settings from './pages/Settings'
 import Error404 from './pages/Error404'
 
 const Wrapper = styled.div`
@@ -33,7 +33,7 @@ const Content = () => (
       <Switch>
         <PrivateRoute component={Add} exact path="/add" />
         <Route component={Login} exact path="/login" />
-        <PrivateRoute component={Account} exact path="/account" />
+        <PrivateRoute component={Settings} exact path="/settings" />
         <PrivateRoute component={Library} exact path="/" />
         <Route component={Error404} />
       </Switch>
