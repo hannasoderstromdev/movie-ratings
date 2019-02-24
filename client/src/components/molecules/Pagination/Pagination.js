@@ -116,6 +116,8 @@ class Pagination extends React.Component {
 
     const pages = this.fetchPageNumbers()
 
+    if (pages.length === 1) return null
+
     return (
       <Wrapper aria-label="Pagination" data-testid="navigation">
         <ul>
