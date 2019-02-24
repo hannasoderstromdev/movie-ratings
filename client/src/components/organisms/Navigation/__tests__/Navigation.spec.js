@@ -24,7 +24,6 @@ describe('Components/Molecules/Navigation', () => {
     )
     expect(getByText('Library')).toBeDefined()
     expect(getByText('Add')).toBeDefined()
-    expect(getByText('Login')).toBeDefined()
     expect(getByTestId('icon')).toBeDefined()
   })
 
@@ -41,7 +40,6 @@ describe('Components/Molecules/Navigation', () => {
     )
     expect(getByText('Library')).toBeDefined()
     expect(getByText('Add')).toBeDefined()
-    expect(getByText('Account')).toBeDefined()
     expect(getByTestId('icon')).toBeDefined()
   })
 })
