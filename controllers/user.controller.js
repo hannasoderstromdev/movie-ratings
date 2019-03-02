@@ -8,7 +8,7 @@ module.exports = {
   /**
    * Create User
    */
-  create: function(req, res, next) {
+  create: (req, res, next) => {
     userModel.create(
       {
         firstName: req.body.firstName,
@@ -33,7 +33,7 @@ module.exports = {
   /**
    * Authenticate User
    */
-  authenticate: function(req, res, next) {
+  authenticate: (req, res, next) => {
     userModel.findOne(
       {
         email: req.body.email,
@@ -69,5 +69,21 @@ module.exports = {
         }
       },
     )
+  },
+
+  findCurrentUserRole: async (req, res, next) => {
+    try {
+      const response = await userModel.findOne({ _id: res.locals.user._id }).exec()
+      res.json({
+        status: 'success',
+        message: 'User role found',
+        data: {
+          role: response.role,
+        },
+      })
+      next()
+    } catch (error) {
+      next(error)
+    }
   },
 }

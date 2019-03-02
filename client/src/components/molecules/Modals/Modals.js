@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import modalsActions from 'actions/modals/modals.actions'
 
-import Modal from 'components/molecules/Modal'
+import Modal from './Modal'
 
 const Modals = ({ modals, closeModal }) => (
   <div data-testid="modals">

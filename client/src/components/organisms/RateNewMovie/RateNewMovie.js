@@ -65,7 +65,7 @@ class RateNewMovie extends Component {
   }
 
   render() {
-    const { loading, movie } = this.props
+    const { loading, movie, userRole } = this.props
 
     if (loading) return <FullscreenSpinner />
 
@@ -74,6 +74,11 @@ class RateNewMovie extends Component {
         <SearchResult>
           <TextDark>Search result</TextDark>
         </SearchResult>
+        {userRole !== 'Admin' && (
+          <MessageWithMargins>
+            <Text>Your account is not allowed to add movies</Text>
+          </MessageWithMargins>
+        )}
         {movie.inLibrary && (
           <MessageWithMargins>
             <Text>This movie already exists in the library</Text>
@@ -109,9 +114,12 @@ class RateNewMovie extends Component {
 
 RateNewMovie.defaultProps = {
   movie: null,
+  rating: 0,
 }
 
 RateNewMovie.propTypes = {
+  createMovie: PropTypes.func.isRequired,
+  history: PropTypes.shape({}).isRequired,
   loading: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
     actors: PropTypes.string.isRequired,
@@ -126,7 +134,7 @@ RateNewMovie.propTypes = {
     plot: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     production: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
+    rating: PropTypes.number,
     ratings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     released: PropTypes.string.isRequired,
     runtime: PropTypes.string.isRequired,
@@ -135,10 +143,12 @@ RateNewMovie.propTypes = {
     writer: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
   }),
+  userRole: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = ({ search }) => ({
+const mapStateToProps = ({ search, user }) => ({
   ...search,
+  userRole: user && user.profile && user.profile.user && user.profile.user.role,
 })
 
 const mapDispatchToProps = {

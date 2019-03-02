@@ -14,6 +14,9 @@ describe('Components/Molecules/Header', () => {
       movies: {
         showSearchLibrary: true,
       },
+      user: {
+        loggedIn: true,
+      },
     })
     const props = {
       toggleLibrarySearch: jest.fn(),

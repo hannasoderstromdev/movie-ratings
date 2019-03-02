@@ -2,12 +2,13 @@ const express = require('express')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
-const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 
 const keys = require('./config/keys')
 
 const app = express()
+
+const { validateUser } = require('./middlewares/validateUser')
 
 /**
  * Middleware
@@ -72,20 +73,6 @@ app.use(function(err, req, res, next) {
       break
   }
 })
-
-/**
- * Utilities
- */
-function validateUser(req, res, next) {
-  jwt.verify(req.headers['x-access-token'], keys.JWT_SECRET, function(err, decoded) {
-    if (err) {
-      res.status(403).json({ status: 'error', message: err.message, data: null })
-    } else {
-      req.body.userId = decoded.id
-      next()
-    }
-  })
-}
 
 /**
  * Run Server

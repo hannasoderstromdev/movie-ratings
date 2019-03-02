@@ -34,6 +34,13 @@ describe('Components/Organisms/MovieFull', () => {
           },
         ],
       },
+      user: {
+        profile: {
+          user: {
+            role: 'User',
+          },
+        },
+      },
     }
     const store = mockStore(initialState)
     const props = {

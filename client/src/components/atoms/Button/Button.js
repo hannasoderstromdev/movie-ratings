@@ -9,6 +9,7 @@ const Primary = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.primary};
   border: 1px solid
     ${({ theme, disabled }) => disabled && theme.colors.darkGray};
+  border-radius: 3px;
   height: 30px;
   min-width: 30px;
   outline: none;

@@ -65,6 +65,7 @@ class MovieFull extends React.Component {
       production,
       ratings,
       released,
+      userRole,
       writer,
       showDelete,
     } = this.props
@@ -82,8 +83,8 @@ class MovieFull extends React.Component {
             poster={poster}
             rating={rating}
             runtime={runtime}
-            setRating={this.setRating}
-            showDelete={showDelete}
+            setRating={userRole === 'Admin' ? this.setRating : null}
+            showDelete={userRole === 'Admin' && showDelete}
             title={title}
             year={year}
           />
@@ -137,22 +138,29 @@ MovieFull.propTypes = {
   showDelete: PropTypes.bool,
   title: PropTypes.string.isRequired,
   updateMovie: PropTypes.func.isRequired,
+  userRole: PropTypes.string.isRequired,
   writer: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = ({ movies }, { movieId }) => {
+const mapStateToProps = ({ movies, user }, { movieId }) => {
   const movieFound =
     movies &&
     movies.movies.length &&
     movies.movies.find(movie => movie.id === movieId)
 
+  const userRole =
+    user && user.profile && user.profile.user && user.profile.user.role
+
   if (movieFound) {
     return {
       ...movieFound,
+      userRole,
     }
   }
-  return {}
+  return {
+    userRole,
+  }
 }
 
 const mapDispatchToProps = {

@@ -57,6 +57,13 @@ describe('Components/Molecules/Modals', () => {
           },
         ],
       },
+      user: {
+        profile: {
+          user: {
+            role: 'User',
+          },
+        },
+      },
     }
     const store = mockStore(initialState)
 

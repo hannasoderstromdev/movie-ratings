@@ -6,10 +6,10 @@ import Main from 'components/templates/Main'
 
 import { H1, Text, TextDark } from 'components/atoms/Typography'
 
-const Account = ({ role, firstName, lastName, email }) => (
+const Settings = ({ role, firstName, lastName, email }) => (
   <Page>
     <Main>
-      <H1>Account</H1>
+      <H1>Settings</H1>
       <p>
         <TextDark>Privileges: </TextDark>
         <Text>{role}</Text>
@@ -26,7 +26,7 @@ const Account = ({ role, firstName, lastName, email }) => (
   </Page>
 )
 
-Account.propTypes = {
+Settings.propTypes = {
   email: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
@@ -37,4 +37,4 @@ const mapStateToProps = ({ user }) => ({
   ...(user && user.profile && user.profile.user),
 })
 
-export default connect(mapStateToProps)(Account)
+export default connect(mapStateToProps)(Settings)
