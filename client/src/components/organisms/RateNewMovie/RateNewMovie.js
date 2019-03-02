@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom'
 
 import moviesThunks from 'actions/movies/movies.thunks'
 
+import { MovieType } from 'types'
+
 import { TextDark, Text } from 'components/atoms/Typography'
 import Button from 'components/atoms/Button'
 import Message from 'components/atoms/Message'
@@ -56,6 +58,7 @@ class RateNewMovie extends Component {
 
   saveNewRating = async () => {
     const { createMovie, movie, history } = this.props
+
     const newMovie = {
       ...movie,
       rating: this.state.rating,
@@ -121,28 +124,7 @@ RateNewMovie.propTypes = {
   createMovie: PropTypes.func.isRequired,
   history: PropTypes.shape({}).isRequired,
   loading: PropTypes.bool.isRequired,
-  movie: PropTypes.shape({
-    actors: PropTypes.string.isRequired,
-    awards: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    imdbID: PropTypes.string.isRequired,
-    imdbRating: PropTypes.string.isRequired,
-    language: PropTypes.string.isRequired,
-    metascore: PropTypes.string.isRequired,
-    plot: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    production: PropTypes.string.isRequired,
-    rating: PropTypes.number,
-    ratings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    released: PropTypes.string.isRequired,
-    runtime: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    website: PropTypes.string.isRequired,
-    writer: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
-  }),
+  movie: PropTypes.shape(MovieType),
   userRole: PropTypes.string.isRequired,
 }
 
