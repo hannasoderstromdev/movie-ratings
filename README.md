@@ -37,3 +37,38 @@ For the UI-components I've implemented the Atomic Design-structure. This means y
 These then combines into Pages which are the routes for the application.
 
 You can read more about the Atomic Design-principles in practice here: https://medium.com/backticks-tildes/visually-breaking-down-ui-components-using-atomic-design-part-1-476e1ddd73ca
+
+## Release Details
+
+v1.1.0
+
+Features:
+
+- Design changes for bottom menu and buttons.
+
+- Renaming page previously named "New" to "Add"
+
+- Renamed "Account" to "Settings" and removed unnecessary button in bottom menu.
+
+- User is now logged out and redirected to login-screen when not allowed access (i.e. if access token is invalid)
+
+- Hiding library search component when user is not logged in.
+
+- Adds an test-user account with restricted access.
+
+- Checking against user role for access to restricted features such as:
+  - Adding a new rating
+  - Change an existing rating
+  - Delete an existing rating
+
+Chores:
+
+- Updating dependencies
+
+- Refactoring in both server and client for more consistent and more readable code.
+
+Fixes:
+
+- Hiding pagination-buttons when there is only one page of content available.
+
+- Closing filter-dropdown when user clicks an filtering option.
