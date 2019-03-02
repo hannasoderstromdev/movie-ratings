@@ -8,7 +8,7 @@ import MovieRow from '..'
 describe('Components/Molecules/MovieRow', () => {
   it('renders', () => {
     const props = {
-      genre: 'drama',
+      genres: ['Drama'],
       id: 'mId01',
       openFullMovie: jest.fn(),
       poster: 'http://pictures.com/image.jpg',
@@ -26,7 +26,7 @@ describe('Components/Molecules/MovieRow', () => {
 
     expect(getByText(props.title)).toBeDefined()
     expect(getByText(`${props.year}, ${props.runtime}`)).toBeDefined()
-    expect(getByText(props.genre)).toBeDefined()
+    expect(getByText(props.genres[0])).toBeDefined()
     expect(getByAltText(props.title)).toBeDefined()
     expect(getByTestId('rating').children.length).toEqual(6)
   })
