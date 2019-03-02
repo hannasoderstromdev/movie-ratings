@@ -6,6 +6,7 @@ import { H2, Text } from 'components/atoms/Typography'
 import Button from 'components/atoms/Button'
 import Icon from 'components/atoms/Icon'
 
+import Genres from 'components/molecules/Genres'
 import Rating from 'components/molecules/Rating'
 
 const Wrapper = styled.header`
@@ -23,10 +24,6 @@ const Meta = styled.div`
 
 const YearRuntime = styled(Text)``
 
-const Genre = styled(Text)`
-  margin-top: 0.5rem;
-`
-
 const DeleteText = styled(Text)`
   color: ${({ theme }) => theme.colors.danger};
   margin-right: 0.5rem;
@@ -39,7 +36,7 @@ const MovieHeader = ({
   title,
   year,
   runtime,
-  genre,
+  genres,
   rating,
   setRating,
   showDelete,
@@ -51,7 +48,7 @@ const MovieHeader = ({
         <YearRuntime>
           {year}, {runtime}
         </YearRuntime>
-        <Genre>{genre}</Genre>
+        <Genres genres={genres} />
       </Meta>
       {!!rating && <Rating rating={rating} setRating={setRating} small />}
       {showDelete && id && (
@@ -74,7 +71,7 @@ MovieHeader.defaultProps = {
 
 MovieHeader.propTypes = {
   deleteMovie: PropTypes.func,
-  genre: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   id: PropTypes.string,
   rating: PropTypes.number,
   runtime: PropTypes.string.isRequired,
