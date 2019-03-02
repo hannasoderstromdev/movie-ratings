@@ -8,7 +8,7 @@ function filterValidMovieProps(props) {
     awards: props.awards,
     country: props.country,
     director: props.director,
-    genre: props.genre,
+    genres: props.genres,
     imdbID: props.imdbID,
     imdbRating: props.imdbRating,
     imdbVotes: props.imdbVotes,
@@ -37,7 +37,7 @@ function addIdToMovies(movies) {
       awards: movie.awards,
       country: movie.country,
       director: movie.director,
-      genre: movie.genre,
+      genres: movie.genres,
       imdbID: movie.imdbID,
       imdbRating: movie.imdbRating,
       imdbVotes: movie.imdbVotes,
@@ -297,9 +297,9 @@ module.exports = {
           body('runtime', 'runtime must be a String')
             .exists()
             .isString(),
-          body('genre', 'genre must be a String')
+          body('genres', 'genre must be an Array')
             .exists()
-            .isString(),
+            .isArray(),
           body('director', 'director must be a String')
             .exists()
             .isString(),
