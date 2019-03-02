@@ -93,8 +93,12 @@ class FilterByRating extends Component {
     this.timer = setTimeout(() => this.setState({ isOpen: false }), 0)
   }
 
+  onClick = value => {
+    this.props.filterByRating(value)
+    this.closeDropdown()
+  }
+
   render() {
-    const { filterByRating } = this.props
     return (
       <Wrapper>
         <Selected
@@ -115,7 +119,7 @@ class FilterByRating extends Component {
           <Dropdown data-testid="dropdown">
             <Option
               data-testid="filter-none"
-              onClick={() => filterByRating('none')}
+              onClick={() => this.onClick('none')}
               onFocus={this.openDropdown}
             >
               <TextPrimary>Show all ratings</TextPrimary>
@@ -125,32 +129,32 @@ class FilterByRating extends Component {
             </Center>
             <Option
               data-testid="filter-one"
-              onClick={() => filterByRating('1')}
+              onClick={() => this.onClick('1')}
               onFocus={this.openDropdown}
             >
               <Rating rating={1} small />
             </Option>
             <Option
               data-testid="filter-two"
-              onClick={() => filterByRating('2')}
+              onClick={() => this.onClick('2')}
               onFocus={this.openDropdown}
             >
               <Rating rating={2} small />
             </Option>
             <Option
-              onClick={() => filterByRating('3')}
+              onClick={() => this.onClick('3')}
               onFocus={this.openDropdown}
             >
               <Rating rating={3} small />
             </Option>
             <Option
-              onClick={() => filterByRating('4')}
+              onClick={() => this.onClick('4')}
               onFocus={this.openDropdown}
             >
               <Rating rating={4} small />
             </Option>
             <Option
-              onClick={() => filterByRating('5')}
+              onClick={() => this.onClick('5')}
               onFocus={this.openDropdown}
             >
               <Rating rating={5} small />
