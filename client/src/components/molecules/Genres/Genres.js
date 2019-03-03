@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 const Genres = ({ genres }) => (
   <Wrapper>
     {genres &&
-      genres.length &&
+      !!genres.length &&
       genres.map((genre, i) => <Text key={i}>{genre}</Text>)}
   </Wrapper>
 )
