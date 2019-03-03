@@ -31,7 +31,7 @@ MoviesList.propTypes = {
       actors: PropTypes.string.isRequired,
       country: PropTypes.string.isRequired,
       director: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
+      genres: PropTypes.arrayOf(PropTypes.string).isRequired,
       id: PropTypes.string,
       language: PropTypes.string.isRequired,
       listStyle: PropTypes.string,

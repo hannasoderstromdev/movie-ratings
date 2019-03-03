@@ -30,7 +30,7 @@ const MovieRow = ({
   title,
   year,
   runtime,
-  genre,
+  genres,
   setRating,
   rating,
   openFullMovie,
@@ -38,7 +38,7 @@ const MovieRow = ({
   <Wrapper>
     <PosterImg alt={title} onClick={openFullMovie} src={poster} />
     <MovieHeader
-      genre={genre}
+      genres={genres}
       id={id}
       poster={poster}
       rating={rating}
@@ -62,7 +62,7 @@ MovieRow.defaultProps = {
 }
 
 MovieRow.propTypes = {
-  genre: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   id: PropTypes.string,
   openFullMovie: PropTypes.func.isRequired,
   poster: PropTypes.string.isRequired,

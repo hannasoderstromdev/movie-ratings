@@ -21,10 +21,10 @@ const MovieSchema = new Schema(
       type: String,
       required: true,
     },
-    genre: {
+    genres: [{
       type: String,
       required: true,
-    },
+    }],
     director: {
       type: String,
       required: true,

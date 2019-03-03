@@ -13,7 +13,7 @@ describe('Components/Molecules/Movie', () => {
     const props = {
       id: 'movieid01',
       country: 'USA',
-      genre: 'Action',
+      genres: ['Action'],
       language: 'ENG',
       title: 'Movie Title',
       year: '1998',

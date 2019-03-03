@@ -52,7 +52,7 @@ class MovieFull extends React.Component {
     const {
       title,
       poster,
-      genre,
+      genres,
       id,
       rating,
       runtime,
@@ -71,6 +71,7 @@ class MovieFull extends React.Component {
     } = this.props
 
     const { detailsOpen } = this.state
+    const setRating = userRole === 'Admin' ? this.setRating : null
 
     return title ? (
       <FullMovie data-testid="full-movie">
@@ -78,12 +79,12 @@ class MovieFull extends React.Component {
           <PosterImg alt={title} src={poster} />
           <MovieHeader
             deleteMovie={this.onDelete}
-            genre={genre}
+            genres={genres}
             id={id}
             poster={poster}
             rating={rating}
             runtime={runtime}
-            setRating={userRole === 'Admin' ? this.setRating : null}
+            setRating={setRating}
             showDelete={userRole === 'Admin' && showDelete}
             title={title}
             year={year}
@@ -124,7 +125,7 @@ MovieFull.propTypes = {
   country: PropTypes.string.isRequired,
   deleteMovie: PropTypes.func.isRequired,
   director: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   id: PropTypes.string,
   language: PropTypes.string.isRequired,
   onClose: PropTypes.func,

@@ -45,6 +45,7 @@ describe('Components/Organisms/MovieFull', () => {
     const store = mockStore(initialState)
     const props = {
       movieId: 'mid01',
+      genres: [],
     }
     const { getByText, getByTestId } = render(
       <Root store={store}>

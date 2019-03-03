@@ -23,7 +23,7 @@ class MoviePreview extends React.Component {
   render() {
     const {
       id,
-      genre,
+      genres,
       title,
       year,
       runtime,
@@ -42,7 +42,7 @@ class MoviePreview extends React.Component {
       />
     ) : (
       <MovieRow
-        genre={genre}
+        genres={genres}
         id={id}
         openFullMovie={this.openFullMovie}
         poster={poster}
@@ -56,13 +56,14 @@ class MoviePreview extends React.Component {
 }
 
 MoviePreview.defaultProps = {
+  id: undefined,
   listStyle: 'rows',
   rating: 0,
 }
 
 MoviePreview.propTypes = {
-  genre: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  id: PropTypes.string,
   listStyle: PropTypes.string,
   openModal: PropTypes.func.isRequired,
   poster: PropTypes.string.isRequired,

@@ -9,10 +9,10 @@ describe('Components/Molecules/MovieHeader', () => {
     const props = {
       id: 'mId01',
       deleteMovie: jest.fn(),
-      title: 'the title',
+      title: 'The Title',
       year: '1998',
       runtime: '120 min',
-      genre: 'drama',
+      genres: ['Drama', 'Adventure'],
       rating: 5,
       setRating: jest.fn(),
       showDelete: true,
@@ -25,6 +25,6 @@ describe('Components/Molecules/MovieHeader', () => {
     expect(getByText(/Delete/i)).toBeDefined()
     expect(getByText(props.title)).toBeDefined()
     expect(getByText(`${props.year}, ${props.runtime}`)).toBeDefined()
-    expect(getByText(props.genre)).toBeDefined()
+    expect(getByText(props.genres[0])).toBeDefined()
   })
 })
