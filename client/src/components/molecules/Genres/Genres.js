@@ -16,7 +16,7 @@ const Genres = ({ genres }) => (
   <Wrapper>
     {genres &&
       !!genres.length &&
-      genres.map((genre, i) => <Text key={i}>{genre}</Text>)}
+      genres.map(genre => <Text key={genre._id}>{genre.name}</Text>)}
   </Wrapper>
 )
 
