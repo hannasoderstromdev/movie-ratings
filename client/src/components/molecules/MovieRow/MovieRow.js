@@ -2,14 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Button from 'components/atoms/Button'
 import MovieHeader from 'components/molecules/MovieHeader'
-
-import expandImg from './expand.png'
 
 const Wrapper = styled.article`
   display: grid;
-  grid-template-columns: 1.5fr 5fr 1fr;
+  grid-template-columns: 2fr 5fr;
   align-items: start;
   grid-gap: 2rem;
 `
@@ -18,10 +15,6 @@ const PosterImg = styled.img`
   width: 100%;
   height: auto;
   cursor: pointer;
-`
-
-const RightAligned = styled.div`
-  justify-self: end;
 `
 
 const MovieRow = ({
@@ -47,11 +40,6 @@ const MovieRow = ({
       title={title}
       year={year}
     />
-    <RightAligned>
-      <Button onClick={openFullMovie} thirdiary>
-        <img alt={title} src={expandImg} />
-      </Button>
-    </RightAligned>
   </Wrapper>
 )
 
@@ -62,7 +50,12 @@ MovieRow.defaultProps = {
 }
 
 MovieRow.propTypes = {
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  genres: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  ).isRequired,
   id: PropTypes.string,
   openFullMovie: PropTypes.func.isRequired,
   poster: PropTypes.string.isRequired,
