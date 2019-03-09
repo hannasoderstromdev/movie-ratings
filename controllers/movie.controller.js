@@ -1,6 +1,7 @@
 const { body, param } = require('express-validator/check')
 
 const movieModel = require('../models/Movie')
+const genreModel = require('../models/Genre')
 
 function filterValidMovieProps(props) {
   return {
@@ -184,6 +185,17 @@ module.exports = {
   // Middleware
   // depends on search.controller.search to set res.locals
   findExisting: async (req, res, next) => {
+    // Check if genres exists, otherwise add them to database
+    const existingGenres = await genreModel.distinct('name')
+
+    for (const genre of res.locals.data.genres) {
+      // does genre exist?
+      if (!existingGenres.includes(genre)) {
+        // otherwise, add it
+        const result = await genreModel.create({ name: genre })
+      }
+    }
+
     // compare result to database titles and find out if it already exists
     try {
       const result = await movieModel.find({
@@ -236,13 +248,28 @@ module.exports = {
         data: addIdToMovies(result),
       })
     } catch (error) {
-      console.error(error)
+      next(error)
+    }
+  },
+
+  getByGenre: async (req, res, next) => {
+    console.log('getByGenre')
+
+    try {
+      const result = await movieModel.find({ genres: req.params.genre }).exec()
+
+      res.json({
+        status: 'success',
+        message: 'Found matching movies',
+        data: addIdToMovies(result),
+      })
+    } catch (error) {
       next(error)
     }
   },
 
   getByRating: async (req, res, next) => {
-    console.log('findByRating')
+    console.log('getByRating')
     try {
       const result = await movieModel
         .find({
@@ -281,6 +308,12 @@ module.exports = {
         return [
           body('title', 'title does not exists').exists(),
           body('title', 'Invalid title').isString(),
+        ]
+
+      case 'getByGenre':
+        return [
+          param('genre', 'genre does not exist').exists(),
+          param('genre', 'genre must be a string').isString(),
         ]
 
       case 'create':
