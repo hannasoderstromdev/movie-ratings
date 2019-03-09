@@ -10,6 +10,8 @@ router.get('/', movieController.getAll)
 
 router.get('/title/:title', movieController.validate('findByTitle'), movieController.findByTitle)
 
+router.get('/genre/:genre', movieController.validate('getByGenre'), movieController.getByGenre)
+
 router.get('/latest/:amount', movieController.getLatest)
 
 router.get('/rating/:rating', movieController.getByRating)
