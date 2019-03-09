@@ -185,21 +185,27 @@ module.exports = {
   // Middleware
   // depends on search.controller.search to set res.locals
   findExisting: async (req, res, next) => {
-    // Check if genres exists, otherwise add them to database
-    const existingGenres = await genreModel.distinct('name')
+    const { genres, title } = res.locals.data
 
-    for (const genre of res.locals.data.genres) {
-      // does genre exist?
-      if (!existingGenres.includes(genre)) {
-        // otherwise, add it
-        const result = await genreModel.create({ name: genre })
+    try {
+      // Check if genres exists, otherwise add them to database
+      const existingGenres = await genreModel.distinct('name')
+
+      for (const genre of genres) {
+        if (!existingGenres.includes(genre)) {
+          const result = await genreModel.create({ name: genre })
+        }
       }
+    } catch (error) {
+      next(error)
     }
 
     // compare result to database titles and find out if it already exists
     try {
+      res.locals.data.genres = await genreModel.find({ name: { $in: genres } })
+
       const result = await movieModel.find({
-        title: res.locals.data.title,
+        title,
       })
 
       if (result.length) {
