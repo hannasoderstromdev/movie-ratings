@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import { MovieType } from 'types'
 
 import moviesThunks from 'actions/movies/movies.thunks'
+import genresThunks from 'actions/genres/genres.thunks'
 
 import { H1, TextDark } from 'components/atoms/Typography'
 import Button from 'components/atoms/Button'
@@ -59,6 +60,7 @@ class Library extends React.Component {
 
   async componentDidMount() {
     await this.props.getAllMovies({ limit: 10, page: 1 })
+    await this.props.getAllGenres()
   }
 
   onFilterByRating = rating => {
@@ -135,6 +137,7 @@ class Library extends React.Component {
 
 Library.propTypes = {
   filterByRating: PropTypes.func.isRequired,
+  getAllGenres: PropTypes.func.isRequired,
   getAllMovies: PropTypes.func.isRequired,
   getLatestMovies: PropTypes.func.isRequired,
   movies: PropTypes.shape({
@@ -152,6 +155,7 @@ const mapStateToProps = ({ movies }) => ({
 })
 
 const mapDispatchToProps = {
+  getAllGenres: genresThunks.getAll,
   getAllMovies: moviesThunks.getAllMovies,
   getLatestMovies: moviesThunks.getLatestMovies,
   filterByRating: moviesThunks.filterByRating,
