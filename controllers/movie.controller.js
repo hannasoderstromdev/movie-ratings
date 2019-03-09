@@ -66,7 +66,7 @@ module.exports = {
    */
   getById: async (req, res, next) => {
     try {
-      const movieInfo = await movieModel.findById(req.params.movieId)
+      const movieInfo = await movieModel.findById(req.params.movieId).populate('genres')
       res.json({
         status: 'success',
         message: 'Movie found',
@@ -86,6 +86,7 @@ module.exports = {
 
       const movies = await movieModel
         .find({})
+        .populate('genres')
         .sort({ createdAt: 'desc' })
         .skip(limit * (page - 1))
         .limit(parseInt(limit, 10))
@@ -95,7 +96,12 @@ module.exports = {
         res.status(204).json({
           status: 'success',
           message: 'No movies available',
-          data: null,
+          data: {
+            movies: [],
+            numberOfItems,
+            page,
+            limit,
+          },
         })
       } else {
         res.status(200).json({
@@ -223,6 +229,7 @@ module.exports = {
     try {
       const result = await movieModel
         .find({})
+        .populate('genres')
         .sort({ createdAt: 'desc' })
         .limit(parseInt(req.params.amount, 10))
         .exec()
@@ -246,6 +253,7 @@ module.exports = {
             $search: `\"${req.params.title}\"`,
           },
         })
+        .populate('genres')
         .exec()
 
       res.json({
@@ -262,7 +270,10 @@ module.exports = {
     console.log('getByGenre')
 
     try {
-      const result = await movieModel.find({ genres: req.params.genre }).exec()
+      const result = await movieModel
+        .find({ genres: req.params.genre })
+        .populate('genres')
+        .exec()
 
       res.json({
         status: 'success',
@@ -281,6 +292,7 @@ module.exports = {
         .find({
           rating: req.params.rating,
         })
+        .populate('genres')
         .exec()
 
       res.json({
@@ -296,7 +308,10 @@ module.exports = {
   getRandom: async (req, res, next) => {
     console.log('getRandom')
     try {
-      const result = await movieModel.aggregate([{ $sample: { size: req.params.amount } }]).exec()
+      const result = await movieModel
+        .aggregate([{ $sample: { size: req.params.amount } }])
+        .populate('genres')
+        .exec()
 
       res.json({
         status: 'success',
