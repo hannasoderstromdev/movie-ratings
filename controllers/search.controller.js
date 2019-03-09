@@ -23,7 +23,9 @@ module.exports = {
 
       const data = JSON.parse(response)
 
-      const genres = data.Genre.split(', ')
+      if (data.Error) throw new Error(data.Error)
+
+      const genres = data && data.Genre.split(', ')
 
       res.locals = {
         status: 'success',
