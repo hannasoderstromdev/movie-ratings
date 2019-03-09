@@ -6,7 +6,7 @@ import { H2, Text } from 'components/atoms/Typography'
 import Button from 'components/atoms/Button'
 import Icon from 'components/atoms/Icon'
 
-import Genres from 'components/molecules/Genres'
+import FilterableGenres from 'components/molecules/FilterableGenres'
 import Rating from 'components/molecules/Rating'
 
 const Wrapper = styled.header`
@@ -48,7 +48,7 @@ const MovieHeader = ({
         <YearRuntime>
           {year}, {runtime}
         </YearRuntime>
-        <Genres genres={genres} />
+        <FilterableGenres genres={genres} />
       </Meta>
       {!!rating && <Rating rating={rating} setRating={setRating} small />}
       {showDelete && id && (
