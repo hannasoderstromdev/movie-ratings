@@ -21,7 +21,12 @@ const Genres = ({ genres }) => (
 )
 
 Genres.propTypes = {
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  genres: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  ).isRequired,
 }
 
 export default Genres
