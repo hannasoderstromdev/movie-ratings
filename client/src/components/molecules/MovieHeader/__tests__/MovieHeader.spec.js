@@ -12,7 +12,10 @@ describe('Components/Molecules/MovieHeader', () => {
       title: 'The Title',
       year: '1998',
       runtime: '120 min',
-      genres: ['Drama', 'Adventure'],
+      genres: [
+        { _id: 'genreId01', name: 'Drama' },
+        { _id: 'genreId02', name: 'Adventure' },
+      ],
       rating: 5,
       setRating: jest.fn(),
       showDelete: true,
@@ -25,6 +28,7 @@ describe('Components/Molecules/MovieHeader', () => {
     expect(getByText(/Delete/i)).toBeDefined()
     expect(getByText(props.title)).toBeDefined()
     expect(getByText(`${props.year}, ${props.runtime}`)).toBeDefined()
-    expect(getByText(props.genres[0])).toBeDefined()
+    expect(getByText(props.genres[0].name)).toBeDefined()
+    expect(getByText(props.genres[1].name)).toBeDefined()
   })
 })
