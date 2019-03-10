@@ -53,10 +53,8 @@ describe('Actions/Genres/Thunks', () => {
         {
           payload: {
             genres: {
-              genres: [
-                { _id: 'genreId01', name: 'Drama' },
-                { _id: 'genreId02', name: 'Action' },
-              ],
+              genreId01: { name: 'Drama' },
+              genreId02: { name: 'Action' },
             },
           },
           type: 'LOAD_GENRES_SUCCESS',
