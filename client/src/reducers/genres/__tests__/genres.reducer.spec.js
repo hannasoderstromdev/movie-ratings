@@ -62,10 +62,10 @@ describe('Reducers/ErrorHandler', () => {
       filter,
     }
     const id = 'genreId01'
-    const genre = { name: 'Action' }
+    const name = 'Action'
     const action = {
       type: genresTypes.ADD_TO_GENRE_FILTER,
-      payload: { id, genre },
+      payload: { id, name },
     }
     expect(reducer(initialState, action)).toEqual(expectedState)
   })
