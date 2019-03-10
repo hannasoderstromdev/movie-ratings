@@ -7,4 +7,5 @@ module.exports = function(app) {
   app.use(proxy('/movies', { target: keys.ROOT_URL }))
   app.use(proxy('/movies/create', { target: keys.ROOT_URL }))
   app.use(proxy('/movies/latest', { target: keys.ROOT_URL }))
+  app.use(proxy('/genres', { target: keys.ROOT_URL }))
 }
