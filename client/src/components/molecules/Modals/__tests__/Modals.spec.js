@@ -41,7 +41,7 @@ describe('Components/Molecules/Modals', () => {
             id: 'mid01',
             actors: 'Tufsen',
             country: 'Sweden',
-            genres: ['Action'],
+            genres: [{ _id: 'genreId01', name: 'Action' }],
             director: 'Hanna Söderström',
             language: 'SWE',
             runtime: '120 min',
