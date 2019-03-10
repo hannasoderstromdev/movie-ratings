@@ -17,20 +17,18 @@ const Wrapper = styled.div`
 const Genres = ({ genres }) => (
   <Wrapper>
     {genres &&
-      !!genres.length &&
-      genres.map(genre => (
-        <Genre id={genre._id} key={genre._id} name={genre.name} />
+      Object.entries(genres).map(([id, genre]) => (
+        <Genre id={id} key={id} name={genre.name} />
       ))}
   </Wrapper>
 )
 
 Genres.propTypes = {
-  genres: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string,
+  genres: PropTypes.shape({
+    [PropTypes.string]: PropTypes.shape({
       name: PropTypes.string,
     }),
-  ).isRequired,
+  }).isRequired,
 }
 
 export default Genres
