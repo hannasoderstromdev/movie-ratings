@@ -24,7 +24,7 @@ describe('Actions/Genres/Thunks', () => {
 
   describe('getAll', () => {
     it('dispatches the correct actions', async () => {
-      fetchMock.mock('/genres/', {
+      fetchMock.mock('/genres', {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
