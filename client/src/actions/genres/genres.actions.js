@@ -13,9 +13,9 @@ const loadGenresFailure = () => ({
   type: genresTypes.LOAD_GENRES_FAILURE,
 })
 
-const addToGenreFilter = ({ id, genre }) => ({
+const addToGenreFilter = ({ id, name }) => ({
   type: genresTypes.ADD_TO_GENRE_FILTER,
-  payload: { id, genre },
+  payload: { id, name },
 })
 
 const removeGenreFromFilter = id => ({
