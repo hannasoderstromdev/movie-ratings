@@ -37,7 +37,7 @@ export default (state = initialState, action) => {
         ...state,
         filter: {
           ...state.filter,
-          [action.payload.id]: { ...action.payload.genre },
+          [action.payload.id]: { name: action.payload.name },
         },
       }
 
