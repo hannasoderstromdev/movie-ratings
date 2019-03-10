@@ -1,9 +1,12 @@
 import genresTypes from 'actions/genres/genres.types'
 
+import { removeObjectChildProperty } from 'utils/Object'
+
 const initialState = {
   loading: false,
-  genres: [],
+  genres: {},
   error: false,
+  filter: {},
 }
 
 export default (state = initialState, action) => {
@@ -27,6 +30,21 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         error: true,
+      }
+
+    case genresTypes.ADD_TO_GENRE_FILTER:
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          [action.payload.id]: { ...action.payload.genre },
+        },
+      }
+
+    case genresTypes.REMOVE_FROM_GENRE_FILTER:
+      return {
+        ...state,
+        ...removeObjectChildProperty(state, 'filter', action.payload.id),
       }
 
     default:
