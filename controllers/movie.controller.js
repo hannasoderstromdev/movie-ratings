@@ -38,7 +38,7 @@ function addIdToMovies(movies) {
       awards: movie.awards,
       country: movie.country,
       director: movie.director,
-      genres: movie.genres,
+      genres: makeGenresObject(movie.genres),
       imdbID: movie.imdbID,
       imdbRating: movie.imdbRating,
       imdbVotes: movie.imdbVotes,
@@ -58,6 +58,14 @@ function addIdToMovies(movies) {
     })
   }
   return moviesWithId
+}
+
+function makeGenresObject(genres) {
+  const newGenres = {}
+  for (const genre of genres) {
+    newGenres[genre._id] = { name: genre.name }
+  }
+  return newGenres
 }
 
 module.exports = {
