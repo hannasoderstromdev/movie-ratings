@@ -7,7 +7,11 @@ const getAll = () => async dispatch => {
   dispatch(genresActions.loadGenresInit())
   try {
     const { data } = await genresService.getAll()
-    dispatch(genresActions.loadGenresSuccess(data))
+    const genres = {}
+    for (const genre of data.genres) {
+      genres[genre._id] = { name: genre.name }
+    }
+    dispatch(genresActions.loadGenresSuccess(genres))
   } catch (error) {
     dispatch(
       errorHandlerActions.setError({
