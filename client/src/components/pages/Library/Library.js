@@ -16,6 +16,7 @@ import FullscreenSpinner from 'components/molecules/FullscreenSpinner'
 import Pagination from 'components/molecules/Pagination'
 
 import FilterByRating from 'components/organisms/FilterByRating'
+import FilterByGenre from 'components/organisms/FilterByGenre'
 import MoviesList from 'components/organisms/MoviesList'
 
 import Page from 'components/templates/Page'
@@ -30,10 +31,10 @@ const NoRatingsYet = styled.div`
   font-style: italic;
 `
 
-const TopWrapper = styled.div`
+const TopWrapper = styled.header`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
 `
 
 const ButtonWrapper = styled.div`
@@ -46,7 +47,13 @@ const ButtonWrapper = styled.div`
 const Center = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin: 1.5rem 0;
+`
+
+const FilterWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 class Library extends React.Component {
@@ -84,23 +91,26 @@ class Library extends React.Component {
         <Main>
           <TopWrapper>
             <H1>Library</H1>
-            <FilterByRating filterByRating={this.onFilterByRating} />
-            <ButtonWrapper>
-              <Button onClick={this.setStyleRows} thirdiary>
-                <Icon
-                  color={listStyle === 'rows' ? '#FEDC9B' : '#666'}
-                  icon={['fas', 'th-list']}
-                  iconsize="2.6rem"
-                />
-              </Button>
-              <Button onClick={this.setStyleTiles} thirdiary>
-                <Icon
-                  color={listStyle === 'tiles' ? '#FEDC9B' : '#666'}
-                  icon={['fas', 'th']}
-                  iconsize="2.6rem"
-                />
-              </Button>
-            </ButtonWrapper>
+            <FilterWrapper>
+              <FilterByGenre />
+              <FilterByRating filterByRating={this.onFilterByRating} />
+              <ButtonWrapper>
+                <Button onClick={this.setStyleRows} thirdiary>
+                  <Icon
+                    color={listStyle === 'rows' ? '#FEDC9B' : '#666'}
+                    icon={['fas', 'th-list']}
+                    iconsize="2.6rem"
+                  />
+                </Button>
+                <Button onClick={this.setStyleTiles} thirdiary>
+                  <Icon
+                    color={listStyle === 'tiles' ? '#FEDC9B' : '#666'}
+                    icon={['fas', 'th']}
+                    iconsize="2.6rem"
+                  />
+                </Button>
+              </ButtonWrapper>
+            </FilterWrapper>
           </TopWrapper>
           <Center>
             <TextDark>
