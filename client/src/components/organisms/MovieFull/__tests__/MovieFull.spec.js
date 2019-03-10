@@ -12,13 +12,20 @@ const mockStore = configureStore([])
 describe('Components/Organisms/MovieFull', () => {
   it('renders', () => {
     const initialState = {
+      genres: {
+        loading: false,
+        genres: {
+          genreId01: { name: 'Action' },
+        },
+        filter: {},
+      },
       movies: {
         movies: [
           {
             id: 'mid01',
             actors: 'Tufsen',
             country: 'Sweden',
-            genre: 'Drama',
+            genres: { genreId01: { name: 'Drama' } },
             director: 'Hanna Söderström',
             language: 'SWE',
             runtime: '120 min',
@@ -45,7 +52,6 @@ describe('Components/Organisms/MovieFull', () => {
     const store = mockStore(initialState)
     const props = {
       movieId: 'mid01',
-      genres: [],
     }
     const { getByText, getByTestId } = render(
       <Root store={store}>
