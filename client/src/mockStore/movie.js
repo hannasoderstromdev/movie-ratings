@@ -1,7 +1,7 @@
 export default {
   id: 'movieId01',
   country: 'USA',
-  genres: [{ _id: 'genreId01', name: 'Action' }],
+  genres: { genreId01: { name: 'Action' } },
   language: 'ENG',
   title: 'Movie Title',
   year: '1998',
