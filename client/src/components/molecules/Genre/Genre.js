@@ -52,9 +52,9 @@ class Genre extends Component {
       <Button onClick={this.toggleSelectedGenre} selected={filter[id]}>
         {name}
         {filter[id] ? (
-          <Icon icon={['fas', 'minus']} />
+          <Icon icon={['fas', 'minus']} testId="minus" />
         ) : (
-          <Icon icon={['fas', 'plus']} />
+          <Icon icon={['fas', 'plus']} testId="plus" />
         )}
       </Button>
     )
