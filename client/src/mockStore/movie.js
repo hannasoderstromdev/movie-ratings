@@ -1,0 +1,22 @@
+export default {
+  id: 'movieId01',
+  country: 'USA',
+  genres: [{ _id: 'genreId01', name: 'Action' }],
+  language: 'ENG',
+  title: 'Movie Title',
+  year: '1998',
+  runtime: '128 min',
+  actors: 'Me and Someone Else',
+  director: 'Me',
+  plot: '',
+  poster: 'http://www.url.com/picture.jpg',
+  production: 'Xena and Zeus',
+  rating: 4,
+  ratings: [
+    { Source: '', Value: '' },
+    { Source: '', Value: '' },
+    { Source: '', Value: '' },
+  ],
+  released: 'May 1st 1998',
+  writer: 'Someone Else',
+}
