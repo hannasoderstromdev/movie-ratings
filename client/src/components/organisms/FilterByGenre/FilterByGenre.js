@@ -1,52 +1,43 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+
+import Spinner from 'components/atoms/Spinner'
+import Genres from 'components/molecules/Genres'
 
 class FilterByGenre extends React.Component {
   state = {
-    genres: [
-      {
-        id: 'id1',
-        name: 'Drama',
-        selected: false,
-      },
-      {
-        id: 'id2',
-        name: 'Family',
-        selected: false,
-      },
-      {
-        id: 'id3',
-        name: 'Romance',
-        selected: false,
-      },
-      {
-        id: 'id4',
-        name: 'War',
-        selected: false,
-      },
-    ],
+    isOpen: false,
   }
 
-  toggleSelected = () => {
-    // toggle selected
+  toggleOpen = () => {
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen,
+    }))
   }
 
   render() {
-    return (
+    const { genres, loading } = this.props
+    const { isOpen } = this.state
+    return loading ? (
+      <Spinner />
+    ) : (
       <div>
-        <button>Filter by genre(s)</button>
-        <div>Genres</div>
-        <ul>
-          {this.state.genres.map(genre => (
-            <li key={genre.id} selected={genre.selected}>
-              <button onClick={() => this.toggleSelected(genre.id)}>
-                {genre.name}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <button onClick={this.toggleOpen}>Open</button>
+        {isOpen ? <Genres genres={genres} /> : null}
       </div>
     )
   }
 }
 
-export default FilterByGenre
+const mapStateToProps = ({ genres }) => ({
+  ...genres,
+})
+
+FilterByGenre.propTypes = {
+  filter: PropTypes.shape({}).isRequired,
+  genres: PropTypes.shape({}).isRequired,
+  loading: PropTypes.bool.isRequired,
+}
+
+export default connect(mapStateToProps)(FilterByGenre)
