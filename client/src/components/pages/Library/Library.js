@@ -59,6 +59,7 @@ const FilterWrapper = styled.div`
 class Library extends React.Component {
   state = {
     listStyle: 'rows',
+    filterByGenreOpen: false,
   }
 
   setStyleRows = () => this.setState({ listStyle: 'rows' })
@@ -82,9 +83,15 @@ class Library extends React.Component {
     this.props.getAllMovies({ limit: 10, page })
   }
 
+  toggleFilterByGenreOpen = () => {
+    this.setState(prevState => ({
+      filterByGenreOpen: !prevState.filterByGenreOpen,
+    }))
+  }
+
   render() {
     const { movies } = this.props
-    const { listStyle } = this.state
+    const { listStyle, filterByGenreOpen } = this.state
 
     return (
       <Page data-testid="library-screen">
@@ -92,7 +99,9 @@ class Library extends React.Component {
           <TopWrapper>
             <H1>Library</H1>
             <FilterWrapper>
-              <FilterByGenre />
+              <button onClick={this.toggleFilterByGenreOpen}>
+                Toggle by genre
+              </button>
               <FilterByRating filterByRating={this.onFilterByRating} />
               <ButtonWrapper>
                 <Button onClick={this.setStyleRows} thirdiary>
@@ -112,6 +121,7 @@ class Library extends React.Component {
               </ButtonWrapper>
             </FilterWrapper>
           </TopWrapper>
+          <FilterByGenre isOpen={filterByGenreOpen} />
           <Center>
             <TextDark>
               {movies.limit * (movies.page - 1) + 1}

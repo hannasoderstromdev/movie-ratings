@@ -1,33 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import Spinner from 'components/atoms/Spinner'
 import Genres from 'components/molecules/Genres'
 
-class FilterByGenre extends React.Component {
-  state = {
-    isOpen: false,
-  }
+const Wrapper = styled.section`
+  background-color: ${({ theme }) => theme.colors.black};
+`
 
-  toggleOpen = () => {
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen,
-    }))
-  }
+const FilterByGenre = ({ genres, loading, isOpen }) => {
+  if (loading) return <Spinner />
 
-  render() {
-    const { genres, loading } = this.props
-    const { isOpen } = this.state
-    return loading ? (
-      <Spinner />
-    ) : (
-      <div>
-        <button onClick={this.toggleOpen}>Open</button>
-        {isOpen ? <Genres genres={genres} /> : null}
-      </div>
-    )
-  }
+  return isOpen ? (
+    <Wrapper>
+      <Genres genres={genres} />
+    </Wrapper>
+  ) : null
 }
 
 const mapStateToProps = ({ genres }) => ({
@@ -37,6 +27,7 @@ const mapStateToProps = ({ genres }) => ({
 FilterByGenre.propTypes = {
   filter: PropTypes.shape({}).isRequired,
   genres: PropTypes.shape({}).isRequired,
+  isOpen: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
 }
 
