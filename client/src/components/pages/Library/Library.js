@@ -100,7 +100,7 @@ class Library extends React.Component {
             <H1>Library</H1>
             <FilterWrapper>
               <button onClick={this.toggleFilterByGenreOpen}>
-                Toggle by genre
+                Filter by genres
               </button>
               <FilterByRating filterByRating={this.onFilterByRating} />
               <ButtonWrapper>
