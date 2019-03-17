@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   margin-top: 1rem;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
 
   span {
     margin-right: 0.5rem;
