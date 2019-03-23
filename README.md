@@ -38,7 +38,23 @@ These then combines into Pages which are the routes for the application.
 
 You can read more about the Atomic Design-principles in practice here: https://medium.com/backticks-tildes/visually-breaking-down-ui-components-using-atomic-design-part-1-476e1ddd73ca
 
-## Release Details
+## Release Notes
+
+v.2.0.0
+
+Features:
+
+- You can now filter movies by genre(s).
+
+Chores:
+
+- Updating dependencies.
+
+Fixes:
+
+- A lot of minor fixes and improvements.
+
+---
 
 v1.1.0
 
