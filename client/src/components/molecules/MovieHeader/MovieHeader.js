@@ -92,6 +92,7 @@ const MovieHeader = ({
 MovieHeader.defaultProps = {
   deleteMovie: null,
   id: null,
+  openFullMovie: undefined,
   rating: null,
   setRating: null,
   showDelete: false,
@@ -105,7 +106,7 @@ MovieHeader.propTypes = {
     }),
   }).isRequired,
   id: PropTypes.string,
-  openFullMovie: PropTypes.func.isRequired,
+  openFullMovie: PropTypes.func,
   rating: PropTypes.number,
   runtime: PropTypes.string.isRequired,
   setRating: PropTypes.func,
