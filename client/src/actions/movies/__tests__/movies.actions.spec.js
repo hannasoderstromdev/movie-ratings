@@ -179,4 +179,66 @@ describe('Actions/Movies', () => {
       })
     })
   })
+
+  describe('getMovies', () => {
+    describe('getMovies', () => {
+      it(`returns ${moviesTypes.GET_MOVIES}`, () => {
+        const action = moviesActions.getMovies()
+        expect(action).toEqual({
+          type: moviesTypes.GET_MOVIES,
+        })
+      })
+    })
+    describe('getMoviesSuccess', () => {
+      it(`returns ${moviesTypes.GET_MOVIES_SUCCESS}`, () => {
+        const data = {}
+        const action = moviesActions.getMoviesSuccess(data)
+        expect(action).toEqual({
+          type: moviesTypes.GET_MOVIES_SUCCESS,
+          payload: { data },
+        })
+      })
+    })
+    describe('getMoviesFailure', () => {
+      it(`returns ${moviesTypes.GET_MOVIES_FAILURE}`, () => {
+        const action = moviesActions.getMoviesFailure()
+        expect(action).toEqual({
+          type: moviesTypes.GET_MOVIES_FAILURE,
+        })
+      })
+    })
+  })
+
+  describe('setFilterTitle', () => {
+    it(`returns ${moviesTypes.SET_FILTER_TITLE}`, () => {
+      const title = 'The Title'
+      const action = moviesActions.setFilterTitle(title)
+      expect(action).toEqual({
+        type: moviesTypes.SET_FILTER_TITLE,
+        payload: { title },
+      })
+    })
+  })
+
+  describe('setFilterGenres', () => {
+    it(`returns ${moviesTypes.SET_FILTER_GENRES}`, () => {
+      const genres = ['genresId01', 'genresId02']
+      const action = moviesActions.setFilterGenres(genres)
+      expect(action).toEqual({
+        type: moviesTypes.SET_FILTER_GENRES,
+        payload: { genres },
+      })
+    })
+  })
+
+  describe('setFilterRating', () => {
+    it(`returns ${moviesTypes.SET_FILTER_RATING}`, () => {
+      const rating = 5
+      const action = moviesActions.setFilterRating(rating)
+      expect(action).toEqual({
+        type: moviesTypes.SET_FILTER_RATING,
+        payload: { rating },
+      })
+    })
+  })
 })
