@@ -10,8 +10,11 @@ import RateNewMovie from '..'
 
 const mockStore = configureStore()
 
-const utils = (state, props) => {
+const utils = state => {
   const store = mockStore(state)
+  const props = {
+    openFullMovie: jest.fn(),
+  }
   return render(
     <Root store={store}>
       <Router>
@@ -60,7 +63,7 @@ describe('Components/Organisms/RateNewMovie', () => {
             awards: '',
             country: '',
             director: '',
-            genres: [],
+            genres: {},
             imdbID: '',
             imdbRating: '',
             language: '',
@@ -107,7 +110,7 @@ describe('Components/Organisms/RateNewMovie', () => {
             awards: '',
             country: '',
             director: '',
-            genres: [],
+            genres: {},
             imdbID: '',
             imdbRating: '',
             language: '',
@@ -153,7 +156,7 @@ describe('Components/Organisms/RateNewMovie', () => {
             awards: '',
             country: '',
             director: '',
-            genres: [],
+            genres: {},
             imdbID: '',
             imdbRating: '',
             language: '',

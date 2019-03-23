@@ -1,4 +1,4 @@
-import { isEmptyObject } from '../Object'
+import { isEmptyObject, removeObjectChildProperty } from '../Object'
 
 describe('Utils/Object', () => {
   describe('isEmptyObject', () => {
@@ -14,6 +14,27 @@ describe('Utils/Object', () => {
       }
 
       expect(isEmptyObject(myObject)).toEqual(false)
+    })
+  })
+
+  describe('removeObjectChildProperty', () => {
+    it('returns Object without removed propery', () => {
+      const object = {
+        thing: {},
+        another: {},
+        third: {
+          toBeDeleted: { thing: 'stuff' },
+          toRemain: { thing: 'stuff' },
+        },
+      }
+      const expected = {
+        another: {},
+        thing: {},
+        third: { toRemain: { thing: 'stuff' } },
+      }
+      expect(removeObjectChildProperty(object, 'third', 'toBeDeleted')).toEqual(
+        expected,
+      )
     })
   })
 })

@@ -5,58 +5,12 @@ import MoviesList from '..'
 import Theme from '../../../Theme'
 import Root from 'components/Root'
 import { store } from 'helpers/store'
+import movies from 'mockStore/movies'
 
 describe('Components/Molecules/MoviesList', () => {
   it('renders', () => {
     const props = {
-      movies: [
-        {
-          id: 'mid01',
-          title: 'Movie Title',
-          year: '1998',
-          runtime: '128 min',
-          director: 'Me',
-          actors: 'Me and Someone Else',
-          poster: 'http://www.url.com/picture.jpg',
-          rating: 4,
-          imdbID: 'tt001',
-          genres: ['Action'],
-          country: 'USA',
-          language: 'ENG',
-          plot: 'A story about something',
-          production: 'Dogs Inc',
-          ratings: [
-            { Source: '', Value: '' },
-            { Source: '', Value: '' },
-            { Source: '', Value: '' },
-          ],
-          released: 'May 1st 1998',
-          writer: 'Someone Else',
-        },
-        {
-          id: 'mid02',
-          title: 'Movie Title',
-          year: '1998',
-          runtime: '128 min',
-          director: 'Me',
-          actors: 'Me and Someone Else',
-          poster: 'http://www.url.com/picture.jpg',
-          rating: 4,
-          imdbID: 'tt002',
-          genres: ['Action'],
-          country: 'USA',
-          language: 'ENG',
-          plot: 'A story about something',
-          production: 'Dogs Inc',
-          ratings: [
-            { Source: '', Value: '' },
-            { Source: '', Value: '' },
-            { Source: '', Value: '' },
-          ],
-          released: 'May 1st 1998',
-          writer: 'Someone Else',
-        },
-      ],
+      movies,
     }
     const { container } = render(
       <Root store={store}>

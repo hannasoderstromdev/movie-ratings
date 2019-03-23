@@ -21,10 +21,12 @@ const MovieSchema = new Schema(
       type: String,
       required: true,
     },
-    genres: [{
-      type: String,
-      required: true,
-    }],
+    genres: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Genre',
+      },
+    ],
     director: {
       type: String,
       required: true,

@@ -19,6 +19,7 @@ theme.colors = {
   lightGray: '#666666',
   textPrimary: '#F3F3F3',
   textSecondary: '#666666',
+  textLight: '#BDBDBD',
   textDark: '#323232',
 }
 
@@ -37,6 +38,7 @@ theme.fontSizes = {
   h1: '1.6rem',
   h2: '1.4rem',
   label: '1.2rem',
+  textSmall: '1.1rem',
   text: '1.2rem',
   textLarge: '1.6rem',
 }

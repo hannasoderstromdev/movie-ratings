@@ -11,9 +11,9 @@ describe('Components/Molecules/Movie', () => {
     const toggleFullMovie = jest.fn()
     const toggleDetails = jest.fn()
     const props = {
-      id: 'movieid01',
+      id: 'movieId01',
       country: 'USA',
-      genres: ['Action'],
+      genres: { genreId01: { name: 'Action' } },
       language: 'ENG',
       title: 'Movie Title',
       year: '1998',
@@ -44,6 +44,7 @@ describe('Components/Molecules/Movie', () => {
 
     expect(getByAltText(props.title).tagName).toBe('IMG')
     expect(getByText(props.title).tagName).toBe('H2')
-    expect(getByText(`${props.year}, ${props.runtime}`)).toBeDefined()
+    expect(getByText(`${props.year}`)).toBeDefined()
+    expect(getByText(`${props.runtime}`)).toBeDefined()
   })
 })

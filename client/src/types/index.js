@@ -2,7 +2,11 @@ import PropTypes from 'prop-types'
 
 export const MovieType = {
   country: PropTypes.string.isRequired,
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  genres: PropTypes.shape({
+    [PropTypes.string]: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+  }).isRequired,
   language: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
