@@ -33,6 +33,7 @@ const MovieRow = ({
     <MovieHeader
       genres={genres}
       id={id}
+      openFullMovie={openFullMovie}
       poster={poster}
       rating={rating}
       runtime={runtime}
