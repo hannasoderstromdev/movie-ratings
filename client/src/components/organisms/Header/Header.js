@@ -41,6 +41,7 @@ const HeaderStyle = styled.header`
   margin: 0;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 4px 40px rgba(0, 0, 0.75);
 `
 
 const Header = ({ showSearchLibrary, toggleLibrarySearch, userLoggedIn }) => (
