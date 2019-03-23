@@ -117,6 +117,36 @@ const filterByGenresFailure = () => ({
   type: moviesTypes.FILTER_BY_GENRES_FAILURE,
 })
 
+// filtering
+const setFilterTitle = title => ({
+  type: moviesTypes.SET_FILTER_TITLE,
+  payload: { title },
+})
+
+const setFilterGenres = genres => ({
+  type: moviesTypes.SET_FILTER_GENRES,
+  payload: { genres },
+})
+
+const setFilterRating = rating => ({
+  type: moviesTypes.SET_FILTER_RATING,
+  payload: { rating },
+})
+
+// get movies with filters
+const getMovies = () => ({
+  type: moviesTypes.GET_MOVIES,
+})
+
+const getMoviesSuccess = data => ({
+  type: moviesTypes.GET_MOVIES_SUCCESS,
+  payload: { data },
+})
+
+const getMoviesFailure = () => ({
+  type: moviesTypes.GET_MOVIES_FAILURE,
+})
+
 const moviesActions = {
   getAllMovies,
   getAllMoviesSuccess,
@@ -143,6 +173,12 @@ const moviesActions = {
   filterByGenres,
   filterByGenresSuccess,
   filterByGenresFailure,
+  setFilterTitle,
+  setFilterGenres,
+  setFilterRating,
+  getMovies,
+  getMoviesSuccess,
+  getMoviesFailure,
 }
 
 export default moviesActions

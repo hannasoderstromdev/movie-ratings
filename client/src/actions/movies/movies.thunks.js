@@ -40,6 +40,43 @@ const getAllMovies = ({ limit, page }) => async dispatch => {
   }
 }
 
+const getMoviesFiltered = ({ limit, page, filters }) => async dispatch => {
+  try {
+    const { data } = await moviesService.getFiltered({ limit, page, filters })
+    if (data) {
+      dispatch(
+        moviesActions.getMoviesSuccess({
+          movies: data && data.movies,
+          numberOfItems: parseInt(data && data.numberOfItems),
+          limit: parseInt(data && data.limit),
+          page: parseInt(data && data.page),
+          filters,
+        }),
+      )
+    } else {
+      // Only happens if there are no movies added yet
+      dispatch(
+        moviesActions.getMoviesSuccess({
+          movies: [],
+          numberOfItems: 0,
+          limit,
+          page,
+          filters,
+        }),
+      )
+    }
+  } catch (error) {
+    dispatch(
+      errorHandlerActions.setError({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
+    dispatch(moviesActions.getMoviesFailure())
+  }
+}
+
 const getLatestMovies = amount => async dispatch => {
   dispatch(moviesActions.getLatestMovies())
 
@@ -170,6 +207,7 @@ const moviesThunks = {
   findMovieByTitle,
   filterByRating,
   filterByGenres,
+  getMoviesFiltered,
 }
 
 export default moviesThunks
