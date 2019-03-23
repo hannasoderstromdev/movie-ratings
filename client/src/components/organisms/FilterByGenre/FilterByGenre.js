@@ -8,6 +8,7 @@ import Genres from 'components/molecules/Genres'
 
 const Wrapper = styled.section`
   background-color: ${({ theme }) => theme.colors.black};
+  padding: 0.15rem 1rem 0 1rem;
 `
 
 const FilterByGenre = ({ genres, loading, isOpen }) => {
