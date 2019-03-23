@@ -13,12 +13,14 @@ const handleResponse = async response => {
     if (response.status === 403) {
       userService.logout()
     }
+
     const error = {
       message: response.statusText,
       status: response.status,
     }
     return Promise.reject(error)
   }
-  return JSON.parse(text)
+
+  return text && JSON.parse(text)
 }
 export default handleResponse

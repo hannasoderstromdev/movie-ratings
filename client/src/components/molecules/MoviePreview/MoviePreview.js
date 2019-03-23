@@ -62,7 +62,11 @@ MoviePreview.defaultProps = {
 }
 
 MoviePreview.propTypes = {
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  genres: PropTypes.shape({
+    [PropTypes.string]: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+  }).isRequired,
   id: PropTypes.string,
   listStyle: PropTypes.string,
   openModal: PropTypes.func.isRequired,

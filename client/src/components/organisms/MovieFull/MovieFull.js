@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import { MovieType } from 'types'
+
 import moviesThunks from 'actions/movies/movies.thunks'
 
 import MovieHeader from 'components/molecules/MovieHeader'
@@ -121,27 +123,10 @@ MovieFull.defaultProps = {
 }
 
 MovieFull.propTypes = {
-  actors: PropTypes.string.isRequired,
-  country: PropTypes.string.isRequired,
-  deleteMovie: PropTypes.func.isRequired,
-  director: PropTypes.string.isRequired,
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-  id: PropTypes.string,
-  language: PropTypes.string.isRequired,
+  ...MovieType,
   onClose: PropTypes.func,
-  plot: PropTypes.string.isRequired,
-  poster: PropTypes.string.isRequired,
-  production: PropTypes.string.isRequired,
-  rating: PropTypes.number,
-  ratings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  released: PropTypes.string.isRequired,
-  runtime: PropTypes.string.isRequired,
-  showDelete: PropTypes.bool,
-  title: PropTypes.string.isRequired,
   updateMovie: PropTypes.func.isRequired,
   userRole: PropTypes.string.isRequired,
-  writer: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = ({ movies, user }, { movieId }) => {
