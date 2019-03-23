@@ -113,20 +113,22 @@ const MovieDetails = ({
           </div>
         </Meta>
 
-        <Ratings>
-          <RatingsItem>
-            <Img alt={ratings[0].Source} src={imdbImage} />
-            <Text>{ratings[0].Value}</Text>
-          </RatingsItem>
-          <RatingsItem>
-            <Img alt={ratings[1].Source} src={rtImage} />
-            <Text>{ratings[1].Value}</Text>
-          </RatingsItem>
-          <RatingsItem>
-            <Img alt={ratings[2].Source} src={mcImage} />
-            <Text>{ratings[2].Value}</Text>
-          </RatingsItem>
-        </Ratings>
+        {ratings && ratings.length && (
+          <Ratings>
+            <RatingsItem>
+              <Img alt={ratings[0].Source} src={imdbImage} />
+              <Text>{ratings[0].Value}</Text>
+            </RatingsItem>
+            <RatingsItem>
+              <Img alt={ratings[1].Source} src={rtImage} />
+              <Text>{ratings[1].Value}</Text>
+            </RatingsItem>
+            <RatingsItem>
+              <Img alt={ratings[2].Source} src={mcImage} />
+              <Text>{ratings[2].Value}</Text>
+            </RatingsItem>
+          </Ratings>
+        )}
       </MoreDetailsContent>
     ) : null}
   </MoreDetails>

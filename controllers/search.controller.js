@@ -23,6 +23,8 @@ module.exports = {
 
       const data = JSON.parse(response)
 
+      const genres = data.Genre.split(', ')
+
       res.locals = {
         status: 'success',
         message: 'movie found',
@@ -31,7 +33,7 @@ module.exports = {
           year: data.Year,
           released: data.Released,
           runtime: data.Runtime,
-          genre: data.Genre,
+          genres,
           director: data.Director,
           writer: data.Writer,
           actors: data.Actors,
