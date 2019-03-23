@@ -23,6 +23,11 @@ describe('Content', () => {
         error: false,
         status: 200,
       },
+      genres: {
+        loading: false,
+        genres: {},
+        filter: {},
+      },
       movies: {
         movies: [],
         loading: false,

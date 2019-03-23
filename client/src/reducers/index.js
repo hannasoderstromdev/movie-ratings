@@ -5,13 +5,15 @@ import movies from './movies/movies.reducer'
 import search from './search/search.reducer'
 import errorHandler from './errorHandler/errorHandler.reducer'
 import modals from './modals/modals.reducer'
+import genres from './genres/genres.reducer'
 
 const rootReducer = combineReducers({
-  user,
+  errorHandler,
+  genres,
+  modals,
   movies,
   search,
-  errorHandler,
-  modals,
+  user,
 })
 
 export default rootReducer

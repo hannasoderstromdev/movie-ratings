@@ -11,9 +11,9 @@ describe('Components/Molecules/Movie', () => {
     const toggleFullMovie = jest.fn()
     const toggleDetails = jest.fn()
     const props = {
-      id: 'movieid01',
+      id: 'movieId01',
       country: 'USA',
-      genres: ['Action'],
+      genres: { genreId01: { name: 'Action' } },
       language: 'ENG',
       title: 'Movie Title',
       year: '1998',

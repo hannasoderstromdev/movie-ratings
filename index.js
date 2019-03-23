@@ -29,6 +29,7 @@ mongoose.connect(keys.MONGO_URI, { useNewUrlParser: true }).catch(err => console
 const movie = require('./routes/movie.route')
 const user = require('./routes/user.route')
 const search = require('./routes/search.route')
+const genre = require('./routes/genre.route')
 
 // app.get('/', function(req, res) {
 //   res.json({ message: 'Welcome to Movie Ratings API' })
@@ -36,6 +37,7 @@ const search = require('./routes/search.route')
 app.use('/users', user)
 app.use('/movies', validateUser, movie)
 app.use('/search', validateUser, search)
+app.use('/genres', validateUser, genre)
 
 /**
  * Serve assets (React App) in production

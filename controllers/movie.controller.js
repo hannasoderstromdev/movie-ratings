@@ -1,6 +1,7 @@
 const { body, param } = require('express-validator/check')
 
 const movieModel = require('../models/Movie')
+const genreModel = require('../models/Genre')
 
 function filterValidMovieProps(props) {
   return {
@@ -37,7 +38,7 @@ function addIdToMovies(movies) {
       awards: movie.awards,
       country: movie.country,
       director: movie.director,
-      genres: movie.genres,
+      genres: makeGenresObject(movie.genres),
       imdbID: movie.imdbID,
       imdbRating: movie.imdbRating,
       imdbVotes: movie.imdbVotes,
@@ -59,13 +60,21 @@ function addIdToMovies(movies) {
   return moviesWithId
 }
 
+function makeGenresObject(genres) {
+  const newGenres = {}
+  for (const genre of genres) {
+    newGenres[genre._id] = { name: genre.name }
+  }
+  return newGenres
+}
+
 module.exports = {
   /**
    * Get Movie By ID
    */
   getById: async (req, res, next) => {
     try {
-      const movieInfo = await movieModel.findById(req.params.movieId)
+      const movieInfo = await movieModel.findById(req.params.movieId).populate('genres')
       res.json({
         status: 'success',
         message: 'Movie found',
@@ -85,6 +94,7 @@ module.exports = {
 
       const movies = await movieModel
         .find({})
+        .populate('genres')
         .sort({ createdAt: 'desc' })
         .skip(limit * (page - 1))
         .limit(parseInt(limit, 10))
@@ -94,7 +104,12 @@ module.exports = {
         res.status(204).json({
           status: 'success',
           message: 'No movies available',
-          data: null,
+          data: {
+            movies: [],
+            numberOfItems,
+            page,
+            limit,
+          },
         })
       } else {
         res.status(200).json({
@@ -184,10 +199,27 @@ module.exports = {
   // Middleware
   // depends on search.controller.search to set res.locals
   findExisting: async (req, res, next) => {
+    const { genres, title } = res.locals.data
+
+    try {
+      // Check if genres exists, otherwise add them to database
+      const existingGenres = await genreModel.distinct('name')
+
+      for (const genre of genres) {
+        if (!existingGenres.includes(genre)) {
+          const result = await genreModel.create({ name: genre })
+        }
+      }
+    } catch (error) {
+      next(error)
+    }
+
     // compare result to database titles and find out if it already exists
     try {
+      res.locals.data.genres = await genreModel.find({ name: { $in: genres } })
+
       const result = await movieModel.find({
-        title: res.locals.data.title,
+        title,
       })
 
       if (result.length) {
@@ -205,6 +237,7 @@ module.exports = {
     try {
       const result = await movieModel
         .find({})
+        .populate('genres')
         .sort({ createdAt: 'desc' })
         .limit(parseInt(req.params.amount, 10))
         .exec()
@@ -228,6 +261,7 @@ module.exports = {
             $search: `\"${req.params.title}\"`,
           },
         })
+        .populate('genres')
         .exec()
 
       res.json({
@@ -236,18 +270,37 @@ module.exports = {
         data: addIdToMovies(result),
       })
     } catch (error) {
-      console.error(error)
+      next(error)
+    }
+  },
+
+  getByGenre: async (req, res, next) => {
+    console.log('getByGenre')
+
+    try {
+      const result = await movieModel
+        .find({ genres: req.params.genre })
+        .populate('genres')
+        .exec()
+
+      res.json({
+        status: 'success',
+        message: 'Found matching movies',
+        data: addIdToMovies(result),
+      })
+    } catch (error) {
       next(error)
     }
   },
 
   getByRating: async (req, res, next) => {
-    console.log('findByRating')
+    console.log('getByRating')
     try {
       const result = await movieModel
         .find({
           rating: req.params.rating,
         })
+        .populate('genres')
         .exec()
 
       res.json({
@@ -263,7 +316,10 @@ module.exports = {
   getRandom: async (req, res, next) => {
     console.log('getRandom')
     try {
-      const result = await movieModel.aggregate([{ $sample: { size: req.params.amount } }]).exec()
+      const result = await movieModel
+        .aggregate([{ $sample: { size: req.params.amount } }])
+        .populate('genres')
+        .exec()
 
       res.json({
         status: 'success',
@@ -281,6 +337,12 @@ module.exports = {
         return [
           body('title', 'title does not exists').exists(),
           body('title', 'Invalid title').isString(),
+        ]
+
+      case 'getByGenre':
+        return [
+          param('genre', 'genre does not exist').exists(),
+          param('genre', 'genre must be a string').isString(),
         ]
 
       case 'create':
