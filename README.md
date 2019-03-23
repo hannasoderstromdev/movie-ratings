@@ -40,7 +40,7 @@ You can read more about the Atomic Design-principles in practice here: https://m
 
 ## Release Notes
 
-v.2.0.0
+### v.2.0.0
 
 Features:
 
@@ -56,7 +56,7 @@ Fixes:
 
 ---
 
-v1.1.0
+### v1.1.0
 
 Features:
 
