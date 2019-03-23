@@ -47,7 +47,7 @@ const ButtonWrapper = styled.div`
 const Center = styled.div`
   display: flex;
   justify-content: center;
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 2rem;
 `
 
 const FilterWrapper = styled.div`
