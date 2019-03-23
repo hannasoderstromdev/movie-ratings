@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import { insertionSort } from 'utils/Array'
+
 import Genre from 'components/molecules/Genre'
 
 const Wrapper = styled.div`
@@ -15,14 +17,22 @@ const Wrapper = styled.div`
   }
 `
 
-const Genres = ({ genres }) => (
-  <Wrapper>
-    {genres &&
-      Object.entries(genres).map(([id, genre]) => (
-        <Genre id={id} key={id} name={genre.name} />
-      ))}
-  </Wrapper>
-)
+const Genres = ({ genres }) => {
+  const genresArr = []
+  for (const id in genres) {
+    const genre = { id, name: genres[id].name }
+    genresArr.push(genre)
+  }
+  const sortedAlphabetically = insertionSort(genresArr, 'name')
+  return (
+    <Wrapper>
+      {genres &&
+        sortedAlphabetically.map(genre => (
+          <Genre id={genre.id} key={genre.id} name={genre.name} />
+        ))}
+    </Wrapper>
+  )
+}
 
 Genres.propTypes = {
   genres: PropTypes.shape({
