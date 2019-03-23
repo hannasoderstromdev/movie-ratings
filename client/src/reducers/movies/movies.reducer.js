@@ -8,6 +8,11 @@ const initialState = {
   limit: 0,
   page: 1,
   showSearchLibrary: false,
+  filters: {
+    title: null,
+    genres: null,
+    rating: null,
+  },
 }
 
 export default (state = initialState, action) => {
