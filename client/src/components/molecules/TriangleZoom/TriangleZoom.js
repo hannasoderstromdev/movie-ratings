@@ -41,8 +41,12 @@ const TriangleZoom = ({ onClick }) => (
   </ButtonWrapper>
 )
 
+TriangleZoom.defaultProps = {
+  onClick: undefined,
+}
+
 TriangleZoom.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 }
 
 export default TriangleZoom
