@@ -144,6 +144,23 @@ const filterByRating = rating => async dispatch => {
   }
 }
 
+const filterByGenres = genresIds => async dispatch => {
+  dispatch(moviesActions.filterByGenres())
+  try {
+    const { data } = await moviesService.filterByGenres(genresIds)
+    dispatch(moviesActions.filterByGenresSuccess(data))
+  } catch (error) {
+    dispatch(
+      errorHandlerActions.setError({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
+    dispatch(moviesActions.filterByGenresFailure())
+  }
+}
+
 const moviesThunks = {
   getAllMovies,
   getLatestMovies,
@@ -152,6 +169,7 @@ const moviesThunks = {
   deleteMovie,
   findMovieByTitle,
   filterByRating,
+  filterByGenres,
 }
 
 export default moviesThunks
