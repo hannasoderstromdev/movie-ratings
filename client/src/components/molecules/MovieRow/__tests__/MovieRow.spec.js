@@ -39,7 +39,7 @@ describe('Components/Molecules/MovieRow', () => {
       </Root>,
     )
     expect(getByText(props.title)).toBeDefined()
-    expect(getByText(`${props.year}, ${props.runtime}`)).toBeDefined()
+    expect(getByText(props.year)).toBeDefined()
     expect(getByText(props.genres['genreId01'].name)).toBeDefined()
     expect(getByAltText(props.title)).toBeDefined()
     expect(getByTestId('rating').children.length).toEqual(6)
