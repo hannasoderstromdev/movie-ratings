@@ -24,6 +24,7 @@ describe('Components/Molecules/MovieHeader', () => {
       rating: 5,
       setRating: jest.fn(),
       showDelete: true,
+      openFullMovie: jest.fn(),
     }
     const store = mockStore({
       genres: {
@@ -39,7 +40,7 @@ describe('Components/Molecules/MovieHeader', () => {
     )
     expect(getByText(/Delete/i)).toBeDefined()
     expect(getByText(props.title)).toBeDefined()
-    expect(getByText(`${props.year}, ${props.runtime}`)).toBeDefined()
+    expect(getByText(props.year)).toBeDefined()
     expect(getByText(props.genres['genreId01'].name)).toBeDefined()
     expect(getByText(props.genres['genreId02'].name)).toBeDefined()
   })
