@@ -33,3 +33,9 @@ export const TextPrimary = styled.span`
   font-size: 1.2rem;
   color: ${({ theme }) => theme.colors.primary};
 `
+
+export const TextSmall = styled.span`
+  font-family: ${({ theme }) => theme.fonts.primary};
+  font-size: 1.1rem;
+  color: ${({ theme }) => theme.colors.textLight};
+`
