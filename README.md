@@ -40,7 +40,7 @@ You can read more about the Atomic Design-principles in practice here: https://m
 
 ## Release Notes
 
-### v2.0.1 - New style for movies
+### v2.1.0 - New style for movies
 
 Features:
 
