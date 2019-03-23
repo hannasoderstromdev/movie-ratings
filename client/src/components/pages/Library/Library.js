@@ -56,6 +56,28 @@ const FilterWrapper = styled.div`
   align-items: center;
 `
 
+const FilterByGenreBtn = styled.button`
+  background-color: transparent;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  font-size: ${({ theme }) => theme.fontSizes.text};
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+
+  svg {
+    margin-left: 0.5rem;
+  }
+
+  &:focus {
+    color: ${({ theme }) => theme.colors.primary};
+    svg {
+      color: ${({ theme }) => theme.colors.primary};
+    }
+  }
+`
+
 class Library extends React.Component {
   state = {
     listStyle: 'rows',
@@ -99,9 +121,14 @@ class Library extends React.Component {
           <TopWrapper>
             <H1>Library</H1>
             <FilterWrapper>
-              <button onClick={this.toggleFilterByGenreOpen}>
+              <FilterByGenreBtn onClick={this.toggleFilterByGenreOpen}>
                 Filter by genres
-              </button>
+                {filterByGenreOpen ? (
+                  <Icon color="#F3F3F3" icon={['fas', 'chevron-up']} />
+                ) : (
+                  <Icon color="#F3F3F3" icon={['fas', 'chevron-down']} />
+                )}
+              </FilterByGenreBtn>
               <FilterByRating filterByRating={this.onFilterByRating} />
               <ButtonWrapper>
                 <Button onClick={this.setStyleRows} thirdiary>
