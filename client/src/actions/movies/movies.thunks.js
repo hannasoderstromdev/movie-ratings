@@ -8,14 +8,26 @@ const getAllMovies = ({ limit, page }) => async dispatch => {
 
   try {
     const { data } = await moviesService.getAll({ limit, page })
-    dispatch(
-      moviesActions.getAllMoviesSuccess({
-        movies: data.movies,
-        numberOfItems: parseInt(data.numberOfItems),
-        limit: parseInt(data.limit),
-        page: parseInt(data.page),
-      }),
-    )
+    if (data) {
+      dispatch(
+        moviesActions.getAllMoviesSuccess({
+          movies: data && data.movies,
+          numberOfItems: parseInt(data && data.numberOfItems),
+          limit: parseInt(data && data.limit),
+          page: parseInt(data && data.page),
+        }),
+      )
+    } else {
+      // Only happens if there are no movies added yet
+      dispatch(
+        moviesActions.getAllMoviesSuccess({
+          movies: [],
+          numberOfItems: 0,
+          limit,
+          page,
+        }),
+      )
+    }
   } catch (error) {
     dispatch(
       errorHandlerActions.setError({

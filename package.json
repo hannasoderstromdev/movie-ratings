@@ -1,6 +1,6 @@
 {
   "name": "movie-ratings",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "engines": {
     "node": "11.3.0",
     "npm": "6.8.0"

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { Text, TextDark, TextPrimary } from 'components/atoms/Typography'
+import { TextDark, TextPrimary } from 'components/atoms/Typography'
 import Icon from 'components/atoms/Icon'
 import Rating from 'components/molecules/Rating'
 
@@ -12,30 +12,33 @@ const Wrapper = styled.div`
 
 const Selected = styled.button`
   background-color: transparent;
-  border-top: 1px solid ${({ theme }) => theme.colors.primary};
-  border-right: 1px solid ${({ theme }) => theme.colors.primary};
-  border-left: 1px solid ${({ theme }) => theme.colors.primary};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
   padding: 0.75rem 1.5rem;
-  width: 14rem;
+  border: none;
+  width: 12.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   outline: none;
   cursor: pointer;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  font-size: ${({ theme }) => theme.fontSizes.text};
+
+  &:focus {
+    color: ${({ theme }) => theme.colors.primary};
+    svg {
+      color: ${({ theme }) => theme.colors.primary};
+    }
+  }
 `
 const Dropdown = styled.div`
   background-color: ${({ theme }) => theme.colors.dark};
-  border-top: none;
-  border-right: 1px solid ${({ theme }) => theme.colors.primary};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
-  border-left: 1px solid ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   position: absolute;
-  top: 3rem;
+  top: 2.9rem;
   left: 0;
   z-index: 10;
   padding: 1rem 0 1.5rem;
-  width: 14rem;
+  width: 12.5rem;
 `
 
 const Center = styled.div`
@@ -45,7 +48,7 @@ const Center = styled.div`
 
 const Option = styled.button`
   background-color: ${({ theme }) => theme.colors.dark};
-  padding: 0 1.5rem;
+  padding: 0 1.25rem;
   margin: 2px 0;
   border: none;
   display: block;
@@ -108,7 +111,7 @@ class FilterByRating extends Component {
           onFocus={this.setFocus}
           ref={this.selected}
         >
-          <Text>Filter results...</Text>{' '}
+          Filter by rating
           {this.state.isOpen ? (
             <Icon color="#F3F3F3" icon={['fas', 'chevron-up']} />
           ) : (

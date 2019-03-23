@@ -37,6 +37,7 @@ theme.fontSizes = {
   h1: '1.6rem',
   h2: '1.4rem',
   label: '1.2rem',
+  textSmall: '1.1rem',
   text: '1.2rem',
   textLarge: '1.6rem',
 }
