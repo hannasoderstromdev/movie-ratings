@@ -16,7 +16,7 @@ const FullMovie = styled.div`
 
 const MovieStyle = styled.article`
   display: grid;
-  grid-template-columns: 2.5fr 5fr 1fr;
+  grid-template-columns: 2.5fr 5fr;
   grid-gap: 1rem;
   margin-bottom: 1rem;
 `
@@ -28,7 +28,7 @@ const PosterImg = styled.img`
 
 class MovieFull extends React.Component {
   state = {
-    detailsOpen: false,
+    detailsOpen: true,
   }
 
   onDelete = id => {

@@ -44,6 +44,7 @@ describe('Components/Molecules/Movie', () => {
 
     expect(getByAltText(props.title).tagName).toBe('IMG')
     expect(getByText(props.title).tagName).toBe('H2')
-    expect(getByText(`${props.year}, ${props.runtime}`)).toBeDefined()
+    expect(getByText(`${props.year}`)).toBeDefined()
+    expect(getByText(`${props.runtime}`)).toBeDefined()
   })
 })

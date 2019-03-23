@@ -19,6 +19,7 @@ theme.colors = {
   lightGray: '#666666',
   textPrimary: '#F3F3F3',
   textSecondary: '#666666',
+  textLight: '#BDBDBD',
   textDark: '#323232',
 }
 
