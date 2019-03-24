@@ -8,11 +8,8 @@ const initialState = {
   limit: 0,
   page: 1,
   showSearchLibrary: false,
-  filters: {
-    title: '',
-    genres: [],
-    rating: 0,
-  },
+  genres: [],
+  rating: 0,
 }
 
 export default (state = initialState, action) => {
@@ -34,7 +31,8 @@ export default (state = initialState, action) => {
         numberOfItems: action.payload.numberOfItems,
         limit: action.payload.limit,
         page: action.payload.page,
-        filters: action.payload.filters,
+        genres: action.payload.genres || [],
+        rating: action.payload.rating || 0,
       }
 
     case moviesTypes.GET_MOVIES_FAILURE:
@@ -160,32 +158,23 @@ export default (state = initialState, action) => {
         movies: action.payload.movie,
       }
 
-    case moviesTypes.FILTER_BY_RATING:
-      return {
-        ...state,
-        error: false,
-        loading: true,
-      }
-
-    case moviesTypes.FILTER_BY_RATING_FAILURE:
-      return {
-        ...state,
-        error: true,
-        loading: false,
-      }
-
-    case moviesTypes.FILTER_BY_RATING_SUCCESS:
-      return {
-        ...state,
-        error: false,
-        loading: false,
-        movies: action.payload.movies,
-      }
-
     case moviesTypes.TOGGLE_SEARCH_LIBRARY:
       return {
         ...state,
         showSearchLibrary: !state.showSearchLibrary,
+      }
+
+    // TODO: remove set filters if not used
+    case moviesTypes.SET_FILTER_GENRES:
+      return {
+        ...state,
+        genres: action.payload.genres,
+      }
+
+    case moviesTypes.SET_FILTER_RATING:
+      return {
+        ...state,
+        rating: action.payload.rating,
       }
 
     default:
