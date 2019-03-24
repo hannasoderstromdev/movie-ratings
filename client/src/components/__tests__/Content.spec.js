@@ -35,6 +35,8 @@ describe('Content', () => {
         page: 1,
         limit: 10,
         showSearchLibrary: false,
+        genres: [],
+        rating: 0,
       },
       user: {
         loggingIn: false,
