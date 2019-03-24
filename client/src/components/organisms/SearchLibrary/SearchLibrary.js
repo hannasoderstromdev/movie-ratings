@@ -61,12 +61,17 @@ class SearchLibrary extends React.Component {
   doOnSubmit = e => {
     e.preventDefault()
     const { title } = this.state
-    const { findMovieByTitle, getAllMovies } = this.props
+    const { findMovieByTitle, getMovies, movies } = this.props
 
     if (title.length) {
       findMovieByTitle(title)
     } else {
-      getAllMovies()
+      getMovies({
+        limit: 10,
+        page: 1,
+        genres: movies.genres,
+        rating: movies.rating,
+      })
     }
   }
 
@@ -93,8 +98,10 @@ class SearchLibrary extends React.Component {
 
 SearchLibrary.propTypes = {
   findMovieByTitle: PropTypes.func.isRequired,
-  getAllMovies: PropTypes.func.isRequired,
+  getMovies: PropTypes.func.isRequired,
   movies: PropTypes.shape({
+    genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+    rating: PropTypes.number.isRequired,
     showSearchLibrary: PropTypes.bool.isRequired,
     movies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   }).isRequired,
@@ -106,7 +113,7 @@ const mapStateToProps = ({ movies }) => ({
 
 const mapDispatchToProps = {
   findMovieByTitle: moviesThunks.findMovieByTitle,
-  getAllMovies: moviesThunks.getAllMovies,
+  getMovies: moviesThunks.getMovies,
 }
 
 export default connect(
