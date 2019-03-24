@@ -94,15 +94,33 @@ class Library extends React.Component {
   }
 
   onFilterByRating = rating => {
-    if (rating === 'none') {
-      this.props.getLatestMovies()
-    } else {
-      // this.props.filterByRating(rating)
-    }
+    const { getMovies, movies } = this.props
+    getMovies({
+      limit: 10,
+      page: 1,
+      rating,
+      genres: movies.genres,
+    })
+  }
+
+  onFilterByGenres = genres => {
+    const { getMovies, movies } = this.props
+    getMovies({
+      limit: 10,
+      page: 1,
+      rating: movies.rating,
+      genres,
+    })
   }
 
   onPageChange = page => {
-    this.props.getMovies({ limit: 10, page })
+    const { getMovies, movies } = this.props
+    getMovies({
+      limit: 10,
+      page,
+      rating: movies.rating,
+      genres: movies.genres,
+    })
   }
 
   toggleFilterByGenreOpen = () => {
@@ -183,9 +201,7 @@ class Library extends React.Component {
 }
 
 Library.propTypes = {
-  // filterByRating: PropTypes.func.isRequired,
   getAllGenres: PropTypes.func.isRequired,
-  getLatestMovies: PropTypes.func.isRequired,
   getMovies: PropTypes.func.isRequired,
   movies: PropTypes.shape({
     numberOfItems: PropTypes.number.isRequired,
@@ -194,11 +210,8 @@ Library.propTypes = {
     loading: PropTypes.bool.isRequired,
     movies: PropTypes.arrayOf(PropTypes.shape(MovieType)).isRequired,
     error: PropTypes.bool,
-    filters: PropTypes.shape({
-      title: PropTypes.string,
-      genres: PropTypes.arrayOf(PropTypes.string),
-      rating: PropTypes.number,
-    }).isRequired,
+    genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+    rating: PropTypes.number.isRequired,
   }).isRequired,
 }
 
@@ -210,7 +223,6 @@ const mapDispatchToProps = {
   getAllGenres: genresThunks.getAll,
   getMovies: moviesThunks.getMovies,
   getLatestMovies: moviesThunks.getLatestMovies,
-  // filterByRating: moviesThunks.filterByRating,
 }
 
 export default connect(
