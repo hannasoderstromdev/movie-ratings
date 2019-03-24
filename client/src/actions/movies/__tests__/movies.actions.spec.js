@@ -21,22 +21,21 @@ describe('Actions/Movies', () => {
         const numberOfItems = 100
         const limit = 10
         const page = 1
-        const filters = {
-          title: '',
-          genres: [],
-          rating: 0,
-        }
+        const genres = ['genresId01', 'genresId02']
+        const rating = 5
+
         const action = moviesActions.getMoviesSuccess({
           movies,
           numberOfItems,
           limit,
           page,
-          filters,
+          genres,
+          rating,
         })
 
         expect(action).toEqual({
           type: moviesTypes.GET_MOVIES_SUCCESS,
-          payload: { movies, numberOfItems, limit, page, filters },
+          payload: { movies, numberOfItems, limit, page, genres, rating },
         })
       })
     })
@@ -190,17 +189,6 @@ describe('Actions/Movies', () => {
         expect(action).toEqual({
           type: moviesTypes.DELETE_MOVIE_FAILURE,
         })
-      })
-    })
-  })
-
-  describe('setFilterTitle', () => {
-    it(`returns ${moviesTypes.SET_FILTER_TITLE}`, () => {
-      const title = 'The Title'
-      const action = moviesActions.setFilterTitle(title)
-      expect(action).toEqual({
-        type: moviesTypes.SET_FILTER_TITLE,
-        payload: { title },
       })
     })
   })
