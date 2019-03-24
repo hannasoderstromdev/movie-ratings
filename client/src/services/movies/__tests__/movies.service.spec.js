@@ -14,11 +14,8 @@ describe('Services/Movies', () => {
 
   describe('getAll', () => {
     it('handles successful request', async () => {
-      const filters = {
-        title: '',
-        rating: 0,
-        genres: [],
-      }
+      const genres = ['genresId01']
+      const rating = 5
       const data = [
         {
           id: 'mid01',
@@ -44,17 +41,25 @@ describe('Services/Movies', () => {
         },
       ]
 
-      fetchMock.mock('/movies/?limit=10&page=1', {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
+      fetchMock.mock(
+        '/movies/?limit=10&page=1&filterGenres=[%22genresId01%22]&filterRating=5',
+        {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            data,
+          }),
         },
-        body: JSON.stringify({
-          data,
-        }),
-      })
+      )
 
-      const result = await moviesService.getAll({ limit: 10, page: 1, filters })
+      const result = await moviesService.getAll({
+        limit: 10,
+        page: 1,
+        genres,
+        rating,
+      })
 
       const expectedResult = { data }
 
