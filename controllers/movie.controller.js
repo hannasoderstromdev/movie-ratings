@@ -90,14 +90,18 @@ module.exports = {
    */
   getAll: async (req, res, next) => {
     try {
-      const { limit, page, filterTitle, filterGenres, filterRating } = req.query
+      const { limit, page, filterGenres, filterRating } = req.query
 
       console.log('req.query', req.query)
 
       const conditions = {}
 
-      if (filterTitle || filterGenres || filterRating) {
-        // create find conditions
+      if (filterGenres) {
+        conditions.genres = filterGenres
+      }
+
+      if (filterRating) {
+        conditions.rating = filterRating
       }
 
       const movies = await movieModel
