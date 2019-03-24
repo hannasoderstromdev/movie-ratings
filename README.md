@@ -40,6 +40,24 @@ You can read more about the Atomic Design-principles in practice here: https://m
 
 ## Release Notes
 
+### v3.0.0 - Filters remake
+
+Features:
+
+- Filters remade. You can now filter on both _rating_ and _genres_ at the same time
+
+- Sorting genres alphabetically
+
+Chores:
+
+- Updated dependencies
+
+Fixes:
+
+- Minor styling fixe
+
+---
+
 ### v2.1.0 - New style for movies
 
 Features:
@@ -52,19 +70,19 @@ Fixes:
 
 ---
 
-### v2.0.0 - Genres!
+### v2.0.0 - Genres
 
 Features:
 
-- You can now filter movies by genre(s).
+- You can now filter movies by genre(s)
 
 Chores:
 
-- Updating dependencies.
+- Updating dependencies
 
 Fixes:
 
-- A lot of minor fixes and improvements.
+- A lot of minor fixes and improvements
 
 ---
 
@@ -72,7 +90,7 @@ Fixes:
 
 Features:
 
-- Design changes for bottom menu and buttons.
+- Design changes for bottom menu and buttons
 
 - Renaming page previously named "New" to "Add"
 
@@ -80,9 +98,9 @@ Features:
 
 - User is now logged out and redirected to login-screen when not allowed access (i.e. if access token is invalid)
 
-- Hiding library search component when user is not logged in.
+- Hiding library search component when user is not logged in
 
-- Adds an test-user account with restricted access.
+- Adds an test-user account with restricted access
 
 - Checking against user role for access to restricted features such as:
   - Adding a new rating
@@ -93,10 +111,10 @@ Chores:
 
 - Updating dependencies
 
-- Refactoring in both server and client for more consistent and more readable code.
+- Refactoring in both server and client for more consistent and more readable code
 
 Fixes:
 
-- Hiding pagination-buttons when there is only one page of content available.
+- Hiding pagination-buttons when there is only one page of content available
 
-- Closing filter-dropdown when user clicks an filtering option.
+- Closing filter-dropdown when user clicks an filtering option
