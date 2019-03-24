@@ -1,26 +1,16 @@
 import handleResponse from '../handle-response'
 import headers from 'helpers/headers'
 
-const getAll = async ({ limit = 10, page = 1, filters }) => {
+const getAll = async ({ limit = 10, page = 1, genres, rating }) => {
   const options = await headers('GET::AUTH')
 
-  const filterTitle =
-    filters && filters.title && filters.title.length
-      ? `&filterTitle=${filters.title}`
-      : ''
-
   const filterGenres =
-    filters && filters.genres && filters.genres.length
-      ? `&filterGenres=${JSON.stringify(filters.genres)}`
-      : ''
+    genres && genres.length ? `&filterGenres=${JSON.stringify(genres)}` : ''
 
-  const filterRating =
-    filters && filters.rating && filters.rating > 0
-      ? `&filterRating=${filters.rating}`
-      : ''
+  const filterRating = rating && rating > 0 ? `&filterRating=${rating}` : ''
 
   const response = await fetch(
-    `/movies/?limit=${limit}&page=${page}${filterTitle}${filterGenres}${filterRating}`,
+    `/movies/?limit=${limit}&page=${page}${filterGenres}${filterRating}`,
     options,
   )
   return await handleResponse(response)
