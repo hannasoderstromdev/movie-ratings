@@ -50,26 +50,11 @@ const deleteById = async id => {
   return await handleResponse(response)
 }
 
-// const findByTitle = async title => {
-//   const options = await headers('GET::AUTH')
-//   const response = await fetch(`/movies/title/${title}`, options)
-//   return await handleResponse(response)
-// }
-
-// const filterByRating = async rating => {
-//   const options = await headers('GET::AUTH')
-//   const response = await fetch(`/movies/rating/${rating}`, options)
-//   return await handleResponse(response)
-// }
-
-// const filterByGenres = async genresIds => {
-//   const options = await headers('GET::AUTH')
-//   const response = await fetch(
-//     `/movies/genres/${JSON.stringify(genresIds)}`,
-//     options,
-//   )
-//   return await handleResponse(response)
-// }
+const findByTitle = async title => {
+  const options = await headers('GET::AUTH')
+  const response = await fetch(`/movies/title/${title}`, options)
+  return await handleResponse(response)
+}
 
 const moviesService = {
   getAll,
@@ -77,9 +62,7 @@ const moviesService = {
   create,
   update,
   deleteById,
-  // findByTitle,
-  // filterByRating,
-  // filterByGenres,
+  findByTitle,
 }
 
 export default moviesService
