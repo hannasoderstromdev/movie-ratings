@@ -92,12 +92,10 @@ module.exports = {
     try {
       const { limit, page, filterGenres, filterRating } = req.query
 
-      console.log('req.query', req.query)
-
       const conditions = {}
 
       if (filterGenres) {
-        conditions.genres = filterGenres
+        conditions.genres = { $in: JSON.parse(filterGenres) }
       }
 
       if (filterRating) {
