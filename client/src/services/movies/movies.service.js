@@ -1,9 +1,28 @@
 import handleResponse from '../handle-response'
 import headers from 'helpers/headers'
 
-const getAll = async ({ limit = 10, page = 1 }) => {
+const getAll = async ({ limit = 10, page = 1, filters }) => {
   const options = await headers('GET::AUTH')
-  const response = await fetch(`/movies/?limit=${limit}&page=${page}`, options)
+
+  const filterTitle =
+    filters && filters.title && filters.title.length
+      ? `&filterTitle=${filters.title}`
+      : ''
+
+  const filterGenres =
+    filters && filters.genres && filters.genres.length
+      ? `&filterGenres=${JSON.stringify(filters.genres)}`
+      : ''
+
+  const filterRating =
+    filters && filters.rating && filters.rating > 0
+      ? `&filterRating=${filters.rating}`
+      : ''
+
+  const response = await fetch(
+    `/movies/?limit=${limit}&page=${page}${filterTitle}${filterGenres}${filterRating}`,
+    options,
+  )
   return await handleResponse(response)
 }
 
@@ -31,39 +50,26 @@ const deleteById = async id => {
   return await handleResponse(response)
 }
 
-const findByTitle = async title => {
-  const options = await headers('GET::AUTH')
-  const response = await fetch(`/movies/title/${title}`, options)
-  return await handleResponse(response)
-}
+// const findByTitle = async title => {
+//   const options = await headers('GET::AUTH')
+//   const response = await fetch(`/movies/title/${title}`, options)
+//   return await handleResponse(response)
+// }
 
-const filterByRating = async rating => {
-  const options = await headers('GET::AUTH')
-  const response = await fetch(`/movies/rating/${rating}`, options)
-  return await handleResponse(response)
-}
+// const filterByRating = async rating => {
+//   const options = await headers('GET::AUTH')
+//   const response = await fetch(`/movies/rating/${rating}`, options)
+//   return await handleResponse(response)
+// }
 
-const filterByGenres = async genresIds => {
-  const options = await headers('GET::AUTH')
-  const response = await fetch(
-    `/movies/genres/${JSON.stringify(genresIds)}`,
-    options,
-  )
-  return await handleResponse(response)
-}
-
-const getFiltered = async ({ limit = 10, page = 1, filters }) => {
-  const options = await headers('GET::AUTH')
-  const response = await fetch(
-    `/movies/?limit=${limit}&page=${page}&filter-title=${
-      filters.title
-    }&filter-genres=${JSON.stringify(filters.genres)}&filter-rating=${
-      filters.rating
-    }`,
-    options,
-  )
-  return await handleResponse(response)
-}
+// const filterByGenres = async genresIds => {
+//   const options = await headers('GET::AUTH')
+//   const response = await fetch(
+//     `/movies/genres/${JSON.stringify(genresIds)}`,
+//     options,
+//   )
+//   return await handleResponse(response)
+// }
 
 const moviesService = {
   getAll,
@@ -71,10 +77,9 @@ const moviesService = {
   create,
   update,
   deleteById,
-  findByTitle,
-  filterByRating,
-  filterByGenres,
-  getFiltered,
+  // findByTitle,
+  // filterByRating,
+  // filterByGenres,
 }
 
 export default moviesService
