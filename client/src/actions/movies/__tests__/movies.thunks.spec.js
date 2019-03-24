@@ -22,10 +22,15 @@ describe('Actions/Movies/Thunks', () => {
     localStorage.clear()
   })
 
-  describe('getAllMovies', () => {
+  describe('getMovies', () => {
     it('dispatches the correct actions', async () => {
       const limit = 10
       const page = 1
+      const filters = {
+        title: '',
+        genres: [],
+        rating: 0,
+      }
 
       fetchMock.mock('/movies/?limit=10&page=1', {
         status: 200,
@@ -39,22 +44,24 @@ describe('Actions/Movies/Thunks', () => {
             limit,
             numberOfItems: 1,
             page,
+            filters,
           },
         },
       })
 
-      await store.dispatch(moviesThunks.getAllMovies({ limit, page }))
+      await store.dispatch(moviesThunks.getMovies({ limit, page, filters }))
       const actions = store.getActions()
       const expected = [
-        { type: 'GET_ALL_MOVIES' },
+        { type: 'GET_MOVIES' },
         {
           payload: {
             movies: [{}],
             limit,
             numberOfItems: 1,
             page,
+            filters,
           },
-          type: 'GET_ALL_MOVIES_SUCCESS',
+          type: 'GET_MOVIES_SUCCESS',
         },
       ]
 
@@ -172,45 +179,45 @@ describe('Actions/Movies/Thunks', () => {
     })
   })
 
-  describe('findMovieByTitle', () => {
-    it('dispatches the correct actions', async () => {
-      const title = 'mId01'
-      fetchMock.mock(`/movies/title/${title}`, {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: { data: [{}] },
-      })
-      await store.dispatch(moviesThunks.findMovieByTitle(title))
-      const actions = store.getActions()
-      const expected = [
-        { type: 'FIND_MOVIE_BY_TITLE' },
-        { payload: { movie: [{}] }, type: 'FIND_MOVIE_BY_TITLE_SUCCESS' },
-      ]
+  // describe('findMovieByTitle', () => {
+  //   it('dispatches the correct actions', async () => {
+  //     const title = 'mId01'
+  //     fetchMock.mock(`/movies/title/${title}`, {
+  //       status: 200,
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: { data: [{}] },
+  //     })
+  //     await store.dispatch(moviesThunks.findMovieByTitle(title))
+  //     const actions = store.getActions()
+  //     const expected = [
+  //       { type: 'FIND_MOVIE_BY_TITLE' },
+  //       { payload: { movie: [{}] }, type: 'FIND_MOVIE_BY_TITLE_SUCCESS' },
+  //     ]
 
-      expect(actions).toEqual(expected)
-    })
-  })
+  //     expect(actions).toEqual(expected)
+  //   })
+  // })
 
-  describe('filterByRating', () => {
-    it('dispatches the correct actions', async () => {
-      const rating = '5'
-      fetchMock.mock(`/movies/rating/${rating}`, {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: { data: [{}] },
-      })
-      await store.dispatch(moviesThunks.filterByRating(rating))
-      const actions = store.getActions()
-      const expected = [
-        { type: 'FILTER_BY_RATING' },
-        { payload: { movies: [{}] }, type: 'FILTER_BY_RATING_SUCCESS' },
-      ]
+  // describe('filterByRating', () => {
+  //   it('dispatches the correct actions', async () => {
+  //     const rating = '5'
+  //     fetchMock.mock(`/movies/rating/${rating}`, {
+  //       status: 200,
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: { data: [{}] },
+  //     })
+  //     await store.dispatch(moviesThunks.filterByRating(rating))
+  //     const actions = store.getActions()
+  //     const expected = [
+  //       { type: 'FILTER_BY_RATING' },
+  //       { payload: { movies: [{}] }, type: 'FILTER_BY_RATING_SUCCESS' },
+  //     ]
 
-      expect(actions).toEqual(expected)
-    })
-  })
+  //     expect(actions).toEqual(expected)
+  //   })
+  // })
 })
