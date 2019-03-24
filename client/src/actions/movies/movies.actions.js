@@ -1,17 +1,17 @@
 import moviesTypes from './movies.types'
 
 // getAllMovies
-const getAllMovies = () => ({
-  type: moviesTypes.GET_ALL_MOVIES,
+const getMovies = () => ({
+  type: moviesTypes.GET_MOVIES,
 })
 
-const getAllMoviesSuccess = ({ movies, numberOfItems, limit, page }) => ({
-  type: moviesTypes.GET_ALL_MOVIES_SUCCESS,
-  payload: { movies, numberOfItems, limit, page },
+const getMoviesSuccess = ({ movies, numberOfItems, limit, page, filters }) => ({
+  type: moviesTypes.GET_MOVIES_SUCCESS,
+  payload: { movies, numberOfItems, limit, page, filters },
 })
 
-const getAllMoviesFailure = () => ({
-  type: moviesTypes.GET_ALL_MOVIES_FAILURE,
+const getMoviesFailure = () => ({
+  type: moviesTypes.GET_MOVIES_FAILURE,
 })
 
 // getLatestMovie
@@ -133,24 +133,10 @@ const setFilterRating = rating => ({
   payload: { rating },
 })
 
-// get movies with filters
-const getMovies = () => ({
-  type: moviesTypes.GET_MOVIES,
-})
-
-const getMoviesSuccess = data => ({
-  type: moviesTypes.GET_MOVIES_SUCCESS,
-  payload: { data },
-})
-
-const getMoviesFailure = () => ({
-  type: moviesTypes.GET_MOVIES_FAILURE,
-})
-
 const moviesActions = {
-  getAllMovies,
-  getAllMoviesSuccess,
-  getAllMoviesFailure,
+  getMovies,
+  getMoviesSuccess,
+  getMoviesFailure,
   getLatestMovies,
   getLatestMoviesSuccess,
   getLatestMoviesFailure,
@@ -176,9 +162,6 @@ const moviesActions = {
   setFilterTitle,
   setFilterGenres,
   setFilterRating,
-  getMovies,
-  getMoviesSuccess,
-  getMoviesFailure,
 }
 
 export default moviesActions
