@@ -9,15 +9,15 @@ const initialState = {
   page: 1,
   showSearchLibrary: false,
   filters: {
-    title: null,
-    genres: null,
-    rating: null,
+    title: '',
+    genres: [],
+    rating: 0,
   },
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case moviesTypes.GET_ALL_MOVIES:
+    case moviesTypes.GET_MOVIES:
       return {
         ...state,
         movies: [],
@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
         error: false,
       }
 
-    case moviesTypes.GET_ALL_MOVIES_SUCCESS:
+    case moviesTypes.GET_MOVIES_SUCCESS:
       return {
         ...state,
         error: false,
@@ -34,9 +34,10 @@ export default (state = initialState, action) => {
         numberOfItems: action.payload.numberOfItems,
         limit: action.payload.limit,
         page: action.payload.page,
+        filters: action.payload.filters,
       }
 
-    case moviesTypes.GET_ALL_MOVIES_FAILURE:
+    case moviesTypes.GET_MOVIES_FAILURE:
       return {
         ...state,
         error: true,
