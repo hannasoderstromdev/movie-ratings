@@ -20,6 +20,8 @@ const utils = (doOnSubmit = jest.fn()) => {
       limit: 10,
       page: 1,
       showSearchLibrary: true,
+      genres: [],
+      rating: 0,
     },
   })
   const props = {
