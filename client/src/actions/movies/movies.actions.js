@@ -1,17 +1,24 @@
 import moviesTypes from './movies.types'
 
-// getAllMovies
-const getAllMovies = () => ({
-  type: moviesTypes.GET_ALL_MOVIES,
+// getMovies
+const getMovies = () => ({
+  type: moviesTypes.GET_MOVIES,
 })
 
-const getAllMoviesSuccess = ({ movies, numberOfItems, limit, page }) => ({
-  type: moviesTypes.GET_ALL_MOVIES_SUCCESS,
-  payload: { movies, numberOfItems, limit, page },
+const getMoviesSuccess = ({
+  movies,
+  numberOfItems,
+  limit,
+  page,
+  genres,
+  rating,
+}) => ({
+  type: moviesTypes.GET_MOVIES_SUCCESS,
+  payload: { movies, numberOfItems, limit, page, genres, rating },
 })
 
-const getAllMoviesFailure = () => ({
-  type: moviesTypes.GET_ALL_MOVIES_FAILURE,
+const getMoviesFailure = () => ({
+  type: moviesTypes.GET_MOVIES_FAILURE,
 })
 
 // getLatestMovie
@@ -84,43 +91,26 @@ const findByTitleFailure = () => ({
   type: moviesTypes.FIND_MOVIE_BY_TITLE_FAILURE,
 })
 
-// filter by rating
-const filterByRating = () => ({
-  type: moviesTypes.FILTER_BY_RATING,
-})
-
-const filterByRatingSuccess = movies => ({
-  type: moviesTypes.FILTER_BY_RATING_SUCCESS,
-  payload: { movies },
-})
-
-const filterByRatingFailure = () => ({
-  type: moviesTypes.FILTER_BY_RATING_FAILURE,
-})
-
 // toggle search library
 const toggleSearchLibrary = () => ({
   type: moviesTypes.TOGGLE_SEARCH_LIBRARY,
 })
 
-// filter by genres
-const filterByGenres = () => ({
-  type: moviesTypes.FILTER_BY_GENRES,
+// filtering
+const setFilterGenres = genres => ({
+  type: moviesTypes.SET_FILTER_GENRES,
+  payload: { genres },
 })
 
-const filterByGenresSuccess = movies => ({
-  type: moviesTypes.FILTER_BY_GENRES_SUCCESS,
-  payload: { movies },
-})
-
-const filterByGenresFailure = () => ({
-  type: moviesTypes.FILTER_BY_GENRES_FAILURE,
+const setFilterRating = rating => ({
+  type: moviesTypes.SET_FILTER_RATING,
+  payload: { rating },
 })
 
 const moviesActions = {
-  getAllMovies,
-  getAllMoviesSuccess,
-  getAllMoviesFailure,
+  getMovies,
+  getMoviesSuccess,
+  getMoviesFailure,
   getLatestMovies,
   getLatestMoviesSuccess,
   getLatestMoviesFailure,
@@ -136,13 +126,9 @@ const moviesActions = {
   findByTitle,
   findByTitleSuccess,
   findByTitleFailure,
-  filterByRating,
-  filterByRatingSuccess,
-  filterByRatingFailure,
   toggleSearchLibrary,
-  filterByGenres,
-  filterByGenresSuccess,
-  filterByGenresFailure,
+  setFilterGenres,
+  setFilterRating,
 }
 
 export default moviesActions

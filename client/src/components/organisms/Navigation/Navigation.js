@@ -29,6 +29,7 @@ const Nav = styled.nav`
 
   a:link,
   a:visited {
+    text-decoration: none;
     color: ${({ theme }) => theme.colors.textSecondary};
     svg {
       color: ${({ theme }) => theme.colors.textSecondary};

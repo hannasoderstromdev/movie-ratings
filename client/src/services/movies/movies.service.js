@@ -1,9 +1,18 @@
 import handleResponse from '../handle-response'
 import headers from 'helpers/headers'
 
-const getAll = async ({ limit = 10, page = 1 }) => {
+const getAll = async ({ limit = 10, page = 1, genres, rating }) => {
   const options = await headers('GET::AUTH')
-  const response = await fetch(`/movies/?limit=${limit}&page=${page}`, options)
+
+  const filterGenres =
+    genres && genres.length ? `&filterGenres=${JSON.stringify(genres)}` : ''
+
+  const filterRating = rating && rating > 0 ? `&filterRating=${rating}` : ''
+
+  const response = await fetch(
+    `/movies/?limit=${limit}&page=${page}${filterGenres}${filterRating}`,
+    options,
+  )
   return await handleResponse(response)
 }
 
@@ -37,21 +46,6 @@ const findByTitle = async title => {
   return await handleResponse(response)
 }
 
-const filterByRating = async rating => {
-  const options = await headers('GET::AUTH')
-  const response = await fetch(`/movies/rating/${rating}`, options)
-  return await handleResponse(response)
-}
-
-const filterByGenres = async genresIds => {
-  const options = await headers('GET::AUTH')
-  const response = await fetch(
-    `/movies/genres/${JSON.stringify(genresIds)}`,
-    options,
-  )
-  return await handleResponse(response)
-}
-
 const moviesService = {
   getAll,
   getLatest,
@@ -59,8 +53,6 @@ const moviesService = {
   update,
   deleteById,
   findByTitle,
-  filterByRating,
-  filterByGenres,
 }
 
 export default moviesService

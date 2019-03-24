@@ -89,20 +89,38 @@ class Library extends React.Component {
   setStyleTiles = () => this.setState({ listStyle: 'tiles' })
 
   async componentDidMount() {
-    await this.props.getAllMovies({ limit: 10, page: 1 })
+    await this.props.getMovies({ limit: 10, page: 1 })
     await this.props.getAllGenres()
   }
 
   onFilterByRating = rating => {
-    if (rating === 'none') {
-      this.props.getLatestMovies()
-    } else {
-      this.props.filterByRating(rating)
-    }
+    const { getMovies, movies } = this.props
+    getMovies({
+      limit: 10,
+      page: 1,
+      rating,
+      genres: movies.genres,
+    })
+  }
+
+  onFilterByGenres = genres => {
+    const { getMovies, movies } = this.props
+    getMovies({
+      limit: 10,
+      page: 1,
+      rating: movies.rating,
+      genres,
+    })
   }
 
   onPageChange = page => {
-    this.props.getAllMovies({ limit: 10, page })
+    const { getMovies, movies } = this.props
+    getMovies({
+      limit: 10,
+      page,
+      rating: movies.rating,
+      genres: movies.genres,
+    })
   }
 
   toggleFilterByGenreOpen = () => {
@@ -183,10 +201,8 @@ class Library extends React.Component {
 }
 
 Library.propTypes = {
-  filterByRating: PropTypes.func.isRequired,
   getAllGenres: PropTypes.func.isRequired,
-  getAllMovies: PropTypes.func.isRequired,
-  getLatestMovies: PropTypes.func.isRequired,
+  getMovies: PropTypes.func.isRequired,
   movies: PropTypes.shape({
     numberOfItems: PropTypes.number.isRequired,
     limit: PropTypes.number.isRequired,
@@ -194,6 +210,8 @@ Library.propTypes = {
     loading: PropTypes.bool.isRequired,
     movies: PropTypes.arrayOf(PropTypes.shape(MovieType)).isRequired,
     error: PropTypes.bool,
+    genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+    rating: PropTypes.number.isRequired,
   }).isRequired,
 }
 
@@ -203,9 +221,8 @@ const mapStateToProps = ({ movies }) => ({
 
 const mapDispatchToProps = {
   getAllGenres: genresThunks.getAll,
-  getAllMovies: moviesThunks.getAllMovies,
+  getMovies: moviesThunks.getMovies,
   getLatestMovies: moviesThunks.getLatestMovies,
-  filterByRating: moviesThunks.filterByRating,
 }
 
 export default connect(

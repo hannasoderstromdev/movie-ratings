@@ -122,7 +122,7 @@ class FilterByRating extends Component {
           <Dropdown data-testid="dropdown">
             <Option
               data-testid="filter-none"
-              onClick={() => this.onClick('none')}
+              onClick={() => this.onClick(0)}
               onFocus={this.openDropdown}
             >
               <TextPrimary>Show all ratings</TextPrimary>
@@ -132,34 +132,25 @@ class FilterByRating extends Component {
             </Center>
             <Option
               data-testid="filter-one"
-              onClick={() => this.onClick('1')}
+              onClick={() => this.onClick(1)}
               onFocus={this.openDropdown}
             >
               <Rating rating={1} small />
             </Option>
             <Option
               data-testid="filter-two"
-              onClick={() => this.onClick('2')}
+              onClick={() => this.onClick(2)}
               onFocus={this.openDropdown}
             >
               <Rating rating={2} small />
             </Option>
-            <Option
-              onClick={() => this.onClick('3')}
-              onFocus={this.openDropdown}
-            >
+            <Option onClick={() => this.onClick(3)} onFocus={this.openDropdown}>
               <Rating rating={3} small />
             </Option>
-            <Option
-              onClick={() => this.onClick('4')}
-              onFocus={this.openDropdown}
-            >
+            <Option onClick={() => this.onClick(4)} onFocus={this.openDropdown}>
               <Rating rating={4} small />
             </Option>
-            <Option
-              onClick={() => this.onClick('5')}
-              onFocus={this.openDropdown}
-            >
+            <Option onClick={() => this.onClick(5)} onFocus={this.openDropdown}>
               <Rating rating={5} small />
             </Option>
           </Dropdown>
