@@ -2,39 +2,53 @@ import moviesTypes from '../movies.types'
 import moviesActions from '../movies.actions'
 
 describe('Actions/Movies', () => {
-  describe('getAllMovies', () => {
-    describe('getAllMovies', () => {
-      it(`returns ${moviesTypes.GET_ALL_MOVIES}`, () => {
-        const action = moviesActions.getAllMovies()
+  describe('getMovies', () => {
+    describe('getMovies', () => {
+      it(`returns ${moviesTypes.GET_MOVIES}`, () => {
+        const action = moviesActions.getMovies()
 
         expect(action).toEqual({
-          type: moviesTypes.GET_ALL_MOVIES,
+          type: moviesTypes.GET_MOVIES,
         })
       })
     })
 
-    describe('getAllMoviesSuccess', () => {
+    describe('getMoviesSuccess', () => {
       it(`returns ${
-        moviesTypes.GET_ALL_MOVIES_SUCCESS
+        moviesTypes.GET_MOVIES_SUCCESS
       } and correct payload`, () => {
         const movies = { data: [] }
-        const action = moviesActions.getAllMoviesSuccess({ movies: movies })
+        const numberOfItems = 100
+        const limit = 10
+        const page = 1
+        const filters = {
+          title: '',
+          genres: [],
+          rating: 0,
+        }
+        const action = moviesActions.getMoviesSuccess({
+          movies,
+          numberOfItems,
+          limit,
+          page,
+          filters,
+        })
 
         expect(action).toEqual({
-          type: moviesTypes.GET_ALL_MOVIES_SUCCESS,
-          payload: { movies },
+          type: moviesTypes.GET_MOVIES_SUCCESS,
+          payload: { movies, numberOfItems, limit, page, filters },
         })
       })
     })
 
-    describe('getAllMoviesFailure', () => {
+    describe('getMoviesFailure', () => {
       it(`returns ${
-        moviesTypes.GET_ALL_MOVIES_FAILURE
+        moviesTypes.GET_MOVIES_FAILURE
       } and correct payload`, () => {
-        const action = moviesActions.getAllMoviesFailure()
+        const action = moviesActions.getMoviesFailure()
 
         expect(action).toEqual({
-          type: moviesTypes.GET_ALL_MOVIES_FAILURE,
+          type: moviesTypes.GET_MOVIES_FAILURE,
         })
       })
     })
@@ -175,35 +189,6 @@ describe('Actions/Movies', () => {
 
         expect(action).toEqual({
           type: moviesTypes.DELETE_MOVIE_FAILURE,
-        })
-      })
-    })
-  })
-
-  describe('getMovies', () => {
-    describe('getMovies', () => {
-      it(`returns ${moviesTypes.GET_MOVIES}`, () => {
-        const action = moviesActions.getMovies()
-        expect(action).toEqual({
-          type: moviesTypes.GET_MOVIES,
-        })
-      })
-    })
-    describe('getMoviesSuccess', () => {
-      it(`returns ${moviesTypes.GET_MOVIES_SUCCESS}`, () => {
-        const data = {}
-        const action = moviesActions.getMoviesSuccess(data)
-        expect(action).toEqual({
-          type: moviesTypes.GET_MOVIES_SUCCESS,
-          payload: { data },
-        })
-      })
-    })
-    describe('getMoviesFailure', () => {
-      it(`returns ${moviesTypes.GET_MOVIES_FAILURE}`, () => {
-        const action = moviesActions.getMoviesFailure()
-        expect(action).toEqual({
-          type: moviesTypes.GET_MOVIES_FAILURE,
         })
       })
     })
