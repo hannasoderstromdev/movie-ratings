@@ -10,11 +10,8 @@ describe('Reducers/Movies', () => {
     numberOfItems: 0,
     limit: 0,
     page: 1,
-    filters: {
-      title: '',
-      genres: [],
-      rating: 0,
-    },
+    genres: [],
+    rating: 0,
   }
 
   describe('getMovies', () => {
@@ -37,10 +34,9 @@ describe('Reducers/Movies', () => {
       const limit = 10
       const numberOfItems = 10
       const page = 1
-      const filters = { title: '', rating: 0, genres: [] }
       const action = {
         type: moviesTypes.GET_MOVIES_SUCCESS,
-        payload: { movies, limit, numberOfItems, page, filters },
+        payload: { movies, limit, numberOfItems, page },
       }
       const expectedState = {
         ...initialState,
@@ -50,7 +46,6 @@ describe('Reducers/Movies', () => {
         error: false,
         loading: false,
         movies,
-        filters,
       }
       expect(reducer(initialState, action)).toEqual(expectedState)
     })
@@ -310,44 +305,29 @@ describe('Reducers/Movies', () => {
     })
   })
 
-  describe('filterByRating', () => {
-    it(`handles ${moviesTypes.FILTER_BY_RATING}`, () => {
+  // TODO: remove if not used
+  describe('setFilters', () => {
+    it(`handles ${moviesTypes.SET_FILTER_GENRES}`, () => {
+      const genres = ['genresId01', 'genresId02']
       const action = {
-        type: moviesTypes.FILTER_BY_RATING,
+        type: moviesTypes.SET_FILTER_GENRES,
+        payload: { genres },
       }
       const expectedState = {
         ...initialState,
-        error: false,
-        loading: true,
-        movies: [],
+        genres,
       }
       expect(reducer(initialState, action)).toEqual(expectedState)
     })
-
-    it(`handles ${moviesTypes.FILTER_BY_RATING_FAILURE}`, () => {
+    it(`handles ${moviesTypes.SET_FILTER_RATING}`, () => {
+      const rating = 5
       const action = {
-        type: moviesTypes.FILTER_BY_RATING_FAILURE,
+        type: moviesTypes.SET_FILTER_RATING,
+        payload: { rating },
       }
       const expectedState = {
         ...initialState,
-        error: true,
-        loading: false,
-        movies: [],
-      }
-      expect(reducer(initialState, action)).toEqual(expectedState)
-    })
-
-    it(`handles ${moviesTypes.FILTER_BY_RATING_SUCCESS}`, () => {
-      const movies = [{}]
-      const action = {
-        type: moviesTypes.FILTER_BY_RATING_SUCCESS,
-        payload: { movies },
-      }
-      const expectedState = {
-        ...initialState,
-        error: false,
-        loading: false,
-        movies,
+        rating,
       }
       expect(reducer(initialState, action)).toEqual(expectedState)
     })
