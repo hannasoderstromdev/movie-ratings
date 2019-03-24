@@ -14,6 +14,11 @@ describe('Services/Movies', () => {
 
   describe('getAll', () => {
     it('handles successful request', async () => {
+      const filters = {
+        title: '',
+        rating: 0,
+        genres: [],
+      }
       const data = [
         {
           id: 'mid01',
@@ -49,7 +54,7 @@ describe('Services/Movies', () => {
         }),
       })
 
-      const result = await moviesService.getAll({ limit: 10, page: 1 })
+      const result = await moviesService.getAll({ limit: 10, page: 1, filters })
 
       const expectedResult = { data }
 
