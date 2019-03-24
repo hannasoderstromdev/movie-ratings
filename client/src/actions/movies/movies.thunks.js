@@ -3,11 +3,11 @@ import errorHandlerActions from 'actions/errorHandler/errorHandler.actions'
 
 import moviesService from 'services/movies/movies.service'
 
-const getMovies = ({ limit, page, filters }) => async dispatch => {
+const getMovies = ({ limit, page, genres, rating }) => async dispatch => {
   dispatch(moviesActions.getMovies())
 
   try {
-    const { data } = await moviesService.getAll({ limit, page, filters })
+    const { data } = await moviesService.getAll({ limit, page, genres, rating })
     if (data) {
       dispatch(
         moviesActions.getMoviesSuccess({
@@ -15,7 +15,8 @@ const getMovies = ({ limit, page, filters }) => async dispatch => {
           numberOfItems: parseInt(data && data.numberOfItems),
           limit: parseInt(data && data.limit),
           page: parseInt(data && data.page),
-          filters,
+          genres,
+          rating,
         }),
       )
     } else {
@@ -26,7 +27,8 @@ const getMovies = ({ limit, page, filters }) => async dispatch => {
           numberOfItems: 0,
           limit,
           page,
-          filters,
+          genres,
+          rating,
         }),
       )
     }
@@ -41,43 +43,6 @@ const getMovies = ({ limit, page, filters }) => async dispatch => {
     dispatch(moviesActions.getMoviesFailure())
   }
 }
-
-// const getMoviesFiltered = ({ limit, page, filters }) => async dispatch => {
-//   try {
-//     const { data } = await moviesService.getFiltered({ limit, page, filters })
-//     if (data) {
-//       dispatch(
-//         moviesActions.getMoviesSuccess({
-//           movies: data && data.movies,
-//           numberOfItems: parseInt(data && data.numberOfItems),
-//           limit: parseInt(data && data.limit),
-//           page: parseInt(data && data.page),
-//           filters,
-//         }),
-//       )
-//     } else {
-//       // Only happens if there are no movies added yet
-//       dispatch(
-//         moviesActions.getMoviesSuccess({
-//           movies: [],
-//           numberOfItems: 0,
-//           limit,
-//           page,
-//           filters,
-//         }),
-//       )
-//     }
-//   } catch (error) {
-//     dispatch(
-//       errorHandlerActions.setError({
-//         type: 'danger',
-//         status: error.status,
-//         message: error.message,
-//       }),
-//     )
-//     dispatch(moviesActions.getMoviesFailure())
-//   }
-// }
 
 const getLatestMovies = amount => async dispatch => {
   dispatch(moviesActions.getLatestMovies())
@@ -149,67 +114,30 @@ const deleteMovie = id => async dispatch => {
   }
 }
 
-// const findMovieByTitle = title => async dispatch => {
-//   dispatch(moviesActions.findByTitle())
-//   try {
-//     const { data } = await moviesService.findByTitle(title)
-//     dispatch(moviesActions.findByTitleSuccess(data))
-//   } catch (error) {
-//     dispatch(
-//       errorHandlerActions.setError({
-//         type: 'danger',
-//         status: error.status,
-//         message: error.message,
-//       }),
-//     )
-//     dispatch(moviesActions.findByTitleFailure())
-//   }
-// }
-
-// const filterByRating = rating => async dispatch => {
-//   dispatch(moviesActions.filterByRating())
-//   try {
-//     const { data } = await moviesService.filterByRating(rating)
-//     dispatch(moviesActions.filterByRatingSuccess(data))
-//   } catch (error) {
-//     dispatch(
-//       errorHandlerActions.setError({
-//         type: 'danger',
-//         status: error.status,
-//         message: error.message,
-//       }),
-//     )
-//     dispatch(moviesActions.filterByRatingFailure())
-//   }
-// }
-
-// const filterByGenres = genresIds => async dispatch => {
-//   dispatch(moviesActions.filterByGenres())
-//   try {
-//     const { data } = await moviesService.filterByGenres(genresIds)
-//     dispatch(moviesActions.filterByGenresSuccess(data))
-//   } catch (error) {
-//     dispatch(
-//       errorHandlerActions.setError({
-//         type: 'danger',
-//         status: error.status,
-//         message: error.message,
-//       }),
-//     )
-//     dispatch(moviesActions.filterByGenresFailure())
-//   }
-// }
+const findMovieByTitle = title => async dispatch => {
+  dispatch(moviesActions.findByTitle())
+  try {
+    const { data } = await moviesService.findByTitle(title)
+    dispatch(moviesActions.findByTitleSuccess(data))
+  } catch (error) {
+    dispatch(
+      errorHandlerActions.setError({
+        type: 'danger',
+        status: error.status,
+        message: error.message,
+      }),
+    )
+    dispatch(moviesActions.findByTitleFailure())
+  }
+}
 
 const moviesThunks = {
   getMovies,
   getLatestMovies,
+  findMovieByTitle,
   createMovie,
   updateMovie,
   deleteMovie,
-  // findMovieByTitle,
-  // filterByRating,
-  // filterByGenres,
-  // getMoviesFiltered,
 }
 
 export default moviesThunks
