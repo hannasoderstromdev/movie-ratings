@@ -52,6 +52,19 @@ const filterByGenres = async genresIds => {
   return await handleResponse(response)
 }
 
+const getFiltered = async ({ limit = 10, page = 1, filters }) => {
+  const options = await headers('GET::AUTH')
+  const response = await fetch(
+    `/movies/?limit=${limit}&page=${page}&filter-title=${
+      filters.title
+    }&filter-genres=${JSON.stringify(filters.genres)}&filter-rating=${
+      filters.rating
+    }`,
+    options,
+  )
+  return await handleResponse(response)
+}
+
 const moviesService = {
   getAll,
   getLatest,
@@ -61,6 +74,7 @@ const moviesService = {
   findByTitle,
   filterByRating,
   filterByGenres,
+  getFiltered,
 }
 
 export default moviesService
