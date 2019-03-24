@@ -29,23 +29,26 @@ describe('Actions/Movies/Thunks', () => {
       const genres = ['genresId01', 'genresId02']
       const rating = 5
 
-      fetchMock.mock('/movies/?limit=10&page=1', {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          message: '',
-          data: {
-            movies: [{}],
-            limit,
-            numberOfItems: 1,
-            page,
-            genres,
-            rating,
+      fetchMock.mock(
+        '/movies/?limit=10&page=1&filterGenres=[%22genresId01%22,%22genresId02%22]&filterRating=5',
+        {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            message: '',
+            data: {
+              movies: [{}],
+              limit,
+              numberOfItems: 1,
+              page,
+              genres,
+              rating,
+            },
           },
         },
-      })
+      )
 
       await store.dispatch(
         moviesThunks.getMovies({ limit, page, genres, rating }),
