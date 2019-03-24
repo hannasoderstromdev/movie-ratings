@@ -3,28 +3,32 @@ import errorHandlerActions from 'actions/errorHandler/errorHandler.actions'
 
 import moviesService from 'services/movies/movies.service'
 
-const getAllMovies = ({ limit, page }) => async dispatch => {
-  dispatch(moviesActions.getAllMovies())
+const getMovies = ({ limit, page, genres, rating }) => async dispatch => {
+  dispatch(moviesActions.getMovies())
 
   try {
-    const { data } = await moviesService.getAll({ limit, page })
+    const { data } = await moviesService.getAll({ limit, page, genres, rating })
     if (data) {
       dispatch(
-        moviesActions.getAllMoviesSuccess({
+        moviesActions.getMoviesSuccess({
           movies: data && data.movies,
           numberOfItems: parseInt(data && data.numberOfItems),
           limit: parseInt(data && data.limit),
           page: parseInt(data && data.page),
+          genres,
+          rating,
         }),
       )
     } else {
       // Only happens if there are no movies added yet
       dispatch(
-        moviesActions.getAllMoviesSuccess({
+        moviesActions.getMoviesSuccess({
           movies: [],
           numberOfItems: 0,
           limit,
           page,
+          genres,
+          rating,
         }),
       )
     }
@@ -36,7 +40,7 @@ const getAllMovies = ({ limit, page }) => async dispatch => {
         message: error.message,
       }),
     )
-    dispatch(moviesActions.getAllMoviesFailure())
+    dispatch(moviesActions.getMoviesFailure())
   }
 }
 
@@ -127,31 +131,13 @@ const findMovieByTitle = title => async dispatch => {
   }
 }
 
-const filterByRating = rating => async dispatch => {
-  dispatch(moviesActions.filterByRating())
-  try {
-    const { data } = await moviesService.filterByRating(rating)
-    dispatch(moviesActions.filterByRatingSuccess(data))
-  } catch (error) {
-    dispatch(
-      errorHandlerActions.setError({
-        type: 'danger',
-        status: error.status,
-        message: error.message,
-      }),
-    )
-    dispatch(moviesActions.filterByRatingFailure())
-  }
-}
-
 const moviesThunks = {
-  getAllMovies,
+  getMovies,
   getLatestMovies,
+  findMovieByTitle,
   createMovie,
   updateMovie,
   deleteMovie,
-  findMovieByTitle,
-  filterByRating,
 }
 
 export default moviesThunks

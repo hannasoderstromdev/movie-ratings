@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import genresActions from 'actions/genres/genres.actions'
+import genresThunks from 'actions/genres/genres.thunks'
 
 import Icon from 'components/atoms/Icon'
 
@@ -32,18 +32,9 @@ const Button = styled.button`
 
 class Genre extends Component {
   toggleSelectedGenre = () => {
-    const {
-      addToGenreFilter,
-      filter,
-      id,
-      name,
-      removeGenreFromFilter,
-    } = this.props
-    if (filter[id]) {
-      removeGenreFromFilter(id)
-    } else {
-      addToGenreFilter({ id, name })
-    }
+    const { addOrRemoveGenreAndGetMovies, id, name } = this.props
+
+    addOrRemoveGenreAndGetMovies({ id, name })
   }
 
   render() {
@@ -66,16 +57,14 @@ const mapStateToProps = ({ genres }) => ({
 })
 
 const mapDispatchToProps = {
-  addToGenreFilter: genresActions.addToGenreFilter,
-  removeGenreFromFilter: genresActions.removeGenreFromFilter,
+  addOrRemoveGenreAndGetMovies: genresThunks.addOrRemoveGenreAndGetMovies,
 }
 
 Genre.propTypes = {
-  addToGenreFilter: PropTypes.func.isRequired,
+  addOrRemoveGenreAndGetMovies: PropTypes.func.isRequired,
   filter: PropTypes.shape({}).isRequired,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  removeGenreFromFilter: PropTypes.func.isRequired,
 }
 
 export default connect(

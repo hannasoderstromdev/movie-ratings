@@ -42,6 +42,6 @@ describe('components/molecules/FilterByRating', () => {
     expect(utils.getByTestId('filter-one')).toBeDefined()
 
     fireEvent.click(utils.getByTestId('filter-one'))
-    expect(filterByRating).toHaveBeenCalledWith('1')
+    expect(filterByRating).toHaveBeenCalledWith(1)
   })
 })

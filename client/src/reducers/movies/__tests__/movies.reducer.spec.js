@@ -10,12 +10,14 @@ describe('Reducers/Movies', () => {
     numberOfItems: 0,
     limit: 0,
     page: 1,
+    genres: [],
+    rating: 0,
   }
 
-  describe('getAllMovies', () => {
-    it(`handles ${moviesTypes.GET_ALL_MOVIES}`, () => {
+  describe('getMovies', () => {
+    it(`handles ${moviesTypes.GET_MOVIES}`, () => {
       const action = {
-        type: moviesTypes.GET_ALL_MOVIES,
+        type: moviesTypes.GET_MOVIES,
       }
       const expectedState = {
         ...initialState,
@@ -27,13 +29,13 @@ describe('Reducers/Movies', () => {
       expect(reducer(initialState, action)).toEqual(expectedState)
     })
 
-    it(`handles ${moviesTypes.GET_ALL_MOVIES_SUCCESS}`, () => {
+    it(`handles ${moviesTypes.GET_MOVIES_SUCCESS}`, () => {
       const movies = []
       const limit = 10
       const numberOfItems = 10
       const page = 1
       const action = {
-        type: moviesTypes.GET_ALL_MOVIES_SUCCESS,
+        type: moviesTypes.GET_MOVIES_SUCCESS,
         payload: { movies, limit, numberOfItems, page },
       }
       const expectedState = {
@@ -48,9 +50,9 @@ describe('Reducers/Movies', () => {
       expect(reducer(initialState, action)).toEqual(expectedState)
     })
 
-    it(`handles ${moviesTypes.GET_ALL_MOVIES_FAILURE}`, () => {
+    it(`handles ${moviesTypes.GET_MOVIES_FAILURE}`, () => {
       const action = {
-        type: moviesTypes.GET_ALL_MOVIES_FAILURE,
+        type: moviesTypes.GET_MOVIES_FAILURE,
       }
       const expectedState = {
         ...initialState,
@@ -303,44 +305,29 @@ describe('Reducers/Movies', () => {
     })
   })
 
-  describe('filterByRating', () => {
-    it(`handles ${moviesTypes.FILTER_BY_RATING}`, () => {
+  // TODO: remove if not used
+  describe('setFilters', () => {
+    it(`handles ${moviesTypes.SET_FILTER_GENRES}`, () => {
+      const genres = ['genresId01', 'genresId02']
       const action = {
-        type: moviesTypes.FILTER_BY_RATING,
+        type: moviesTypes.SET_FILTER_GENRES,
+        payload: { genres },
       }
       const expectedState = {
         ...initialState,
-        error: false,
-        loading: true,
-        movies: [],
+        genres,
       }
       expect(reducer(initialState, action)).toEqual(expectedState)
     })
-
-    it(`handles ${moviesTypes.FILTER_BY_RATING_FAILURE}`, () => {
+    it(`handles ${moviesTypes.SET_FILTER_RATING}`, () => {
+      const rating = 5
       const action = {
-        type: moviesTypes.FILTER_BY_RATING_FAILURE,
+        type: moviesTypes.SET_FILTER_RATING,
+        payload: { rating },
       }
       const expectedState = {
         ...initialState,
-        error: true,
-        loading: false,
-        movies: [],
-      }
-      expect(reducer(initialState, action)).toEqual(expectedState)
-    })
-
-    it(`handles ${moviesTypes.FILTER_BY_RATING_SUCCESS}`, () => {
-      const movies = [{}]
-      const action = {
-        type: moviesTypes.FILTER_BY_RATING_SUCCESS,
-        payload: { movies },
-      }
-      const expectedState = {
-        ...initialState,
-        error: false,
-        loading: false,
-        movies,
+        rating,
       }
       expect(reducer(initialState, action)).toEqual(expectedState)
     })

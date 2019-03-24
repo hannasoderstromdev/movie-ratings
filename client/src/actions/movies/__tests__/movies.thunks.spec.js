@@ -22,39 +22,50 @@ describe('Actions/Movies/Thunks', () => {
     localStorage.clear()
   })
 
-  describe('getAllMovies', () => {
+  describe('getMovies', () => {
     it('dispatches the correct actions', async () => {
       const limit = 10
       const page = 1
+      const genres = ['genresId01', 'genresId02']
+      const rating = 5
 
-      fetchMock.mock('/movies/?limit=10&page=1', {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          message: '',
-          data: {
-            movies: [{}],
-            limit,
-            numberOfItems: 1,
-            page,
+      fetchMock.mock(
+        '/movies/?limit=10&page=1&filterGenres=[%22genresId01%22,%22genresId02%22]&filterRating=5',
+        {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            message: '',
+            data: {
+              movies: [{}],
+              limit,
+              numberOfItems: 1,
+              page,
+              genres,
+              rating,
+            },
           },
         },
-      })
+      )
 
-      await store.dispatch(moviesThunks.getAllMovies({ limit, page }))
+      await store.dispatch(
+        moviesThunks.getMovies({ limit, page, genres, rating }),
+      )
       const actions = store.getActions()
       const expected = [
-        { type: 'GET_ALL_MOVIES' },
+        { type: 'GET_MOVIES' },
         {
           payload: {
             movies: [{}],
             limit,
             numberOfItems: 1,
             page,
+            rating,
+            genres,
           },
-          type: 'GET_ALL_MOVIES_SUCCESS',
+          type: 'GET_MOVIES_SUCCESS',
         },
       ]
 
@@ -187,27 +198,6 @@ describe('Actions/Movies/Thunks', () => {
       const expected = [
         { type: 'FIND_MOVIE_BY_TITLE' },
         { payload: { movie: [{}] }, type: 'FIND_MOVIE_BY_TITLE_SUCCESS' },
-      ]
-
-      expect(actions).toEqual(expected)
-    })
-  })
-
-  describe('filterByRating', () => {
-    it('dispatches the correct actions', async () => {
-      const rating = '5'
-      fetchMock.mock(`/movies/rating/${rating}`, {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: { data: [{}] },
-      })
-      await store.dispatch(moviesThunks.filterByRating(rating))
-      const actions = store.getActions()
-      const expected = [
-        { type: 'FILTER_BY_RATING' },
-        { payload: { movies: [{}] }, type: 'FILTER_BY_RATING_SUCCESS' },
       ]
 
       expect(actions).toEqual(expected)

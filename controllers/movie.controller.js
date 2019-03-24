@@ -90,14 +90,25 @@ module.exports = {
    */
   getAll: async (req, res, next) => {
     try {
-      const { limit, page } = req.query
+      const { limit, page, filterGenres, filterRating } = req.query
+
+      const conditions = {}
+
+      if (filterGenres) {
+        conditions.genres = { $in: JSON.parse(filterGenres) }
+      }
+
+      if (filterRating) {
+        conditions.rating = filterRating
+      }
 
       const movies = await movieModel
-        .find({})
+        .find(conditions)
         .populate('genres')
         .sort({ createdAt: 'desc' })
         .skip(limit * (page - 1))
         .limit(parseInt(limit, 10))
+
       const numberOfItems = await movieModel.count()
 
       if (movies.length === 0) {
