@@ -89,7 +89,7 @@ class Library extends React.Component {
   setStyleTiles = () => this.setState({ listStyle: 'tiles' })
 
   async componentDidMount() {
-    await this.props.getAllMovies({ limit: 10, page: 1 })
+    await this.props.getMovies({ limit: 10, page: 1 })
     await this.props.getAllGenres()
   }
 
@@ -97,12 +97,12 @@ class Library extends React.Component {
     if (rating === 'none') {
       this.props.getLatestMovies()
     } else {
-      this.props.filterByRating(rating)
+      // this.props.filterByRating(rating)
     }
   }
 
   onPageChange = page => {
-    this.props.getAllMovies({ limit: 10, page })
+    this.props.getMovies({ limit: 10, page })
   }
 
   toggleFilterByGenreOpen = () => {
@@ -183,10 +183,10 @@ class Library extends React.Component {
 }
 
 Library.propTypes = {
-  filterByRating: PropTypes.func.isRequired,
+  // filterByRating: PropTypes.func.isRequired,
   getAllGenres: PropTypes.func.isRequired,
-  getAllMovies: PropTypes.func.isRequired,
   getLatestMovies: PropTypes.func.isRequired,
+  getMovies: PropTypes.func.isRequired,
   movies: PropTypes.shape({
     numberOfItems: PropTypes.number.isRequired,
     limit: PropTypes.number.isRequired,
@@ -194,6 +194,11 @@ Library.propTypes = {
     loading: PropTypes.bool.isRequired,
     movies: PropTypes.arrayOf(PropTypes.shape(MovieType)).isRequired,
     error: PropTypes.bool,
+    filters: PropTypes.shape({
+      title: PropTypes.string,
+      genres: PropTypes.arrayOf(PropTypes.string),
+      rating: PropTypes.number,
+    }).isRequired,
   }).isRequired,
 }
 
@@ -203,9 +208,9 @@ const mapStateToProps = ({ movies }) => ({
 
 const mapDispatchToProps = {
   getAllGenres: genresThunks.getAll,
-  getAllMovies: moviesThunks.getAllMovies,
+  getMovies: moviesThunks.getMovies,
   getLatestMovies: moviesThunks.getLatestMovies,
-  filterByRating: moviesThunks.filterByRating,
+  // filterByRating: moviesThunks.filterByRating,
 }
 
 export default connect(
