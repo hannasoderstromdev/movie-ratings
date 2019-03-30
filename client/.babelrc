@@ -2,6 +2,12 @@
   "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
     [
+      "@babel/plugin-transform-runtime",
+      {
+        "useESModules": true
+      }
+    ],
+    [
       "@babel/plugin-proposal-class-properties",
       {
         "loose": true
@@ -12,6 +18,6 @@
       "alias": {
         "reducers": "./src/reducers"
       }
-    }]
+    }],
   ]
 }
