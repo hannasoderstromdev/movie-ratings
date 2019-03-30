@@ -1,6 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const keys = require('../../config/keys')
+const keys = require('../config/keys')
 
 module.exports = {
   devServer: {
