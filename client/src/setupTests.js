@@ -1,3 +1,5 @@
+import 'jest-styled-components'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faCheckCircle,
