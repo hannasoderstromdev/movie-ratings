@@ -13,9 +13,8 @@ module.exports = {
     path: path.resolve(__dirname, 'src/index.js'),
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist/static/'),
     filename: '[name].bundle.js',
-    publicPath: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
@@ -35,6 +34,12 @@ module.exports = {
         },
       },
       {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: {
+          loader: 'file-loader',
+        },
+      },
+      {
         test: /\.html$/,
         use: [
           {
@@ -47,7 +52,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './build/index.html',
-      filename: './dist/index.html',
+      filename: './index.html',
     }),
   ],
 }
