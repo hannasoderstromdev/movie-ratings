@@ -1,7 +1,18 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const keys = require('../../config/keys')
 
 module.exports = {
+  devServer: {
+    proxy: {
+      '/users/authenticate': keys.ROOT_URL,
+      '/search': keys.ROOT_URL,
+      '/movies': keys.ROOT_URL,
+      '/movies/create': keys.ROOT_URL,
+      '/movies/latest': keys.ROOT_URL,
+      '/genres': keys.ROOT_URL,
+    },
+  },
   resolve: {
     modules: [path.resolve(__dirname, './src'), 'node_modules'],
     extensions: ['.js', '.jsx', '.json'],
