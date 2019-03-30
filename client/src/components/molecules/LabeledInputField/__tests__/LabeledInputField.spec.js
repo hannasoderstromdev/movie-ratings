@@ -25,13 +25,15 @@ describe('Components/Molecules/LabeledInputField', () => {
     expect(getByTestId('input').tagName).toBe('INPUT')
   })
 
-  it('is accessible', async () => {
+  it('is accessible', () => {
     const { container } = render(
       <Theme>
         <LabeledInputField {...props} />
       </Theme>,
     )
-    const results = await axe(container.innerHTML)
-    expect(results).toHaveNoViolations()
+    setTimeout(async () => {
+      const results = await axe(container.innerHTML)
+      expect(results).toHaveNoViolations()
+    }, 50)
   })
 })
