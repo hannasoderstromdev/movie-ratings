@@ -112,10 +112,10 @@ module.exports = {
   // setupFiles: [],
 
   // The path to a module that runs some code to configure or set up the testing framework before each test
-  setupTestFrameworkScriptFile: '<rootDir>/tests/setupTests.js',
+  setupFilesAfterEnv: ['<rootDir>src/setupTests.js'],
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
-  snapshotSerializers: ['enzyme-to-json/serializer'],
+  // snapshotSerializers: ['enzyme-to-json/serializer'],
 
   // The test environment that will be used for testing
   // testEnvironment: "jest-environment-jsdom",
@@ -155,7 +155,7 @@ module.exports = {
   // A map from regular expressions to paths to transformers
   transform: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/tests/fileTransformer.js',
+      '<rootDir>src/fileTransformer.js',
     '^.+\\.js$': 'babel-jest',
   },
 
