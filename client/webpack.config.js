@@ -13,8 +13,7 @@ module.exports = env => {
 
   return {
     devServer: {
-      compress: true,
-      // contentBase: path.resolve(__dirname, 'dist'),
+      contentBase: path.resolve(__dirname, 'dist'),
       watchContentBase: true,
       publicPath: '/',
       proxy: {
@@ -43,30 +42,32 @@ module.exports = env => {
     },
     optimization: {
       minimize: isDevelopment,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            parse: { ecma: 8 },
-            compress: {
-              ecma: 5,
-              warnings: false,
-              comparisons: false,
-              inline: 2,
-            },
-            mangle: {
-              safari10: true,
-            },
-            output: {
-              ecma: 5,
-              comments: false,
-              ascii_only: true,
-            },
-          },
-          parallel: true,
-          cache: true,
-          sourceMap: isDevelopment,
-        }),
-      ],
+      minimizer: isProduction
+        ? [
+            new TerserPlugin({
+              terserOptions: {
+                parse: { ecma: 8 },
+                compress: {
+                  ecma: 5,
+                  warnings: false,
+                  comparisons: false,
+                  inline: 2,
+                },
+                mangle: {
+                  safari10: true,
+                },
+                output: {
+                  ecma: 5,
+                  comments: false,
+                  ascii_only: true,
+                },
+              },
+              parallel: true,
+              cache: true,
+              sourceMap: isDevelopment,
+            }),
+          ]
+        : [],
       // splitChunks: {
       //   chunks: 'all',
       //   name: false,
@@ -100,42 +101,9 @@ module.exports = env => {
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
-            options: {
-              presets: [
-                ['@babel/preset-env', { targets: { node: 'current' } }],
-                '@babel/preset-react',
-              ],
-              plugins: [
-                [
-                  'transform-imports',
-                  {
-                    '@fortawesome/free-solid-svg-icons': {
-                      transform: '@fortawesome/free-solid-svg-icons/${member}', // eslint-disable-line
-                      skipDefaultConversion: true,
-                    },
-                  },
-                ],
-                ['@babel/plugin-transform-runtime'],
-                ['dynamic-import-node-babel-7'],
-                [
-                  '@babel/plugin-proposal-class-properties',
-                  {
-                    loose: true,
-                  },
-                ],
-                [
-                  'module-resolver',
-                  {
-                    root: ['./src'],
-                    alias: {
-                      reducers: './src/reducers',
-                    },
-                  },
-                ],
-              ],
-            },
           },
         },
+
         {
           test: /\.html$/,
           use: [
@@ -143,17 +111,26 @@ module.exports = env => {
               loader: 'html-loader',
             },
           ],
-          // options: {
-          //   name: 'media/[name].[hash:8].[ext]',
-          // },
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
-          exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
-          use: {
-            loader: 'file-loader',
-          },
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 8000,
+                name: 'images/[hash]-[name].[ext]',
+              },
+            },
+          ],
         },
+        // {
+        //   test: /\.(png|svg|jpg|gif)$/,
+        //   exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+        //   use: {
+        //     loader: 'file-loader',
+        //   },
+        // },
       ],
     },
     plugins: [
