@@ -23,7 +23,7 @@ describe('Components/Molecules/Pagination', () => {
     expect(getByTestId('navigation').children[0].children.length).toEqual(7)
   })
 
-  it('is accessible', async () => {
+  it('is accessible', () => {
     const props = {
       currentPage: 1,
       itemsTotal: 100,
@@ -36,7 +36,9 @@ describe('Components/Molecules/Pagination', () => {
         <Pagination {...props} />
       </Theme>,
     )
-    const results = await axe(container.innerHTML)
-    expect(results).toHaveNoViolations()
+    setTimeout(async () => {
+      const results = await axe(container.innerHTML)
+      expect(results).toHaveNoViolations()
+    }, 50)
   })
 })

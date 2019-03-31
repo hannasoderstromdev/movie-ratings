@@ -93,13 +93,15 @@ describe('<Button />', () => {
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 
-  it('is accessible', async () => {
+  it('is accessible', () => {
     const { container } = render(
       <Theme>
         <Button {...props}>Test Button</Button>
       </Theme>,
     )
-    const results = await axe(container.innerHTML)
-    expect(results).toHaveNoViolations()
+    setTimeout(async () => {
+      const results = await axe(container.innerHTML)
+      expect(results).toHaveNoViolations()
+    }, 50)
   })
 })

@@ -62,10 +62,10 @@ module.exports = {
   moduleFileExtensions: ['js', 'jsx'],
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
-  // moduleNameMapper: {
-  //   '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-  //     '<rootDir>/tests/__mocks__/fileMock.js',
-  // },
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>src/tests/__mocks__/fileMock.js',
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -112,10 +112,10 @@ module.exports = {
   // setupFiles: [],
 
   // The path to a module that runs some code to configure or set up the testing framework before each test
-  setupTestFrameworkScriptFile: '<rootDir>/tests/setupTests.js',
+  setupFilesAfterEnv: ['<rootDir>src/setupTests.js'],
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
-  snapshotSerializers: ['enzyme-to-json/serializer'],
+  // snapshotSerializers: ['enzyme-to-json/serializer'],
 
   // The test environment that will be used for testing
   // testEnvironment: "jest-environment-jsdom",
@@ -153,11 +153,11 @@ module.exports = {
   timers: 'fake',
 
   // A map from regular expressions to paths to transformers
-  transform: {
-    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/tests/fileTransformer.js',
-    '^.+\\.js$': 'babel-jest',
-  },
+  // transform: {
+  //   '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+  //     '<rootDir>src/tests/fileTransformer.js',
+  //   '^.+\\.js$': 'babel-jest',
+  // },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   transformIgnorePatterns: ['/node_modules/'],
@@ -173,4 +173,8 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+
+  watchPlugins: [
+    ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
+  ],
 }
