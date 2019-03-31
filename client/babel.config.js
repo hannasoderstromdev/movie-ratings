@@ -14,14 +14,15 @@ module.exports = {
         },
       },
     ],
+    ['@babel/plugin-transform-spread'],
     ['@babel/plugin-transform-runtime'],
+    ['@babel/plugin-transform-async-to-generator'],
+    ['@babel/plugin-transform-modules-commonjs'],
+    // ['@babel/plugin-transform-react-constant-elements'],
+    ['@babel/plugin-proposal-object-rest-spread'],
+    ['@babel/plugin-proposal-class-properties'],
+    ['@babel/plugin-syntax-dynamic-import'],
     ['dynamic-import-node-babel-7'],
-    [
-      '@babel/plugin-proposal-class-properties',
-      {
-        loose: true,
-      },
-    ],
     [
       'module-resolver',
       {

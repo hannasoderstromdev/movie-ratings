@@ -23,7 +23,8 @@
     "redux-thunk": "^2.3.0",
     "save-dev": "^2.0.0",
     "styled-components": "^4.2.0",
-    "terser-webpack-plugin": "^1.2.3"
+    "terser-webpack-plugin": "^1.2.3",
+    "url-loader": "^1.1.2"
   },
   "scripts": {
     "start": "webpack-dev-server --open --env.mode=development --color --progress",
@@ -50,7 +51,12 @@
     "@babel/core": "^7.4.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-async-to-generator": "^7.4.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.0",
+    "@babel/plugin-transform-react-constant-elements": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.4.0",
+    "@babel/plugin-transform-spread": "^7.2.2",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
