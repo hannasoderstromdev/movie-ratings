@@ -26,9 +26,9 @@
     "terser-webpack-plugin": "^1.2.3"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
+    "start": "webpack-dev-server --open --env.mode=development --color --progress",
+    "dev": "webpack --mode development --env.mode=development --color --progress",
+    "build": "webpack --mode production --env.mode=production",
     "test": "jest --watch",
     "test-clear": "jest --clearCache",
     "test:coverage": "npm test -- --coverage",
@@ -39,9 +39,6 @@
     "format": "npm run prettier -- --write",
     "prettier": "prettier '**/*.+(js)'",
     "validate": "npm run lint && npm run prettier -- --list-different"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",
