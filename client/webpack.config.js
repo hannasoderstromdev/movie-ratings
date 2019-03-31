@@ -2,8 +2,8 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-//   .BundleAnalyzerPlugin
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 
 const keys = require('../config/keys')
 
@@ -36,9 +36,9 @@ module.exports = env => {
       filename: isDevelopment
         ? 'static/js/bundle.js'
         : 'static/js/[name].[hash:8].js',
-      // chunkFilename: isDevelopment
-      //   ? 'static/js/[name].chunk.js'
-      //   : 'static/js/[name].[hash:8].chunk.js',
+      chunkFilename: isDevelopment
+        ? 'static/js/[name].chunk.js'
+        : 'static/js/[name].[hash:8].chunk.js',
     },
     optimization: {
       minimize: isDevelopment,
@@ -103,7 +103,6 @@ module.exports = env => {
             loader: 'babel-loader',
           },
         },
-
         {
           test: /\.html$/,
           use: [
@@ -159,8 +158,8 @@ module.exports = env => {
             : undefined,
         ),
       ),
-      // new BundleAnalyzerPlugin(),
-      isDevelopment && new webpack.HotModuleReplacementPlugin(),
+      env.analyze ? new BundleAnalyzerPlugin() : () => {},
+      isDevelopment ? new webpack.HotModuleReplacementPlugin() : () => {},
     ],
     // node: {
     //   module: 'empty',

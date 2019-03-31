@@ -30,6 +30,7 @@
     "start": "webpack-dev-server --open --env.mode=development --color --progress",
     "dev": "webpack --mode development --env.mode=development --color --progress",
     "build": "webpack --mode production --env.mode=production",
+    "build:analyze": "webpack --mode production --env.mode=production --env.analyze",
     "test": "jest --watch",
     "test-clear": "jest --clearCache",
     "test:coverage": "npm test -- --coverage",
