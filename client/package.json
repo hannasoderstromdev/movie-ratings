@@ -1,6 +1,6 @@
 {
   "name": "movie-ratings-client",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.4.2",
