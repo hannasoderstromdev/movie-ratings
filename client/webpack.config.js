@@ -2,18 +2,21 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+//   .BundleAnalyzerPlugin
 
 const keys = require('../config/keys')
 
 module.exports = env => {
-  const isDevelopment = env === 'development'
-  const isProduction = env === 'production'
+  const isDevelopment = env.mode === 'development'
+  const isProduction = env.mode === 'production'
 
   return {
     devServer: {
-      contentBase: path.resolve(__dirname, 'dist/static/'),
+      compress: true,
+      // contentBase: path.resolve(__dirname, 'dist'),
+      watchContentBase: true,
+      publicPath: '/',
       proxy: {
         '/users/authenticate': keys.ROOT_URL,
         '/search': keys.ROOT_URL,
@@ -29,18 +32,14 @@ module.exports = env => {
       app: path.resolve(__dirname, 'src/index.js'),
     },
     output: {
+      path: isProduction ? path.resolve(__dirname, 'dist') : undefined,
+      // publicPath: '/',
       filename: isDevelopment
         ? 'static/js/bundle.js'
         : 'static/js/[name].[hash:8].js',
-      chunkFilename: isDevelopment
-        ? 'static/js/[name].chunk.js'
-        : 'static/js/[name].[hash:8].chunk.js',
-      devtoolModuleFilenameTemplate: isDevelopment
-        ? info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
-        : info =>
-            path
-              .relative(path.appSrc, info.absoluteResourcePath)
-              .replace(/\\/g, '/'),
+      // chunkFilename: isDevelopment
+      //   ? 'static/js/[name].chunk.js'
+      //   : 'static/js/[name].[hash:8].chunk.js',
     },
     optimization: {
       minimize: isDevelopment,
@@ -68,11 +67,11 @@ module.exports = env => {
           sourceMap: isDevelopment,
         }),
       ],
-      splitChunks: {
-        chunks: 'all',
-        name: false,
-      },
-      runtimeChunk: true,
+      // splitChunks: {
+      //   chunks: 'all',
+      //   name: false,
+      // },
+      // runtimeChunk: true,
     },
     resolve: {
       modules: [path.resolve(__dirname, './src'), 'node_modules'],
@@ -82,28 +81,59 @@ module.exports = env => {
       },
     },
     module: {
+      // strictExportPresence: true,
       rules: [
         { parser: { requireEnsure: false } },
+        {
+          test: /\.(js|jsx)$/,
+          enforce: 'pre',
+          exclude: /node_modules/,
+          use: {
+            loader: 'eslint-loader',
+            options: {
+              emitError: true,
+            },
+          },
+        },
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
-          },
-        },
-        {
-          test: /\.(js|jsx)$/,
-          enforce: 'pre',
-          exclude: /node_modules/,
-          loader: 'eslint-loader',
-          options: {
-            emitError: true,
-          },
-        },
-        {
-          test: /\.(png|svg|jpg|gif)$/,
-          use: {
-            loader: 'file-loader',
+            options: {
+              presets: [
+                ['@babel/preset-env', { targets: { node: 'current' } }],
+                '@babel/preset-react',
+              ],
+              plugins: [
+                [
+                  'transform-imports',
+                  {
+                    '@fortawesome/free-solid-svg-icons': {
+                      transform: '@fortawesome/free-solid-svg-icons/${member}', // eslint-disable-line
+                      skipDefaultConversion: true,
+                    },
+                  },
+                ],
+                ['@babel/plugin-transform-runtime'],
+                ['dynamic-import-node-babel-7'],
+                [
+                  '@babel/plugin-proposal-class-properties',
+                  {
+                    loose: true,
+                  },
+                ],
+                [
+                  'module-resolver',
+                  {
+                    root: ['./src'],
+                    alias: {
+                      reducers: './src/reducers',
+                    },
+                  },
+                ],
+              ],
+            },
           },
         },
         {
@@ -111,11 +141,18 @@ module.exports = env => {
           use: [
             {
               loader: 'html-loader',
-              options: {
-                name: 'static/media/[name].[hash:8].[ext]',
-              },
             },
           ],
+          // options: {
+          //   name: 'media/[name].[hash:8].[ext]',
+          // },
+        },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+          use: {
+            loader: 'file-loader',
+          },
         },
       ],
     },
@@ -124,7 +161,7 @@ module.exports = env => {
         Object.assign(
           {},
           {
-            template: './build/index.html',
+            template: './public/index.html',
             filename: './index.html',
           },
           isProduction
@@ -145,18 +182,18 @@ module.exports = env => {
             : undefined,
         ),
       ),
-      new BundleAnalyzerPlugin(),
-      isDevelopment ? new webpack.HotModuleReplacementPlugin() : () => {},
+      // new BundleAnalyzerPlugin(),
+      isDevelopment && new webpack.HotModuleReplacementPlugin(),
     ],
-    node: {
-      module: 'empty',
-      dgram: 'empty',
-      dns: 'mock',
-      fs: 'empty',
-      http2: 'empty',
-      net: 'empty',
-      tls: 'empty',
-      child_process: 'empty',
-    },
+    // node: {
+    //   module: 'empty',
+    //   dgram: 'empty',
+    //   dns: 'mock',
+    //   fs: 'empty',
+    //   http2: 'empty',
+    //   net: 'empty',
+    //   tls: 'empty',
+    //   child_process: 'empty',
+    // },
   }
 }
