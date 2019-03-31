@@ -40,6 +40,12 @@ You can read more about the Atomic Design-principles in practice here: https://m
 
 ## Release Notes
 
+### v3.0.1 - Behind the scenes
+
+This release contains important updates from a developer point of view. `create-react-app` has been replaced with a standalone configuration of Webpack 4 and Babel 7.
+
+---
+
 ### v3.0.0 - Filters remake
 
 Features:

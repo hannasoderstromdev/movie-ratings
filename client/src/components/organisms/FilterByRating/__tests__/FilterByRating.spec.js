@@ -29,12 +29,13 @@ describe('components/molecules/FilterByRating', () => {
     expect(utils.getByTestId('dropdown')).toBeDefined()
   })
 
-  it('closes onBlur', async () => {
+  it('closes onBlur', () => {
     fireEvent.click(utils.getByTestId('selected'))
+    setTimeout(async () => {
+      fireEvent.blur(utils.getByTestId('selected'))
 
-    fireEvent.blur(utils.getByTestId('selected'))
-
-    await wait(() => expect(utils.queryByTestId('dropdown')).toBeNull())
+      await wait(() => expect(utils.queryByTestId('dropdown')).toBeNull())
+    }, 50)
   })
 
   it('calls filterByRating onClick', () => {
