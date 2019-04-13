@@ -74,6 +74,7 @@ class MovieFull extends React.Component {
 
     const { detailsOpen } = this.state
     const setRating = userRole === 'Admin' ? this.setRating : null
+    const showDeleteSetting = userRole === 'Admin' && showDelete
 
     return title ? (
       <FullMovie data-testid="full-movie">
@@ -87,7 +88,7 @@ class MovieFull extends React.Component {
             rating={rating}
             runtime={runtime}
             setRating={setRating}
-            showDelete={userRole === 'Admin' && showDelete}
+            showDelete={showDeleteSetting}
             title={title}
             year={year}
           />
