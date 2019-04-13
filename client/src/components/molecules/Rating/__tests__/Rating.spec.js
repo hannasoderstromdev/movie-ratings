@@ -31,9 +31,9 @@ describe('Components/Molecules/Rating', () => {
   })
 
   it('handles useLock and setRating', () => {
-    fireEvent.click(utils.getByTestId('rating').children[5]) // unlock
+    fireEvent.click(utils.getByTestId('rating').children[0]) // unlock
     fireEvent.click(utils.getByTestId('rating').children[1])
     expect(setRating).toHaveBeenCalledTimes(1)
-    expect(setRating).toHaveBeenCalledWith(2)
+    expect(setRating).toHaveBeenCalledWith(1)
   })
 })

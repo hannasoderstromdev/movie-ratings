@@ -18,8 +18,8 @@ const StarButton = styled.button`
 const RatingStyle = styled.div`
   display: flex;
 
-  button:nth-of-type(6) {
-    margin-left: 1rem;
+  button:nth-of-type(0) {
+    margin-right: 0.5rem;
   }
 `
 
@@ -120,12 +120,12 @@ class Rating extends React.Component {
 
     return (
       <RatingStyle data-testid="rating">
-        {starsToRender}
         {useLock && setRating && (
           <Button onClick={this.toggleLocked} thirdiary>
             {this.renderLockIcon()}
           </Button>
         )}
+        {starsToRender}
       </RatingStyle>
     )
   }

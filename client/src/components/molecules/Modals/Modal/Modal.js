@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import Icon from 'components/atoms/Icon'
 import Button from 'components/atoms/Button'
+import Spinner from 'components/atoms/Spinner'
 
-import MovieFull from 'components/organisms/MovieFull'
+const LazyMovieFull = React.lazy(() => import('components/organisms/MovieFull'))
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -79,11 +80,13 @@ class Modal extends Component {
                   <Icon icon={['fas', 'times']} />
                 </Button>
               </TopRight>
-              <MovieFull
-                movieId={item.content.movieId}
-                onClose={this.onClose}
-                showDelete
-              />
+              <Suspense fallback={<Spinner />}>
+                <LazyMovieFull
+                  movieId={item.content.movieId}
+                  onClose={this.onClose}
+                  showDelete
+                />
+              </Suspense>
             </ModalBox>
           </ModalWrapper>
         )
