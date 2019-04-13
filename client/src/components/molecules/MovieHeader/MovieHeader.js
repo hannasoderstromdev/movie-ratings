@@ -74,16 +74,18 @@ const MovieHeader = ({
         <span>{year}</span> {runtime}
       </YearRuntime>
       <Genres genres={genres} />
-      {!!rating && (
-        <RatingWrapper>
-          <Rating rating={rating} setRating={setRating} small />
-        </RatingWrapper>
-      )}
+
       {showDelete && id && (
         <Button onClick={() => deleteMovie(id)} thirdiary>
           <DeleteText>Delete</DeleteText>
           <Icon color="#832D2D" icon={['fas', 'trash-alt']} iconsize="12px" />
         </Button>
+      )}
+
+      {!!rating && (
+        <RatingWrapper>
+          <Rating rating={rating} setRating={setRating} small />
+        </RatingWrapper>
       )}
     </Wrapper>
   )
