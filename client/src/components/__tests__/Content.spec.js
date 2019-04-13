@@ -99,7 +99,9 @@ describe('Content', () => {
     )
     expect(getByTestId('main-header')).toBeInTheDocument()
     expect(getByTestId('main-navigation')).toBeInTheDocument()
-    expect(getByTestId('library-screen')).toBeInTheDocument()
+    setTimeout(async () => {
+      await expect(getByTestId('library-screen')).toBeInTheDocument()
+    })
     localStorage.clear()
   })
 })
