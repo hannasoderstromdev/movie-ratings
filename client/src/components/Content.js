@@ -38,16 +38,10 @@ const Content = () => (
 
       <Suspense fallback={<Spinner />}>
         <Switch>
-          <PrivateRoute exact path="/add">
-            <LazyAdd />
-          </PrivateRoute>
+          <PrivateRoute component={LazyAdd} exact path="/add" />
           <Route component={Login} exact path="/login" />
-          <PrivateRoute exact path="/settings">
-            <LazySettings />
-          </PrivateRoute>
-          <PrivateRoute exact path="/">
-            <LazyLibrary />
-          </PrivateRoute>
+          <PrivateRoute component={LazySettings} exact path="/settings" />
+          <PrivateRoute component={LazyLibrary} exact path="/" />
           <Route component={Error404} />
         </Switch>
       </Suspense>
