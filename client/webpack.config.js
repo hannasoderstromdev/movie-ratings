@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
 
@@ -41,37 +42,52 @@ module.exports = env => {
         : 'static/js/[name].[hash:8].chunk.js',
     },
     optimization: {
-      minimize: isDevelopment,
-      minimizer: isProduction
-        ? [
-            new TerserPlugin({
-              terserOptions: {
-                parse: { ecma: 8 },
-                compress: {
-                  ecma: 5,
-                  warnings: false,
-                  comparisons: false,
-                  inline: 2,
-                },
-                mangle: {
-                  safari10: true,
-                },
-                output: {
-                  ecma: 5,
-                  comments: false,
-                  ascii_only: true,
-                },
-              },
-              parallel: true,
-              cache: true,
-              sourceMap: isDevelopment,
-            }),
-          ]
-        : [],
-      // splitChunks: {
-      //   chunks: 'all',
-      //   name: false,
-      // },
+      namedChunks: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            parse: { ecma: 8 },
+            compress: {
+              ecma: 5,
+              warnings: false,
+              comparisons: false,
+              inline: 2,
+            },
+            mangle: {
+              safari10: true,
+            },
+            output: {
+              ecma: 5,
+              comments: false,
+              ascii_only: true,
+            },
+          },
+          parallel: true,
+          cache: true,
+          sourceMap: true,
+        }),
+      ],
+      splitChunks: {
+        chunks: 'all',
+        minSize: 30000,
+        maxSize: 0,
+        cacheGroups: {
+          default: false,
+          vendor: {
+            name: false,
+            chunks: 'all',
+            test: /[//\]node_modules[\\/]/,
+          },
+          common: {
+            name: false,
+            minChunks: 2,
+            chunks: 'all',
+            priority: 10,
+            reuseExistingChunk: true,
+            enforce: true,
+          },
+        },
+      },
       // runtimeChunk: true,
     },
     resolve: {
@@ -82,7 +98,6 @@ module.exports = env => {
       },
     },
     module: {
-      // strictExportPresence: true,
       rules: [
         { parser: { requireEnsure: false } },
         {
@@ -118,7 +133,7 @@ module.exports = env => {
               loader: 'url-loader',
               options: {
                 limit: 8000,
-                name: 'images/[hash]-[name].[ext]',
+                name: 'static/images/[hash]-[name].[ext]',
               },
             },
           ],
@@ -160,6 +175,7 @@ module.exports = env => {
       ),
       env.analyze ? new BundleAnalyzerPlugin() : () => {},
       isDevelopment ? new webpack.HotModuleReplacementPlugin() : () => {},
+      new CleanWebpackPlugin(),
     ],
     // node: {
     //   module: 'empty',
