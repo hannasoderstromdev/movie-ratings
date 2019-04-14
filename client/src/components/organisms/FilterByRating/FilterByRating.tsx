@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component } from 'react'
+import styled from 'styled-components'
 
-import { TextDark, TextPrimary } from "components/atoms/Typography";
-import Icon from "components/atoms/Icon";
+import { TextDark, TextPrimary } from 'components/atoms/Typography'
+import Icon from 'components/atoms/Icon'
 
-import Rating from "components/molecules/Rating";
+import Rating from 'components/molecules/Rating'
 
 const Wrapper = styled.div`
   position: relative;
-`;
+`
 
 const Selected = styled.button`
   background-color: transparent;
@@ -29,7 +29,7 @@ const Selected = styled.button`
       color: ${({ theme }) => theme.colors.primary};
     }
   }
-`;
+`
 
 const Dropdown = styled.div`
   background-color: ${({ theme }) => theme.colors.dark};
@@ -40,12 +40,12 @@ const Dropdown = styled.div`
   z-index: 10;
   padding: 1rem 0 1.5rem;
   width: 12.5rem;
-`;
+`
 
 const Center = styled.div`
   text-align: center;
   font-style: italic;
-`;
+`
 
 const Option = styled.button`
   background-color: ${({ theme }) => theme.colors.dark};
@@ -59,58 +59,58 @@ const Option = styled.button`
     background-color: ${({ theme }) => theme.colors.alertDark};
     cursor: pointer;
   }
-`;
+`
 
-type FilterByRatingProps = {
-  filterByRating: (...args: any[]) => any
-};
+interface FilterByRatingProps {
+  filterByRating: () => void;
+}
 
-type FilterByRatingState = {
-  isOpen: boolean
-};
+interface FilterByRatingState {
+  isOpen: boolean;
+}
 
 class FilterByRating extends Component<
   FilterByRatingProps,
-  FilterByRatingState
+  FilterByRatingState,
 > {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      isOpen: false
-    };
-    this.selected = React.createRef();
+      isOpen: false,
+    }
+    this.selected = React.createRef()
   }
 
   componentDidMount() {
-    this.timer = null;
+    this.timer = null
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timer);
+    clearTimeout(this.timer)
   }
 
   toggleOpen = () => {
-    this.setState(prevState => ({ isOpen: !prevState.isOpen }));
-  };
+    this.setState(prevState => ({ isOpen: !prevState.isOpen }))
+  }
 
   setFocus = () => {
-    this.selected.current.focus();
-  };
+    this.selected.current.focus()
+  }
 
   openDropdown = () => {
-    this.setState({ isOpen: true });
-    clearTimeout(this.timer);
-  };
+    this.setState({ isOpen: true })
+    clearTimeout(this.timer)
+  }
 
   closeDropdown = () => {
     // https://stackoverflow.com/questions/152975/how-do-i-detect-a-click-outside-an-element/3028037#3028037
-    this.timer = setTimeout(() => this.setState({ isOpen: false }), 0);
-  };
+    this.timer = setTimeout(() => this.setState({ isOpen: false }), 0)
+  }
 
   onClick = value => {
-    this.props.filterByRating(value);
-    this.closeDropdown();
-  };
+    this.props.filterByRating(value)
+    this.closeDropdown()
+  }
 
   render() {
     return (
@@ -124,9 +124,9 @@ class FilterByRating extends Component<
         >
           Filter by rating
           {this.state.isOpen ? (
-            <Icon color="#F3F3F3" icon={["fas", "chevron-up"]} />
+            <Icon color="#F3F3F3" icon={['fas', 'chevron-up']} />
           ) : (
-            <Icon color="#F3F3F3" icon={["fas", "chevron-down"]} />
+            <Icon color="#F3F3F3" icon={['fas', 'chevron-down']} />
           )}
         </Selected>
         {this.state.isOpen && (
@@ -167,8 +167,8 @@ class FilterByRating extends Component<
           </Dropdown>
         )}
       </Wrapper>
-    );
+    )
   }
 }
 
-export default FilterByRating;
+export default FilterByRating

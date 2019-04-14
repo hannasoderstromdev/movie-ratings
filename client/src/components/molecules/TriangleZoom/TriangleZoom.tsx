@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import Icon from "components/atoms/Icon";
+import Icon from 'components/atoms/Icon'
 
 const ButtonWrapper = styled.button`
   position: relative;
@@ -15,7 +15,7 @@ const ButtonWrapper = styled.button`
       color: ${({ theme }) => theme.colors.lightGray};
     }
   }
-`;
+`
 
 const TriangleTopRight = styled.div`
   position: absolute;
@@ -25,27 +25,27 @@ const TriangleTopRight = styled.div`
   height: 0;
   border-top: 2.5rem solid ${({ theme }) => theme.colors.primary};
   border-left: 2.5rem solid transparent;
-`;
+`
 
 const ZoomIcon = styled(Icon)`
   position: absolute;
   top: 0.25rem;
   right: 0.25rem;
-`;
+`
 
-type TriangleZoomProps = {
-  onClick?: (...args: any[]) => any
-};
+interface TriangleZoomProps {
+  onClick?: () => void;
+}
 
 const TriangleZoom: React.SFC<TriangleZoomProps> = ({ onClick }) => (
   <ButtonWrapper onClick={onClick}>
     <TriangleTopRight />
-    <ZoomIcon color="#000" icon={["fas", "search-plus"]} />
+    <ZoomIcon color="#000" icon={['fas', 'search-plus']} />
   </ButtonWrapper>
-);
+)
 
 TriangleZoom.defaultProps = {
-  onClick: undefined
-};
+  onClick: undefined,
+}
 
-export default TriangleZoom;
+export default TriangleZoom

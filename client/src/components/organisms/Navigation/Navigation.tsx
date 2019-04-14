@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { NavLink, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import React from 'react'
+import styled from 'styled-components'
+import { NavLink, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-import Icon from "components/atoms/Icon";
+import Icon from 'components/atoms/Icon'
 
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.colors.black};
@@ -43,7 +43,7 @@ const Nav = styled.nav`
       color: ${({ theme }) => theme.colors.primary};
     }
   }
-`;
+`
 
 const LinkItem = styled.li`
   flex: 3;
@@ -74,7 +74,7 @@ const LinkItem = styled.li`
   &:not(:last-of-type) {
     border-right: 1px solid ${({ theme }) => theme.colors.textSecondary};
   }
-`;
+`
 
 const DisabledItem = styled(LinkItem)`
   min-height: 7vh;
@@ -82,34 +82,34 @@ const DisabledItem = styled(LinkItem)`
   align-items: center;
   justify-content: center;
   cursor: not-allowed;
-`;
+`
 
 const isActive = (path, match, location) =>
-  !!(match || path === location.pathname);
+  !!(match || path === location.pathname)
 
-type NavigationProps = {
-  loggedIn: boolean
-};
+interface NavigationProps {
+  loggedIn: boolean;
+}
 
 const Navigation: React.SFC<NavigationProps> = ({ loggedIn }) => (
   <Nav data-testid="main-navigation">
     {loggedIn ? (
       <ul>
         <LinkItem>
-          <NavLink exact isActive={isActive.bind(this, "/")} to="/">
+          <NavLink exact isActive={isActive.bind(this, '/')} to="/">
             <span>Library</span>
-            <Icon icon={["fas", "list"]} iconsize="1.8rem" />
+            <Icon icon={['fas', 'list']} iconsize="1.8rem" />
           </NavLink>
         </LinkItem>
         <LinkItem>
-          <NavLink isActive={isActive.bind(this, "/add")} to="/add">
+          <NavLink isActive={isActive.bind(this, '/add')} to="/add">
             <span>Add</span>
-            <Icon icon={["fas", "plus-circle"]} iconsize="1.8rem" />
+            <Icon icon={['fas', 'plus-circle']} iconsize="1.8rem" />
           </NavLink>
         </LinkItem>
         <LinkItem>
           <NavLink to="/settings">
-            <Icon icon={["fas", "cog"]} iconsize="1.8rem" />
+            <Icon icon={['fas', 'cog']} iconsize="1.8rem" />
           </NavLink>
         </LinkItem>
       </ul>
@@ -117,24 +117,24 @@ const Navigation: React.SFC<NavigationProps> = ({ loggedIn }) => (
       <ul>
         <DisabledItem>
           <span>Library</span>
-          <Icon icon={["fas", "list"]} iconsize="1.8rem" />
+          <Icon icon={['fas', 'list']} iconsize="1.8rem" />
         </DisabledItem>
         <DisabledItem>
           <span>Add</span>
-          <Icon icon={["fas", "plus-circle"]} iconsize="1.8rem" />
+          <Icon icon={['fas', 'plus-circle']} iconsize="1.8rem" />
         </DisabledItem>
         <DisabledItem>
-          <Icon icon={["fas", "cog"]} iconsize="1.8rem" />
+          <Icon icon={['fas', 'cog']} iconsize="1.8rem" />
         </DisabledItem>
       </ul>
     )}
   </Nav>
-);
+)
 
 const mapStateToProps = ({ user }) => ({
-  loggedIn: user && user.loggedIn
-});
+  loggedIn: user && user.loggedIn,
+})
 
 // NOTE! isActive only works if withRouter is the outermost HOC,
 // see this for more details: https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
-export default withRouter(connect(mapStateToProps)(Navigation));
+export default withRouter(connect(mapStateToProps)(Navigation))

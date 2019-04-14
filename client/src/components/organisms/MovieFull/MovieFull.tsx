@@ -1,62 +1,62 @@
-import React from "react";
-import styled from "styled-components";
-import { connect } from "react-redux";
+import React from 'react'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
 
-import { MovieType } from "types";
+import { MovieType } from 'types'
 
-import moviesThunks from "actions/movies/movies.thunks";
+import moviesThunks from 'actions/movies/movies.thunks'
 
-import MovieHeader from "components/molecules/MovieHeader";
-import MovieDetails from "components/molecules/MovieDetails";
+import MovieHeader from 'components/molecules/MovieHeader'
+import MovieDetails from 'components/molecules/MovieDetails'
 
 const FullMovie = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
-`;
+`
 
 const MovieStyle = styled.article`
   display: grid;
   grid-template-columns: 2.5fr 5fr;
   grid-gap: 1rem;
   margin-bottom: 1rem;
-`;
+`
 
 const PosterImg = styled.img`
   width: 100%;
   height: auto;
-`;
+`
 
-type MovieFullProps = {
-  onClose?: (...args: any[]) => any,
-  updateMovie: (...args: any[]) => any,
-  userRole: string
-};
+interface MovieFullProps {
+  onClose?: () => void;
+  updateMovie: () => void;
+  userRole: string;
+}
 
-type MovieFullState = {
-  detailsOpen: boolean
-};
+interface MovieFullState {
+  detailsOpen: boolean;
+}
 
 class MovieFull extends React.Component<MovieFullProps, MovieFullState> {
   state = {
-    detailsOpen: true
-  };
+    detailsOpen: true,
+  }
 
   onDelete = id => {
-    const { deleteMovie, onClose } = this.props;
-    deleteMovie(id);
+    const { deleteMovie, onClose } = this.props
+    deleteMovie(id)
     if (onClose) {
-      onClose();
+      onClose()
     }
-  };
+  }
 
   toggleDetails = () =>
     this.setState(prevState => ({
-      detailsOpen: !prevState.detailsOpen
-    }));
+      detailsOpen: !prevState.detailsOpen,
+    }))
 
   setRating = async rating => {
-    const { updateMovie, id } = this.props;
-    await updateMovie(id, { rating });
-  };
+    const { updateMovie, id } = this.props
+    await updateMovie(id, { rating })
+  }
 
   render() {
     const {
@@ -77,11 +77,11 @@ class MovieFull extends React.Component<MovieFullProps, MovieFullState> {
       released,
       userRole,
       writer,
-      showDelete
-    } = this.props;
-    const { detailsOpen } = this.state;
-    const setRating = userRole === "Admin" ? this.setRating : null;
-    const showDeleteSetting = userRole === "Admin" && showDelete;
+      showDelete,
+    } = this.props
+    const { detailsOpen } = this.state
+    const setRating = userRole === 'Admin' ? this.setRating : null
+    const showDeleteSetting = userRole === 'Admin' && showDelete
 
     return title ? (
       <FullMovie data-testid="full-movie">
@@ -114,43 +114,46 @@ class MovieFull extends React.Component<MovieFullProps, MovieFullState> {
           writer={writer}
         />
       </FullMovie>
-    ) : null;
+    ) : null
   }
 }
 
 MovieFull.whyDidYouRender = {
   logOnDifferentValues: true,
-  customName: "MovieFull"
-};
+  customName: 'MovieFull',
+}
 
 MovieFull.defaultProps = {
   id: null,
   onClose: null,
   rating: 0,
-  showDelete: false
-};
+  showDelete: false,
+}
 
 const mapStateToProps = ({ movies, user }, { movieId }) => {
   const movieFound =
     movies &&
     movies.movies.length &&
-    movies.movies.find(movie => movie.id === movieId);
+    movies.movies.find(movie => movie.id === movieId)
   const userRole =
-    user && user.profile && user.profile.user && user.profile.user.role;
+    user && user.profile && user.profile.user && user.profile.user.role
   if (movieFound) {
     return {
       ...movieFound,
-      userRole
-    };
+      userRole,
+    }
   }
   return {
-    userRole
-  };
-};
+    userRole,
+  }
+}
 
 const mapDispatchToProps = {
   updateMovie: moviesThunks.updateMovie,
-  deleteMovie: moviesThunks.deleteMovie
-};
+  deleteMovie: moviesThunks.deleteMovie,
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieFull);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MovieFull)

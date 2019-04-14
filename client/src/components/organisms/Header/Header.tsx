@@ -1,28 +1,28 @@
-import React from "react";
-import styled from "styled-components";
-import { connect } from "react-redux";
+import React from 'react'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
 
-import moviesActions from "actions/movies/movies.actions";
+import moviesActions from 'actions/movies/movies.actions'
 
-import Button from "components/atoms/Button";
-import Icon from "components/atoms/Icon";
+import Button from 'components/atoms/Button'
+import Icon from 'components/atoms/Icon'
 
-import logoImg from "./logo.svg";
-import clapperImg from "./clapper.svg";
+import logoImg from './logo.svg'
+import clapperImg from './clapper.svg'
 
 const RightAlignedButton = styled(Button)`
   position: absolute;
   right: 1rem;
-`;
+`
 
 const Logo = styled.img`
   max-height: 2.25vh;
-`;
+`
 
 const Clapper = styled.img`
   max-height: 2.25vh;
   margin-right: 1rem;
-`;
+`
 
 const HeaderStyle = styled.header`
   width: 100%;
@@ -33,7 +33,7 @@ const HeaderStyle = styled.header`
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.dark};
   color: ${({ theme }) => theme.colors.primary};
-  font-family: "Trajan Pro 3", serif;
+  font-family: 'Trajan Pro 3', serif;
   line-height: 1rem;
   font-size: 1.8rem;
   padding: 0;
@@ -41,18 +41,18 @@ const HeaderStyle = styled.header`
   overflow: hidden;
   position: relative;
   box-shadow: 0 4px 40px rgba(0, 0, 0.75);
-`;
+`
 
-type HeaderProps = {
-  showSearchLibrary: boolean,
-  toggleLibrarySearch: (...args: any[]) => any,
-  userLoggedIn: boolean
-};
+interface HeaderProps {
+  showSearchLibrary: boolean;
+  toggleLibrarySearch: () => void;
+  userLoggedIn: boolean;
+}
 
 const Header: React.SFC<HeaderProps> = ({
   showSearchLibrary,
   toggleLibrarySearch,
-  userLoggedIn
+  userLoggedIn,
 }) => (
   <HeaderStyle data-testid="main-header">
     <Clapper alt="logo" data-testid="clapper" src={clapperImg} />
@@ -61,31 +61,34 @@ const Header: React.SFC<HeaderProps> = ({
       <RightAlignedButton onClick={toggleLibrarySearch} thirdiary>
         {showSearchLibrary ? (
           <React.Fragment>
-            <Icon color="#FEDC9B" icon={["fas", "search"]} iconsize="2rem" />
+            <Icon color="#FEDC9B" icon={['fas', 'search']} iconsize="2rem" />
             <Icon
               color="#FEDC9B"
-              icon={["fas", "chevron-up"]}
+              icon={['fas', 'chevron-up']}
               iconsize="1rem"
             />
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Icon color="#666" icon={["fas", "search"]} iconsize="2rem" />
-            <Icon color="#666" icon={["fas", "chevron-down"]} iconsize="1rem" />
+            <Icon color="#666" icon={['fas', 'search']} iconsize="2rem" />
+            <Icon color="#666" icon={['fas', 'chevron-down']} iconsize="1rem" />
           </React.Fragment>
         )}
       </RightAlignedButton>
     )}
   </HeaderStyle>
-);
+)
 
 const mapStateToProps = ({ movies, user }) => ({
   showSearchLibrary: movies && movies.showSearchLibrary,
-  userLoggedIn: user && user.loggedIn
-});
+  userLoggedIn: user && user.loggedIn,
+})
 
 const mapDispatchToProps = {
-  toggleLibrarySearch: moviesActions.toggleSearchLibrary
-};
+  toggleLibrarySearch: moviesActions.toggleSearchLibrary,
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Header)

@@ -1,5 +1,5 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
+import * as React from 'react'
+import styled, { keyframes } from 'styled-components'
 
 const SpinAnimation = keyframes`
   0% {
@@ -8,7 +8,7 @@ const SpinAnimation = keyframes`
   100% {
     transform: rotate(360deg);
   }
-`;
+`
 
 const SpinnerWrapper = styled.div`
   width: 30px;
@@ -17,7 +17,7 @@ const SpinnerWrapper = styled.div`
   border-radius: 50%;
   animation: ${SpinAnimation} 1s cubic-bezier(0.26, 0.56, 0.72, 0.85) infinite;
   position: relative;
-`;
+`
 
 const SpinnerBall = styled.div`
   width: 10px;
@@ -27,12 +27,12 @@ const SpinnerBall = styled.div`
   position: absolute;
   top: -10px;
   right: -10px;
-`;
+`
 
 const Spinner = () => (
   <SpinnerWrapper data-testid="spinner">
     <SpinnerBall />
   </SpinnerWrapper>
-);
+)
 
-export default Spinner;
+export default Spinner

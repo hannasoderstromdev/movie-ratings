@@ -1,19 +1,19 @@
-import React from "react";
-import Label from "components/atoms/Label";
-import InputField from "components/atoms/InputField";
-import ErrorMessage from "components/atoms/ErrorMessage";
-import Icon from "components/atoms/Icon";
+import React from 'react'
+import Label from 'components/atoms/Label'
+import InputField from 'components/atoms/InputField'
+import ErrorMessage from 'components/atoms/ErrorMessage'
+import Icon from 'components/atoms/Icon'
 
-type LabeledInputFieldProps = {
-  error?: boolean,
-  label: string,
-  name: string,
-  onBlur?: (...args: any[]) => any,
-  onChange: (...args: any[]) => any,
-  placeholder: string,
-  type: string,
-  value: string
-};
+interface LabeledInputFieldProps {
+  error?: boolean;
+  label: string;
+  name: string;
+  onBlur?: () => void;
+  onChange: () => void;
+  placeholder: string;
+  type: string;
+  value: string;
+}
 
 const LabeledInputField: React.SFC<LabeledInputFieldProps> = ({
   label,
@@ -23,7 +23,7 @@ const LabeledInputField: React.SFC<LabeledInputFieldProps> = ({
   onChange,
   value,
   placeholder,
-  error
+  error,
 }) => (
   <Label htmlFor={name}>
     {label}
@@ -37,16 +37,16 @@ const LabeledInputField: React.SFC<LabeledInputFieldProps> = ({
       value={value}
     />
     {error && (
-      <ErrorMessage renderIcon={<Icon icon={["fa", "exclamation-triangle"]} />}>
+      <ErrorMessage renderIcon={<Icon icon={['fa', 'exclamation-triangle']} />}>
         {error}
       </ErrorMessage>
     )}
   </Label>
-);
+)
 
 LabeledInputField.defaultProps = {
   error: false,
-  onBlur: null
-};
+  onBlur: null,
+}
 
-export default LabeledInputField;
+export default LabeledInputField

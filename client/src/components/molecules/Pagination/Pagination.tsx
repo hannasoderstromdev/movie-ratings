@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import range from "helpers/range";
+import range from 'helpers/range'
 
-import Icon from "components/atoms/Icon";
+import Icon from 'components/atoms/Icon'
 
 const Wrapper = styled.nav`
   ul {
@@ -27,7 +27,7 @@ const Wrapper = styled.nav`
     justify-content: center;
     cursor: pointer;
   }
-`;
+`
 
 const Prev = styled.button`
   background-color: ${({ isActive, theme }) =>
@@ -37,7 +37,7 @@ const Prev = styled.button`
     color: ${({ isActive, theme }) =>
       isActive ? theme.colors.textDark : theme.colors.primary};
   }
-`;
+`
 
 const Next = styled.button`
   background-color: ${({ isActive, theme }) =>
@@ -47,7 +47,7 @@ const Next = styled.button`
     color: ${({ isActive, theme }) =>
       isActive ? theme.colors.textDark : theme.colors.primary};
   }
-`;
+`
 
 const Page = styled.button`
   background-color: ${({ isActive, theme }) =>
@@ -55,72 +55,69 @@ const Page = styled.button`
 
   color: ${({ isActive, theme }) =>
     isActive ? theme.colors.textDark : theme.colors.primary};
-`;
+`
 
-const LEFT = "LEFT";
-const RIGHT = "RIGHT";
+const LEFT = 'LEFT'
+const RIGHT = 'RIGHT'
 
-type PaginationProps = {
-  currentPage: number,
-  itemsTotal: number,
-  onPageChange: (...args: any[]) => any,
-  pageLimit: number,
-  pageNeighbors: number
-};
+interface PaginationProps {
+  currentPage: number;
+  itemsTotal: number;
+  onPageChange: () => void;
+  pageLimit: number;
+  pageNeighbors: number;
+}
 
 class Pagination extends React.Component<PaginationProps, {}> {
   constructor(props) {
-    super(props);
-    this.totalPages = Math.ceil(props.itemsTotal / props.pageLimit);
+    super(props)
+    this.totalPages = Math.ceil(props.itemsTotal / props.pageLimit)
   }
 
   toNext = () => {
-    this.toPage(this.props.currentPage - this.props.pageNeighbors * 2 - 1);
-  };
+    this.toPage(this.props.currentPage - this.props.pageNeighbors * 2 - 1)
+  }
 
   toPrev = () => {
-    this.toPage(this.props.currentPage + this.props.pageNeighbors * 2 + 1);
-  };
+    this.toPage(this.props.currentPage + this.props.pageNeighbors * 2 + 1)
+  }
 
   toPage = page => {
-    const validPage = Math.max(0, Math.min(page, this.totalPages));
+    const validPage = Math.max(0, Math.min(page, this.totalPages))
     if (page !== this.props.currentPage) {
-      this.props.onPageChange(validPage);
+      this.props.onPageChange(validPage)
     }
-  };
+  }
 
   fetchPageNumbers = () => {
-    const { pageNeighbors, currentPage } = this.props;
-    const totalNumbers = pageNeighbors * 2 + 3;
-    const totalBlocks = totalNumbers + 2;
+    const { pageNeighbors, currentPage } = this.props
+    const totalNumbers = pageNeighbors * 2 + 3
+    const totalBlocks = totalNumbers + 2
     if (this.totalPages > totalBlocks) {
-      const startPage = Math.max(2, currentPage - pageNeighbors);
-      const endPage = Math.min(
-        this.totalPages - 1,
-        currentPage + pageNeighbors
-      );
-      let pages = range(startPage, endPage);
-      const hasLeftSpill = startPage > 2;
-      const hasRightSpill = this.totalPages - endPage > 1;
-      const spillOffset = totalNumbers - (pages.length + 1);
+      const startPage = Math.max(2, currentPage - pageNeighbors)
+      const endPage = Math.min(this.totalPages - 1, currentPage + pageNeighbors)
+      let pages = range(startPage, endPage)
+      const hasLeftSpill = startPage > 2
+      const hasRightSpill = this.totalPages - endPage > 1
+      const spillOffset = totalNumbers - (pages.length + 1)
       if (hasLeftSpill && !hasRightSpill) {
-        const extraPages = range(startPage - spillOffset, startPage - 1);
-        pages = [LEFT, ...extraPages, ...pages];
+        const extraPages = range(startPage - spillOffset, startPage - 1)
+        pages = [LEFT, ...extraPages, ...pages]
       } else if (!hasLeftSpill && hasRightSpill) {
-        const extraPages = range(endPage + 1, endPage + spillOffset);
-        pages = [...pages, ...extraPages, RIGHT];
+        const extraPages = range(endPage + 1, endPage + spillOffset)
+        pages = [...pages, ...extraPages, RIGHT]
       } else if (hasLeftSpill && hasRightSpill) {
-        pages = [LEFT, ...pages, RIGHT];
+        pages = [LEFT, ...pages, RIGHT]
       }
-      return [1, ...pages, this.totalPages];
+      return [1, ...pages, this.totalPages]
     }
-    return range(1, this.totalPages);
-  };
+    return range(1, this.totalPages)
+  }
 
   render() {
-    const { currentPage } = this.props;
-    const pages = this.fetchPageNumbers();
-    if (pages.length === 1) return null;
+    const { currentPage } = this.props
+    const pages = this.fetchPageNumbers()
+    if (pages.length === 1) return null
     return (
       <Wrapper aria-label="Pagination" data-testid="navigation">
         <ul>
@@ -135,10 +132,10 @@ class Pagination extends React.Component<PaginationProps, {}> {
                       isActive={currentPage === 1}
                       onClick={this.toPrev}
                     >
-                      <Icon icon={["fas", "chevron-left"]} />
+                      <Icon icon={['fas', 'chevron-left']} />
                     </Prev>
                   </li>
-                );
+                )
               if (page === RIGHT)
                 return (
                   <li key={i}>
@@ -147,10 +144,10 @@ class Pagination extends React.Component<PaginationProps, {}> {
                       isActive={currentPage === this.totalPages}
                       onClick={this.toNext}
                     >
-                      <Icon icon={["fas", "chevron-right"]} />
+                      <Icon icon={['fas', 'chevron-right']} />
                     </Next>
                   </li>
-                );
+                )
               return (
                 <li key={i}>
                   <Page
@@ -161,12 +158,12 @@ class Pagination extends React.Component<PaginationProps, {}> {
                     {page}
                   </Page>
                 </li>
-              );
+              )
             })}
         </ul>
       </Wrapper>
-    );
+    )
   }
 }
 
-export default Pagination;
+export default Pagination

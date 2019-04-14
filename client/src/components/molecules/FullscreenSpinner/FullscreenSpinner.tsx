@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import Spinner from "components/atoms/Spinner";
+import Spinner from 'components/atoms/Spinner'
 
 const Backdrop = styled.div`
   position: fixed;
@@ -13,12 +13,12 @@ const Backdrop = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
 
 const FullscreenSpinner = () => (
   <Backdrop data-testid="backdrop">
     <Spinner />
   </Backdrop>
-);
+)
 
-export default FullscreenSpinner;
+export default FullscreenSpinner

@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import * as React from 'react'
+import styled from 'styled-components'
 
 const InputStyle = styled.input`
   height: 3.5rem;
@@ -23,16 +23,16 @@ const InputStyle = styled.input`
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.textPrimary};
   }
-`;
+`
 
-type InputFieldProps = {
-  name?: string,
-  onBlur?: (...args: any[]) => any,
-  onChange: (...args: any[]) => any,
-  placeholder?: string,
-  type?: string,
-  value?: string
-};
+interface InputFieldProps {
+  name?: string;
+  onBlur?: () => void;
+  onChange: () => void;
+  placeholder?: string;
+  type?: string;
+  value?: string;
+}
 
 const InputField: React.SFC<InputFieldProps> = ({
   name,
@@ -40,7 +40,7 @@ const InputField: React.SFC<InputFieldProps> = ({
   placeholder,
   value,
   onBlur,
-  onChange
+  onChange,
 }) => (
   <InputStyle
     data-testid="input"
@@ -51,14 +51,14 @@ const InputField: React.SFC<InputFieldProps> = ({
     type={type}
     value={value}
   />
-);
+)
 
 InputField.defaultProps = {
-  name: "",
+  name: '',
   onBlur: null,
-  placeholder: "",
-  type: "text",
-  value: ""
-};
+  placeholder: '',
+  type: 'text',
+  value: '',
+}
 
-export default InputField;
+export default InputField

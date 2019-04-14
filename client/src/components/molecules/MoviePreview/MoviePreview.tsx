@@ -1,14 +1,23 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 import uuid from 'uuid/v4'
-
 import modalsActions from 'actions/modals/modals.actions'
-
 import MovieTile from 'components/molecules/MovieTile'
 import MovieRow from 'components/molecules/MovieRow'
 
-class MoviePreview extends React.Component {
+interface MoviePreviewProps {
+  genres: {};
+  id?: string;
+  listStyle?: string;
+  openModal: () => void;
+  poster: string;
+  rating?: number;
+  runtime: string;
+  title: string;
+  year: string;
+}
+
+class MoviePreview extends React.Component<MoviePreviewProps, {}> {
   openFullMovie = () => {
     const { id } = this.props
     this.props.openModal({
@@ -19,7 +28,6 @@ class MoviePreview extends React.Component {
       },
     })
   }
-
   render() {
     const {
       id,
@@ -31,7 +39,6 @@ class MoviePreview extends React.Component {
       rating,
       listStyle,
     } = this.props
-
     return listStyle === 'tiles' ? (
       <MovieTile
         id={id}
@@ -59,22 +66,6 @@ MoviePreview.defaultProps = {
   id: undefined,
   listStyle: 'rows',
   rating: 0,
-}
-
-MoviePreview.propTypes = {
-  genres: PropTypes.shape({
-    [PropTypes.string]: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-  }).isRequired,
-  id: PropTypes.string,
-  listStyle: PropTypes.string,
-  openModal: PropTypes.func.isRequired,
-  poster: PropTypes.string.isRequired,
-  rating: PropTypes.number,
-  runtime: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
 }
 
 const mapDispatchToProps = {

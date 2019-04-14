@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-import { insertionSort } from 'utils/Array';
+import { insertionSort } from 'utils/Array'
 
-import Genre from 'components/molecules/Genre';
+import Genre from 'components/molecules/Genre'
 
 const Wrapper = styled.div`
   margin-top: 1rem;
@@ -15,9 +14,13 @@ const Wrapper = styled.div`
   span {
     margin-right: 0.5rem;
   }
-`;
+`
 
-const Genres = ({ genres }) => {
+interface GenresProps {
+  genres: {};
+}
+
+const Genres: React.SFC<GenresProps> = ({ genres }) => {
   const genresArr = []
   for (const id in genres) {
     const genre = { id, name: genres[id].name }
@@ -32,14 +35,6 @@ const Genres = ({ genres }) => {
         ))}
     </Wrapper>
   )
-}
-
-Genres.propTypes = {
-  genres: PropTypes.shape({
-    [PropTypes.string]: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-  }).isRequired,
 }
 
 export default Genres

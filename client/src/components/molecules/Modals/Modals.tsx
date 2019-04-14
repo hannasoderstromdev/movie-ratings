@@ -1,22 +1,22 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react'
+import { connect } from 'react-redux'
 
-import modalsActions from "actions/modals/modals.actions";
-import Modal from "./Modal";
+import modalsActions from 'actions/modals/modals.actions'
+import Modal from './Modal'
 
-type ModalsProps = {
-  closeModal: (...args: any[]) => any,
+interface ModalsProps {
+  closeModal: () => void;
   modals: {
     id: string,
     type: string,
     content?: {
       text?: string,
-      movieId?: string
+      movieId?: string,
     },
-    onClose?: (...args: any[]) => any,
-    onConfirm?: (...args: any[]) => any
-  }[]
-};
+    onClose?: () => void,
+    onConfirm?: () => void,
+  }[];
+}
 
 const Modals: React.SFC<ModalsProps> = ({ modals, closeModal }) => (
   <div data-testid="modals">
@@ -30,14 +30,17 @@ const Modals: React.SFC<ModalsProps> = ({ modals, closeModal }) => (
         />
       ))}
   </div>
-);
+)
 
 const mapStateToProps = ({ modals }) => ({
-  modals
-});
+  modals,
+})
 
 const mapDispatchToProps = {
-  closeModal: modalsActions.closeModal
-};
+  closeModal: modalsActions.closeModal,
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modals);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Modals)

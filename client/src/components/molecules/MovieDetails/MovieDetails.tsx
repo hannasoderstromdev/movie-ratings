@@ -1,28 +1,28 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import mcImage from "./img/metacritics.png";
-import rtImage from "./img/rottentomatoes.png";
-import imdbImage from "./img/imdb.png";
+import mcImage from './img/metacritics.png'
+import rtImage from './img/rottentomatoes.png'
+import imdbImage from './img/imdb.png'
 
-import { Text, TextDark } from "components/atoms/Typography";
-import Icon from "components/atoms/Icon";
-import Button from "components/atoms/Button";
+import { Text, TextDark } from 'components/atoms/Typography'
+import Icon from 'components/atoms/Icon'
+import Button from 'components/atoms/Button'
 
-const MoreDetails = styled.div``;
+const MoreDetails = styled.div``
 
 const IconWrapper = styled.div`
   margin-left: 0.5rem;
-`;
+`
 
 const MoreDetailsContent = styled.div`
   padding: 2rem;
   border-top: 1px solid ${({ theme }) => theme.colors.lightGray};
-`;
+`
 
 const Plot = styled.div`
   margin-bottom: 2.5rem;
-`;
+`
 
 const Meta = styled.div`
   display: flex;
@@ -35,37 +35,37 @@ const Meta = styled.div`
   > div:first-of-type {
     margin-bottom: 2.5rem;
   }
-`;
+`
 
 const Ratings = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 2rem;
-`;
+`
 
 const RatingsItem = styled.div`
   display: flex;
   align-items: center;
-`;
+`
 
 const Img = styled.img`
   margin-right: 1rem;
-`;
+`
 
-type MovieDetailsProps = {
-  actors: string,
-  country: string,
-  director: string,
-  isOpen: boolean,
-  language: string,
-  plot: string,
-  production: string,
-  ratings: string[],
-  released: string,
-  toggle: (...args: any[]) => any,
-  writer: string
-};
+interface MovieDetailsProps {
+  actors: string;
+  country: string;
+  director: string;
+  isOpen: boolean;
+  language: string;
+  plot: string;
+  production: string;
+  ratings: string[];
+  released: string;
+  toggle: () => void;
+  writer: string;
+}
 
 const MovieDetails: React.SFC<MovieDetailsProps> = ({
   actors,
@@ -78,18 +78,18 @@ const MovieDetails: React.SFC<MovieDetailsProps> = ({
   ratings,
   isOpen,
   toggle,
-  writer
+  writer,
 }) => (
   <MoreDetails>
     <Button onClick={toggle} thirdiary>
       <Text>More details</Text>
       <IconWrapper>
         {isOpen ? (
-          <Icon color="#F3F3F3" icon={["fas", "chevron-up"]} iconsize="14px" />
+          <Icon color="#F3F3F3" icon={['fas', 'chevron-up']} iconsize="14px" />
         ) : (
           <Icon
             color="#F3F3F3"
-            icon={["fas", "chevron-down"]}
+            icon={['fas', 'chevron-down']}
             iconsize="14px"
           />
         )}
@@ -126,26 +126,25 @@ const MovieDetails: React.SFC<MovieDetailsProps> = ({
           </div>
         </Meta>
 
-        {ratings &&
-          ratings.length && (
-            <Ratings>
-              <RatingsItem>
-                <Img alt={ratings[0].Source} src={imdbImage} />
-                <Text>{ratings[0].Value}</Text>
-              </RatingsItem>
-              <RatingsItem>
-                <Img alt={ratings[1].Source} src={rtImage} />
-                <Text>{ratings[1].Value}</Text>
-              </RatingsItem>
-              <RatingsItem>
-                <Img alt={ratings[2].Source} src={mcImage} />
-                <Text>{ratings[2].Value}</Text>
-              </RatingsItem>
-            </Ratings>
-          )}
+        {ratings && ratings.length && (
+          <Ratings>
+            <RatingsItem>
+              <Img alt={ratings[0].Source} src={imdbImage} />
+              <Text>{ratings[0].Value}</Text>
+            </RatingsItem>
+            <RatingsItem>
+              <Img alt={ratings[1].Source} src={rtImage} />
+              <Text>{ratings[1].Value}</Text>
+            </RatingsItem>
+            <RatingsItem>
+              <Img alt={ratings[2].Source} src={mcImage} />
+              <Text>{ratings[2].Value}</Text>
+            </RatingsItem>
+          </Ratings>
+        )}
       </MoreDetailsContent>
     ) : null}
   </MoreDetails>
-);
+)
 
-export default MovieDetails;
+export default MovieDetails

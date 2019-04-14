@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { connect } from "react-redux";
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
 
-import genresThunks from "actions/genres/genres.thunks";
-import Icon from "components/atoms/Icon";
+import genresThunks from 'actions/genres/genres.thunks'
+import Icon from 'components/atoms/Icon'
 
 const Button = styled.button`
   border-radius: 3px;
@@ -26,41 +26,44 @@ const Button = styled.button`
   svg {
     margin-left: 0.5rem;
   }
-`;
+`
 
-type GenreProps = {
-  addOrRemoveGenreAndGetMovies: (...args: any[]) => any,
-  filter: {},
-  id: string,
-  name: string
-};
+interface GenreProps {
+  addOrRemoveGenreAndGetMovies: () => void;
+  filter: {};
+  id: string;
+  name: string;
+}
 
 class Genre extends Component<GenreProps, {}> {
   toggleSelectedGenre = () => {
-    const { addOrRemoveGenreAndGetMovies, id, name } = this.props;
-    addOrRemoveGenreAndGetMovies({ id, name });
-  };
+    const { addOrRemoveGenreAndGetMovies, id, name } = this.props
+    addOrRemoveGenreAndGetMovies({ id, name })
+  }
   render() {
-    const { name, filter, id } = this.props;
+    const { name, filter, id } = this.props
     return (
       <Button onClick={this.toggleSelectedGenre} selected={filter[id]}>
         {name}
         {filter[id] ? (
-          <Icon icon={["fas", "minus"]} testId="minus" />
+          <Icon icon={['fas', 'minus']} testId="minus" />
         ) : (
-          <Icon icon={["fas", "plus"]} testId="plus" />
+          <Icon icon={['fas', 'plus']} testId="plus" />
         )}
       </Button>
-    );
+    )
   }
 }
 
 const mapStateToProps = ({ genres }) => ({
-  filter: genres.filter
-});
+  filter: genres.filter,
+})
 
 const mapDispatchToProps = {
-  addOrRemoveGenreAndGetMovies: genresThunks.addOrRemoveGenreAndGetMovies
-};
+  addOrRemoveGenreAndGetMovies: genresThunks.addOrRemoveGenreAndGetMovies,
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Genre);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Genre)

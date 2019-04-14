@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import * as React from 'react'
+import styled from 'styled-components'
 
 const ErrorStyle = styled.div`
   height: 2rem;
@@ -9,7 +9,7 @@ const ErrorStyle = styled.div`
   color: ${({ theme }) => theme.colors.dangerLight};
   background-color: ${({ theme }) => theme.colors.danger};
   border: 1px solid ${({ theme }) => theme.colors.dangerDark};
-`;
+`
 
 const IconWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.dangerDark};
@@ -20,20 +20,20 @@ const IconWrapper = styled.div`
   align-items: center;
   width: 1.8rem;
   height: 100%;
-`;
+`
 
-type ErrorMessageProps = {
-  renderIcon: React.ReactNode
-};
+interface ErrorMessageProps {
+  renderIcon: React.ReactNode;
+}
 
 const ErrorMessage: React.SFC<ErrorMessageProps> = ({
   renderIcon,
-  children
+  children,
 }) => (
   <ErrorStyle>
     <IconWrapper>{renderIcon}</IconWrapper>
     {children}
   </ErrorStyle>
-);
+)
 
-export default ErrorMessage;
+export default ErrorMessage

@@ -1,10 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import { connect } from "react-redux";
+import * as React from 'react'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
 
-import moviesThunks from "actions/movies/movies.thunks";
+import { MovieType } from 'types'
 
-import Icon from "components/atoms/Icon";
+import moviesThunks from 'actions/movies/movies.thunks'
+
+import Icon from 'components/atoms/Icon'
 
 const Wrapper = styled.form`
   width: 100%;
@@ -13,7 +15,7 @@ const Wrapper = styled.form`
   display: flex;
   position: relative;
   box-shadow: 0 4px 40px rgba(0, 0, 0, 0.75);
-`;
+`
 
 const SearchLibraryField = styled.input`
   height: 100%;
@@ -31,7 +33,7 @@ const SearchLibraryField = styled.input`
     color: ${({ theme }) => theme.colors.textDark};
     opacity: 1;
   }
-`;
+`
 
 const SearchButton = styled.button`
   flex: 0.1;
@@ -48,53 +50,58 @@ const SearchButton = styled.button`
   &:focus {
     border: 1px solid transparent;
   }
-`;
+`
 
-type SearchLibraryProps = {
-  findMovieByTitle: (...args: any[]) => any,
-  getMovies: (...args: any[]) => any,
+interface SearchLibraryProps {
+  findMovieByTitle: (title: string) => void;
+  getMovies: (props: {
+    limit: number,
+    page: number,
+    genres: string[],
+    rating: number,
+  }) => void;
   movies: {
     genres: string[],
     rating: number,
     showSearchLibrary: boolean,
-    movies: {}[]
-  }
-};
+    movies: [MovieType],
+  };
+}
 
-type SearchLibraryState = {
-  title: string
-};
+interface SearchLibraryState {
+  title: string;
+}
 
 class SearchLibrary extends React.Component<
   SearchLibraryProps,
-  SearchLibraryState
+  SearchLibraryState,
 > {
   state = {
-    title: ""
-  };
+    title: '',
+  }
 
-  doOnChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  doOnChange = (e: React.FormEvent<HTMLSearchElement>) => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
 
-  doOnSubmit = e => {
-    e.preventDefault();
-    const { title } = this.state;
-    const { findMovieByTitle, getMovies, movies } = this.props;
+  doOnSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const { title } = this.state
+    const { findMovieByTitle, getMovies, movies } = this.props
     if (title.length) {
-      findMovieByTitle(title);
+      findMovieByTitle(title)
     } else {
       getMovies({
         limit: 10,
         page: 1,
         genres: movies.genres,
-        rating: movies.rating
-      });
+        rating: movies.rating,
+      })
     }
-  };
+  }
 
   render() {
-    const { movies } = this.props;
+    const { movies } = this.props
     return movies && movies.showSearchLibrary ? (
       <Wrapper data-testid="wrapper" onSubmit={this.doOnSubmit}>
         <SearchLibraryField
@@ -106,20 +113,23 @@ class SearchLibrary extends React.Component<
           value={this.state.title}
         />
         <SearchButton data-testid="search-button" type="submit">
-          <Icon icon={["fas", "search"]} iconsize="1rem" />
+          <Icon icon={['fas', 'search']} iconsize="1rem" />
         </SearchButton>
       </Wrapper>
-    ) : null;
+    ) : null
   }
 }
 
 const mapStateToProps = ({ movies }) => ({
-  movies
-});
+  movies,
+})
 
 const mapDispatchToProps = {
   findMovieByTitle: moviesThunks.findMovieByTitle,
-  getMovies: moviesThunks.getMovies
-};
+  getMovies: moviesThunks.getMovies,
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchLibrary);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SearchLibrary)

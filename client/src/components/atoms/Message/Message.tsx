@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.danger};
@@ -7,18 +7,18 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 0.5rem;
-`;
+`
 
-type MessageProps = {
-  className?: string
-};
+interface MessageProps {
+  className?: string;
+}
 
 const Message: React.SFC<MessageProps> = ({ children, className }) => (
   <Wrapper className={className}>{children}</Wrapper>
-);
+)
 
 Message.defaultProps = {
-  className: null
-};
+  className: null,
+}
 
-export default Message;
+export default Message

@@ -1,13 +1,11 @@
-import React, { Component, Suspense } from "react";
-import styled from "styled-components";
+import React, { Component, Suspense } from 'react'
+import styled from 'styled-components'
 
-import Icon from "components/atoms/Icon";
-import Button from "components/atoms/Button";
-import Spinner from "components/atoms/Spinner";
+import Icon from 'components/atoms/Icon'
+import Button from 'components/atoms/Button'
+import Spinner from 'components/atoms/Spinner'
 
-const LazyMovieFull = React.lazy(() =>
-  import("components/organisms/MovieFull")
-);
+const LazyMovieFull = React.lazy(() => import('components/organisms/MovieFull'))
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -20,7 +18,7 @@ const ModalWrapper = styled.div`
   left: 0;
   background-color: ${({ theme }) => theme.colors.darkTransparent};
   z-index: ${({ zIndex }) => zIndex};
-`;
+`
 
 const ModalBox = styled.section`
   background-color: ${({ theme }) => theme.colors.darkTransparent};
@@ -28,51 +26,51 @@ const ModalBox = styled.section`
   position: relative;
   margin: 1rem;
   padding: 2rem;
-`;
+`
 
 const TopRight = styled.div`
   position: absolute;
   top: -1rem;
   right: -1rem;
-`;
+`
 
-type ModalProps = {
+interface ModalProps {
   item: {
     id: string,
-    onConfirm?: (...args: any[]) => any,
-    onClose?: (...args: any[]) => any,
+    onConfirm?: () => void,
+    onClose?: () => void,
     content?: {
       text?: string,
-      movieId?: string
-    }
-  },
-  onClose: (...args: any[]) => any,
-  zIndex?: number
-};
+      movieId?: string,
+    },
+  };
+  onClose: () => void;
+  zIndex?: number;
+}
 
 class Modal extends Component<ModalProps, {}> {
   onClose = () => {
-    const { item, onClose } = this.props;
+    const { item, onClose } = this.props
     if (item.onClose) {
-      item.onClose();
-      onClose();
+      item.onClose()
+      onClose()
     } else {
-      onClose();
+      onClose()
     }
-  };
+  }
 
   onConfirm = () => {
-    const { item, onClose } = this.props;
+    const { item, onClose } = this.props
     if (item.onConfirm) {
-      item.onConfirm();
-      onClose();
+      item.onConfirm()
+      onClose()
     }
-  };
+  }
 
   render() {
-    const { zIndex, item } = this.props;
+    const { zIndex, item } = this.props
     switch (item.type) {
-      case "confirmation":
+      case 'confirmation':
         return (
           <ModalWrapper zIndex={(zIndex + 1) * 10}>
             <ModalBox>
@@ -83,14 +81,14 @@ class Modal extends Component<ModalProps, {}> {
               </div>
             </ModalBox>
           </ModalWrapper>
-        );
-      case "movie-details":
+        )
+      case 'movie-details':
         return (
           <ModalWrapper zIndex={(zIndex + 1) * 10}>
             <ModalBox>
               <TopRight>
                 <Button onClick={this.onClose}>
-                  <Icon icon={["fas", "times"]} />
+                  <Icon icon={['fas', 'times']} />
                 </Button>
               </TopRight>
               <Suspense fallback={<Spinner />}>
@@ -102,15 +100,15 @@ class Modal extends Component<ModalProps, {}> {
               </Suspense>
             </ModalBox>
           </ModalWrapper>
-        );
+        )
       default:
-        return null;
+        return null
     }
   }
 }
 
 Modal.defaultProps = {
-  zIndex: 10
-};
+  zIndex: 10,
+}
 
-export default Modal;
+export default Modal

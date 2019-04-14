@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import Icon from "components/atoms/Icon";
-import Label from "components/atoms/Label";
+import Icon from 'components/atoms/Icon'
+import Label from 'components/atoms/Label'
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
+`
 
 const SearchStyle = styled.input`
   height: 3.5rem;
@@ -31,7 +31,7 @@ const SearchStyle = styled.input`
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.textPrimary};
   }
-`;
+`
 
 const SearchButton = styled.button`
   flex: 0.1;
@@ -50,30 +50,30 @@ const SearchButton = styled.button`
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.textPrimary};
   }
-`;
+`
 
 const LabelWithMargin = styled(Label)`
   margin-bottom: 1rem;
-`;
+`
 
 const InputWrapper = styled.div`
   display: flex;
-`;
+`
 
-type SearchFieldProps = {
-  label?: string,
-  name: string,
-  onBlur?: (...args: any[]) => any,
-  onChange: (...args: any[]) => any,
-  placeholder?: string
-};
+interface SearchFieldProps {
+  label?: string;
+  name: string;
+  onBlur?: () => void;
+  onChange: () => void;
+  placeholder?: string;
+}
 
 const SearchField: React.SFC<SearchFieldProps> = ({
   name,
   label,
   onBlur,
   onChange,
-  placeholder
+  placeholder,
 }) => (
   <Wrapper>
     <LabelWithMargin>{label}</LabelWithMargin>
@@ -87,16 +87,16 @@ const SearchField: React.SFC<SearchFieldProps> = ({
         type="search"
       />
       <SearchButton type="submit">
-        <Icon icon={["fas", "search"]} iconsize="18px" />
+        <Icon icon={['fas', 'search']} iconsize="18px" />
       </SearchButton>
     </InputWrapper>
   </Wrapper>
-);
+)
 
 SearchField.defaultProps = {
-  label: "",
+  label: '',
   onBlur: null,
-  placeholder: "Search..."
-};
+  placeholder: 'Search...',
+}
 
-export default SearchField;
+export default SearchField

@@ -1,24 +1,23 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
 const ErrorWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.red};
   color: ${({ theme }) => theme.colors.white};
-`;
+`
 
-type ErrorBoundaryState = {
-  error: any,
-  error: null
-};
+interface ErrorBoundaryState {
+  error: ?string;
+}
 
 class ErrorBoundary extends React.Component<{}, ErrorBoundaryState> {
   state = {
-    error: null
-  };
+    error: null,
+  }
 
   componentDidCatch(error, info) {
-    this.setState({ error });
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+    this.setState({ error })
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       console.error("Error", error); // eslint-disable-line
       console.error("ErrorInfo", JSON.stringify(info)); // eslint-disable-line
     } else {
@@ -32,15 +31,15 @@ class ErrorBoundary extends React.Component<{}, ErrorBoundaryState> {
         <ErrorWrapper>
           <h1>Oups, something went wrong :(</h1>
           <p>
-            Feel free to{" "}
+            Feel free to{' '}
             <a href="mailto:contact@hannasoderstrom.com">report this error</a>.
           </p>
         </ErrorWrapper>
-      );
+      )
     }
 
-    return this.props.children;
+    return this.props.children
   }
 }
 
-export default ErrorBoundary;
+export default ErrorBoundary

@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import * as React from 'react'
+import styled from 'styled-components'
 
 const Primary = styled.button`
   background-color: ${({ theme }) => theme.colors.primary};
@@ -19,12 +19,12 @@ const Primary = styled.button`
   display: flex;
   align-items: center;
   cursor: pointer;
-  cursor: ${({ disabled }) => disabled && "not-allowed"};
+  cursor: ${({ disabled }) => disabled && 'not-allowed'};
 
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.textPrimary};
   }
-`;
+`
 
 const Secondary = styled.button`
   background-color: transparent;
@@ -43,7 +43,7 @@ const Secondary = styled.button`
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.textPrimary};
   }
-`;
+`
 
 const Thirdiary = styled.button`
   background-color: transparent;
@@ -63,16 +63,16 @@ const Thirdiary = styled.button`
   &:focus {
     border: 1px solid transparent;
   }
-`;
+`
 
-type ButtonProps = {
-  className?: string,
-  disabled?: boolean,
-  onClick?: (...args: any[]) => any,
-  secondary?: boolean,
-  thirdiary?: boolean,
-  type?: string
-};
+interface ButtonProps {
+  className?: string;
+  disabled?: boolean;
+  onClick?: () => void;
+  secondary?: boolean;
+  thirdiary?: boolean;
+  type?: string;
+}
 
 const Button: React.SFC<ButtonProps> = ({
   className,
@@ -81,7 +81,7 @@ const Button: React.SFC<ButtonProps> = ({
   children,
   onClick,
   disabled,
-  type
+  type,
 }) => {
   if (secondary) {
     return (
@@ -94,7 +94,7 @@ const Button: React.SFC<ButtonProps> = ({
       >
         {children}
       </Secondary>
-    );
+    )
   }
   if (thirdiary) {
     return (
@@ -107,7 +107,7 @@ const Button: React.SFC<ButtonProps> = ({
       >
         {children}
       </Thirdiary>
-    );
+    )
   }
   return (
     <Primary
@@ -119,8 +119,8 @@ const Button: React.SFC<ButtonProps> = ({
     >
       {children}
     </Primary>
-  );
-};
+  )
+}
 
 Button.defaultProps = {
   className: null,
@@ -128,7 +128,7 @@ Button.defaultProps = {
   onClick: null,
   secondary: null,
   thirdiary: null,
-  type: null
-};
+  type: null,
+}
 
-export default Button;
+export default Button

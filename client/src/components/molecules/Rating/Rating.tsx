@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import Button from "components/atoms/Button";
-import Star from "components/atoms/Star";
-import Icon from "components/atoms/Icon";
+import Button from 'components/atoms/Button'
+import Star from 'components/atoms/Star'
+import Icon from 'components/atoms/Icon'
 
 const StarButton = styled.button`
   border: none;
@@ -11,8 +11,8 @@ const StarButton = styled.button`
   outline: none;
   background-color: transparent;
   cursor: pointer;
-  font-size: ${({ small }) => (small ? "1.75rem" : "2.5rem")};
-`;
+  font-size: ${({ small }) => (small ? '1.75rem' : '2.5rem')};
+`
 
 const RatingStyle = styled.div`
   display: flex;
@@ -20,77 +20,77 @@ const RatingStyle = styled.div`
   button:nth-of-type(0) {
     margin-right: 0.5rem;
   }
-`;
+`
 
-type RatingProps = {
-  rating: number,
-  setRating?: (...args: any[]) => any,
-  small?: boolean,
-  useLock?: boolean
-};
+interface RatingProps {
+  rating: number;
+  setRating?: () => void;
+  small?: boolean;
+  useLock?: boolean;
+}
 
-type RatingState = {
-  locked: any,
-  rating: any,
-  stars: any
-};
+interface RatingState {
+  locked: boolean;
+  rating: number;
+  stars: number;
+}
 
 class Rating extends React.Component<RatingProps, RatingState> {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       locked: this.props.useLock,
       rating: props.rating,
-      stars: props.rating
-    };
+      stars: props.rating,
+    }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.rating !== prevState.rating) {
-      return { rating: nextProps.rating };
+      return { rating: nextProps.rating }
     }
-    return prevState;
+    return prevState
   }
 
   onMouseOver = newRating => {
     if (!this.state.locked) {
-      this.setState({ stars: newRating });
+      this.setState({ stars: newRating })
     }
-  };
+  }
 
   onMouseOut = () => {
     if (!this.state.locked) {
-      this.setState(prevState => ({ stars: prevState.rating }));
+      this.setState(prevState => ({ stars: prevState.rating }))
     }
-  };
+  }
 
   onClickStar = rating => {
     if (!this.state.locked) {
-      const { setRating } = this.props;
+      const { setRating } = this.props
       if (setRating) {
-        setRating(rating);
+        setRating(rating)
       }
     }
-  };
+  }
 
   toggleLocked = () => {
     this.setState(prevState => ({
-      locked: !prevState.locked
-    }));
-  };
+      locked: !prevState.locked,
+    }))
+  }
 
   renderLockIcon() {
     return this.state.locked ? (
-      <Icon color="#666" icon={["fas", "lock"]} />
+      <Icon color="#666" icon={['fas', 'lock']} />
     ) : (
-      <Icon color="#FEDC9B" icon={["fas", "unlock"]} />
-    );
+      <Icon color="#FEDC9B" icon={['fas', 'unlock']} />
+    )
   }
 
   render() {
-    const { small, useLock, setRating } = this.props;
-    const { stars } = this.state;
-    const starsToRender = [];
+    const { small, useLock, setRating } = this.props
+    const { stars } = this.state
+    const starsToRender = []
     for (let i = 0; i < stars; i++) {
       if (setRating) {
         starsToRender.push(
@@ -103,10 +103,10 @@ class Rating extends React.Component<RatingProps, RatingState> {
             onMouseOver={() => this.onMouseOver(i + 1)}
           >
             <Star isSelected small={small} />
-          </StarButton>
-        );
+          </StarButton>,
+        )
       } else {
-        starsToRender.push(<Star isSelected key={i + 1} small={small} />);
+        starsToRender.push(<Star isSelected key={i + 1} small={small} />)
       }
     }
     for (let i = 0; i < 5 - stars; i++) {
@@ -121,30 +121,29 @@ class Rating extends React.Component<RatingProps, RatingState> {
             onMouseOver={() => this.onMouseOver(stars + 1 + i)}
           >
             <Star small={small} />
-          </StarButton>
-        );
+          </StarButton>,
+        )
       } else {
-        starsToRender.push(<Star key={stars + 1 + i} small={small} />);
+        starsToRender.push(<Star key={stars + 1 + i} small={small} />)
       }
     }
     return (
       <RatingStyle data-testid="rating">
-        {useLock &&
-          setRating && (
-            <Button onClick={this.toggleLocked} thirdiary>
-              {this.renderLockIcon()}
-            </Button>
-          )}
+        {useLock && setRating && (
+          <Button onClick={this.toggleLocked} thirdiary>
+            {this.renderLockIcon()}
+          </Button>
+        )}
         {starsToRender}
       </RatingStyle>
-    );
+    )
   }
 }
 
 Rating.defaultProps = {
   setRating: null,
   small: false,
-  useLock: true
-};
+  useLock: true,
+}
 
-export default Rating;
+export default Rating

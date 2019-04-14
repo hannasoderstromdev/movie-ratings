@@ -1,38 +1,38 @@
-import React from "react";
-import { connect } from "react-redux";
-import styled from "styled-components";
+import React from 'react'
+import { connect } from 'react-redux'
+import styled from 'styled-components'
 
-import Spinner from "components/atoms/Spinner";
+import Spinner from 'components/atoms/Spinner'
 
-import Genres from "components/molecules/Genres";
+import Genres from 'components/molecules/Genres'
 
 const Wrapper = styled.section`
   background-color: ${({ theme }) => theme.colors.black};
   padding: 0.15rem 1rem 0 1rem;
-`;
+`
 
-type FilterByGenreProps = {
-  filter: {},
-  genres: {},
-  isOpen: boolean,
-  loading: boolean
-};
+interface FilterByGenreProps {
+  filter: {};
+  genres: {};
+  isOpen: boolean;
+  loading: boolean;
+}
 
 const FilterByGenre: React.SFC<FilterByGenreProps> = ({
   genres,
   loading,
-  isOpen
+  isOpen,
 }) => {
-  if (loading) return <Spinner />;
+  if (loading) return <Spinner />
   return isOpen ? (
     <Wrapper>
       <Genres genres={genres} />
     </Wrapper>
-  ) : null;
-};
+  ) : null
+}
 
 const mapStateToProps = ({ genres }) => ({
-  ...genres
-});
+  ...genres,
+})
 
-export default connect(mapStateToProps)(FilterByGenre);
+export default connect(mapStateToProps)(FilterByGenre)
