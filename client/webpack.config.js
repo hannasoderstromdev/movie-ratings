@@ -27,9 +27,9 @@ module.exports = env => {
       },
       hot: isDevelopment,
     },
-    devtool: isDevelopment ? 'inline-source-map' : false,
+    devtool: isDevelopment ? 'source-map' : false,
     entry: {
-      app: path.resolve(__dirname, 'src/index.js'),
+      app: path.resolve(__dirname, 'src/index.tsx'),
     },
     output: {
       path: isProduction ? path.resolve(__dirname, 'dist') : undefined,
@@ -59,7 +59,7 @@ module.exports = env => {
             output: {
               ecma: 5,
               comments: false,
-              ascii_only: true,
+              ascii_only: true, // eslint-disable-line
             },
           },
           parallel: true,
@@ -92,7 +92,7 @@ module.exports = env => {
     },
     resolve: {
       modules: [path.resolve(__dirname, './src'), 'node_modules'],
-      extensions: ['.js', '.jsx', '.json'],
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
       alias: {
         reducers: path.resolve(__dirname, './src/reducers'),
       },
@@ -110,6 +110,15 @@ module.exports = env => {
               emitError: true,
             },
           },
+        },
+        {
+          test: /\.tsx?$/,
+          loader: 'awesome-typescript-loader',
+        },
+        {
+          enforce: 'pre',
+          test: /\.js$/,
+          loader: 'source-map-loader',
         },
         {
           test: /\.(js|jsx)$/,
@@ -177,6 +186,10 @@ module.exports = env => {
       isDevelopment ? new webpack.HotModuleReplacementPlugin() : () => {},
       new CleanWebpackPlugin(),
     ],
+    externals: {
+      react: 'React',
+      'react-dom': 'ReactDOM',
+    },
     // node: {
     //   module: 'empty',
     //   dgram: 'empty',
