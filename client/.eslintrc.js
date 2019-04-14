@@ -23,7 +23,7 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    'prettier',
+    // 'prettier',
     'plugin:prettier/recommended',
     'prettier/@typescript-eslint',
   ],
@@ -46,13 +46,14 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/explicit-member-accessibility': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     eqeqeq: ["error", "always" ],
     "prefer-const": 2,
     strict: ["error", "global"],
     "react/prefer-es6-class": 2,
-    "react/prop-types": 2,
+    "react/prop-types": 0,
     "react/no-access-state-in-setstate": 2,
     "react/no-deprecated": 2,
     "react/no-did-mount-set-state": 2,
@@ -64,22 +65,22 @@ module.exports = {
     "react/no-this-in-sfc": 2,
     "react/no-unescaped-entities": 2,
     "react/no-unsafe": 2,
-    "react/no-unused-prop-types": 2,
+    "react/no-unused-prop-types": 0,
     "react/no-unused-state": 2,
     "react/prefer-stateless-function": 2,
     "react/react-in-jsx-scope": 2,
     "react/require-default-props": 2,
     "react/require-render-return": 2,
-    "react/sort-prop-types": 2,
+    "react/sort-prop-types": 0,
     "react/void-dom-elements-no-children": 2,
     "react/jsx-filename-extension": [
       1,
       {
-        extensions: [".js", ".jsx"]
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
       }
     ],
     "react/jsx-key": 2,
-    "react/jsx-no-duplicate-props": 2,
+    "react/jsx-no-duplicate-props": 0,
     "react/jsx-no-undef": [
       2,
       {
@@ -87,8 +88,8 @@ module.exports = {
       }
     ],
     "react/jsx-pascal-case": 2,
-    "react/jsx-sort-default-props": 2,
-    "react/jsx-sort-props": 2,
+    "react/jsx-sort-default-props": 0,
+    "react/jsx-sort-props": 0,
     "react/jsx-uses-vars": 2,
     "no-console": 2,
     "no-template-curly-in-string": 2,
