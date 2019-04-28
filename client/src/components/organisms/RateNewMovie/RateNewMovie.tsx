@@ -46,10 +46,19 @@ const RateWrapper = styled.div`
 
 interface RateNewMovieProps {
   createMovie: () => void;
-  history: {};
+  history: {
+    push: () => void,
+  };
   loading: boolean;
   movie?: MovieType;
   userRole: string;
+  user: {
+    profile: {
+      user: {
+        role: string,
+      },
+    },
+  };
 }
 
 interface RateNewMovieState {

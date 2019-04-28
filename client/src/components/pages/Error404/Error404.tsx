@@ -1,9 +1,9 @@
-import React from "react";
+import * as React from 'react'
 
-import Page from "components/templates/Page";
-import Main from "components/templates/Main";
+import Page from 'components/templates/Page'
+import Main from 'components/templates/Main'
 
-import { H1 } from "components/atoms/Typography";
+import { H1 } from 'components/atoms/Typography'
 
 const Error404 = () => (
   <Page data-testid="error404-screen">
@@ -11,6 +11,6 @@ const Error404 = () => (
       <H1>No such page</H1>
     </Main>
   </Page>
-);
+)
 
-export default Error404;
+export default Error404

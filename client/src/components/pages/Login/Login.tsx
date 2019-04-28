@@ -1,71 +1,71 @@
-import React from "react";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import * as React from 'react'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-import userThunks from "actions/user/user.thunks";
+import userThunks from 'actions/user/user.thunks'
 
-import Page from "components/templates/Page";
-import Main from "components/templates/Main";
+import Page from 'components/templates/Page'
+import Main from 'components/templates/Main'
 
-import { H1 } from "components/atoms/Typography";
-import Button from "components/atoms/Button";
+import { H1 } from 'components/atoms/Typography'
+import Button from 'components/atoms/Button'
 
-import LabeledInputField from "components/molecules/LabeledInputField";
-import FullscreenSpinner from "components/molecules/FullscreenSpinner/FullscreenSpinner";
+import LabeledInputField from 'components/molecules/LabeledInputField'
+import FullscreenSpinner from 'components/molecules/FullscreenSpinner/FullscreenSpinner'
 
 const FormField = styled.div`
   display: flex;
   flex-direction: column;
   margin: 4rem 0;
-`;
+`
 
 const RightAlign = styled.div`
   display: flex;
   justify-content: flex-end;
-`;
+`
 
-type LoginProps = {
+interface LoginProps {
   history: {
-    push: (...args: any[]) => any
-  },
-  login: (...args: any[]) => any,
-  logout: (...args: any[]) => any,
+    push: () => void,
+  };
+  login: () => void;
+  logout: () => void;
   user: {
     loggingIn: boolean,
-    loggedIn: boolean
-  }
-};
+    loggedIn: boolean,
+  };
+}
 
-type LoginState = {
-  username: string,
-  password: string
-};
+interface LoginState {
+  username: string;
+  password: string;
+}
 
 class Login extends React.Component<LoginProps, LoginState> {
   state = {
-    username: "",
-    password: ""
-  };
-
-  componentDidMount() {
-    this.props.logout();
+    username: '',
+    password: '',
   }
 
-  doOnChange = e => this.setState({ [e.target.name]: e.target.value });
+  componentDidMount() {
+    this.props.logout()
+  }
+
+  doOnChange = e => this.setState({ [e.target.name]: e.target.value })
 
   doOnSubmit = async e => {
-    e.preventDefault();
+    e.preventDefault()
     // attempt login
-    const { username, password } = this.state;
-    await this.props.login(username, password);
+    const { username, password } = this.state
+    await this.props.login(username, password)
     // redirect to home
-    await this.props.history.push("/");
-  };
+    await this.props.history.push('/')
+  }
 
   render() {
-    const { username, password } = this.state;
-    const { user } = this.props;
+    const { username, password } = this.state
+    const { user } = this.props
     return (
       <Page data-testid="login-screen">
         {user && user.loggingIn && <FullscreenSpinner />}
@@ -103,19 +103,22 @@ class Login extends React.Component<LoginProps, LoginState> {
           </form>
         </Main>
       </Page>
-    );
+    )
   }
 }
 
 const mapStateToProps = ({ user }) => ({
-  user
-});
+  user,
+})
 
 const mapDispatchToProps = {
   login: userThunks.login,
-  logout: userThunks.logout
-};
+  logout: userThunks.logout,
+}
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
-);
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(withRouter(Login)),
+)
