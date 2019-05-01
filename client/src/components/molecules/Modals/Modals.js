@@ -4,21 +4,21 @@ import { connect } from 'react-redux'
 import modalsActions from 'actions/modals/modals.actions'
 import Modal from './Modal'
 
-interface ModalsProps {
-  closeModal: () => void;
-  modals: {
-    id: string,
-    type: string,
-    content?: {
-      text?: string,
-      movieId?: string,
-    },
-    onClose?: () => void,
-    onConfirm?: () => void,
-  }[];
-}
+// interface ModalsProps {
+//   closeModal: (itemId: string) => void;
+//   modals: {
+//     id: string,
+//     type: string,
+//     content?: {
+//       text?: string,
+//       movieId?: string,
+//     },
+//     onClose?: () => void,
+//     onConfirm?: () => void,
+//   }[];
+// }
 
-const Modals: React.SFC<ModalsProps> = ({ modals, closeModal }) => (
+const Modals = ({ modals, closeModal }) => (
   <div data-testid="modals">
     {modals &&
       modals.map((item, i) => (
