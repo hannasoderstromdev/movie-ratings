@@ -34,21 +34,21 @@ const TopRight = styled.div`
   right: -1rem;
 `
 
-interface ModalProps {
-  item: {
-    id: string,
-    onConfirm?: () => void,
-    onClose?: () => void,
-    content?: {
-      text?: string,
-      movieId?: string,
-    },
-  };
-  onClose: () => void;
-  zIndex?: number;
-}
+// interface ModalProps {
+//   item: {
+//     id: string,
+//     onConfirm?: () => void,
+//     onClose?: () => void,
+//     content?: {
+//       text?: string,
+//       movieId?: string,
+//     },
+//   };
+//   onClose: () => void;
+//   zIndex: number;
+// }
 
-class Modal extends Component<ModalProps, {}> {
+class Modal extends Component {
   onClose = () => {
     const { item, onClose } = this.props
     if (item.onClose) {
@@ -93,7 +93,7 @@ class Modal extends Component<ModalProps, {}> {
               </TopRight>
               <Suspense fallback={<Spinner />}>
                 <LazyMovieFull
-                  movieId={item.content.movieId}
+                  movieId={item && item.content && item.content.movieId}
                   onClose={this.onClose}
                   showDelete
                 />
@@ -105,10 +105,6 @@ class Modal extends Component<ModalProps, {}> {
         return null
     }
   }
-}
-
-Modal.defaultProps = {
-  zIndex: 10,
 }
 
 export default Modal
