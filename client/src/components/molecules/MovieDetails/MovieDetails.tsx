@@ -53,21 +53,7 @@ const Img = styled.img`
   margin-right: 1rem;
 `
 
-interface MovieDetailsProps {
-  actors: string;
-  country: string;
-  director: string;
-  isOpen: boolean;
-  language: string;
-  plot: string;
-  production: string;
-  ratings: string[];
-  released: string;
-  toggle: () => void;
-  writer: string;
-}
-
-const MovieDetails: React.SFC<MovieDetailsProps> = ({
+const MovieDetails = ({
   actors,
   plot,
   released,
@@ -79,6 +65,21 @@ const MovieDetails: React.SFC<MovieDetailsProps> = ({
   isOpen,
   toggle,
   writer,
+}: {
+  actors: string,
+  country: string,
+  director: string,
+  isOpen: boolean,
+  language: string,
+  plot: string,
+  production: string,
+  ratings: {
+    Source: string,
+    Value: string,
+  }[],
+  released: string,
+  toggle: () => void,
+  writer: string,
 }) => (
   <MoreDetails>
     <Button onClick={toggle} thirdiary>

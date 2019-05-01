@@ -44,9 +44,4 @@ const LabeledInputField: React.SFC<LabeledInputFieldProps> = ({
   </Label>
 )
 
-LabeledInputField.defaultProps = {
-  error: false,
-  onBlur: null,
-}
-
 export default LabeledInputField

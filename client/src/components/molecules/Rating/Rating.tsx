@@ -24,9 +24,9 @@ const RatingStyle = styled.div`
 
 interface RatingProps {
   rating: number;
-  setRating?: () => void;
-  small?: boolean;
-  useLock?: boolean;
+  setRating: (rating: number) => void;
+  small: boolean;
+  useLock: boolean;
 }
 
 interface RatingState {
@@ -36,7 +36,7 @@ interface RatingState {
 }
 
 class Rating extends React.Component<RatingProps, RatingState> {
-  constructor(props) {
+  constructor(props: RatingProps) {
     super(props)
     this.state = {
       locked: this.props.useLock,
@@ -45,14 +45,17 @@ class Rating extends React.Component<RatingProps, RatingState> {
     }
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(
+    nextProps: RatingProps,
+    prevState: RatingState,
+  ) {
     if (nextProps.rating !== prevState.rating) {
       return { rating: nextProps.rating }
     }
     return prevState
   }
 
-  onMouseOver = newRating => {
+  onMouseOver = (newRating: number) => {
     if (!this.state.locked) {
       this.setState({ stars: newRating })
     }
@@ -64,7 +67,7 @@ class Rating extends React.Component<RatingProps, RatingState> {
     }
   }
 
-  onClickStar = rating => {
+  onClickStar = (rating: number) => {
     if (!this.state.locked) {
       const { setRating } = this.props
       if (setRating) {
@@ -138,12 +141,6 @@ class Rating extends React.Component<RatingProps, RatingState> {
       </RatingStyle>
     )
   }
-}
-
-Rating.defaultProps = {
-  setRating: null,
-  small: false,
-  useLock: true,
 }
 
 export default Rating

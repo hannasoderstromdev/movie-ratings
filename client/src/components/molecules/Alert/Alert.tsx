@@ -73,7 +73,7 @@ const Alert: React.SFC<AlertProps> = ({
   type,
   message,
   clearError,
-}) => {
+}: AlertProps) => {
   return error ? (
     <Expire callOnFinish={clearError}>
       <AlertWrapper type={type}>

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { H2, Text, TextSmall } from 'components/atoms/Typography'
@@ -61,6 +60,17 @@ const MovieHeader = ({
   rating,
   setRating,
   showDelete,
+}: {
+  id: string,
+  deleteMovie: (id: string) => void,
+  title: string,
+  year: string,
+  runtime: string,
+  genres: {}[],
+  openFullMovie: () => void,
+  rating: number,
+  setRating: () => void,
+  showDelete: () => void,
 }) => {
   return (
     <Wrapper>
@@ -89,32 +99,6 @@ const MovieHeader = ({
       )}
     </Wrapper>
   )
-}
-
-MovieHeader.defaultProps = {
-  deleteMovie: null,
-  id: null,
-  openFullMovie: undefined,
-  rating: null,
-  setRating: null,
-  showDelete: false,
-}
-
-MovieHeader.propTypes = {
-  deleteMovie: PropTypes.func,
-  genres: PropTypes.shape({
-    [PropTypes.string]: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-  }).isRequired,
-  id: PropTypes.string,
-  openFullMovie: PropTypes.func,
-  rating: PropTypes.number,
-  runtime: PropTypes.string.isRequired,
-  setRating: PropTypes.func,
-  showDelete: PropTypes.bool,
-  title: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
 }
 
 export default MovieHeader

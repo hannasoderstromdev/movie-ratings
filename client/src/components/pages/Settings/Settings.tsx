@@ -6,11 +6,7 @@ import Main from 'components/templates/Main'
 
 import { H1, Text, TextDark } from 'components/atoms/Typography'
 
-interface SettingsProps {
-  email: string;
-  firstName: string;
-  lastName: string;
-  role: string;
+interface User {
   user: {
     profile: {
       user: {
@@ -21,6 +17,14 @@ interface SettingsProps {
       },
     },
   };
+}
+
+interface SettingsProps {
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  user: User;
 }
 
 const Settings: React.SFC<SettingsProps> = ({
@@ -48,7 +52,7 @@ const Settings: React.SFC<SettingsProps> = ({
   </Page>
 )
 
-const mapStateToProps = ({ user }) => ({
+const mapStateToProps = ({ user }: User) => ({
   ...(user && user.profile && user.profile.user),
 })
 

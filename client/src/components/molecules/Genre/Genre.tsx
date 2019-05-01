@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
@@ -29,17 +29,18 @@ const Button = styled.button`
 `
 
 interface GenreProps {
-  addOrRemoveGenreAndGetMovies: () => void;
+  addOrRemoveGenreAndGetMovies: (props: { id: string, name: string }) => void;
   filter: {};
   id: string;
   name: string;
 }
 
-class Genre extends Component<GenreProps, {}> {
+class Genre extends React.Component<GenreProps, {}> {
   toggleSelectedGenre = () => {
     const { addOrRemoveGenreAndGetMovies, id, name } = this.props
     addOrRemoveGenreAndGetMovies({ id, name })
   }
+
   render() {
     const { name, filter, id } = this.props
     return (
@@ -55,7 +56,7 @@ class Genre extends Component<GenreProps, {}> {
   }
 }
 
-const mapStateToProps = ({ genres }) => ({
+const mapStateToProps = ({ genres }: { genres: { filter: {} } }) => ({
   filter: genres.filter,
 })
 

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { MovieType } from 'types'
+import { MovieType, User } from 'types'
 
 import moviesThunks from 'actions/movies/movies.thunks'
 
@@ -26,9 +26,27 @@ const PosterImg = styled.img`
 `
 
 interface MovieFullProps {
+  deleteMovie: (id: string) => void;
   onClose?: () => void;
-  updateMovie: () => void;
+  updateMovie: (id: string, {}) => void;
+  title: string;
+  poster: string;
+  genres: { Source: string, Value: string }[];
+  id: string;
+  rating: number;
+  runtime: string;
+  year: string;
+  actors: string;
+  country: string;
+  director: string;
+  language: string;
+  plot: string;
+  production: string;
+  ratings: {};
+  released: string;
   userRole: string;
+  writer: string;
+  showDelete: () => boolean;
 }
 
 interface MovieFullState {
@@ -40,7 +58,7 @@ class MovieFull extends React.Component<MovieFullProps, MovieFullState> {
     detailsOpen: true,
   }
 
-  onDelete = id => {
+  onDelete = (id: string) => {
     const { deleteMovie, onClose } = this.props
     deleteMovie(id)
     if (onClose) {
@@ -53,7 +71,7 @@ class MovieFull extends React.Component<MovieFullProps, MovieFullState> {
       detailsOpen: !prevState.detailsOpen,
     }))
 
-  setRating = async rating => {
+  setRating = async (rating: number) => {
     const { updateMovie, id } = this.props
     await updateMovie(id, { rating })
   }
@@ -118,19 +136,37 @@ class MovieFull extends React.Component<MovieFullProps, MovieFullState> {
   }
 }
 
-MovieFull.whyDidYouRender = {
-  logOnDifferentValues: true,
-  customName: 'MovieFull',
-}
-
-MovieFull.defaultProps = {
-  id: null,
-  onClose: null,
-  rating: 0,
-  showDelete: false,
-}
-
-const mapStateToProps = ({ movies, user }, { movieId }) => {
+const mapStateToProps = (
+  {
+    movies,
+    user,
+  }: {
+    movies: {
+      loading: boolean,
+      movies: {
+        id: string,
+      }[],
+      error: null,
+      numberOfItems: number,
+      limit: number,
+      page: number,
+      showSearchLibrary: boolean,
+      genres: [],
+      rating: number,
+    },
+    user: {
+      loggingIn: boolean,
+      loggedIn: boolean,
+      profile: {
+        user: {
+          role: string,
+        },
+      },
+      error: boolean,
+    },
+  },
+  { movieId }: { movieId: string },
+) => {
   const movieFound =
     movies &&
     movies.movies.length &&

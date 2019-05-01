@@ -53,12 +53,4 @@ const InputField: React.SFC<InputFieldProps> = ({
   />
 )
 
-InputField.defaultProps = {
-  name: '',
-  onBlur: null,
-  placeholder: '',
-  type: 'text',
-  value: '',
-}
-
 export default InputField

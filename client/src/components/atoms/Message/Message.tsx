@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `
 
 interface MessageProps {
-  className?: string;
+  className?: string | undefined;
 }
 
 const Message: React.SFC<MessageProps> = ({ children, className }) => (
@@ -18,7 +18,7 @@ const Message: React.SFC<MessageProps> = ({ children, className }) => (
 )
 
 Message.defaultProps = {
-  className: null,
+  className: undefined,
 }
 
 export default Message

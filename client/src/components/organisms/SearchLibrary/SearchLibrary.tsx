@@ -64,7 +64,7 @@ interface SearchLibraryProps {
     genres: string[],
     rating: number,
     showSearchLibrary: boolean,
-    movies: [MovieType],
+    movies: MovieType,
   };
 }
 
@@ -74,14 +74,15 @@ interface SearchLibraryState {
 
 class SearchLibrary extends React.Component<
   SearchLibraryProps,
-  SearchLibraryState,
+  // eslint-disable-next-line prettier/prettier
+  SearchLibraryState
 > {
   state = {
     title: '',
   }
 
-  doOnChange = (e: React.FormEvent<HTMLSearchElement>) => {
-    this.setState({ [e.target.name]: e.target.value })
+  doOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ title: e.target.value })
   }
 
   doOnSubmit = (e: React.FormEvent) => {
