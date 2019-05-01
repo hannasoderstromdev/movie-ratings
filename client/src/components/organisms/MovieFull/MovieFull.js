@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { MovieType, User } from 'types'
+// import { MovieType, User } from 'types'
 
 import moviesThunks from 'actions/movies/movies.thunks'
 
@@ -25,40 +25,44 @@ const PosterImg = styled.img`
   height: auto;
 `
 
-interface MovieFullProps {
-  deleteMovie: (id: string) => void;
-  onClose?: () => void;
-  updateMovie: (id: string, {}) => void;
-  title: string;
-  poster: string;
-  genres: { Source: string, Value: string }[];
-  id: string;
-  rating: number;
-  runtime: string;
-  year: string;
-  actors: string;
-  country: string;
-  director: string;
-  language: string;
-  plot: string;
-  production: string;
-  ratings: {};
-  released: string;
-  userRole: string;
-  writer: string;
-  showDelete: () => boolean;
-}
+// interface MovieFullProps {
+//   deleteMovie: (id: string) => void;
+//   onClose?: () => void;
+//   updateMovie: (id: string, {}) => void;
+//   title: string;
+//   poster: string;
+//   genres: { Source: string, Value: string }[];
+//   id: string;
+//   rating: number;
+//   runtime: string;
+//   year: string;
+//   actors: string;
+//   country: string;
+//   director: string;
+//   language: string;
+//   plot: string;
+//   production: string;
+//   ratings: {
+//     Source: string,
+//     Value: string,
+//   };
+//   released: string;
+//   userRole: string;
+//   writer: string;
+//   showDelete: () => boolean;
+//   setRating: () => void;
+// }
 
-interface MovieFullState {
-  detailsOpen: boolean;
-}
+// interface MovieFullState {
+//   detailsOpen: boolean;
+// }
 
-class MovieFull extends React.Component<MovieFullProps, MovieFullState> {
+class MovieFull extends React.Component {
   state = {
     detailsOpen: true,
   }
 
-  onDelete = (id: string) => {
+  onDelete = id => {
     const { deleteMovie, onClose } = this.props
     deleteMovie(id)
     if (onClose) {
@@ -71,7 +75,7 @@ class MovieFull extends React.Component<MovieFullProps, MovieFullState> {
       detailsOpen: !prevState.detailsOpen,
     }))
 
-  setRating = async (rating: number) => {
+  setRating = async rating => {
     const { updateMovie, id } = this.props
     await updateMovie(id, { rating })
   }
@@ -136,37 +140,7 @@ class MovieFull extends React.Component<MovieFullProps, MovieFullState> {
   }
 }
 
-const mapStateToProps = (
-  {
-    movies,
-    user,
-  }: {
-    movies: {
-      loading: boolean,
-      movies: {
-        id: string,
-      }[],
-      error: null,
-      numberOfItems: number,
-      limit: number,
-      page: number,
-      showSearchLibrary: boolean,
-      genres: [],
-      rating: number,
-    },
-    user: {
-      loggingIn: boolean,
-      loggedIn: boolean,
-      profile: {
-        user: {
-          role: string,
-        },
-      },
-      error: boolean,
-    },
-  },
-  { movieId }: { movieId: string },
-) => {
+const mapStateToProps = ({ movies, user }) => {
   const movieFound =
     movies &&
     movies.movies.length &&
