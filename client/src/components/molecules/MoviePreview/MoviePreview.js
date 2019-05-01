@@ -1,26 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import uuid from 'uuid/v4'
+
 import modalsActions from 'actions/modals/modals.actions'
 import MovieTile from 'components/molecules/MovieTile'
 import MovieRow from 'components/molecules/MovieRow'
 
-interface MoviePreviewProps {
-  genres: {};
-  id?: string;
-  listStyle?: string;
-  openModal: () => void;
-  poster: string;
-  rating?: number;
-  runtime: string;
-  title: string;
-  year: string;
-}
+// interface MoviePreviewProps {
+//   genres: {};
+//   id?: string;
+//   listStyle: string;
+//   openModal: () => void;
+//   poster: string;
+//   rating: number;
+//   runtime: string;
+//   title: string;
+//   year: string;
+// }
 
-class MoviePreview extends React.Component<MoviePreviewProps, {}> {
+class MoviePreview extends React.Component {
   openFullMovie = () => {
-    const { id } = this.props
-    this.props.openModal({
+    const { id, openModal } = this.props
+    openModal({
       id: uuid(),
       type: 'movie-details',
       content: {
@@ -28,6 +29,7 @@ class MoviePreview extends React.Component<MoviePreviewProps, {}> {
       },
     })
   }
+
   render() {
     const {
       id,
@@ -60,12 +62,6 @@ class MoviePreview extends React.Component<MoviePreviewProps, {}> {
       />
     )
   }
-}
-
-MoviePreview.defaultProps = {
-  id: undefined,
-  listStyle: 'rows',
-  rating: 0,
 }
 
 const mapDispatchToProps = {
