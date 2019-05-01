@@ -26,7 +26,7 @@ interface RatingProps {
   rating: number;
   setRating: (rating: number) => void;
   small: boolean;
-  useLock: boolean;
+  useLock?: boolean;
 }
 
 interface RatingState {
