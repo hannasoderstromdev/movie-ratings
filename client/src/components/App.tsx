@@ -1,10 +1,13 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import { store } from "helpers/store";
-import Root from "./Root";
-import Theme from "./Theme";
-import Normalize from "./Normalize";
-import Content from "./Content";
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+
+import { store } from 'helpers/store'
+
+import Root from './Root'
+import Theme from './Theme'
+import Normalize from './Normalize'
+import Content from './Content'
+
 const App = () => (
   <Root store={store}>
     <Theme>
@@ -16,5 +19,5 @@ const App = () => (
       </React.Fragment>
     </Theme>
   </Root>
-);
-export default App;
+)
+export default App
