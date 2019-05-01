@@ -25,24 +25,24 @@ const RightAlign = styled.div`
   justify-content: flex-end;
 `
 
-interface LoginProps {
-  history: {
-    push: () => void,
-  };
-  login: () => void;
-  logout: () => void;
-  user: {
-    loggingIn: boolean,
-    loggedIn: boolean,
-  };
-}
+// interface LoginProps {
+//   history: {
+//     push: () => void,
+//   };
+//   login: () => void;
+//   logout: () => void;
+//   user: {
+//     loggingIn: boolean,
+//     loggedIn: boolean,
+//   };
+// }
 
-interface LoginState {
-  username: string;
-  password: string;
-}
+// interface LoginState {
+//   username: string;
+//   password: string;
+// }
 
-class Login extends React.Component<LoginProps, LoginState> {
+class Login extends React.Component {
   state = {
     username: '',
     password: '',

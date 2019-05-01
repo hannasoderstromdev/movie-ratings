@@ -11,18 +11,14 @@ const Wrapper = styled.section`
   padding: 0.15rem 1rem 0 1rem;
 `
 
-interface FilterByGenreProps {
-  filter: {};
-  genres: {};
-  isOpen: boolean;
-  loading: boolean;
-}
+// interface FilterByGenreProps {
+//   filter: {};
+//   genres: {};
+//   isOpen: boolean;
+//   loading: boolean;
+// }
 
-const FilterByGenre: React.SFC<FilterByGenreProps> = ({
-  genres,
-  loading,
-  isOpen,
-}) => {
+const FilterByGenre = ({ genres, loading, isOpen }) => {
   if (loading) return <Spinner />
   return isOpen ? (
     <Wrapper>

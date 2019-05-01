@@ -14,33 +14,29 @@ const Center = styled.div`
   margin: 2rem 0;
 `
 
-interface SearchForMovieProps {
-  searchById: (validId: string) => void;
-  searchByTitle: (movieTitle: string) => void;
-}
+// interface SearchForMovieProps {
+//   searchById: (validId: string) => void;
+//   searchByTitle: (movieTitle: string) => void;
+// }
 
-interface SearchForMovieState {
-  movieTitle: string;
-  imdbId: string;
-  validId: string;
-}
+// interface SearchForMovieState {
+//   movieTitle: string;
+//   imdbId: string;
+//   validId: string;
+// }
 
-class SearchForMovie extends React.Component<
-  SearchForMovieProps,
-  // eslint-disable-next-line prettier/prettier
-  SearchForMovieState
-> {
+class SearchForMovie extends React.Component {
   state = {
     movieTitle: '',
     imdbId: '',
     validId: '',
   }
 
-  doOnChange = (e: React.FormEvent<HTMLInputElement>) => {
+  doOnChange = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  searchOMDB = (e: React.FormEvent) => {
+  searchOMDB = e => {
     e.preventDefault()
     const { movieTitle, validId } = this.state
     const { searchByTitle, searchById } = this.props

@@ -10,6 +10,8 @@ import Icon from 'components/atoms/Icon'
 import logoImg from './logo.svg'
 import clapperImg from './clapper.svg'
 
+// import { MovieType, User } from 'types'
+
 const RightAlignedButton = styled(Button)`
   position: absolute;
   right: 1rem;
@@ -43,17 +45,13 @@ const HeaderStyle = styled.header`
   box-shadow: 0 4px 40px rgba(0, 0, 0.75);
 `
 
-interface HeaderProps {
-  showSearchLibrary: boolean;
-  toggleLibrarySearch: () => void;
-  userLoggedIn: boolean;
-}
+// interface HeaderProps {
+//   showSearchLibrary: boolean;
+//   toggleLibrarySearch: () => void;
+//   userLoggedIn: boolean;
+// }
 
-const Header: React.SFC<HeaderProps> = ({
-  showSearchLibrary,
-  toggleLibrarySearch,
-  userLoggedIn,
-}) => (
+const Header = ({ showSearchLibrary, toggleLibrarySearch, userLoggedIn }) => (
   <HeaderStyle data-testid="main-header">
     <Clapper alt="logo" data-testid="clapper" src={clapperImg} />
     <Logo alt="movie ratings" data-testid="logo" src={logoImg} />

@@ -61,18 +61,15 @@ const Option = styled.button`
   }
 `
 
-interface FilterByRatingProps {
-  filterByRating: () => void;
-}
+// interface FilterByRatingProps {
+//   filterByRating: () => void;
+// }
 
-interface FilterByRatingState {
-  isOpen: boolean;
-}
+// interface FilterByRatingState {
+//   isOpen: boolean;
+// }
 
-class FilterByRating extends Component<
-  FilterByRatingProps,
-  FilterByRatingState,
-> {
+class FilterByRating extends Component {
   constructor(props) {
     super(props)
     this.state = {

@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 
 import moviesThunks from 'actions/movies/movies.thunks'
 
-import { MovieType } from 'types'
+// import { MovieType } from 'types'
 
 import { TextDark, Text } from 'components/atoms/Typography'
 import Button from 'components/atoms/Button'
@@ -44,28 +44,28 @@ const RateWrapper = styled.div`
   align-items: center;
 `
 
-interface RateNewMovieProps {
-  createMovie: () => void;
-  history: {
-    push: () => void,
-  };
-  loading: boolean;
-  movie?: MovieType;
-  userRole: string;
-  user: {
-    profile: {
-      user: {
-        role: string,
-      },
-    },
-  };
-}
+// interface RateNewMovieProps {
+//   createMovie: () => void;
+//   history: {
+//     push: () => void,
+//   };
+//   loading: boolean;
+//   movie?: MovieType;
+//   userRole: string;
+//   user: {
+//     profile: {
+//       user: {
+//         role: string,
+//       },
+//     },
+//   };
+// }
 
-interface RateNewMovieState {
-  rating: number;
-}
+// interface RateNewMovieState {
+//   rating: number;
+// }
 
-class RateNewMovie extends Component<RateNewMovieProps, RateNewMovieState> {
+class RateNewMovie extends Component {
   state = {
     rating: 0,
   }
@@ -135,6 +135,23 @@ RateNewMovie.defaultProps = {
   movie: null,
   rating: 0,
 }
+
+// interface Search {
+//   loading: boolean;
+//   movie: {};
+//   error: boolean;
+// }
+
+// interface User {
+//   profile: {
+//     user: {
+//       role: string,
+//       firstName: string,
+//       lastName: string,
+//       email: string,
+//     },
+//   };
+// }
 
 const mapStateToProps = ({ search, user }) => ({
   ...search,

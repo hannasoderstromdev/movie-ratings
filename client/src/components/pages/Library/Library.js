@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { MovieType } from 'types'
+// import { MovieType } from 'types'
 
 import moviesThunks from 'actions/movies/movies.thunks'
 import genresThunks from 'actions/genres/genres.thunks'
@@ -77,28 +77,28 @@ const FilterByGenreBtn = styled.button`
   }
 `
 
-interface LibraryProps {
-  getAllGenres: () => void;
-  getMovies: ({ limit: number, page: number }) => void;
-  movies: {
-    numberOfItems: number,
-    limit: number,
-    page: number,
-    loading: boolean,
-    movies: MovieType[],
-    error?: boolean,
-    genres: string[],
-    rating: number,
-  };
-}
+// interface LibraryProps {
+//   getAllGenres: () => void;
+//   getMovies: ({ limit: number, page: number }) => void;
+//   movies: {
+//     numberOfItems: number,
+//     limit: number,
+//     page: number,
+//     loading: boolean,
+//     movies: MovieType[],
+//     error?: boolean,
+//     genres: string[],
+//     rating: number,
+//   };
+// }
 
-interface LibraryState {
-  listStyle: string;
-  filterByGenreOpen: boolean;
-}
+// interface LibraryState {
+//   listStyle: string;
+//   filterByGenreOpen: boolean;
+// }
 
-class Library extends React.Component<LibraryProps, LibraryState> {
-  state: LibraryState = {
+class Library extends React.Component {
+  state = {
     listStyle: 'rows',
     filterByGenreOpen: false,
   }

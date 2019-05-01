@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import MovieHeader from 'components/molecules/MovieHeader'
 
 const Wrapper = styled.article`
@@ -15,19 +16,19 @@ const PosterImg = styled.img`
   cursor: pointer;
 `
 
-interface MovieRowProps {
-  genres: {};
-  id?: string;
-  openFullMovie: () => void;
-  poster: string;
-  rating?: number;
-  runtime: string;
-  setRating?: () => void;
-  title: string;
-  year: string;
-}
+// interface MovieRowProps {
+//   genres: {};
+//   id?: string;
+//   openFullMovie: () => void;
+//   poster: string;
+//   rating?: number;
+//   runtime: string;
+//   setRating?: () => void;
+//   title: string;
+//   year: string;
+// }
 
-const MovieRow: React.SFC<MovieRowProps> = ({
+const MovieRow = ({
   id,
   poster,
   title,
@@ -53,11 +54,5 @@ const MovieRow: React.SFC<MovieRowProps> = ({
     />
   </Wrapper>
 )
-
-MovieRow.defaultProps = {
-  id: null,
-  rating: null,
-  setRating: null,
-}
 
 export default MovieRow

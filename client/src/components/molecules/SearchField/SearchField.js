@@ -60,21 +60,15 @@ const InputWrapper = styled.div`
   display: flex;
 `
 
-interface SearchFieldProps {
-  label?: string;
-  name: string;
-  onBlur?: () => void;
-  onChange: () => void;
-  placeholder?: string;
-}
+// interface SearchFieldProps {
+//   label?: string;
+//   name: string;
+//   onBlur?: () => void;
+//   onChange: () => void;
+//   placeholder?: string;
+// }
 
-const SearchField: React.SFC<SearchFieldProps> = ({
-  name,
-  label,
-  onBlur,
-  onChange,
-  placeholder,
-}) => (
+const SearchField = ({ name, label, onBlur, onChange, placeholder }) => (
   <Wrapper>
     <LabelWithMargin>{label}</LabelWithMargin>
     <InputWrapper>

@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 
 import Icon from 'components/atoms/Icon'
 
+// import { User } from 'types'
+
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.colors.black};
   color: ${({ theme }) => theme.colors.textPrimary};
@@ -84,52 +86,55 @@ const DisabledItem = styled(LinkItem)`
   cursor: not-allowed;
 `
 
-const isActive = (path, match, location) =>
+function isActive(path, match, location) {
   !!(match || path === location.pathname)
-
-interface NavigationProps {
-  loggedIn: boolean;
 }
 
-const Navigation: React.SFC<NavigationProps> = ({ loggedIn }) => (
-  <Nav data-testid="main-navigation">
-    {loggedIn ? (
-      <ul>
-        <LinkItem>
-          <NavLink exact isActive={isActive.bind(this, '/')} to="/">
+// interface NavigationProps {
+//   loggedIn: boolean;
+// }
+
+function Navigation({ loggedIn }) {
+  return (
+    <Nav data-testid="main-navigation">
+      {loggedIn ? (
+        <ul>
+          <LinkItem>
+            <NavLink exact isActive={isActive.bind(this, '/')} to="/">
+              <span>Library</span>
+              <Icon icon={['fas', 'list']} iconsize="1.8rem" />
+            </NavLink>
+          </LinkItem>
+          <LinkItem>
+            <NavLink isActive={isActive.bind(this, '/add')} to="/add">
+              <span>Add</span>
+              <Icon icon={['fas', 'plus-circle']} iconsize="1.8rem" />
+            </NavLink>
+          </LinkItem>
+          <LinkItem>
+            <NavLink to="/settings">
+              <Icon icon={['fas', 'cog']} iconsize="1.8rem" />
+            </NavLink>
+          </LinkItem>
+        </ul>
+      ) : (
+        <ul>
+          <DisabledItem>
             <span>Library</span>
             <Icon icon={['fas', 'list']} iconsize="1.8rem" />
-          </NavLink>
-        </LinkItem>
-        <LinkItem>
-          <NavLink isActive={isActive.bind(this, '/add')} to="/add">
+          </DisabledItem>
+          <DisabledItem>
             <span>Add</span>
             <Icon icon={['fas', 'plus-circle']} iconsize="1.8rem" />
-          </NavLink>
-        </LinkItem>
-        <LinkItem>
-          <NavLink to="/settings">
+          </DisabledItem>
+          <DisabledItem>
             <Icon icon={['fas', 'cog']} iconsize="1.8rem" />
-          </NavLink>
-        </LinkItem>
-      </ul>
-    ) : (
-      <ul>
-        <DisabledItem>
-          <span>Library</span>
-          <Icon icon={['fas', 'list']} iconsize="1.8rem" />
-        </DisabledItem>
-        <DisabledItem>
-          <span>Add</span>
-          <Icon icon={['fas', 'plus-circle']} iconsize="1.8rem" />
-        </DisabledItem>
-        <DisabledItem>
-          <Icon icon={['fas', 'cog']} iconsize="1.8rem" />
-        </DisabledItem>
-      </ul>
-    )}
-  </Nav>
-)
+          </DisabledItem>
+        </ul>
+      )}
+    </Nav>
+  )
+}
 
 const mapStateToProps = ({ user }) => ({
   loggedIn: user && user.loggedIn,

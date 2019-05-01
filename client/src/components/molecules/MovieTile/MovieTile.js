@@ -20,17 +20,13 @@ const RatingWrapper = styled.div`
   justify-content: center;
 `
 
-interface MovieTileProps {
-  openFullMovie: () => void;
-  poster: string;
-  rating: number;
-}
+// interface MovieTileProps {
+//   openFullMovie: () => void;
+//   poster: string;
+//   rating: number;
+// }
 
-const MovieTile: React.SFC<MovieTileProps> = ({
-  poster,
-  rating,
-  openFullMovie,
-}) => (
+const MovieTile = ({ poster, rating, openFullMovie }) => (
   <Wrapper data-testid="movie-tile" imgUrl={poster} onClick={openFullMovie}>
     <RatingWrapper>
       <Rating rating={rating} small useLock={false} />

@@ -60,15 +60,15 @@ const Page = styled.button`
 const LEFT = 'LEFT'
 const RIGHT = 'RIGHT'
 
-interface PaginationProps {
-  currentPage: number;
-  itemsTotal: number;
-  onPageChange: () => void;
-  pageLimit: number;
-  pageNeighbors: number;
-}
+// interface PaginationProps {
+//   currentPage: number;
+//   itemsTotal: number;
+//   onPageChange: () => void;
+//   pageLimit: number;
+//   pageNeighbors: number;
+// }
 
-class Pagination extends React.Component<PaginationProps, {}> {
+class Pagination extends React.Component {
   constructor(props) {
     super(props)
     this.totalPages = Math.ceil(props.itemsTotal / props.pageLimit)
@@ -91,15 +91,20 @@ class Pagination extends React.Component<PaginationProps, {}> {
 
   fetchPageNumbers = () => {
     const { pageNeighbors, currentPage } = this.props
+
     const totalNumbers = pageNeighbors * 2 + 3
     const totalBlocks = totalNumbers + 2
+
     if (this.totalPages > totalBlocks) {
       const startPage = Math.max(2, currentPage - pageNeighbors)
       const endPage = Math.min(this.totalPages - 1, currentPage + pageNeighbors)
+
       let pages = range(startPage, endPage)
+
       const hasLeftSpill = startPage > 2
       const hasRightSpill = this.totalPages - endPage > 1
       const spillOffset = totalNumbers - (pages.length + 1)
+
       if (hasLeftSpill && !hasRightSpill) {
         const extraPages = range(startPage - spillOffset, startPage - 1)
         pages = [LEFT, ...extraPages, ...pages]
@@ -117,7 +122,9 @@ class Pagination extends React.Component<PaginationProps, {}> {
   render() {
     const { currentPage } = this.props
     const pages = this.fetchPageNumbers()
+
     if (pages.length === 1) return null
+
     return (
       <Wrapper aria-label="Pagination" data-testid="navigation">
         <ul>
