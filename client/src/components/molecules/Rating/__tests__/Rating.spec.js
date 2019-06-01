@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 
 import Rating from '..'
 import Theme from '../../../Theme'
@@ -25,6 +25,8 @@ describe('Components/Molecules/Rating', () => {
       </Theme>,
     )
   })
+
+  afterEach(() => cleanup())
 
   it('renders', () => {
     expect(utils.getByTestId('rating').children.length).toBe(6) // 5 without lock
