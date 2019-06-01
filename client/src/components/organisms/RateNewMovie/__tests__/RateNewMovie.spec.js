@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import configureStore from 'redux-mock-store'
 
@@ -8,26 +8,33 @@ import Theme from 'components/Theme'
 
 import RateNewMovie from '..'
 
-const mockStore = configureStore()
-
-const utils = state => {
-  const store = mockStore(state)
-  const props = {
-    openFullMovie: jest.fn(),
-  }
-  return render(
-    <Root store={store}>
-      <Router>
-        <Theme>
-          <RateNewMovie {...props} />
-        </Theme>
-      </Router>
-    </Root>,
-  )
-}
-
 describe('Components/Organisms/RateNewMovie', () => {
   describe('renders', () => {
+    const mockStore = configureStore()
+
+    let utils
+    let props
+
+    beforeEach(() => {
+      utils = state => {
+        const store = mockStore(state)
+        props = {
+          openFullMovie: jest.fn(),
+        }
+        return render(
+          <Root store={store}>
+            <Router>
+              <Theme>
+                <RateNewMovie {...props} />
+              </Theme>
+            </Router>
+          </Root>,
+        )
+      }
+    })
+
+    afterEach(() => cleanup())
+
     it('without movie', () => {
       const state = {
         movies: {
@@ -91,10 +98,10 @@ describe('Components/Organisms/RateNewMovie', () => {
       }
 
       expect(utils(state).getByText(/Search result/i)).toBeDefined()
-      expect(utils(state).getByText(/More details/i)).toBeDefined()
-      expect(utils(state).getByText(state.search.movie.title)).toBeDefined()
-      expect(utils(state).getByText(/Rate this movie/i)).toBeDefined()
-      expect(utils(state).getByText(/Save/i)).toBeDefined()
+      expect(utils(state).getAllByText(/More details/i)).toBeDefined()
+      expect(utils(state).getAllByText(state.search.movie.title)).toBeDefined()
+      expect(utils(state).getAllByText(/Rate this movie/i)).toBeDefined()
+      expect(utils(state).getAllByText(/Save/i)).toBeDefined()
     })
 
     it('Warning - Movie already exists', () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, wait } from '@testing-library/react'
+import { render, fireEvent, wait, cleanup } from '@testing-library/react'
 
 import Theme from 'components/Theme'
 
@@ -19,6 +19,8 @@ describe('components/molecules/FilterByRating', () => {
       </Theme>,
     )
   })
+
+  afterEach(() => cleanup())
 
   it('renders closed', () => {
     expect(utils.getByTestId('selected')).toBeDefined()
