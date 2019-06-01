@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-testing-library'
+import { render } from '@testing-library/react'
 import configureStore from 'redux-mock-store'
 
 import Root from 'components/Root'
