@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from 'react-testing-library'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 
 import InputField from '..'
 import Theme from '../../../Theme'
@@ -27,6 +27,8 @@ describe('<InputField />', () => {
       </Theme>,
     )
   })
+
+  afterEach(() => cleanup())
 
   it('renders', () => {
     expect(utils.getByTestId('input').tagName).toBe('INPUT')

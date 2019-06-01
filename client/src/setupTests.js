@@ -32,9 +32,6 @@ import 'jest-localstorage-mock'
 import 'jest-dom/extend-expect'
 import 'jest-axe/extend-expect'
 
-// Cleans up DOM after each test automatically
-import 'react-testing-library/cleanup-after-each'
-
 library.add(
   faCheckCircle,
   faChevronDown,

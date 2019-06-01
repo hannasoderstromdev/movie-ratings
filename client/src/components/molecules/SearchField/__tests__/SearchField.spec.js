@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from 'react-testing-library'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 
 import SearchField from '..'
 import Theme from 'components/Theme'
@@ -11,23 +11,27 @@ describe('Components/Molecules/SearchField', () => {
     name: 'searchfield',
   }
 
-  it('renders', () => {
-    const { getByTestId } = render(
+  let utils
+
+  beforeEach(() => {
+    utils = render(
       <Theme>
         <SearchField {...props} />
       </Theme>,
     )
-    expect(getByTestId('searchfield').tagName).toBe('INPUT')
-    expect(getByTestId('searchfield').type).toBe('search')
+  })
+
+  afterEach(() => cleanup())
+
+  it('renders', () => {
+    expect(utils.getByTestId('searchfield').tagName).toBe('INPUT')
+    expect(utils.getByTestId('searchfield').type).toBe('search')
   })
 
   it('handles change', () => {
-    const { getByTestId } = render(
-      <Theme>
-        <SearchField {...props} />
-      </Theme>,
-    )
-    fireEvent.change(getByTestId('searchfield'), { target: { value: 'a' } })
+    fireEvent.change(utils.getByTestId('searchfield'), {
+      target: { value: 'a' },
+    })
     expect(onChange).toHaveBeenCalledTimes(1)
   })
 })

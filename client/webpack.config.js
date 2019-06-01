@@ -14,6 +14,7 @@ module.exports = env => {
 
   return {
     devServer: {
+      clientLogLevel: 'warning',
       contentBase: path.resolve(__dirname, 'dist'),
       watchContentBase: true,
       publicPath: '/',
@@ -41,55 +42,57 @@ module.exports = env => {
         ? 'static/js/[name].chunk.js'
         : 'static/js/[name].[hash:8].chunk.js',
     },
-    optimization: {
-      namedChunks: true,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            parse: { ecma: 8 },
-            compress: {
-              ecma: 5,
-              warnings: false,
-              comparisons: false,
-              inline: 2,
-            },
-            mangle: {
-              safari10: true,
-            },
-            output: {
-              ecma: 5,
-              comments: false,
-              ascii_only: true,
-            },
-          },
-          parallel: true,
-          cache: true,
-          sourceMap: true,
-        }),
-      ],
-      splitChunks: {
-        chunks: 'all',
-        minSize: 30000,
-        maxSize: 0,
-        cacheGroups: {
-          default: false,
-          vendor: {
-            name: false,
+    optimization: isProduction
+      ? {
+          namedChunks: true,
+          minimizer: [
+            new TerserPlugin({
+              terserOptions: {
+                parse: { ecma: 8 },
+                compress: {
+                  ecma: 5,
+                  warnings: false,
+                  comparisons: false,
+                  inline: 2,
+                },
+                mangle: {
+                  safari10: true,
+                },
+                output: {
+                  ecma: 5,
+                  comments: false,
+                  ascii_only: true,
+                },
+              },
+              parallel: true,
+              cache: true,
+              sourceMap: true,
+            }),
+          ],
+          splitChunks: {
             chunks: 'all',
-            test: /[//\]node_modules[\\/]/,
+            minSize: 30000,
+            maxSize: 0,
+            cacheGroups: {
+              default: false,
+              vendor: {
+                name: false,
+                chunks: 'all',
+                test: /[//\]node_modules[\\/]/,
+              },
+              common: {
+                name: false,
+                minChunks: 2,
+                chunks: 'all',
+                priority: 10,
+                reuseExistingChunk: true,
+                enforce: true,
+              },
+            },
           },
-          common: {
-            name: false,
-            minChunks: 2,
-            chunks: 'all',
-            priority: 10,
-            reuseExistingChunk: true,
-            enforce: true,
-          },
-        },
-      },
-      // runtimeChunk: true,
-    },
+          // runtimeChunk: true,
+        }
+      : {},
     resolve: {
       modules: [path.resolve(__dirname, './src'), 'node_modules'],
       extensions: ['.js', '.jsx', '.json'],
@@ -107,7 +110,7 @@ module.exports = env => {
           use: {
             loader: 'eslint-loader',
             options: {
-              emitError: true,
+              emitWarning: true,
             },
           },
         },

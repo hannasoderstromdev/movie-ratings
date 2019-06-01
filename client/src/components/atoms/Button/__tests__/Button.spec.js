@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from 'react-testing-library'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 import { axe } from 'jest-axe'
 
 import Button from '..'
@@ -16,6 +16,8 @@ describe('<Button />', () => {
       disabled: false,
     }
   })
+
+  afterEach(() => cleanup())
 
   it('renders a button', () => {
     const { getByTestId } = render(

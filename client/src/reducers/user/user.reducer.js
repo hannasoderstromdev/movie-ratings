@@ -6,7 +6,7 @@ const initialState = user
   ? {
       loggingIn: false,
       loggedIn: true,
-      profile: user,
+      profile: { ...user },
       error: false,
     }
   : {
@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
         ...initialState,
         loggingIn: false,
         loggedIn: true,
-        profile: action.payload.user,
+        profile: { ...action.payload.user },
       }
 
     case userTypes.LOGIN_FAILURE:
