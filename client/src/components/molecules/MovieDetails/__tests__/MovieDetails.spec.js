@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 
 import { store } from 'helpers/store'
 
@@ -16,16 +16,16 @@ describe('Components/Molecules/MovieDetails', () => {
     toggle = jest.fn()
     props = {
       actors: 'Me and Someone Else',
-      plot: '',
+      plot: 'something',
       released: 'May 1st 1998',
       country: 'USA',
       director: 'Me',
       language: 'ENG',
       production: 'Xena and Zeus',
       ratings: [
-        { Source: '', Value: '' },
-        { Source: '', Value: '' },
-        { Source: '', Value: '' },
+        { Source: '', Value: '5' },
+        { Source: '', Value: '3' },
+        { Source: '', Value: '1' },
       ],
       isOpen: true,
       toggle,
@@ -39,6 +39,8 @@ describe('Components/Molecules/MovieDetails', () => {
       </Root>,
     )
   })
+
+  afterEach(() => cleanup())
 
   it('renders', () => {
     expect(utils.getByText(props.actors)).toBeDefined()
