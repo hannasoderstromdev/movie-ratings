@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import genresSelectors from 'selectors/genres.selectors'
+
 import Spinner from 'components/atoms/Spinner'
 import Genres from 'components/molecules/Genres'
 
@@ -21,9 +23,7 @@ const FilterByGenre = ({ genres, loading, isOpen }) => {
   ) : null
 }
 
-const mapStateToProps = ({ genres }) => ({
-  ...genres,
-})
+const mapStateToProps = state => genresSelectors.getGenres(state)
 
 FilterByGenre.propTypes = {
   filter: PropTypes.shape({}).isRequired,
