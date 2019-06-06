@@ -81,11 +81,7 @@ class Modal extends Component {
                 </Button>
               </TopRight>
               <Suspense fallback={<Spinner />}>
-                <LazyMovieFull
-                  movieId={item.content.movieId}
-                  onClose={this.onClose}
-                  showDelete
-                />
+                <LazyMovieFull onClose={this.onClose} showDelete />
               </Suspense>
             </ModalBox>
           </ModalWrapper>
@@ -108,7 +104,6 @@ Modal.propTypes = {
     onClose: PropTypes.func,
     content: PropTypes.shape({
       text: PropTypes.string,
-      movieId: PropTypes.string,
     }),
   }).isRequired,
   onClose: PropTypes.func.isRequired,
