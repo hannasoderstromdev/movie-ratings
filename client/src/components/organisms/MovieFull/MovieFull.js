@@ -6,6 +6,9 @@ import { connect } from 'react-redux'
 import { MovieType } from 'types'
 
 import moviesThunks from 'actions/movies/movies.thunks'
+import moviesSelectors from 'selectors/movies.selectors'
+import userSelectors from 'selectors/user.selectors'
+import searchSelectors from 'selectors/search.selectors'
 
 import MovieHeader from 'components/molecules/MovieHeader'
 import MovieDetails from 'components/molecules/MovieDetails'
@@ -130,23 +133,18 @@ MovieFull.propTypes = {
   userRole: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = ({ movies, user }, { movieId }) => {
-  const movieFound =
-    movies &&
-    movies.movies.length &&
-    movies.movies.find(movie => movie.id === movieId)
+const mapStateToProps = (state, { useSearch }) => {
+  let movie
 
-  const userRole =
-    user && user.profile && user.profile.user && user.profile.user.role
-
-  if (movieFound) {
-    return {
-      ...movieFound,
-      userRole,
-    }
+  if (useSearch) {
+    movie = searchSelectors.getMovie(state)
+  } else {
+    movie = moviesSelectors.getSelectedMovie(state)
   }
+
   return {
-    userRole,
+    ...movie,
+    userRole: userSelectors.getUserRole(state),
   }
 }
 
