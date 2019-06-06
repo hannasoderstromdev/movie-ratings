@@ -4,19 +4,18 @@ import { connect } from 'react-redux'
 import uuid from 'uuid/v4'
 
 import modalsActions from 'actions/modals/modals.actions'
+import movieActions from 'actions/movies/movies.actions'
 
 import MovieTile from 'components/molecules/MovieTile'
 import MovieRow from 'components/molecules/MovieRow'
 
 class MoviePreview extends React.Component {
   openFullMovie = () => {
-    const { id } = this.props
-    this.props.openModal({
+    const { id, openModal, setSelectedMovie } = this.props
+    setSelectedMovie(id)
+    openModal({
       id: uuid(),
       type: 'movie-details',
-      content: {
-        movieId: id,
-      },
     })
   }
 
@@ -73,12 +72,14 @@ MoviePreview.propTypes = {
   poster: PropTypes.string.isRequired,
   rating: PropTypes.number,
   runtime: PropTypes.string.isRequired,
+  setSelectedMovie: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
 }
 
 const mapDispatchToProps = {
   openModal: modalsActions.openModal,
+  setSelectedMovie: movieActions.setSelectedMovie,
 }
 
 export default connect(
