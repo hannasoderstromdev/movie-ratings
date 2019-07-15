@@ -29,7 +29,7 @@ import {
 import 'jest-localstorage-mock'
 
 // Adds additional expect-functions
-import 'jest-dom/extend-expect'
+import '@testing-library/jest-dom/extend-expect'
 import 'jest-axe/extend-expect'
 
 library.add(
