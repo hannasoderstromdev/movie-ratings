@@ -19,13 +19,27 @@ describe('Reducers/User', () => {
   it(`handles ${userTypes.LOGIN_SUCCESS}`, () => {
     const action = {
       type: userTypes.LOGIN_SUCCESS,
-      payload: { user: {} },
+      payload: {
+        user: {
+          role: 'Admin',
+          id: 'userId01',
+          firstName: 'Hanna',
+          lastName: 'Söderström',
+          email: 'test@test.se',
+        },
+      },
     }
     const expectedState = {
       error: false,
       loggedIn: true,
       loggingIn: false,
-      profile: {},
+      profile: {
+        role: 'Admin',
+        id: 'userId01',
+        firstName: 'Hanna',
+        lastName: 'Söderström',
+        email: 'test@test.se',
+      },
     }
     expect(reducer({}, action)).toEqual(expectedState)
   })

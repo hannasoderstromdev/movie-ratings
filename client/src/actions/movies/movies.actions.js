@@ -107,6 +107,15 @@ const setFilterRating = rating => ({
   payload: { rating },
 })
 
+const setSelectedMovie = movieId => ({
+  type: moviesTypes.SET_SELECTED_MOVIE,
+  payload: { movieId },
+})
+
+const clearSelectedMovie = () => ({
+  type: moviesTypes.CLEAR_SELECTED_MOVIE,
+})
+
 const moviesActions = {
   getMovies,
   getMoviesSuccess,
@@ -129,6 +138,8 @@ const moviesActions = {
   toggleSearchLibrary,
   setFilterGenres,
   setFilterRating,
+  setSelectedMovie,
+  clearSelectedMovie,
 }
 
 export default moviesActions

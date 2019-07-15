@@ -1,6 +1,5 @@
 import React from 'react'
-import { render } from 'react-testing-library'
-
+import { render, cleanup } from '@testing-library/react'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import configureStore from 'redux-mock-store'
@@ -11,47 +10,49 @@ import Root from 'components/Root'
 
 import Content from '../Content'
 
-describe('Content', () => {
-  const middlewares = [thunk]
-  const mockStore = configureStore(middlewares)
-  let store
-  let initialState
+const middlewares = [thunk]
+const mockStore = configureStore(middlewares)
 
-  beforeEach(() => {
-    initialState = {
-      errorHandler: {
-        error: false,
-        status: 200,
-      },
-      genres: {
-        loading: false,
-        genres: {},
-        filter: {},
-      },
-      movies: {
-        movies: [],
-        loading: false,
-        numberOfItems: 0,
-        page: 1,
-        limit: 10,
-        showSearchLibrary: false,
-        genres: [],
-        rating: 0,
-      },
-      user: {
-        loggingIn: false,
-        loggedIn: false,
-        profile: null,
-        error: false,
-      },
-      modals: [],
-    }
-  })
+describe('Content', () => {
+  let history
+
+  const initialState = {
+    errorHandler: {
+      error: false,
+      status: 200,
+    },
+    genres: {
+      loading: false,
+      genres: {},
+      filter: {},
+    },
+    movies: {
+      movies: [],
+      loading: false,
+      numberOfItems: 0,
+      page: 1,
+      limit: 10,
+      showSearchLibrary: false,
+      genres: [],
+      rating: 0,
+    },
+    user: {
+      loggingIn: false,
+      loggedIn: false,
+      profile: null,
+      error: false,
+    },
+    modals: [],
+  }
+
+  const store = mockStore(initialState)
+
+  afterEach(() => cleanup())
 
   it('renders login screen as default', () => {
-    const history = createMemoryHistory({ initialEntries: ['/'] })
-    store = mockStore(initialState)
-    const { getByTestId } = render(
+    history = createMemoryHistory({ initialEntries: ['/'] })
+
+    const utils = render(
       <Root store={store}>
         <Theme>
           <Router history={history}>
@@ -60,15 +61,16 @@ describe('Content', () => {
         </Theme>
       </Root>,
     )
-    expect(getByTestId('main-header')).toBeInTheDocument()
-    expect(getByTestId('main-navigation')).toBeInTheDocument()
-    expect(getByTestId('login-screen')).toBeInTheDocument()
+
+    expect(utils.getByTestId('main-header')).toBeInTheDocument()
+    expect(utils.getByTestId('main-navigation')).toBeInTheDocument()
+    expect(utils.getByTestId('login-screen')).toBeInTheDocument()
   })
 
   it('handles 404', () => {
-    const history = createMemoryHistory({ initialEntries: ['/does-not-exist'] })
-    store = mockStore(initialState)
-    const { getByTestId } = render(
+    history = createMemoryHistory({ initialEntries: ['/does-not-exist'] })
+
+    const utils = render(
       <Root store={store}>
         <Theme>
           <Router history={history}>
@@ -77,18 +79,17 @@ describe('Content', () => {
         </Theme>
       </Root>,
     )
-    expect(getByTestId('main-header')).toBeInTheDocument()
-    expect(getByTestId('main-navigation')).toBeInTheDocument()
-    expect(getByTestId('error404-screen')).toBeInTheDocument()
+    expect(utils.getByTestId('main-header')).toBeInTheDocument()
+    expect(utils.getByTestId('main-navigation')).toBeInTheDocument()
+    expect(utils.getByTestId('error404-screen')).toBeInTheDocument()
   })
 
   it('renders library if user is logged in', () => {
     localStorage.setItem('user', JSON.stringify({ token: 'fake token' }))
-    const history = createMemoryHistory({ initialEntries: ['/'] })
+    history = createMemoryHistory({ initialEntries: ['/'] })
     initialState.isLoggedIn = true
 
-    store = mockStore(initialState)
-    const { getByTestId } = render(
+    const utils = render(
       <Root store={store}>
         <Theme>
           <Router history={history}>
@@ -97,9 +98,12 @@ describe('Content', () => {
         </Theme>
       </Root>,
     )
-    expect(getByTestId('main-header')).toBeInTheDocument()
-    expect(getByTestId('main-navigation')).toBeInTheDocument()
-    expect(getByTestId('library-screen')).toBeInTheDocument()
+
+    expect(utils.getByTestId('main-header')).toBeInTheDocument()
+    expect(utils.getByTestId('main-navigation')).toBeInTheDocument()
+    setTimeout(async () => {
+      await expect(utils.getByTestId('library-screen')).toBeInTheDocument()
+    })
     localStorage.clear()
   })
 })

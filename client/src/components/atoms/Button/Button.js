@@ -59,6 +59,7 @@ const Thirdiary = styled.button`
   display: flex;
   align-items: center;
   cursor: pointer;
+  justify-content: center;
 
   &:focus {
     border: 1px solid transparent;

@@ -10,6 +10,7 @@ const initialState = {
   showSearchLibrary: false,
   genres: [],
   rating: 0,
+  selectedMovieId: null,
 }
 
 export default (state = initialState, action) => {
@@ -134,6 +135,7 @@ export default (state = initialState, action) => {
         error: false,
         loading: false,
         movies: state.movies.filter(movie => movie.id !== action.payload.id),
+        selectedMovieId: null,
       }
 
     case moviesTypes.FIND_MOVIE_BY_TITLE:
@@ -175,6 +177,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         rating: action.payload.rating,
+      }
+
+    case moviesTypes.SET_SELECTED_MOVIE:
+      return {
+        ...state,
+        selectedMovieId: action.payload.movieId,
+      }
+
+    case moviesTypes.CLEAR_SELECTED_MOVIE:
+      return {
+        ...state,
+        selectedMovieId: null,
       }
 
     default:

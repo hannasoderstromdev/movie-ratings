@@ -214,4 +214,24 @@ describe('Actions/Movies', () => {
       })
     })
   })
+
+  describe('setSelectedMovie', () => {
+    it(`returns ${moviesTypes.SET_SELECTED_MOVIE}`, () => {
+      const movieId = 'movieId01'
+      const action = moviesActions.setSelectedMovie(movieId)
+      expect(action).toEqual({
+        type: moviesTypes.SET_SELECTED_MOVIE,
+        payload: { movieId },
+      })
+    })
+  })
+
+  describe('clearSelectedMovie', () => {
+    it(`returns ${moviesTypes.CLEAR_SELECTED_MOVIE}`, () => {
+      const action = moviesActions.clearSelectedMovie()
+      expect(action).toEqual({
+        type: moviesTypes.CLEAR_SELECTED_MOVIE,
+      })
+    })
+  })
 })

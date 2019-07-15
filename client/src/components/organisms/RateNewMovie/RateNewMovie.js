@@ -6,7 +6,9 @@ import { withRouter } from 'react-router-dom'
 
 import moviesThunks from 'actions/movies/movies.thunks'
 
-import { MovieType } from 'types'
+import userSelectors from 'selectors/user.selectors'
+
+import { MovieType, SearchMovieType } from 'types'
 
 import { TextDark, Text } from 'components/atoms/Typography'
 import Button from 'components/atoms/Button'
@@ -88,7 +90,7 @@ class RateNewMovie extends Component {
           </MessageWithMargins>
         )}
         <MarginTop>
-          <MovieFull {...movie} />
+          <MovieFull useSearch />
         </MarginTop>
         <RateWrapper>
           {!movie.inLibrary && (
@@ -124,13 +126,16 @@ RateNewMovie.propTypes = {
   createMovie: PropTypes.func.isRequired,
   history: PropTypes.shape({}).isRequired,
   loading: PropTypes.bool.isRequired,
-  movie: PropTypes.shape(MovieType),
+  movie: PropTypes.oneOf([
+    PropTypes.shape(MovieType),
+    PropTypes.shape(SearchMovieType),
+  ]).isRequired,
   userRole: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = ({ search, user }) => ({
-  ...search,
-  userRole: user && user.profile && user.profile.user && user.profile.user.role,
+const mapStateToProps = state => ({
+  movie: { ...state.search },
+  userRole: userSelectors.getUserRole(state),
 })
 
 const mapDispatchToProps = {

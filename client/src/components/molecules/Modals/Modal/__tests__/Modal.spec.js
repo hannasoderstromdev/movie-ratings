@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-testing-library'
+import { render, cleanup } from '@testing-library/react'
 import configureStore from 'redux-mock-store'
 
 import Root from 'components/Root'
@@ -60,6 +60,8 @@ describe('Components/Molecules/Modal', () => {
       </Root>,
     )
   })
+
+  afterEach(() => cleanup())
 
   it('renders confirmation modal', () => {
     const text = utils.getByText('Do you confirm?')

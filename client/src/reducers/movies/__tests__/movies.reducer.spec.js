@@ -12,6 +12,7 @@ describe('Reducers/Movies', () => {
     page: 1,
     genres: [],
     rating: 0,
+    selectedMovieId: null,
   }
 
   describe('getMovies', () => {
@@ -249,6 +250,7 @@ describe('Reducers/Movies', () => {
             title: 'title',
           },
         ],
+        selectedMovieId: 'movieId01',
       }
       const action = {
         type: moviesTypes.DELETE_MOVIE_SUCCESS,
@@ -259,6 +261,7 @@ describe('Reducers/Movies', () => {
         error: false,
         loading: false,
         movies: [{ ...initialState.movies[1] }],
+        selectedMovieId: null,
       }
       expect(reducer(initialState, action)).toEqual(expectedState)
     })
@@ -300,6 +303,30 @@ describe('Reducers/Movies', () => {
         error: false,
         loading: false,
         movies: movie,
+      }
+      expect(reducer(initialState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('setSelectedMovie', () => {
+    it(`handles ${moviesTypes.SET_SELECTED_MOVIE}`, () => {
+      const movieId = 'movieId01'
+      const action = {
+        type: moviesTypes.SET_SELECTED_MOVIE,
+        payload: { movieId },
+      }
+      const expectedState = {
+        ...initialState,
+        selectedMovieId: movieId,
+      }
+      expect(reducer(initialState, action)).toEqual(expectedState)
+    })
+    it(`handles ${moviesTypes.CLEAR_SELECTED_MOVIE}`, () => {
+      const action = {
+        type: moviesTypes.CLEAR_SELECTED_MOVIE,
+      }
+      const expectedState = {
+        ...initialState,
       }
       expect(reducer(initialState, action)).toEqual(expectedState)
     })

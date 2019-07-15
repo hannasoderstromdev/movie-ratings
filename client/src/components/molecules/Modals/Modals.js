@@ -20,6 +20,10 @@ const Modals = ({ modals, closeModal }) => (
   </div>
 )
 
+Modals.defaultProps = {
+  selectedMovieId: undefined,
+}
+
 Modals.propTypes = {
   closeModal: PropTypes.func.isRequired,
   modals: PropTypes.arrayOf(
@@ -28,7 +32,6 @@ Modals.propTypes = {
       type: PropTypes.string.isRequired,
       content: PropTypes.shape({
         text: PropTypes.string,
-        movieId: PropTypes.string,
       }),
       onClose: PropTypes.func,
       onConfirm: PropTypes.func,
