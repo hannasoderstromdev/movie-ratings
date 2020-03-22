@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import ErrorBoundary from 'components/hoc/ErrorBoundary'
 import PrivateRoute from 'components/hoc/PrivateRoute'
 
-import Spinner from 'components/Atoms/Spinner'
+import Spinner from 'components/atoms/Spinner'
 
 import Alert from 'components/molecules/Alert'
 import Modals from 'components/molecules/Modals'

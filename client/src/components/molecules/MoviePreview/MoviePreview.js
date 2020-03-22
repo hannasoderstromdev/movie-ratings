@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
-import { v4 as uuid } from 'uuid'
+import { v4 as uuid } from 'uuid'
 
 import modalsActions from 'actions/modals/modals.actions'
 import movieActions from 'actions/movies/movies.actions'

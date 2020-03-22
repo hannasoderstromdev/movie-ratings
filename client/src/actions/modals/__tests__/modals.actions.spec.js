@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'uuid'
+import { v4 as uuid } from 'uuid'
 
 import modalsTypes from '../modals.types'
 import modalsActions from '../modals.actions'
