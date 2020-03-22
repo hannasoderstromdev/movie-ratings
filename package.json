@@ -1,6 +1,6 @@
 {
   "name": "movie-ratings",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "engines": {
     "node": "11.3.0",
     "npm": "6.8.0"
@@ -8,18 +8,18 @@
   "private": true,
   "dependencies": {
     "bcrypt": "^3.0.5",
-    "body-parser": "^1.18.3",
+    "body-parser": "1.19.0",
     "concurrently": "^4.1.0",
-    "express": "^4.16.4",
-    "express-jwt": "^5.3.1",
+    "express": "4.17.1",
+    "express-jwt": "5.3.1",
     "express-validator": "^5.3.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "8.5.1",
     "lint-staged": "^8.1.5",
-    "mongoose": "^5.4.19",
-    "morgan": "^1.9.1",
+    "mongoose": "5.9.5",
+    "morgan": "1.10.0",
     "nodemon": "^1.18.10",
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.7"
+    "request": "2.88.2",
+    "request-promise-native": "1.0.8"
   },
   "scripts": {
     "start": "node index.js",
