@@ -14,9 +14,7 @@ describe('Actions/Movies', () => {
     })
 
     describe('getMoviesSuccess', () => {
-      it(`returns ${
-        moviesTypes.GET_MOVIES_SUCCESS
-      } and correct payload`, () => {
+      it(`returns ${moviesTypes.GET_MOVIES_SUCCESS} and correct payload`, () => {
         const movies = { data: [] }
         const numberOfItems = 100
         const limit = 10
@@ -41,9 +39,7 @@ describe('Actions/Movies', () => {
     })
 
     describe('getMoviesFailure', () => {
-      it(`returns ${
-        moviesTypes.GET_MOVIES_FAILURE
-      } and correct payload`, () => {
+      it(`returns ${moviesTypes.GET_MOVIES_FAILURE} and correct payload`, () => {
         const action = moviesActions.getMoviesFailure()
 
         expect(action).toEqual({
@@ -99,9 +95,7 @@ describe('Actions/Movies', () => {
     })
 
     describe('createMovieSuccess', () => {
-      it(`returns ${
-        moviesTypes.CREATE_MOVIE_SUCCESS
-      } and correct payload`, () => {
+      it(`returns ${moviesTypes.CREATE_MOVIE_SUCCESS} and correct payload`, () => {
         const movie = {}
         const action = moviesActions.createMovieSuccess(movie)
 
@@ -113,9 +107,7 @@ describe('Actions/Movies', () => {
     })
 
     describe('createMovieFailure', () => {
-      it(`returns ${
-        moviesTypes.CREATE_MOVIE_FAILURE
-      } and correct payload`, () => {
+      it(`returns ${moviesTypes.CREATE_MOVIE_FAILURE} and correct payload`, () => {
         const action = moviesActions.createMovieFailure()
 
         expect(action).toEqual({

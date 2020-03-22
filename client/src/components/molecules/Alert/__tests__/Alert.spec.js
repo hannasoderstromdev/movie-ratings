@@ -41,9 +41,7 @@ describe('Components/Molecules/Alert', () => {
     expect(getByTestId('message').tagName).toBeDefined()
     expect(
       getByText(
-        `${initialState.errorHandler.status}: ${
-          initialState.errorHandler.message
-        }`,
+        `${initialState.errorHandler.status}: ${initialState.errorHandler.message}`,
       ),
     ).toBeDefined()
   })
@@ -70,9 +68,7 @@ describe('Components/Molecules/Alert', () => {
     expect(getByTestId('message').tagName).toBeDefined()
     expect(
       getByText(
-        `${initialState.errorHandler.status}: ${
-          initialState.errorHandler.message
-        }`,
+        `${initialState.errorHandler.status}: ${initialState.errorHandler.message}`,
       ),
     ).toBeDefined()
   })
@@ -99,9 +95,7 @@ describe('Components/Molecules/Alert', () => {
     expect(getByTestId('message').tagName).toBeDefined()
     expect(
       getByText(
-        `${initialState.errorHandler.status}: ${
-          initialState.errorHandler.message
-        }`,
+        `${initialState.errorHandler.status}: ${initialState.errorHandler.message}`,
       ),
     ).toBeDefined()
   })

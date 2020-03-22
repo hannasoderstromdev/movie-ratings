@@ -117,7 +117,4 @@ const mapDispatchToProps = {
   clearError: errorHandlerActions.clearError,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Alert)
+export default connect(mapStateToProps, mapDispatchToProps)(Alert)

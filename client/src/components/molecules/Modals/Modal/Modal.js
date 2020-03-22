@@ -105,6 +105,7 @@ Modal.propTypes = {
     content: PropTypes.shape({
       text: PropTypes.string,
     }),
+    type: PropTypes.string,
   }).isRequired,
   onClose: PropTypes.func.isRequired,
   zIndex: PropTypes.number,

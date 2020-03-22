@@ -91,7 +91,4 @@ SearchForMovie.propTypes = {
   searchByTitle: PropTypes.func.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(SearchForMovie)
+export default connect(null, mapDispatchToProps)(SearchForMovie)

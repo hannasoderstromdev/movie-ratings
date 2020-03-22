@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
-import uuid from 'uuid/v4'
+import { v4 as uuid } from 'uuid'
 
 import modalsActions from 'actions/modals/modals.actions'
 import movieActions from 'actions/movies/movies.actions'
@@ -82,7 +82,4 @@ const mapDispatchToProps = {
   setSelectedMovie: movieActions.setSelectedMovie,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(MoviePreview)
+export default connect(null, mapDispatchToProps)(MoviePreview)

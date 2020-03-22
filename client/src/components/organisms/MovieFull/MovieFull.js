@@ -153,7 +153,4 @@ const mapDispatchToProps = {
   deleteMovie: moviesThunks.deleteMovie,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MovieFull)
+export default connect(mapStateToProps, mapDispatchToProps)(MovieFull)

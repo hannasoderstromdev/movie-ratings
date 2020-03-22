@@ -62,7 +62,4 @@ const mapDispatchToProps = {
   logoutUser: userActions.logoutUser,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(PrivateRoute)
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute)

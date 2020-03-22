@@ -124,7 +124,9 @@ RateNewMovie.defaultProps = {
 
 RateNewMovie.propTypes = {
   createMovie: PropTypes.func.isRequired,
-  history: PropTypes.shape({}).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
   loading: PropTypes.bool.isRequired,
   movie: PropTypes.oneOf([
     PropTypes.shape(MovieType),
@@ -143,8 +145,5 @@ const mapDispatchToProps = {
 }
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(RateNewMovie),
+  connect(mapStateToProps, mapDispatchToProps)(RateNewMovie),
 )

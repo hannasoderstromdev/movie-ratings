@@ -116,7 +116,4 @@ const mapDispatchToProps = {
   getMovies: moviesThunks.getMovies,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SearchLibrary)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchLibrary)

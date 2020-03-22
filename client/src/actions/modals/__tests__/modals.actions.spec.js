@@ -1,13 +1,11 @@
-import uuid from 'uuid/v4'
+import { v4 as uuid } from 'uuid'
 
 import modalsTypes from '../modals.types'
 import modalsActions from '../modals.actions'
 
 describe('Actions/Modals', () => {
   describe('openModal', () => {
-    it(`returns ${
-      modalsTypes.OPEN_MODAL
-    } with correct payload for confirmation`, () => {
+    it(`returns ${modalsTypes.OPEN_MODAL} with correct payload for confirmation`, () => {
       const id = uuid()
       const type = 'confirmation'
 
@@ -26,9 +24,7 @@ describe('Actions/Modals', () => {
       })
     })
 
-    it(`returns ${
-      modalsTypes.OPEN_MODAL
-    } with correct payload for movie-details`, () => {
+    it(`returns ${modalsTypes.OPEN_MODAL} with correct payload for movie-details`, () => {
       const id = uuid()
       const type = 'movie-details'
 

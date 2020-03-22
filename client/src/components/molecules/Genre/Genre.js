@@ -67,7 +67,4 @@ Genre.propTypes = {
   name: PropTypes.string.isRequired,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Genre)
+export default connect(mapStateToProps, mapDispatchToProps)(Genre)

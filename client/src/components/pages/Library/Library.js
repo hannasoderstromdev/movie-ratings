@@ -225,7 +225,4 @@ const mapDispatchToProps = {
   getLatestMovies: moviesThunks.getLatestMovies,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Library)
+export default connect(mapStateToProps, mapDispatchToProps)(Library)
