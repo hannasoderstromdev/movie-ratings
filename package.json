@@ -7,11 +7,11 @@
   },
   "private": true,
   "dependencies": {
-    "bcrypt": "^3.0.5",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "express": "^4.16.4",
-    "express-jwt": "^5.3.1",
+    "express-jwt": "^6.0.0",
     "express-validator": "^5.3.1",
     "jsonwebtoken": "^8.5.1",
     "lint-staged": "^8.1.5",
